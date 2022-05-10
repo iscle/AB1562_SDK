@@ -1,0 +1,1801 @@
+<root>
+  <CommandPool>
+    <!-- ID:0x0200~0x02FF Group 2: Control Baseband Command (ported from Commands GRP2) start -->
+    <HexCommand name="RACE_CONTINUOUS_WRITE_SFR">
+      <Transmit format="05 5A %1 00 02 %2 %3">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>num_sfr</P2>
+        <P3>data{0:}</P3>
+      </Transmit>
+      <Response format="05 5B %% %% 00 02 %1 %2 %3 %4 %5">
+        <P1>status</P1>
+        <P2>address[0:8]</P2>
+        <P3>address[8:8]</P3>
+        <P4>address[16:8]</P4>
+        <P5>address[24:8]</P5>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_WRITE_SFR">
+      <Transmit format="05 5A %1 00 02 %2 %3 %4 %5 %6 %7 %8">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>num_sfr</P2>
+        <P3>address[0:8]</P3>
+        <P4>address[8:8]</P4>
+        <P5>address[16:8]</P5>
+        <P6>address[24:8]</P6>
+        <P7>byte_align</P7>
+        <P8>data{0:}</P8>
+      </Transmit>
+      <Response format="05 5B %% %% 00 02 %1 %2 %3 %4 %5">
+        <P1>status</P1>
+        <P2>address[0:8]</P2>
+        <P3>address[8:8]</P3>
+        <P4>address[16:8]</P4>
+        <P5>address[24:8]</P5>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_READ_SFR">
+      <Transmit format="05 5A %1 01 02 %2 %3 %4 %5 %6 %7">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>num_sfr</P2>
+        <P3>address[0:8]</P3>
+        <P4>address[8:8]</P4>
+        <P5>address[16:8]</P5>
+        <P6>address[24:8]</P6>
+        <P7>byte_align</P7>
+      </Transmit>
+      <Response format="05 5B %1 %% 01 02 %2 %3 %4 %5 %6 %7 %8 %9 %10 %11">
+        <P1>payload_length</P1>
+        <P2>status</P2>
+        <P3>address[0:8]</P3>
+        <P4>address[8:8]</P4>
+        <P5>address[16:8]</P5>
+        <P6>address[24:8]</P6>
+        <P7>byte_align</P7>
+        <P8>data[0:8]</P8>
+        <P9>data[8:8]</P9>
+        <P10>data[16:8]</P10>
+        <P11>data[24:8]</P11>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_CONTINUOUS_WRITE_3WIRE">
+      <Transmit format="05 5A %1 04 02 %2 %3">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <!-- (LoByte, HiByte, Addr)*Num3Wire-->
+        <P2>num3wire</P2>
+        <P3>data{0:}</P3>
+      </Transmit>
+      <Response format="05 5B %% %% 04 02 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_WRITE_3WIRE">
+      <Transmit format="05 5A %1 04 02 01 %2 %3 %4">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <!-- (LoByte, HiByte, Addr)*Num3Wire-->
+        <P2>lo_byte</P2>
+        <P3>hi_byte</P3>
+        <P4>address</P4>
+      </Transmit>
+      <Response format="05 5B %% %% 04 02 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_CONTINUOUS_READ_3WIRE">
+      <Transmit format="05 5A %1 05 02 %2 %3">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>num3wire</P2>
+        <P3>data{0:}</P3>
+        <!--Addr*Num3Wire-->
+        <!--<P3>data{0:}</P3>-->
+      </Transmit>
+      <Response format="05 5B %1 %% 05 02 %2 %3">
+        <P1>payload_length</P1>
+        <P2>status</P2>
+        <!--(LoByte, HiByte, Addr)*Num3Wire-->
+        <P3>data{0:}</P3>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_READ_3WIRE">
+      <Transmit format="05 5A %1 05 02 01 %2">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>address</P2>
+        <!--Addr*Num3Wire-->
+        <!--<P3>data{0:}</P3>-->
+      </Transmit>
+      <Response format="05 5B %1 %% 05 02 %2 %3 %4 %5">
+        <P1>payload_length</P1>
+        <P2>status</P2>
+        <!--(LoByte, HiByte, Addr)*Num3Wire-->
+        <P3>lo_byte</P3>
+        <P4>hi_byte</P4>
+        <P5>address</P5>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_HARDWARE_RESET">
+      <Transmit format="05 5C %1 06 02">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+    </HexCommand>
+    <HexCommand name="RACE_SOFTWARE_RESET">
+      <Transmit format="05 5C %1 07 02">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <!--<Response format="05 5B %% %% 06 02 %1">
+				<P1>status</P1>
+			</Response>-->
+    </HexCommand>
+
+    <HexCommand name="RACE_SET_CONSTRAINED_POWER_LEVEL">
+      <Transmit format="05 5A %1 08 02 %2">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>power_level</P2>
+      </Transmit>
+      <Response format="05 5B %% %% 08 02 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_SET_CONSTRAINED_POWER_LEVEL_NO_RESPONSE">
+      <Transmit format="05 5A %1 08 02 %2">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>power_level</P2>
+      </Transmit>
+    </HexCommand>
+    <HexCommand name="RACE_POWER_OFF">
+      <Transmit format="05 5A %1 01 11 18 00">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+    </HexCommand>
+    <HexCommand name="RACE_POWER_OFF_PARTNER">
+      <Transmit format="05 5A %1 01 0D %2 %3 05 5A %1 01 11 18 00">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>dst_type</P2>
+        <P3>dst_id</P3>
+      </Transmit>
+    </HexCommand>
+
+    <HexCommand name="RACE_GET_POWER_MODE">
+      <Transmit format="05 5A %1 0C 02">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="05 5B %% %% 0C 02 %1 %2">
+        <P1>status</P1>
+        <P2>power_mode</P2>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_SWITCH_POWER_MODE">
+      <Transmit format="05 5A %1 0D 02 %2">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>power_mode</P2>
+      </Transmit>
+      <Response format="05 5B %% %% 0D 02 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <!-- ID:0x0200~0x02FF Group 2: Control Baseband Command (ported from Commands GRP2) end -->
+    <!-- ID:0x0300~0x03FF Group 3: Informational Parameters (ported from Commands GRP3) start -->
+    <!-- ID:0x0300~0x03FF Group 3: Informational Parameters (ported from Commands GRP3) end -->
+    <!-- ID:0x0400~0x04FF Group 4: Driver Control Commands (ported from Commands GRP4) start -->
+
+    <!-- SPI FLASH commands -->
+    <HexCommand name="RACE_SPIFLASH_CHIP_ERASE">
+      <Transmit format="05 5A %1 03 04">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="05 5B %% %% 03 04 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_SPIFLASH_SECTOR_ERASE">
+      <Transmit format="05 5A %1 04 04 %2 %3 %4 %5">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>address[0:8]</P2>
+        <P3>address[8:8]</P3>
+        <P4>address[16:8]</P4>
+        <P5>address[24:8]</P5>
+      </Transmit>
+      <Response format="05 5B %% %% 04 04 %1 %2 %3 %4 %5">
+        <P1>status</P1>
+        <P2>address[0:8]</P2>
+        <P3>address[8:8]</P3>
+        <P4>address[16:8]</P4>
+        <P5>address[24:8]</P5>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_SPIFLASH_BLOCK_32KBLOCK_ERASE">
+      <Transmit format="05 5A %1 05 04 %2 %3 %4 %5">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>address[0:8]</P2>
+        <P3>address[8:8]</P3>
+        <P4>address[16:8]</P4>
+        <P5>address[24:8]</P5>
+      </Transmit>
+      <Response format="05 5B %% %% 05 04 %1 %2 %3 %4 %5">
+        <P1>status</P1>
+        <P2>address[0:8]</P2>
+        <P3>address[8:8]</P3>
+        <P4>address[16:8]</P4>
+        <P5>address[24:8]</P5>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_SPIFLASH_BLOCK_64KBLOCK_ERASE">
+      <Transmit format="05 5A %1 06 04 %2 %3 %4 %5">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>address[0:8]</P2>
+        <P3>address[8:8]</P3>
+        <P4>address[16:8]</P4>
+        <P5>address[24:8]</P5>
+      </Transmit>
+      <Response format="05 5B %% %% 06 04 %1 %2 %3 %4 %5">
+        <P1>status</P1>
+        <P2>address[0:8]</P2>
+        <P3>address[8:8]</P3>
+        <P4>address[16:8]</P4>
+        <P5>address[24:8]</P5>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_SPIFLASH_PAGE_PROGRAM">
+      <Transmit format="05 5A %1 07 04 %2 %3 %4 %5 %6 %7">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>crc</P2>
+        <P3>address[0:8]</P3>
+        <P4>address[8:8]</P4>
+        <P5>address[16:8]</P5>
+        <P6>address[24:8]</P6>
+        <P7>data{0:}</P7>
+      </Transmit>
+      <Response format="05 5B %% %% 07 04 %1 %2 %3 %4 %5">
+        <P1>status</P1>
+        <P2>address[0:8]</P2>
+        <P3>address[8:8]</P3>
+        <P4>address[16:8]</P4>
+        <P5>address[24:8]</P5>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_SPIFLASH_PAGE_PROGRAM_RESPONSE">
+      <Response format="05 5B %% %% 07 04 %1 %2 %3 %4 %5">
+        <P1>status</P1>
+        <P2>address[0:8]</P2>
+        <P3>address[8:8]</P3>
+        <P4>address[16:8]</P4>
+        <P5>address[24:8]</P5>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_SPIFLASH_PAGE_READ">
+      <Transmit format="05 5A %1 08 04 %2 %3 %4 %5 %6">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>page_count</P2>
+        <P3>address[0:8]</P3>
+        <P4>address[8:8]</P4>
+        <P5>address[16:8]</P5>
+        <P6>address[24:8]</P6>
+      </Transmit>
+      <Response format="05 5B %% %% 08 04 %1 %2 %3 %4 %5 %6 %7 %8">
+        <P1>status</P1>
+        <P2>more_page</P2>
+        <P3>crc</P3>
+        <P4>address[0:8]</P4>
+        <P5>address[8:8]</P5>
+        <P6>address[16:8]</P6>
+        <P7>address[24:8]</P7>
+        <P8>data{0:}</P8>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_SPIFLASH_READ_PROGRAM_RESPONSE">
+      <Response format="05 5B %% %% 08 04 %1 %2 %3 %4 %5 %6 %7 %8">
+        <P1>status</P1>
+        <P2>more_page</P2>
+        <P3>crc</P3>
+        <P4>address[0:8]</P4>
+        <P5>address[8:8]</P5>
+        <P6>address[16:8]</P6>
+        <P7>address[24:8]</P7>
+        <P8>data{0:}</P8>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_SPIFLASH_BYTE_PROGRAM">
+      <Transmit format="05 5A %1 09 04 %2 %3 %4 %5 %6 %7">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>data_length</P2>
+        <P3>address[0:8]</P3>
+        <P4>address[8:8]</P4>
+        <P5>address[16:8]</P5>
+        <P6>address[24:8]</P6>
+        <P7>data{0:}</P7>
+      </Transmit>
+      <Response format="05 5B %% %% 09 04 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    
+    <HexCommand name="RACE_SPIFLASH_MULTI_PAGE_PROGRAM">
+      <Transmit format="05 5A %1 0B 04 %2 %3">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>page_count</P2>
+        <P3>data{0:}</P3>
+      </Transmit>
+      <Response format="05 5B %% %% 0B 04 %1 %2 %3">
+        <P1>status</P1>
+        <P2>completed_page_count</P2>
+        <P3>data{0:}</P3>
+      </Response>
+    </HexCommand>
+    <!-- end of SPI FLASH commands -->
+
+    <!-- Storage Commands !-->
+    <HexCommand name="RACE_STORAGE_WRITE_BYTE">
+      <Transmit format="05 5A %1 00 04 %2 %3 %4 %5 %6 %7 %8 %9">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>storage_type</P2>
+        <P3>data_length[0:8]</P3>
+        <P4>data_length[8:8]</P4>
+        <P5>address[0:8]</P5>
+        <P6>address[8:8]</P6>
+        <P7>address[16:8]</P7>
+        <P8>address[24:8]</P8>
+        <P9>data{0:}</P9>
+      </Transmit>
+      <Response format="05 5B %% %% 00 04 %1 %2 %3 %4 %5 %6 %7 %8">
+        <P1>status</P1>
+        <P2>storage_type</P2>
+        <P3>data_length[0:8]</P3>
+        <P4>data_length[8:8]</P4>
+        <P5>address[0:8]</P5>
+        <P6>address[8:8]</P6>
+        <P7>address[16:8]</P7>
+        <P8>address[24:8]</P8>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_STORAGE_READ_BYTE">
+      <Transmit format="05 5A %1 01 04 %2 %3 %4 %5 %6 %7 %8">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>storage_type</P2>
+        <P3>data_length[0:8]</P3>
+        <P4>data_length[8:8]</P4>
+        <P5>address[0:8]</P5>
+        <P6>address[8:8]</P6>
+        <P7>address[16:8]</P7>
+        <P8>address[24:8]</P8>
+      </Transmit>
+      <Response format="05 5B %% %% 01 04 %1 %2 %3 %4 %5 %6 %7 %8 %9">
+        <P1>status</P1>
+        <P2>storage_type</P2>
+        <P3>data_length[0:8]</P3>
+        <P4>data_length[8:8]</P4>
+        <P5>address[0:8]</P5>
+        <P6>address[8:8]</P6>
+        <P7>address[16:8]</P7>
+        <P8>address[24:8]</P8>
+        <P9>data{0:}</P9>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_STORAGE_WRITE_PAGE">
+      <Transmit format="05 5A %1 02 04 %2 %3 %4">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>storage_type</P2>
+        <P3>page_count</P3>
+        <P4>data{0:}</P4>
+      </Transmit>
+      <Response format="05 5B %% %% 02 04 %1 %2 %3 %4">
+        <P1>status</P1>
+        <P2>storage_type</P2>
+        <P3>completed_page_count</P3>
+        <P4>data{0:}</P4>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_STORAGE_READ_PAGE">
+      <Transmit format="05 5A %1 03 04 %2 %3 %4 %5 %6 %7">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>storage_type</P2>
+        <P3>number_of_page</P3>
+        <P4>address[0:8]</P4>
+        <P5>address[8:8]</P5>
+        <P6>address[16:8]</P6>
+        <P7>address[24:8]</P7>
+      </Transmit>
+      <Response format="05 5B %% %% 03 04 %1 %2 %3 %4 %5 %6 %7 %8 %9">
+        <P1>status</P1>
+        <P2>storage_type</P2>
+        <P3>number_of_the_rest_page</P3>
+        <P4>crc</P4>
+        <P5>address[0:8]</P5>
+        <P6>address[8:8]</P6>
+        <P7>address[16:8]</P7>
+        <P8>address[24:8]</P8>
+        <P9>data{0:}</P9>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_STORAGE_ERASE_PARTITION">
+      <Transmit format="05 5A %1 04 04 %2 %3">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>recipient_count</P2>
+        <P3>recipient_info{0}</P3>
+      </Transmit>
+      <Response format="05 5D %% %% 04 04 %1 %2 %3">
+        <P1>status</P1>
+        <P2>recipient_count</P2>
+        <P3>recipient_info{0}</P3>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_STORAGE_LOCK_UNLOCK">
+      <Transmit format="05 5A %1 30 04 %2 %3 %4 %5">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>recipient_count</P2>
+        <P3>recipient</P3>
+        <P4>storage_type</P4>
+        <P5>lock_or_unlock_and_extra_info{0:}</P5>
+      </Transmit>
+      <Response format="05 5D %% %% 30 04 %1 %2 %3 %4 %5">
+        <P1>status</P1>
+        <P2>recipient_count</P2>
+        <P3>recipient</P3>
+        <P4>storage_type</P4>
+        <P5>lock_or_unlock_and_extra_info{0:}</P5>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_STORAGE_GET_PARTITION_SHA256">
+      <Transmit format="05 5A %1 31 04 %2 %3">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>recipient_count</P2>
+        <P3>recipient_info{0}</P3>
+        <!--
+        <P3>recipient</P3>
+        <P4>storage_type</P4>
+        <P5>address[0:8]</P5>
+        <P6>address[8:8]</P6>
+        <P7>address[16:8]</P7>
+        <P8>address[24:8]</P8>
+        <P9>length_and_extra_info{0:}</P9>
+        -->
+      </Transmit>
+      <Response format="05 5D %% %% 31 04 %1 %2 %3">
+        <P1>status</P1>
+        <P2>recipient_count</P2>
+        <P3>recipient_info{0}</P3>
+        <!--
+        <P3>recipient</P3>
+        <P4>storage_type</P4>
+        <P5>address[0:8]</P5>
+        <P6>address[8:8]</P6>
+        <P7>address[16:8]</P7>
+        <P8>address[24:8]</P8>
+        <P9>length[0:8]</P9>
+        <P10>length[8:8]</P10>
+        <P11>length[16:8]</P11>
+        <P12>length[24:8]</P12>
+        <P13>sha256_and_extra_info{0:}</P13>
+        -->
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_STORAGE_GET_4K_ERASED_STATUS">
+      <Transmit format="05 5A %1 33 04 %2 %3 %4 %5 %6 %7 %8 %9">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>recipient_count</P2>
+        <P3>recipient</P3>
+        <P4>storage_type</P4>
+        <P5>address[0:8]</P5>
+        <P6>address[8:8]</P6>
+        <P7>address[16:8]</P7>
+        <P8>address[24:8]</P8>
+        <P9>length_and_extra_info{0:}</P9>
+      </Transmit>
+      <Response format="05 5D %% %% 33 04 %1 %2 %3 %4 %5 %6 %7 %8 %9">
+        <P1>status</P1>
+        <P2>recipient_count</P2>
+        <P3>recipient</P3>
+        <P4>storage_type</P4>
+        <P5>address[0:8]</P5>
+        <P6>address[8:8]</P6>
+        <P7>address[16:8]</P7>
+        <P8>address[24:8]</P8>
+        <P9>length_and_extra_info{0:}</P9>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_STORAGE_SET_CONFIGURATION_REGISTER">
+      <Transmit format="05 5A %1 A1 04 %2 %3">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>storage_type</P2>
+        <P3>flash_cfg</P3>
+      </Transmit>
+      <Response format="05 5B %% %% A1 04 %1 %2">
+        <P1>status</P1>
+        <P2>storage_type</P2>
+      </Response>
+    </HexCommand>
+
+    <!-- ID:0x0400~0x04FF Group 4: Driver Control Commands (ported from Commands GRP4) end -->
+    <!-- ID:0x0500~0x05FF Group 5: Debug Commands (ported from Commands GRP5) start -->
+    <HexCommand name="RACE_LOG_OPEN">
+      <Transmit format="05 5A %1 00 05 FF FF FF FF">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="05 5B %% %% 00 05 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_LOG_CLOSE">
+      <Transmit format="05 5A %1 00 05 00 00 00 00">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="05 5B %% %% 00 05 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <!-- ID:0x0500~0x05FF Group 5: Debug Commands (ported from Commands GRP5) end -->
+    <!-- ID:0x0600~0x06FF OGF1: Memory Access By Rom Command (ported from ACL OGF1) -->
+    <HexCommand name="RACE_MEMORY_BURST_READ">
+      <Transmit format="05 5A %1 00 06 %2 %3 %4 %5 %6 %7">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>address[0:8]</P2>
+        <P3>address[8:8]</P3>
+        <P4>address[16:8]</P4>
+        <P5>address[24:8]</P5>
+        <P6>data_length[0:8]</P6>
+        <P7>data_length[8:8]</P7>
+      </Transmit>
+      <Response format="05 5B %% %% 00 06 %1 %2 %3 %4 %5 %6">
+        <P1>status</P1>
+        <P2>address[0:8]</P2>
+        <P3>address[8:8]</P3>
+        <P4>address[16:8]</P4>
+        <P5>address[24:8]</P5>
+        <P6>data{0:}</P6>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_MEMORY_BURST_READ_RESPONSE">
+      <Response format="05 5B %% %% 00 06 %1 %2 %3 %4 %5 %6">
+        <P1>status</P1>
+        <P2>address[0:8]</P2>
+        <P3>address[8:8]</P3>
+        <P4>address[16:8]</P4>
+        <P5>address[24:8]</P5>
+        <P6>data{0:}</P6>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_MEMORY_BURST_WRITE">
+      <Transmit format="05 5A %1 01 06 %2 %3 %4 %5 %6 %7 %8">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>address[0:8]</P2>
+        <P3>address[8:8]</P3>
+        <P4>address[16:8]</P4>
+        <P5>address[24:8]</P5>
+        <P6>data_length[0:8]</P6>
+        <P7>data_length[8:8]</P7>
+        <P8>data{0:}</P8>
+      </Transmit>
+      <Response format="05 5B %% %% 01 06 %1 %2 %3 %4 %5">
+        <P1>status</P1>
+        <P2>address[0:8]</P2>
+        <P3>address[8:8]</P3>
+        <P4>address[16:8]</P4>
+        <P5>address[24:8]</P5>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_JUMP_TO_RUN">
+      <Transmit format="05 5A %1 02 06 %2 %3 %4 %5">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>address[0:8]</P2>
+        <P3>address[8:8]</P3>
+        <P4>address[16:8]</P4>
+        <P5>address[24:8]</P5>
+      </Transmit>
+      <Response format="05 5B %% %% 02 06 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_SWITCH_HCI_TRANSPORT">
+      <Transmit format="05 5A %1 03 06 %2">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>mode</P2>
+      </Transmit>
+      <Response format="05 5B %% %% 03 06 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_HAND_SHAKE">
+      <Transmit format="05 5A %1 06 06 %2">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>index</P2>
+      </Transmit>
+      <Response format="05 5B %% %% 06 06 %1">
+        <P1>status_type_index{0:}</P1>
+      </Response>
+    </HexCommand>
+    <!-- ID:0x0600~0x06FF OGF1: Memory Access By Rom Command (ported from ACL OGF1) end -->
+    <!-- ID:0x0700~0x07FF OGF2: Internal Flash Control Command (ported from ACL OGF2) start -->
+    <HexCommand name="RACE_FLASH_READ_MANUFACTURER_AND_MEMORYTYPE">
+      <Transmit format="05 5A %1 00 07">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="05 5B %% %% 00 07 %1 %2 %3 %4">
+        <P1>status</P1>
+        <P2>manufacturer_id</P2>
+        <P3>memory_type</P3>
+        <P4>memory_capacity</P4>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_FLASH_CHIP_ERASE">
+      <Transmit format="05 5A %1 03 07">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="05 5B %% %% 03 07 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_FLASH_SECTOR_ERASE">
+      <Transmit format="05 5A %1 04 07 %2 %3 %4 %5">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>address[0:8]</P2>
+        <P3>address[8:8]</P3>
+        <P4>address[16:8]</P4>
+        <P5>address[24:8]</P5>
+      </Transmit>
+      <Response format="05 5B %% %% 04 07 %1 %2 %3 %4 %5">
+        <P1>status</P1>
+        <P2>address[0:8]</P2>
+        <P3>address[8:8]</P3>
+        <P4>address[16:8]</P4>
+        <P5>address[24:8]</P5>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_FLASH_BLOCK_32KBLOCK_ERASE">
+      <Transmit format="05 5A %1 05 07 %2 %3 %4 %5">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>address[0:8]</P2>
+        <P3>address[8:8]</P3>
+        <P4>address[16:8]</P4>
+        <P5>address[24:8]</P5>
+      </Transmit>
+      <Response format="05 5B %% %% 05 07 %1 %2 %3 %4 %5">
+        <P1>status</P1>
+        <P2>address[0:8]</P2>
+        <P3>address[8:8]</P3>
+        <P4>address[16:8]</P4>
+        <P5>address[24:8]</P5>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_FLASH_BLOCK_64KBLOCK_ERASE">
+      <Transmit format="05 5A %1 06 07 %2 %3 %4 %5">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>address[0:8]</P2>
+        <P3>address[8:8]</P3>
+        <P4>address[16:8]</P4>
+        <P5>address[24:8]</P5>
+      </Transmit>
+      <Response format="05 5B %% %% 06 07 %1 %2 %3 %4 %5">
+        <P1>status</P1>
+        <P2>address[0:8]</P2>
+        <P3>address[8:8]</P3>
+        <P4>address[16:8]</P4>
+        <P5>address[24:8]</P5>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_FLASH_PAGE_PROGRAM">
+      <Transmit format="05 5A %1 07 07 %2 %3 %4 %5 %6 %7">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>crc</P2>
+        <P3>address[0:8]</P3>
+        <P4>address[8:8]</P4>
+        <P5>address[16:8]</P5>
+        <P6>address[24:8]</P6>
+        <P7>data{0:}</P7>
+      </Transmit>
+      <Response format="05 5B %% %% 07 07 %1 %2 %3 %4 %5">
+        <P1>status</P1>
+        <P2>address[0:8]</P2>
+        <P3>address[8:8]</P3>
+        <P4>address[16:8]</P4>
+        <P5>address[24:8]</P5>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_FLASH_PAGE_PROGRAM_RESPONSE">
+      <Response format="05 5B %% %% 07 07 %1 %2 %3 %4 %5">
+        <P1>status</P1>
+        <P2>address[0:8]</P2>
+        <P3>address[8:8]</P3>
+        <P4>address[16:8]</P4>
+        <P5>address[24:8]</P5>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_FLASH_PAGE_READ">
+      <Transmit format="05 5A %1 08 07 %2 %3 %4 %5 %6">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>page_count</P2>
+        <P3>address[0:8]</P3>
+        <P4>address[8:8]</P4>
+        <P5>address[16:8]</P5>
+        <P6>address[24:8]</P6>
+      </Transmit>
+      <Response format="05 5B %% %% 08 07 %1 %2 %3 %4 %5 %6 %7 %8">
+        <P1>status</P1>
+        <P2>more_page</P2>
+        <P3>crc</P3>
+        <P4>address[0:8]</P4>
+        <P5>address[8:8]</P5>
+        <P6>address[16:8]</P6>
+        <P7>address[24:8]</P7>
+        <P8>data{0:}</P8>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_FLASH_READ_PROGRAM_RESPONSE">
+      <Response format="05 5B %% %% 08 07 %1 %2 %3 %4 %5 %6 %7 %8">
+        <P1>status</P1>
+        <P2>more_page</P2>
+        <P3>crc</P3>
+        <P4>address[0:8]</P4>
+        <P5>address[8:8]</P5>
+        <P6>address[16:8]</P6>
+        <P7>address[24:8]</P7>
+        <P8>data{0:}</P8>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_FLASH_BYTE_PROGRAM">
+      <Transmit format="05 5A %1 09 07 %2 %3 %4 %5 %6 %7">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>data_length</P2>
+        <P3>address[0:8]</P3>
+        <P4>address[8:8]</P4>
+        <P5>address[16:8]</P5>
+        <P6>address[24:8]</P6>
+        <P7>data{0:}</P7>
+      </Transmit>
+      <Response format="05 5B %% %% 09 07 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_FLASH_EMPTY_KEY">
+      <Transmit format="05 5A %1 0A 07">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="05 5B %% %% 0A 07 %1 %2">
+        <P1>status</P1>
+        <P2>empty_key_index</P2>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_FLASH_MULTI_PAGE_PROGRAM">
+      <Transmit format="05 5A %1 0B 07 %2 %3">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>page_count</P2>
+        <P3>data{0:}</P3>
+      </Transmit>
+      <Response format="05 5B %% %% 0B 07 %1 %2 %3">
+        <P1>status</P1>
+        <P2>completed_page_count</P2>
+        <P3>data{0:}</P3>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_CMD_READ_OTP">
+      <Transmit format="05 5A %1 10 07 %2 %3 %4 %5 %6">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>addr[0:8]</P2>
+        <P3>addr[8:8]</P3>
+        <P4>addr[16:8]</P4>
+        <P5>addr[24:8]</P5>
+        <P6>length</P6>
+      </Transmit>
+      <Response format="05 5B %% %% 10 07 %1 %2 %3 %4 %5 %6">
+        <P1>status</P1>
+        <P2>addr[0:8]</P2>
+        <P3>addr[8:8]</P3>
+        <P4>addr[16:8]</P4>
+        <P5>addr[24:8]</P5>
+        <P6>data{0:}</P6>
+      </Response>
+    </HexCommand>
+    
+    <HexCommand name="RACE_CMD_FLASH_STRESS_TEST">
+      <Transmit format="05 5A %1 12 07 %2 %3 %4 %5 %6 %7 %8">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>enable</P2>
+        <P3>high_buck_mv</P3>
+        <P4>low_buck_mv</P4>
+        <P5>flash_size[0:8]</P5>
+        <P6>flash_size[8:8]</P6>
+        <P7>flash_size[16:8]</P7>
+        <P8>flash_size[24:8]</P8>
+      </Transmit>
+      <Response format="05 5B %% %% 12 07 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_CMD_FLASH_STRESS_TEST_REPORT">
+      <Response format="05 5D %% %% 12 07 %1 %2 %3 %4 %5">
+        <P1>status</P1>
+        <P2>addr[0:8]</P2>
+        <P3>addr[8:8]</P3>
+        <P4>addr[16:8]</P4>
+        <P5>addr[24:8]</P5>
+      </Response>
+    </HexCommand>
+    <!-- ID:0x0700~0x07FF OGF2: Internal Flash Control Command (ported from ACL OGF2) end -->
+    <!-- ID:0x0800~0x08FF Calibration Command start -->
+    <HexCommand name="RACE_CRYSTAL_ON_TX">
+      <Transmit format="05 5A %1 03 08 %2 %3">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>trim_time[0:8]</P2>
+        <P3>trim_time[8:8]</P3>
+      </Transmit>
+      <!--<Response format="05 5B %% %% 06 02 %1">
+        <P1>status</P1>
+      </Response>-->
+    </HexCommand>
+    <!-- ID:0x0800~0x08FF Calibration Command end -->
+    <!-- ID:0x0900~0x09FF AirApp Commands start -->
+    <!-- ID:0x0900~0x09FF AirApp Commands end -->
+    <!-- ID:0x0A00~0x0AFF NVKEY & nvdm Commands start -->
+    <HexCommand name="RACE_NVKEY_READFULLKEY">
+      <Transmit format="05 5A %1 00 0A %2 %3 %4 %5">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>nvkey_id_b0</P2>
+        <P3>nvkey_id_b1</P3>
+        <P4>length_of_read_bytes[0:8]</P4>
+        <P5>length_of_read_bytes[8:8]</P5>
+      </Transmit>
+      <Response format="05 5B %% %% 00 0A %1">
+        <P1>length_payload{0:}</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_NVKEY_READFULLKEY_PARTNER">
+      <Transmit format="05 5A %1 01 0D %2 %3 05 5A %1 00 0A %4 %5 %6 %7">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>dst_type</P2>
+        <P3>dst_id</P3>
+        <P4>nvkey_id_b0</P4>
+        <P5>nvkey_id_b1</P5>
+        <P6>length_of_read_bytes[0:8]</P6>
+        <P7>length_of_read_bytes[8:8]</P7>
+      </Transmit>
+      <Response format="05 5D %% %% 01 0D %1 %2 05 5B %% %% 00 0A %3">
+        <P1>dst_type</P1>
+        <P2>dst_id</P2>
+        <P3>length_payload{0:}</P3>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_NVKEY_WRITEFULLKEY">
+      <Transmit format="05 5A %1 01 0A %2 %3 %4">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>nvkey_id_b0</P2>
+        <P3>nvkey_id_b1</P3>
+        <P4>value{0:}</P4>
+      </Transmit>
+      <Response format="05 5B %% %% 01 0A %1">
+        <P1>return_code</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_NVKEY_NEXT">
+      <Transmit format="05 5A %1 02 0A %2 %3">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>nvkey_id_b0</P2>
+        <P3>nvkey_id_b1</P3>
+      </Transmit>
+      <Response format="05 5B %% %% 02 0A %1 %2">
+        <P1>nvkey_id_b0</P1>
+        <P2>nvkey_id_b1</P2>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_NVKEY_RECLAIM">
+      <Transmit format="05 5A %1 03 0A %2 %3">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>length_b0</P2>
+        <P3>length_b1</P3>
+      </Transmit>
+      <Response format="05 5B %% %% 03 0A %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_NVDM_READ_DATA_ITEM">
+      <Transmit format="05 5A %1 03 0A %2">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>param</P2>
+        <!-- <group_name>\0<data_item_name>\0<lengt_of_read_bytes> -->
+      </Transmit>
+      <Response format="05 5B %% %% 03 0A %1 %2 %3">
+        <P1>nvdm_status</P1>
+        <P2>lenght</P2>
+        <P3>payload{0:}</P3>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_NVDM_WRITE_DATA_ITEM">
+      <Transmit format="05 5A %1 04 0A %2">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>param</P2>
+        <!-- <group_name>\0<data_item_name>\0<payload> -->
+      </Transmit>
+      <Response format="05 5B %% %% 04 0A %1">
+        <P1>nvdm_status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_NVDM_GET_DATA_ITEM_NUMBERS">
+      <Transmit format="05 5A %1 05 0A">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="05 5B %% %% 05 0A %1 %2">
+        <P1>data_item_number_b0</P1>
+        <P2>data_item_number_b1</P2>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_NVDM_READ_DATA_ITEM_BY_INDEX">
+      <Transmit format="05 5A %1 06 0A %2 %3 %4 %5">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>data_item_number_b0</P2>
+        <P3>data_item_number_b1</P3>
+        <P4>length_of_read_bytes[0:8]</P4>
+        <P5>length_of_read_bytes[8:8]</P5>
+      </Transmit>
+      <Response format="05 5B %% %% 06 0A %1 %2">
+        <P1>nvdm_status</P1>
+        <P2>payload{0:}</P2>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_NVDM_ALL">
+      <Transmit format="05 5A 02 00 07 0A" />
+      <Response format="05 5B %1 %2 %% %% %3 %% %% %4">
+        <P1>length[0:8]</P1>
+        <P2>lenght[8:8]</P2>
+        <P3>status</P3>
+        <P4>data{0:}</P4>
+      </Response>
+    </HexCommand>
+    <!-- ID:0x0A00~0x0AFF NVKEY & nvdm Commands end -->
+    <!-- ID:0x0B00~0x0BFF LABTEST Commands start -->
+    <!-- ID:0x0B00~0x0BFF LABTEST Commands end -->
+    <!-- ID:0x0C00~0x0CFF Bluetooth Commands start -->
+    <HexCommand name="RACE_BLUETOOTH_GET_BATTERY">
+      <Transmit format="05 5A %1 D6 0C %2">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>agent_or_partner</P2>
+      </Transmit>
+      <Response format="05 5D %% %% D6 0C %1 %2 %3">
+        <P1>status</P1>
+        <P2>agent_or_partner</P2>
+        <P3>battery_percentage</P3>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_BLUETOOTH_GET_PARTNER_BATTERY">
+      <Transmit format="05 5A %1 01 0D %2 %3 05 5A 03 00 D6 0C 00">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>dst_type</P2>
+        <P3>dst_id</P3>
+      </Transmit>
+      <Response format="05 5D %% %% 01 0D %1 %2 05 5D 05 00 D6 0C %3 %4 %5">
+        <P1>dst_type</P1>
+        <P2>dst_id</P2>
+        <P3>status</P3>
+        <P4>agent_or_partner</P4>
+        <P5>battery_percentage</P5>
+      </Response>
+    </HexCommand>
+    <!-- ID:0x0C00~0x0CFF Bluetooth Commands end -->
+    <!-- ID:0x0D00~0x0D01 Ccmdrelay Commands start -->
+    <HexCommand name="RACE_CMDREALY_GET_AVA_DST">
+      <Transmit format="05 5A %1 00 0D">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="05 5B %% %% 00 0D %1">
+        <P1>data{0:}</P1>
+      </Response>
+    </HexCommand>
+    <!-- ID:0x0D00~0x0D01 Ccmdrelay Commands end -->
+    <!-- ID:0x0E01~0x0EFF DSP RealTime Commands start -->
+    <HexCommand name="DSP_REALTIME_SUSPEND">
+      <Transmit format="05 5A %1 01 0E">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="05 5B %% %% 01 0E %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="DSP_REALTIME_RESUME">
+      <Transmit format="05 5A %1 02 0E">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="05 5B %% %% 02 0E %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="DSP_REALTIME_PEQ">
+      <Transmit format="05 5A %1 03 0E %2 %3">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>peq_phase</P2>
+        <P3>peq_param{0:}</P3>
+      </Transmit>
+      <Response format="05 5B %% %% 03 0E 00" />
+    </HexCommand>
+
+    <HexCommand name="DSP_REALTIME_GET_REFERENCE_GAIN">
+      <Transmit format="05 5A 02 00 05 0E" />
+      <Response format="05 5D 12 00 05 0E %1">
+        <P1>resp{0:}</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_AUDIO_CMD_GET_TWO_MIC_PARA">
+      <Transmit format="05 5A 02 00 07 0E" />
+      <Response format="05 5D 66 00 07 0E %1">
+        <P1>resp{0:}</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="DSP_REALTIME_MIC_SWAP">
+      <Transmit format="05 5A %1 0C 0E %2">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>mictype</P2>
+      </Transmit>
+      <Response format="05 5B %% %% 0C 0E %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="DSP_REALTIME_AECNR_ON_OFF">
+      <Transmit format="05 5A %1 0D 0E %2">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>onoff</P2>
+      </Transmit>
+      <Response format="05 5B %% %% 0D 0E %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="DSP_REALTIME_PASS_THROUGH_ON_OFF">
+      <Transmit format="05 5A %1 0E 0E %2">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>onoff</P2>
+      </Transmit>
+      <Response format="05 5B %% %% 0E 0E %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="DSP_REALTIME_PASS_THROUGH_TEST">
+      <Transmit format="05 5A %1 0F 0E %2">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>mictype</P2>
+      </Transmit>
+      <Response format="05 5B %% %% 0F 0E %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <!-- ID:0x0E01~0x0EFF DSP RealTime Commands end -->
+    <!-- ID:0x0F00~0x0FFF Vendor Event (ported from Events) start -->
+    <!-- ID:0x0F00~0x0FFF Vendor Event (ported from Events) end -->
+    <!-- ID:0x1000~0x10FF Audio Commands start -->
+    <!-- ID:0x1000~0x10FF Audio Commands end -->
+    <!-- ID:0x1100~0x110F APP Key Commands start -->
+    <HexCommand name="REALTIME_TRIGGER_KEY_EVENT">
+      <Transmit format="05 5A 04 00 01 11 %1 %2">
+        <P1>keyid_b0</P1>
+        <P2>keyid_b1</P2>
+      </Transmit>
+      <Response format="05 5B 03 00 01 11 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    
+    <HexCommand name="RACE_SYSTEM_PMUOFF_MODE">
+      <Transmit format="05 5A %1 11 11 01">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="05 5B %% %% 11 11 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    
+    <HexCommand name="RACE_SYSTEM_RTC_MODE">
+      <Transmit format="05 5A %1 12 11 01">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="05 5B %% %% 12 11 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    
+    <HexCommand name="RACE_SYSTEM_SLEEP_MODE">
+      <Transmit format="05 5A %1 13 11 01">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="05 5B %% %% 13 11 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <!-- ID:0x1100~0x110F APP Key Commands end -->
+    <!-- ID:0x1110~0x111F System Power Commands start -->
+    <!-- ID:0x1110~0x111F System Power Commands end -->
+    <!-- ID:0x1200~0x12FF APP ANC Commands start -->
+    <HexCommand name="REALTIME_SET_ANC_GAIN">
+      <Transmit format="05 5A 04 00 03 12 %1 %2">
+        <P1>target_side</P1>
+        <P2>gain</P2>
+      </Transmit>
+      <Response format="05 5B 03 00 03 12 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <!-- ID:0x1200~0x12FF APP ANC Commands end -->
+    <!-- ID:0x1400~0x140F APP Connect Commands start -->
+    <!-- ID:0x1400~0x140F APP Connect Commands end -->
+    <!-- ID:0x1500~0x15FF APP EarSafe Commands start -->
+    <!-- ID:0x1500~0x15FF APP EarSafe Commands end -->
+    <!-- ID:0x1600~0x167f captouch tunning tool start -->
+    <HexCommand name="RACE_CMD_CAPTOUCH_REALTIME">
+      <Transmit format="05 5A %1 05 16 %2 %3 %4 %5">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>enable</P2>
+        <P3>channel</P3>
+        <P4>time[0:8]</P4>
+        <P5>time[8:8]</P5>
+      </Transmit>
+      <Response format="05 5B %% %% 05 16 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_CMD_CAPTOUCH_REALTIME_RESPONSE">
+      <Response format="05 5D %% %% 05 16 %1 %2">
+        <P1>status</P1>
+        <P2>data{0:}</P2>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_CMD_CAPTOUCH_FIND_BASELINE">
+      <Transmit format="05 5A %1 03 16 01">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="05 5B %% %% 03 16 %1 %2">
+        <P1>fail_status</P1>
+        <P2>data{0:}</P2>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_CMD_CAPTOUCH_CHECK_DELTA">
+      <Transmit format="05 5A %1 04 16 01 %2 %3">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>thrH[0:8]</P2>
+        <P3>thrH[8:8]</P3>
+      </Transmit>
+      <Response format="05 5B %% %% 04 16 %1 %2">
+        <P1>fail_status</P1>
+        <P2>data{0:}</P2>
+      </Response>
+    </HexCommand>
+    <!-- ID:0x1600~0x167f captouch tunning tool end -->
+    <!-- ID:0x1680~0x16ff common RG READ/WRITE start -->
+    <!-- ID:0x1680~0x16ff common RG READ/WRITE end -->
+    <!-- ID:0x1700~0x170F AWS Commands start -->
+    <!-- ID:0x1700~0x170F AWS Commands end -->
+    <!-- ID:0x1C00~0x1C1F FOTA Commands start -->
+    
+    <HexCommand name="RACE_FOTA_QUERY_PARTITION_INFO">
+      <Transmit format="05 5A %1 00 1C %2 %3">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>recipient_count</P2>
+        <P3>recipient_info{0:}</P3>
+        <!-- recipient (1 byte), partition_id (1 byte)-->
+      </Transmit>
+      <Response format="05 5D %% %% 00 1C %1 %2 %3">
+        <P1>status</P1>
+        <P2>recipient_count</P2>
+        <P3>recipient_info{0:}</P3>
+        <!-- recipient (1 byte), partition_id (1 byte), storage_type (1 byte), address (4 bytes), length (4 bytes) -->
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_FOTA_CHECK_INTEGRITY">
+      <Transmit format="05 5A %1 01 1C %2 %3">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>recipient_count</P2>
+        <P3>recipient_info{0:}</P3>
+      </Transmit>
+      <Response format="05 5D %% %% 01 1C %1 %2 %3 %4">
+        <P1>status</P1>
+        <P2>recipient_count</P2>
+        <P3>recipient_info{0:}</P3>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_FOTA_COMMIT">
+      <Transmit format="05 5A %1 02 1C %2 %3">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>recipient_count</P2>
+        <P3>recipient_info{0:}</P3>
+      </Transmit>
+      <Response format="05 5B %% %% 02 1C %1 %2 %3">
+        <P1>status</P1>
+        <P2>recipient_count</P2>
+        <P3>recipient_info{0:}</P3>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_FOTA_STOP">
+      <Transmit format="05 5A %1 03 1C %2 %3 %4 %5">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>sender</P2>
+        <P3>recipient_count</P3>
+        <P4>recipient</P4>
+        <P5>reason_and_extra_info{0:}</P5>
+      </Transmit>
+      <Response format="05 5D %% %% 03 1C %1 %2 %3 %4 %5">
+        <P1>status</P1>
+        <P2>sender</P2>
+        <P3>recipient_count</P3>
+        <P4>recipient</P4>
+        <P5>reason_and_extra_info{0:}</P5>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_FOTA_QUERY_STATE">
+      <Transmit format="05 5A %1 04 1C %2 %3">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>recipient_count</P2>
+        <P3>recipient_info{0:}</P3>
+      </Transmit>
+      <Response format="05 5D %% %% 04 1C %1 %2 %3">
+        <P1>status</P1>
+        <P2>recipient_count</P2>
+        <P3>recipient_info{0:}</P3>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_FOTA_DETACH_RESET">
+      <Transmit format="05 5A %1 05 1C">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="05 5B %% %% 05 1C %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_FOTA_WRITE_STATE">
+      <Transmit format="05 5A %1 06 1C %2 %3">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>recipient_count</P2>
+        <P3>recipient_info{0}</P3>
+      </Transmit>
+      <Response format="05 5D %% %% 06 1C %1 %2 %3">
+        <P1>status</P1>
+        <P2>recipient_count</P2>
+        <P3>recipient_info{0:}</P3>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_FOTA_GET_VERSION">
+      <Transmit format="05 5A %1 07 1C %2 %3">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>recipient_count</P2>
+        <P3>recipients{0:}</P3>
+      </Transmit>
+      <Response format="05 5D %% %% 07 1C %1 %2 %3">
+        <P1>status</P1>
+        <P2>recipient_count</P2>
+        <P3>payload{0:}</P3>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_FOTA_NEW_TRANSACTION">
+      <Transmit format="05 5A %1 0A 1C %2 %3">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>recipient_count</P2>
+        <P3>recipient_info{0:}</P3>
+      </Transmit>
+      <Response format="05 5D %% %% 0A 1C %1 %2 %3">
+        <P1>status</P1>
+        <P2>recipient_count</P2>
+        <P3>recipient_info{0:}</P3>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_FOTA_GET_INTERNAL_FLASH_PARTITION_CRC32">
+      <Transmit format="05 5A %1 0F 1C %2 %3 %4 %5 %6 %7 %8 %9">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>address[0:8]</P2>
+        <P3>address[8:8]</P3>
+        <P4>address[16:8]</P4>
+        <P5>address[24:8]</P5>
+        <P6>length[0:8]</P6>
+        <P7>length[8:8]</P7>
+        <P8>length[16:8]</P8>
+        <P9>length[24:8]</P9>
+      </Transmit>
+      <Response format="05 5B %% %% 0F 1C %1 %2 %3 %4 %5 %6 %7 %8 %9 %10 %11 %12 %13">
+        <P1>status</P1>
+        <P2>address[0:8]</P2>
+        <P3>address[8:8]</P3>
+        <P4>address[16:8]</P4>
+        <P5>address[24:8]</P5>
+        <P6>length[0:8]</P6>
+        <P7>length[8:8]</P7>
+        <P8>length[16:8]</P8>
+        <P9>length[24:8]</P9>
+        <P10>crc32[0:8]</P10>
+        <P11>crc32[8:8]</P11>
+        <P12>crc32[16:8]</P12>
+        <P13>crc32[24:8]</P13>
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_FOTA_GET_EXTERNAL_FLASH_PARTITION_CRC32">
+      <Transmit format="05 5A %1 1F 1C %2 %3 %4 %5 %6 %7 %8 %9">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>address[0:8]</P2>
+        <P3>address[8:8]</P3>
+        <P4>address[16:8]</P4>
+        <P5>address[24:8]</P5>
+        <P6>length[0:8]</P6>
+        <P7>length[8:8]</P7>
+        <P8>length[16:8]</P8>
+        <P9>length[24:8]</P9>
+      </Transmit>
+      <Response format="05 5B %% %% 1F 1C %1 %2 %3 %4 %5 %6 %7 %8 %9 %10 %11 %12 %13">
+        <P1>status</P1>
+        <P2>address[0:8]</P2>
+        <P3>address[8:8]</P3>
+        <P4>address[16:8]</P4>
+        <P5>address[24:8]</P5>
+        <P6>length[0:8]</P6>
+        <P7>length[8:8]</P7>
+        <P8>length[16:8]</P8>
+        <P9>length[24:8]</P9>
+        <P10>crc32[0:8]</P10>
+        <P11>crc32[8:8]</P11>
+        <P12>crc32[16:8]</P12>
+        <P13>crc32[24:8]</P13>
+      </Response>
+    </HexCommand>
+    <!-- end of FOTA commands !-->
+
+    <!-- ID:0x1C00~0x1C1F FOTA Commands end -->
+    <!-- ID:0x1D00~0x1D0F ROFS Commands start -->
+    <HexCommand name="RACE_ID_ROFS_GET_FILE_INFO">
+      <Transmit format="05 5A %1 00 1D %2 %3">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>file_id_b0</P2>
+        <P3>file_id_b1</P3>
+      </Transmit>
+      <Response format="05 5B 0B 00 00 1D %1 %2 %3 %4 %5 %6 %7 %8 %9">
+        <P1>status</P1>
+        <P2>offset[0:8]</P2>
+        <P3>offset[8:8]</P3>
+        <P4>offset[16:8]</P4>
+        <P5>offset[24:8]</P5>
+        <P6>length[0:8]</P6>
+        <P7>length[8:8]</P7>
+        <P8>length[16:8]</P8>
+        <P9>length[24:8]</P9>
+      </Response>
+    </HexCommand>
+    <!-- ID:0x1D00~0x1D0F ROFS Commands end -->
+    <!-- ID:0x1E00~0x1E1F kernel service Commands start -->
+    <!-- ID:0x1E00~0x1E1F kernel service Commands end -->
+    <!-- ID:0x1E20~0x1E3F BT Config Commmands start -->
+    <!-- ID:0x1E20~0x1E3F BT Config Commmands end -->
+    <!-- ID:0x1F00~0x1F3F FCD commands start -->
+    <HexCommand name="MCSyncAgentFactoryReset">
+      <Transmit format="05 5A %1 00 1F 17">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="05 5B %% %% 00 1F %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="MCSyncPartnerFactoryReset">
+      <Transmit format="05 5A %1 01 0D %2 %3 05 5A 03 00 00 1F 17">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>dst_type</P2>
+        <P3>dst_id</P3>
+      </Transmit>
+      <Response format="05 5D %% %% 01 0D %1 %2 05 5B 03 00 00 1F %3">
+        <P1>dst_type</P1>
+        <P2>dst_id</P2>
+        <P3>status</P3>
+      </Response>
+    </HexCommand>
+    <HexCommand name="MCSyncAgentDisableDUTMode">
+      <Transmit format="05 5A %1 01 0A C2 F2 00">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="05 5B %% %% 01 0A %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="MCSyncPartnerDisableDUTMode">
+      <Transmit format="05 5A %1 01 0D %2 %3 05 5A 05 00 01 0A C2 F2 00">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>dst_type</P2>
+        <P3>dst_id</P3>
+      </Transmit>
+      <Response format="05 5D %% %% 01 0D %1 %2 05 5B 03 00 01 0A %3">
+        <P1>dst_type</P1>
+        <P2>dst_id</P2>
+        <P3>status</P3>
+      </Response>
+    </HexCommand>    
+    <!-- ID:0x1F00~0x1F3F FCD commands end -->
+    <!-- ID:0x1F40~0x1F6F Record Commands start -->
+    <!-- ID:0x1F40~0x1F6F Record Commands end -->
+
+    <HexCommand name="DSP_REALTIME_PASS_THROUGH_TEST_TONE_RSP">
+      <Response format="05 5D %% %% %% %% %% %% %% %% %1 %2 %3 %4 %5 %6 %7 %8">
+        <P1>db[0:8]</P1>
+        <P2>db[8:8]</P2>
+        <P3>db[16:8]</P3>
+        <P4>db[24:8]</P4>
+        <P5>freq[0:8]</P5>
+        <P6>freq[8:8]</P6>
+        <P7>freq[16:8]</P7>
+        <P8>freq[24:8]</P8>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="Inquiry">
+      <Transmit format="01 00 fc %1 b8 08 00">
+        <P1>_one_byte_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="04 FF %% B8 09 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <!-- OGF 0x01 -->
+    <HexCommand name="HCI_VCMD_LABTEST_TEST_END">
+      <Transmit format="01 41 FC 00">
+      </Transmit>
+      <Response format="04 0E %% 01 41 FC %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="HCI_VCMD_LABTEST_CTX_DATA">
+      <!-- 01 42 FC 06 01 FF FF 00 36 5B -->
+      <Transmit format="01 42 FC %1 %2 %3 %4 %5 %6">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>channel</P2>
+        <P3>mod_type</P3>
+        <P4>pattern_type</P4>
+        <P5>tx_gc[0:8]</P5>
+        <P6>tx_gc[8:8]</P6>
+      </Transmit>
+      <Response format="04 0E %% 01 42 FC %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="HCI_VCMD_LABTEST_CRX_DATA">
+      <!-- 01 43 FC 01 01 -->
+      <Transmit format="01 43 FC %1 %2">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>channel</P2>
+      </Transmit>
+      <Response format="04 0E %% 01 43 FC %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="HCI_VCMD_LABTEST_BT3_BTX_PACKET">
+      <!-- 01 44 FC 11 01 01 04 02 00 00 36 00 33  22  33  22  33  03 -->
+      <Transmit format="01 44 FC %1 %2 %3 %4 %5 %6 %7 %8 %9 %10 %11 %12 %13 %14 %15 %16">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>start_channel</P2>
+        <P3>end_channel</P3>
+        <P4>packet_type</P4>
+        <P5>payload_length[0:8]</P5>
+        <P6>payload_length[8:8]</P6>
+        <P7>pattern_type</P7>
+        <P8>tx_gc[0:8]</P8>
+        <P9>tx_gc[8:8]</P9>
+        <P10>bd_address_b0</P10>
+        <P11>bd_address_b1</P11>
+        <P12>bd_address_b2</P12>
+        <P13>bd_address_b3</P13>
+        <P14>bd_address_b4</P14>
+        <P15>bd_address_b5</P15>
+        <P16>lt_addr</P16>
+      </Transmit>
+      <Response format="04 0E %% 01 44 FC %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="HCI_VCMD_LABTEST_BT3_BRX_PACKET">
+      <!-- 01 45 FC 08 01 00 33 22 33 22 33 03 -->
+      <Transmit format="01 45 FC %1 %2 %3 %4 %5 %6 %7 %8 %9">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>channel</P2>
+        <P3>mod_type</P3>
+        <P4>bd_address_b0</P4>
+        <P5>bd_address_b1</P5>
+        <P6>bd_address_b2</P6>
+        <P7>bd_address_b3</P7>
+        <P8>bd_address_b4</P8>
+        <P9>bd_address_b5</P9>
+      </Transmit>
+      <Response format="04 0E %% 01 45 FC %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="HCI_VCMD_LABTEST_BLE_BTX_PACKET">
+      <!-- 01 46 FC 0D 01 03 01 DD 00 36 00 AA  AA  AA  AA  55  55  55 -->
+      <Transmit format="01 46 FC %1 %2 %3 %4 %5 %6 %7 %8 %9 %10 %11 %12 %13 %14 %15 %16 %17">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>start_channel</P2>
+        <P3>end_channel</P3>
+        <P4>mod_type</P4>
+        <P5>payload_length</P5>
+        <P6>pattern_type</P6>
+        <P7>tx_gc[0:8]</P7>
+        <P8>tx_gc[8:8]</P8>
+        <P9>access_address_b0</P9>
+        <P10>access_address_b1</P10>
+        <P11>access_address_b2</P11>
+        <P12>access_address_b3</P12>
+        <P13>crc_init[0:8]</P13>
+        <P14>crc_init[8:8]</P14>
+        <P15>crc_init[16:8]</P15>
+        <P16>pkt_cnt[0:8]</P16>
+        <P17>pkt_cnt[8:8]</P17>
+      </Transmit>
+      <Response format="04 0E %% 01 46 FC %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="HCI_VCMD_LABTEST_BLE_BRX_PACKET">
+      <!-- 01 47 FC 09 02 00 AA AA AA AA 55 55  55 -->
+      <Transmit format="01 47 FC %1 %2 %3 %4 %5 %6 %7 %8 %9 %10">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>channel</P2>
+        <P3>mod_type</P3>
+        <P4>access_address[0:8]</P4>
+        <P5>access_address[8:8]</P5>
+        <P6>access_address[16:8]</P6>
+        <P7>access_address[24:8]</P7>
+        <P8>crc_init[0:8]</P8>
+        <P9>crc_init[8:8]</P9>
+        <P10>crc_init[16:8]</P10>
+      </Transmit>
+      <!-- 04 0E 04 01 47 FC 00 -->
+      <Response format="04 0E %% 01 47 FC %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="HCI_VCMD_LABTEST_SET_TEMPERATURE_COMPENSATION_ENALBE">
+      <Transmit format="01 48 FC %1 %2">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>data{0:}</P2>
+      </Transmit>
+      <Response format="04 0E %% 01 48 FC %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="ACL_VEVT_LABTEST_RX_PACKET">
+      <!-- 02 00 0F 03 00 03 04 00 C9 -->
+      <Response format="02 00 0F %1 %2 03 %3 %4 %5">
+        <P1>length_b0</P1>
+        <P2>length_b1</P2>
+        <P3>rx_result[0:8]</P3>
+        <P4>rx_result[8:8]</P4>
+        <P5>rssi{0:}</P5>
+        <!--<P5>data{0:}</P5>-->
+      </Response>
+    </HexCommand>
+
+    <!-- OGF 0x30 -->
+    <HexCommand name="ReadSystemStatus">
+      <Transmit format="01 00 FC %1 02 30">
+        <P1>_one_byte_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="04 FF %% 01 30 02 30 %1 01 0C 41 42 31 36 30 32 44 73 6F 63 00 00 81 03 %2 %3 %4 83 02 02 00">
+        <P1>status</P1>
+        <P2>system_mode</P2>
+        <P3>boot_reason[0:8]</P3>
+        <P4>boot_reason[8:8]</P4>
+      </Response>
+    </HexCommand>
+    <!-- OGF 0x34 -->
+    <!--<HexCommand name="SectorErase">
+         <Transmit format="01-00-FC-%1-01-34-%2-%3-%4-%5-%6">
+            <P1>_one_byte_right_count_of_bytes</P1>
+            <P2>access_address[0:8]</P2>
+            <P3>access_address[8:8]</P3>
+            <P4>access_address[16:8]</P4>
+            <P5>access_address[24:8]</P5>
+            <P6>bBks</P6>
+         </Transmit>
+         <Response format="04-FF-%%-01-30-20-31-%1">
+            <P1>status</P1>
+         </Response>
+      </HexCommand>-->
+
+    <!-- OGF 0x3F-->
+    <HexCommand name="VCMD_LABTEST_CONFIG_WRITE_CSR">
+      <Transmit format="01 04 7F %1 %2 %3">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>num_of_reg</P2>
+        <!--AddrB0, AddrB1, AddrB2, AddrB3,ByteAlign(1,2,or 4), Data[1,2,or 4] ...-->
+        <P3>data{0:}</P3>
+      </Transmit>
+      <Response format="04 FF %% 01 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="VCMD_LABTEST_CONFIG_READ_CSR">
+      <Transmit format="01 04 7F %1 %2 %3 %4 %5 %6">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>address[0:8]</P2>
+        <P3>address[8:8]</P3>
+        <P4>address[16:8]</P4>
+        <P5>address[24:8]</P5>
+        <P6>byte_align</P6>
+      </Transmit>
+      <Response format="04 FF %% 01 %1 %2 %3 %4 %5 %6 %7 %8 %9 %10">
+        <P1>status</P1>
+        <P2>address[0:8]</P2>
+        <P3>address[8:8]</P3>
+        <P4>address[16:8]</P4>
+        <P5>address[24:8]</P5>
+        <P6>byte_align</P6>
+        <P7>data[0:8]</P7>
+        <P8>data[8:8]</P8>
+        <P9>data[16:8]</P9>
+        <P10>data[24:8]</P10>
+      </Response>
+    </HexCommand>
+    <HexCommand name="HCI_VCMD_WRITE_SFR">
+      <Transmit format="01 81 FC %1 %2 %3 %4 %5 %6 %7 %8 %9 %10 %11">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>num_sfr</P2>
+        <P3>address[0:8]</P3>
+        <P4>address[8:8]</P4>
+        <P5>address[16:8]</P5>
+        <P6>address[24:8]</P6>
+        <P7>byte_align</P7>
+        <P8>data[0:8]</P8>
+        <P9>data[8:8]</P9>
+        <P10>data[16:8]</P10>
+        <P11>data[24:8]</P11>
+      </Transmit>
+      <Response format="04 0E %% %% 81 FC %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="HCI_VCMD_READ_SFR">
+      <Transmit format="01 82 FC %1 %2 %3 %4 %5 %6 %7">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>num_sfr</P2>
+        <P3>address[0:8]</P3>
+        <P4>address[8:8]</P4>
+        <P5>address[16:8]</P5>
+        <P6>address[24:8]</P6>
+        <P7>byte_align</P7>
+      </Transmit>
+      <Response format="04 0E %1 %% 82 FC %2 %3 %4 %5 %6 %7 %8 %9 %10 %11">
+        <P1>payload_length</P1>
+        <P2>status</P2>
+        <P3>address[0:8]</P3>
+        <P4>address[8:8]</P4>
+        <P5>address[16:8]</P5>
+        <P6>address[24:8]</P6>
+        <P7>byte_align</P7>
+        <P8>data[0:8]</P8>
+        <P9>data[8:8]</P9>
+        <P10>data[16:8]</P10>
+        <P11>data[24:8]</P11>
+      </Response>
+    </HexCommand>
+    
+    <HexCommand name="HCI_VCMD_WRITE_3WIRE">
+      <Transmit format="01 85 FC %1 01 %2 %3 %4">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <!-- (LoByte, HiByte, Addr)*Num3Wire-->
+        <P2>lo_byte</P2>
+        <P3>hi_byte</P3>
+        <P4>address</P4>
+      </Transmit>
+      <Response format="04 0E %% %% 85 FC %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="HCI_VCMD_READ_3WIRE">
+      <Transmit format="01 86 FC %1 01 %2">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>address</P2>
+        <!--Addr*Num3Wire-->
+        <!--<P3>data{0:}</P3>-->
+      </Transmit>
+      <Response format="04 0E %1 %% 86 FC %2 %3 %4 %5">
+        <P1>payload_length</P1>
+        <P2>status</P2>
+        <!--(LoByte, HiByte, Addr)*Num3Wire-->
+        <P3>lo_byte</P3>
+        <P4>hi_byte</P4>
+        <P5>address</P5>
+      </Response>
+    </HexCommand>
+    <HexCommand name="HCI_VCMD_READ_3WIRE2">
+      <Transmit format="01 86 FC %1 %2 %3">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>num3wire</P2>
+        <P3>data{0:}</P3>
+      </Transmit>
+      <Response format="04 0E %1 %% 86 FC %2 %3">
+        <P1>payload_length</P1>
+        <P2>status</P2>
+        <P3>data{0:}</P3>
+        <!--(LoByte, HiByte, Addr)*Num3Wire-->
+        <!--<P3>lo_byte</P3>
+         <P4>hi_byte</P4>
+         <P5>address</P5>-->
+      </Response>
+    </HexCommand>
+    <HexCommand name="HCI_VCMD_CONTINUOUS_WRITE_3WIRE">
+      <Transmit format="01 87 FC %1 %2 %3">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>num_of_reg</P2>
+        <!--LoByte, HiByte, Addr...-->
+        <P3>data{0:}</P3>
+      </Transmit>
+      <Response format="04 0E %% 87 FC %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <!-- AT commands -->
+    <HexCommand name="MT2811_SWITCH_AT_TO_RACE">
+      <Transmit format="41 54 2B 53 57 49 54 43 48 3D 32 2C 72 61 63 65 5F 63 6F 6D 6D 61 6E 64 0D 0A" />
+    </HexCommand>
+    <HexCommand name="MT2811_SWITCH_AT_TO_RACE_R1">
+      <Response format="%1">
+        <P1>resp{0:}</P1>
+      </Response>
+    </HexCommand>
+    <!-- end of AT commands -->
+
+    <HexCommand name="SQcbControl">
+      <Transmit format="%1 %2 %3 %4 %5 %6 %7 %8 %9 %10 %11 %12 %13 %14 %15 %16 %17">
+        <P1>function</P1>
+        <P2>switch_key[24:8]</P2>
+        <P3>switch_key[16:8]</P3>
+        <P4>switch_key[8:8]</P4>
+        <P5>switch_key[0:8]</P5>
+        <P6>press_times</P6>
+        <P7>stable_pulse_width[24:8]</P7>
+        <P8>stable_pulse_width[16:8]</P8>
+        <P9>stable_pulse_width[8:8]</P9>
+        <P10>stable_pulse_width[0:8]</P10>
+        <P11>release_pulse_width[24:8]</P11>
+        <P12>release_pulse_width[16:8]</P12>
+        <P13>release_pulse_width[8:8]</P13>
+        <P14>release_pulse_width[0:8]</P14>
+        <P15>pulse_width_tolerance[8:8]</P15>
+        <P16>pulse_width_tolerance[0:8]</P16>
+        <P17>checksum</P17>
+      </Transmit>
+      <Response format="04 ff 01 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+	
+	<!--For eSCO ref. gain-->
+	<HexCommand name="RACE_ESCO_REF_GAIN_START">
+      <Transmit format="05 5A %1 00 EE">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+    </HexCommand>
+	
+	<HexCommand name="RACE_ESCO_REF_GAIN_STOP">
+      <Transmit format="05 5A %1 01 EE">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+    </HexCommand>
+
+    <HexCommand name="RACE_RESET_PAIRED_DEV_AND_POWER_OFF">
+      <Transmit format="05 5A 04 00 01 11 1A 00 05 5A 04 00 01 11 18 00">
+      </Transmit>
+      <Response format="05 5B %% %% 01 11 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_RESET_PAIRED_DEV_AND_DETACH_RESET">
+      <Transmit format="05 5A 04 00 01 11 1A 00 05 5A 02 00 05 1C">
+      </Transmit>
+      <Response format="05 5B %% %% 01 11 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    
+  </CommandPool>
+</root>

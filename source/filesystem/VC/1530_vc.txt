@@ -1,0 +1,8 @@
+Pairing
+Check-battery
+Connection-status
+Call-back
+What-can-I-say
+Answer
+Ignore
+Cancel

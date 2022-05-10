@@ -1,0 +1,372 @@
+<root>
+  <BleDongle>
+    <HexCommand name="DongleReadRemoteVersion">
+      <Transmit format="01 00 FC 04 11 40 %1 %2">
+        <P1>handle[0:8]</P1>
+        <P2>handle[8:8]</P2>
+      </Transmit>
+      <Response format="04 FF 0B 11 40 %1 %% %% %% %2 %3 %4 %% %%">
+        <P1>status</P1>
+        <P2>version</P2>
+        <P3>company_id[0:8]</P3>
+        <P4>company_id[8:8]</P4>
+      </Response>
+    </HexCommand>
+    
+    <HexCommand name="DongleScanStart">
+      <Transmit format="01 00 FC %1 0B 40 01 10 00 10 00 00 00 00">
+        <P1>_one_byte_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="04 FF %% 0B 40 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="DongleScanRsp">
+      <Response format="04 FF %% FF 40 %1 %% %2 %3 %4 %5 %6 %7 %8 %% %% %9">
+        <P1>status</P1>
+        <P2>peer_addr[0:8]</P2>
+        <P3>peer_addr[8:8]</P3>
+        <P4>peer_addr[16:8]</P4>
+        <P5>peer_addr[24:8]</P5>
+        <P6>peer_addr[32:8]</P6>
+        <P7>peer_addr[40:8]</P7>
+        <P8>rssi</P8>
+        <P9>addata{0:}</P9>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="DongleScanStop">
+      <Transmit format="01 00 FC %1 0C 40">
+        <P1>_one_byte_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="04 FF %% 0C 40 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="DongleChangeMtu">
+      <Transmit format="01 00 FC 06 01 42 %1 %2 %3 %4">
+        <P1>conn_handle[0:8]</P1>
+        <P2>conn_handle[8:8]</P2>
+        <P3>mtu[0:8]</P3>
+        <P4>mtu[8:8]</P4>
+      </Transmit>
+      <Response format="04 FF % 01 42 %1 %2 %3">
+        <P1>status</P1>
+        <P2>mtu[0:8]</P2>
+        <P3>mtu[8:8]</P3>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="DongleConnect">
+      <Transmit format="01 00 FC %1 0F 40 0A 00 0A 00 00 %2 %3 %4 %5 %6 %7 %8 00 27 00 27 00 00 00 90 00 00 00 00 00">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>peer_addr_type</P2>
+        <P3>peer_addr[0:8]</P3>
+        <P4>peer_addr[8:8]</P4>
+        <P5>peer_addr[16:8]</P5>
+        <P6>peer_addr[24:8]</P6>
+        <P7>peer_addr[32:8]</P7>
+        <P8>peer_addr[40:8]</P8>
+      </Transmit>
+      <Response format="04 FF %% 0F 40 %1 %% %2 %3 00 %4 %5 %6 %7 %8 %9 %10 %% %% %% %% %% %%">
+        <P1>status</P1>
+        <P2>handle[0:8]</P2>
+        <P3>handle[8:8]</P3>
+        <P4>peer_addr_type</P4>
+        <P5>peer_addr[0:8]</P5>
+        <P6>peer_addr[8:8]</P6>
+        <P7>peer_addr[16:8]</P7>
+        <P8>peer_addr[24:8]</P8>
+        <P9>peer_addr[32:8]</P9>
+        <P10>peer_addr[40:8]</P10>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="DongleConnectCancel">
+      <Transmit format="01 00 FC 02 10 40"/>
+      <Response format="04 FF %% 10 40 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="DongleLogLevel">
+      <Transmit format="01 00 FC 03 01 40 00"/>
+      <Response format="04 FF 03 01 40 00"/>
+    </HexCommand>
+    
+    <HexCommand name="DongleDisconnect">
+      <Transmit format="01 00 FC %1 09 40 %2 %3 15">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>handle[0:8]</P2>
+        <P3>handle[8:8]</P3>
+      </Transmit>
+      <Response format="04 FF %% 09 40 %1 %2 %3 %4">
+        <P1>status</P1>
+        <P2>reason</P2>
+        <P3>handle[0:8]</P3>
+        <P4>handle[8:8]</P4>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="DongleDiscAllChar">
+      <Transmit format="01 00 FC 08 05 42 %1 %2 01 00 FF FF">
+        <P1>handle[0:8]</P1>
+        <P2>handle[8:8]</P2>
+      </Transmit>
+      <Response format="04 FF 04 80 42 00 %1">
+        <P1>event_count</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="DongleCharRsp">
+      <Response format="04 FF %% 05 42 00 %% %% %1 %2 %3 %% %4">
+        <P1>att_handle[0:8]</P1>
+        <P2>att_handle[8:8]</P2>
+        <P3>type</P3>
+        <P4>data{0:}</P4>
+      </Response>
+    </HexCommand>
+    
+    <HexCommand name="DongleDiscCharByUUID">
+      <Transmit format="01 00 FC %1 06 42 %2 %3 01 00 FF FF %4 %5">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>handle[0:8]</P2>
+        <P3>handle[8:8]</P3>
+        <P4>uuid_size</P4>
+        <P5>uuid{0:}</P5>
+      </Transmit>
+      <Response format="04 FF %% 06 42 00 %% %% %1 %2 %3">
+        <P1>att_handle[0:8]</P1>
+        <P2>att_handle[8:8]</P2>
+        <P3>type</P3>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="DongleDiscAllCharDescs">
+      <Transmit format="01 00 FC 09 07 42 83 00 %1 %2 %3 %4 10">
+        <P1>att_start_handle[0:8]</P1>
+        <P2>att_start_handle[8:8]</P2>
+        <P3>att_end_handle[0:8]</P3>
+        <P4>att_end_handle[8:8]</P4>
+      </Transmit>
+      <Response format="04 FF 04 80 42 00 %1">
+        <P1>event_count</P1>
+      </Response>
+    </HexCommand>
+    
+    <HexCommand name="DongleCharDescRsp">
+      <Response format="04 ff 08 07 42 00 %1 %2 02 %3 %4">
+        <P1>desc_att_handle[0:8]</P1>
+        <P2>desc_att_handle[8:8]</P2>
+        <P3>uuid[0:8]</P3>
+        <P4>uuid[8:8]</P4>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="DongleWriteCharDesc">
+      <Transmit format="01 00 FC 0A 12 42 %1 %2 %3 %4 02 00 %5 %6">
+        <P1>conn_handle[0:8]</P1>
+        <P2>conn_handle[8:8]</P2>
+        <P3>att_handle[0:8]</P3>
+        <P4>att_handle[8:8]</P4>
+        <P5>value[0:8]</P5>
+        <P6>value[8:8]</P6>
+      </Transmit>
+      <Response format="04 FF %% 12 42 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="DongleWriteCharValue">
+      <Transmit format="01 00 FC %1 0D 42 %2 %3 %4 %5 %6 %7 %8">
+		<P1>payload_length</P1>
+        <P2>conn_handle[0:8]</P2>
+        <P3>conn_handle[8:8]</P3>
+        <P4>att_handle[0:8]</P4>
+        <P5>att_handle[8:8]</P5>
+		<P6>length[0:8]</P6>
+		<P7>length[8:8]</P7>
+        <P8>value{0:}</P8>
+      </Transmit>
+      <Response format="04 FF %% 0D 42 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+	
+	 <HexCommand name="DongleReadRaceResponse">
+      <Response format="04 FF %% FF 42 %1 %2 %3 %4 %5 %6 %7 %8">
+        <P1>status</P1>
+		<P2>conn_handle[0:8]</P2>
+        <P3>conn_handle[8:8]</P3>
+		<P4>att_handle[0:8]</P4>
+        <P5>att_handle[8:8]</P5>
+		<P6>length[0:8]</P6>
+		<P7>length[8:8]</P7>
+		<P8>value{0:}</P8>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="DongleReadCharValue">
+      <Transmit format="01 00 FC 06 08 42 %1 %2 %3 %4">
+        <P1>conn_handle[0:8]</P1>
+        <P2>conn_handle[8:8]</P2>
+        <P3>att_handle[0:8]</P3>
+        <P4>att_handle[8:8]</P4>
+      </Transmit>
+      <Response format="04 FF %% 08 42 00 %% %% 01 00 %1">
+        <P1>value</P1>
+      </Response>
+    </HexCommand>
+	
+    <HexCommand name="DongleKeyRsp">
+      <Response format="04 FF %% FF 42 00 %% %% %1 %2 %% 00 %3">
+        <P1>value_handle[0:8]</P1>
+        <P2>value_handle[8:8]</P2>
+        <P3>key_code{0:}</P3>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="DongleMicRsp">
+      <Response format="04 FF %% FF 42 00 %% %% %1 %2 %3">
+        <P1>value_handle[0:8]</P1>
+        <P2>value_handle[8:8]</P2>
+        <P3>data{0:}</P3>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="DongleMouseRsp">
+      <Response format="04 FF %% FF 42 00 %% %% %1 %2 03 00 %3 %4 %5">
+        <P1>value_handle[0:8]</P1>
+        <P2>value_handle[8:8]</P2>
+        <P3>axis_x</P3>
+        <P4>axis_y</P4>
+        <P5>left_key_status</P5>
+      </Response>
+    </HexCommand>
+	
+	<HexCommand name="DongleKeyboardRsp">
+      <Response format="04 FF %% FF 42 00 %% %% %1 %2 %% 00 %3">
+        <P1>value_handle[0:8]</P1>
+        <P2>value_handle[8:8]</P2>
+        <P3>key_code{0:}</P3>
+      </Response>
+    </HexCommand>
+	
+	<HexCommand name="DongleIRKeyRsp">
+      <Response format="04 FF 05 %1 43 00 %2">
+        <P1>value_handle</P1>
+        <P2>key_code{0:}</P2>
+      </Response>
+    </HexCommand>
+	
+	<HexCommand name="DongleIRKeyboardRsp">
+      <Response format="04 FF 05 %1 43 00 %2">
+        <P1>value_handle</P1>
+        <P2>key_code{0:}</P2>
+      </Response>
+    </HexCommand>
+	
+	<HexCommand name="DongleOnOffIR">
+      <Transmit format="01 00 FC 03 01 43 %1">
+        <P1>on_off</P1>
+      </Transmit>
+      <Response format="04 FF 03 01 43 00"/>
+    </HexCommand>
+	
+	<HexCommand name="DongleSoftReset">
+      <Transmit format="01 00 FC 02 01 36"/>
+      <Response format="04 FF 03 00 00 00"/>
+    </HexCommand> 
+	
+	<HexCommand name="DonglePairingRequest">
+      <Transmit format="01 00 FC 0A 01 41 %1 %2 00 00 01 10 02 02">
+        <P1>conn_handle[0:8]</P1>
+        <P2>conn_handle[8:8]</P2>
+      </Transmit>
+      <Response format="04 FF 06 0D 40 00 00 00 00"/>
+    </HexCommand>
+	
+	<HexCommand name="DongleClearBondingList">
+      <Transmit format="01 00 FC 02 09 41"/>
+      <Response format="04 FF 03 09 41 00"/>
+    </HexCommand>
+	
+	<HexCommand name="DongleClearDeviceBondingList">
+      <Transmit format="01 00 FC 09 12 42 %1 %2 %3 %4 01 00 %5">
+        <P1>conn_handle[0:8]</P1>
+        <P2>conn_handle[8:8]</P2>
+        <P3>att_handle[0:8]</P3>
+        <P4>att_handle[8:8]</P4>
+        <P5>value</P5>
+      </Transmit>
+      <Response format="04 FF 03 12 42 00"/>
+    </HexCommand>
+	
+	<HexCommand name="DongleUpdateConnParam">
+      <Transmit format="01 00 FC 10 0E 40 %1 %2 08 00 08 00 1D 00 00 01 00 00 00 00">
+        <P1>conn_handle[0:8]</P1>
+        <P2>conn_handle[8:8]</P2>
+      </Transmit>
+      <Response format="04 FF 0C 0E 40 00 00 83 00 08 00 1D 00 00 01"/>
+    </HexCommand>
+	
+	<HexCommand name="DongleNonBondingPairing">
+      <Transmit format="01 00 FC 0A 01 41 %1 %2 00 00 00 10 00 00">
+        <P1>conn_handle[0:8]</P1>
+        <P2>conn_handle[8:8]</P2>
+      </Transmit>
+      <Response format="04 FF 06 0D 40 00 00 00 00"/>
+    </HexCommand>
+    
+	<HexCommand name="DongleWifiTest">
+      <Transmit format="01 00 FC 1C 0D 42 %1 %2 %3 %4 14 00 %5">
+        <P1>conn_handle[0:8]</P1>
+        <P2>conn_handle[8:8]</P2>
+        <P3>att_handle[0:8]</P3>
+        <P4>att_handle[8:8]</P4>
+        <P5>value{0:}</P5>
+      </Transmit>
+      <Response format="04 FF 0A FF 42 00 83 00 %% 00 01 00 00"/>
+    </HexCommand>
+
+   <HexCommand name="DongleReadDongleVersion">
+      <Transmit format="01 00 FC 07 11 36 04 04 00 09 00"/>
+      <Response format="04 FF %% 11 36 %1 %2">
+        <P1>status</P1>
+        <P2>dongle_version{0:}</P2>
+      </Response>
+    </HexCommand>
+	
+	<HexCommand name="RACE_NVKEY_NEXT">
+      <Transmit format="05 5A %1 02 0A %2 %3">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>nvkey_id_b0</P2>
+        <P3>nvkey_id_b1</P3>
+      </Transmit>
+      <Response format="05 5B %% %% 02 0A %1 %2">
+        <P1>nvkey_id_b0</P1>
+        <P2>nvkey_id_b1</P2>
+      </Response>
+    </HexCommand>
+	
+	<HexCommand name="RACE_NVKEY_READFULLKEY_PARTNER">
+      <Transmit format="05 5A %1 01 0D %2 %3 05 5A %1 00 0A %4 %5 %6 %7">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>dst_type</P2>
+        <P3>dst_id</P3>
+        <P4>nvkey_id_b0</P4>
+        <P5>nvkey_id_b1</P5>
+        <P6>length_of_read_bytes[0:8]</P6>
+        <P7>length_of_read_bytes[8:8]</P7>
+      </Transmit>
+      <Response format="05 5D %% %% 01 0D %1 %2 05 5B %% %% 00 0A %3">
+        <P1>dst_type</P1>
+        <P2>dst_id</P2>
+        <P3>length_payload{0:}</P3>
+      </Response>
+    </HexCommand>
+	
+  </BleDongle>
+</root>

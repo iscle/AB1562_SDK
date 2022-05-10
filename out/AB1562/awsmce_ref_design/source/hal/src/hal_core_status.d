@@ -1,0 +1,9 @@
+../../out/AB1562/awsmce_ref_design/source/hal/src/hal_core_status.o:  \
+ ../../source/hal/src/hal_core_status.c \
+  ../../source/hal/inc/hal_core_status.h \
+  C:/Airoha_toolchain/RG-2019.12-win32/AB1562_i64B_d32B/xtensa-elf/include/stdint.h \
+  C:/Airoha_toolchain/RG-2019.12-win32/AB1562_i64B_d32B/xtensa-elf/include/yvals.h \
+  C:/Airoha_toolchain/RG-2019.12-win32/AB1562_i64B_d32B/xtensa-elf/include/c99/yvals.h \
+  C:/Airoha_toolchain/RG-2019.12-win32/AB1562_i64B_d32B/xtensa-elf/arch/include/xtensa/config/core-isa.h \
+  C:/Airoha_toolchain/RG-2019.12-win32/XtensaTools/lib/xcc/include/stdarg.h \
+  ../../source/hal/inc/memory_attribute.h

@@ -1,0 +1,53 @@
+# Copyright (c) 2015-2016 by Cadence Design Systems, Inc.  ALL RIGHTS RESERVED.
+# These coded instructions, statements, and computer programs are the
+# copyrighted works and confidential proprietary information of Cadence.
+# They may not be modified, copied, reproduced, distributed, or disclosed to
+# third parties in any manner, medium, or form, in whole or in part, without
+# the prior written consent of Cadence.
+
+package com.tensilica.xide.core.mccfg.rules
+ 
+global MCMessageSet messageSet;
+global CoreIsaController_T10XX controller;
+global ConfigBuildOptions configBuildOptions;
+
+expander ISARules.dsl
+
+
+rule "RG2 fusion"
+    condition:
+                'fsn' equals "1" is not supported
+    failure:
+        Report custom error: "Fusion F1 is not supported on the selected release",["fsn"]
+end
+rule "RG2 bbep16"
+    condition:
+                'cx_bbep16' equals "1" is not supported
+    failure:
+        Report custom error: "BBE16EP is not supported on the selected release",["cx_bbep16"]
+end
+rule "RG2 ivp26"
+    condition:
+                'ivp26_32' equals "1" is not supported
+    failure:
+        Report custom error: "Vision P6 is not supported on the selected release",["ivp26_32"]
+end
+rule "RG2 pdx4b"
+    condition:
+                'pdx4b' equals "1" is not supported
+    failure:
+        Report custom error: "Fusion G3 is not supported on the selected release",["pdx4b"]
+end
+
+
+#
+# XPG specific check for LX7 build submit - feature needed for RG.1/2/3
+#
+
+rule "isa7 RG123 req early_lx7"
+    condition:
+    	'mmuType' notequal "fake" withisa "LX7.0" reqfeat "early_lx7"
+    failure:
+    	Report custom error: "XPG Build of LX7 configurations is not enabled for releases before RG-2016.4",["mmuType"]
+end
+

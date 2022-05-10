@@ -1,0 +1,286 @@
+<root>
+  <FcdDongle>
+    <!-- Reset -->
+    <!-- Reset -->
+    <!-- Reset -->
+    <HexCommand name="HCIReset">
+      <Transmit format="01 03 0C 00">
+      </Transmit>
+    </HexCommand>
+    <HexCommand name="SoftwareReset">
+      <Transmit format="01 00 FC 02 04 30">
+      </Transmit>
+    </HexCommand>
+    <HexCommand name="DisableFcdLog">
+      <Transmit format="01 00 FC 02 12 0C">
+      </Transmit>
+      <Response format="04 FF 03 12 0C %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="GetFcdBdaddress">
+      <Transmit format="01 00 FC 02 A1 08">
+      </Transmit>
+      <Response format="04 FF %% A1 0B %1">
+        <P1>bd_address{0:}</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="EditFcdPinLimit">
+      <Transmit format="01 00 FC 03 A2 0C %2">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>pin</P2>
+      </Transmit>
+      <Response format="04 ff %% A2 0C %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    
+    
+    <!--Testing-->
+    <!--Testing-->
+    <!--Testing-->
+    <HexCommand name="Disconnect">
+      <Transmit format="01 00 fc %1 05 08">
+        <P1>_one_byte_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="04 ff %% 05 09 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="DisconnectEvent">
+      <Response format="04 ff %% 14 34"/>
+    </HexCommand>
+    <HexCommand name="CreateConnection">
+      <Transmit format="01 00 fc %1 b9 08 %2 %3 %4 %5 %6 %7">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>bd_address_b0</P2>
+        <P3>bd_address_b1</P3>
+        <P4>bd_address_b2</P4>
+        <P5>bd_address_b3</P5>
+        <P6>bd_address_b4</P6>
+        <P7>bd_address_b5</P7>
+      </Transmit>
+      <Response format="04 ff %% b9 09 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="ConnectedEvent">
+      <Response format="04 ff %% ce 0a %1 %2 %3 %4 %5 %6 03">
+        <P1>bd_address_b0</P1>
+        <P2>bd_address_b1</P2>
+        <P3>bd_address_b2</P3>
+        <P4>bd_address_b3</P4>
+        <P5>bd_address_b4</P5>
+        <P6>bd_address_b5</P6>
+      </Response>
+    </HexCommand>
+    <HexCommand name="MCSyncImportAgentInfo">
+      <Transmit format="02 00 0F 18 00 05 5A 14 00 01 0A B0 F2 40 0D 00 00 00 00 00 00 00 05 %1 %2 %3 %4 %5 %6">
+        <P1>partner_bd_address_b0</P1>
+        <P2>partner_bd_address_b1</P2>
+        <P3>partner_bd_address_b2</P3>
+        <P4>partner_bd_address_b3</P4>
+        <P5>partner_bd_address_b4</P5>
+        <P6>partner_bd_address_b5</P6>
+      </Transmit>
+      <Response format="02 00 0f 07 00 05 5b 03 00 01 0a %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="MCSyncImportPartnerInfo">
+      <Transmit format="02 00 0F 18 00 05 5A 14 00 01 0A B0 F2 30 0D 00 %1 %2 %3 %4 %5 %6 05 %7 %8 %9 %10 %11 %12">
+        <P1>agent_bd_address_b0</P1>
+        <P2>agent_bd_address_b1</P2>
+        <P3>agent_bd_address_b2</P3>
+        <P4>agent_bd_address_b3</P4>
+        <P5>agent_bd_address_b4</P5>
+        <P6>agent_bd_address_b5</P6>
+        <P7>partner_bd_address_b0</P7>
+        <P8>partner_bd_address_b1</P8>
+        <P9>partner_bd_address_b2</P9>
+        <P10>partner_bd_address_b3</P10>
+        <P11>partner_bd_address_b4</P11>
+        <P12>partner_bd_address_b5</P12>
+      </Transmit>
+      <Response format="02 00 0f 07 00 05 5b 03 00 01 0a %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="FcdMCSyncPressPauseKeyEventToLeft">
+      <Transmit format="02 00 0F %1 05 5A 0A 00 00 11 55 00 89 99 CC 66 00 00">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="02 00 0F %% %% 05 5B %% %% 00 11 %1">
+        <!--02 00 0F 07 00 05 5B 03 00 00 11 00-->
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="FcdMCSyncPressPauseKeyEventEvent">
+      <Response format="04 ff 02 1B 34"/>
+    </HexCommand>
+    <HexCommand name="FcdMCSyncPressPauseKeyEventToRight">
+      <Transmit format="02 00 0F %1 05 5A 0A 00 00 11 55 00 88 99 CC 66 00 00">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="02 00 0F %% %% 05 5B %% %% 00 11 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="MCSyncAgentFactoryReset">
+      <Transmit format="02 00 0F 07 00 05 5A 03 00 00 1F 17">
+      </Transmit>
+      <Response format="02 00 0f 07 00 05 5b 03 00 00 1f %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="MCSyncRequestRSSI">
+      <Transmit format="02 00 0F %1 05 5A 02 00 00 17">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="02 00 0f %% %% 05 5B 03 00 00 17 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="MCSyncRequestRSSIEvent">
+      <Response format="02 00 0f %% %% 05 5D %% %% 00 17 %1 %2 %3">
+        <P1>status</P1>
+        <P2>PartnerRssi</P2>
+        <P3>rssi</P3>
+      </Response>
+    </HexCommand>
+    <HexCommand name="MCSyncRequestBattery">
+      <Transmit format="02 00 0F %1 05 5A 03 00 D6 0C 00">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="02 00 0f %% %% 05 5B 03 00 D6 0C %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="MCSyncRequestBatteryEvent">
+      <Response format="02 00 0f %% %% 05 5D %% %% D6 0C %1 %% %2">
+        <P1>status</P1>
+        <P2>battery_percentage</P2>
+      </Response>
+    </HexCommand>
+    <HexCommand name="MCSyncRequestLeAdvData">
+      <Transmit format="02 00 0F %1 05 5A 06 00 00 0A 00 39 20 00">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="02 00 0f %% %% 05 5B %% %% 00 0A %1 %2 %3">
+        <P1>length[0:8]</P1>
+        <P2>length[8:8]</P2>
+        <P3>adv_data{0:}</P3>
+      </Response>
+    </HexCommand>
+    <HexCommand name="MCSyncRequestBdAddressFromNvkey">
+      <Transmit format="02 00 0F %1 05 5A 06 00 00 0A 00 36 06 00">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="02 00 0f %% %% 05 5B %% %% 00 0A %1 %2 %3">
+        <P1>length[0:8]</P1>
+        <P2>length[8:8]</P2>
+        <P3>bd_address{0:}</P3>
+      </Response>
+    </HexCommand>
+
+
+    <!--Observer-->
+    <!--Observer-->
+    <!--Observer-->
+    <HexObserverResponse name="Connected">
+      <Response format="04 ff %% ce 0a %1 %2 %3 %4 %5 %6 03">
+        <P1>bd_address_b0</P1>
+        <P2>bd_address_b1</P2>
+        <P3>bd_address_b2</P3>
+        <P4>bd_address_b3</P4>
+        <P5>bd_address_b4</P5>
+        <P6>bd_address_b5</P6>
+      </Response>
+    </HexObserverResponse>
+    <HexObserverResponse name="PageFailed">
+      <Response format="04 ff %% ce 0a %1 %2 %3 %4 %5 %6 02">
+        <P1>bd_address_b0</P1>
+        <P2>bd_address_b1</P2>
+        <P3>bd_address_b2</P3>
+        <P4>bd_address_b3</P4>
+        <P5>bd_address_b4</P5>
+        <P6>bd_address_b5</P6>
+      </Response>
+    </HexObserverResponse>
+    <HexObserverResponse name="DisconnectedWithBdAddress">
+      <Response format="04 ff %% ce 0a %1 %2 %3 %4 %5 %6 00">
+        <P1>bd_address_b0</P1>
+        <P2>bd_address_b1</P2>
+        <P3>bd_address_b2</P3>
+        <P4>bd_address_b3</P4>
+        <P5>bd_address_b4</P5>
+        <P6>bd_address_b5</P6>
+      </Response>
+    </HexObserverResponse>
+    <HexObserverResponse name="Disconnected">
+      <Response format="04 ff %% 14 34"/>
+    </HexObserverResponse>
+    <HexObserverResponse name="NoMatchDeviceConnected">
+      <Response format="04 ff 07 c7 0a a0 ff 0c 7f 00"/>
+    </HexObserverResponse>
+    <HexObserverResponse name="RssiReport">
+      <Response format="04 FF 03 13 34 %1">
+        <P1>rssi</P1>
+      </Response>
+    </HexObserverResponse>
+    <HexObserverResponse name="DeviceGetFcdRssiReport">
+      <Response format="02 00 0f %% %% 05 5D %% %% 00 17 %1 %2 %3">
+        <P1>status</P1>
+        <P2>PartnerRssi</P2>
+        <P3>rssi</P3>
+      </Response>
+    </HexObserverResponse>
+    <HexObserverResponse name="DeviceGetFcdBatteryReport">
+      <Response format="02 00 0f %% %% 05 5D %% %% D6 0C %1 %% %2">
+        <P1>status</P1>
+        <P2>battery_percentage</P2>
+      </Response>
+    </HexObserverResponse>
+    <HexObserverResponse name="DeviceNameReport">
+      <Response format="04 FF %% 12 34 %1">
+        <P1>device_name{0:}</P1>
+      </Response>
+    </HexObserverResponse>
+    <HexObserverResponse name="BdAddressReport">
+      <Response format="04 FF %% 11 34 %1">
+        <P1>bd_address{0:}</P1>
+      </Response>
+    </HexObserverResponse>
+    <HexObserverResponse name="PauseKey">
+      <Response format="04 ff 02 1B 34"/>
+    </HexObserverResponse>
+    <HexObserverResponse name="PlayKey">
+      <Response format="04 ff 02 1A 34"/>
+    </HexObserverResponse>
+    <HexObserverResponse name="NextKey">
+      <Response format="04 ff 02 1C 34"/>
+    </HexObserverResponse>
+    <HexObserverResponse name="PreviousKey">
+      <Response format="04 ff 02 1D 34"/>
+    </HexObserverResponse>
+    <HexObserverResponse name="A2dpVolReport">
+      <Response format="04 FF 03 19 34 %1">
+        <P1>vol</P1>
+      </Response>
+    </HexObserverResponse>
+    <HexObserverResponse name="AnswerCall">
+      <Response format="04 ff 02 15 34"/>
+    </HexObserverResponse>
+    <HexObserverResponse name="RejectCall">
+      <Response format="04 ff 02 16 34"/>
+    </HexObserverResponse>
+    <HexObserverResponse name="HangUp">
+      <Response format="04 ff 02 17 34"/>
+    </HexObserverResponse>
+    <HexObserverResponse name="HfpVolReport">
+      <Response format="04 FF 03 18 34 %1">
+        <P1>vol</P1>
+      </Response>
+    </HexObserverResponse>
+  </FcdDongle>
+</root>

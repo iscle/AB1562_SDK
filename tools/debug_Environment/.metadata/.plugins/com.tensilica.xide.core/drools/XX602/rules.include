@@ -1,0 +1,4 @@
+Ruleset_name=XX602
+Xplorer_specific=true
+Dependency=common
+Files=XX602/featurechecks_602.dslr, XX601/featurechecks_601.dslr

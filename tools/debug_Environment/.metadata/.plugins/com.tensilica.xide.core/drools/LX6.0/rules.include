@@ -1,0 +1,3 @@
+Ruleset_name=LX6.0
+Dependency=common
+Files=LX6.0/optionchecks_60.dslr

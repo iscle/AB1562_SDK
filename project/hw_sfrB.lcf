@@ -1,0 +1,84 @@
+SECTIONS {
+  SERIALFLASH           =    0x62000000;
+  DMA                   =    0x62004000;
+  SYSTEM                =    0x62008000;
+  FFT                   =    0;
+  LV2INTERRUPT             =    0x62010000;
+  DDMA                  =    0x62014000;
+  USB                   =    0x62600000;
+  WIRE3                 =    0x62800000;
+  IOMUX                 =    0x62804000;
+  PMU                   =    0x62808000;
+  SLEEPCTRL             =    0x6280C000;
+  rPROBE                =    0x6280C300;
+  UART                  =    0x62810000;
+  I2C                   =    0x62814000;
+  SPI                   =    0x62818000;
+  SDCONTROLLER          =    0x6281c000;
+  UART2                 =    0x62820000;
+  
+  AUDIO_INTERRUPT       =    0x62824000;
+  AUDIO_MDSP            =    0;
+  AUDIO_CODEC         	=    0;
+  RATE_DET              =    0;
+  
+  SRC_A                 =    0;
+  AU_SRC_A_CH0_RADMA    =    0;
+  AU_SRC_A_CH1_RADMA    =    0;
+  AU_SRC_A_CH0_WADMA    =    0;
+  AU_SRC_A_CH1_WADMA    =    0;
+  
+  SRC_B                 =    0;
+  AU_SRC_B_CH0_RADMA    =    0;
+  AU_SRC_B_CH1_RADMA    =    0;
+  AU_SRC_B_CH0_WADMA    =    0;
+  AU_SRC_B_CH1_WADMA    =    0;
+  
+  SRC_C                 =    0;
+  AU_SRC_C_CH0_RADMA    =    0;
+  AU_SRC_C_CH1_RADMA    =    0;
+  AU_SRC_C_CH0_WADMA    =    0;
+  AU_SRC_C_CH1_WADMA    =    0;
+  
+  SPDIF                 =    0;
+  I2S                   =    0;
+  AUDIO_DFE             =    0;
+  AU_ODFE_CH0_RADMA   	=    0;
+  AU_ODFE_CH1_RADMA     =    0;
+  AU_ODFE_CH2_RADMA     =    0;
+  AU_ODFE_CH3_RADMA     =    0;
+  AU_ODFE_CH4_RADMA     =    0;
+  AU_IDFE_CH0_WADMA   	=    0;
+  AU_IDFE_CH1_WADMA   	=    0;
+  AU_IDFE_CH2_WADMA   	=    0;
+  AU_IDFE_CH3_WADMA   	=    0;
+  AU_IDFE_CH4_WADMA   	=    0;
+  AU_mDFE_CH5_RADMA     =    0;
+  AU_mDFE_CH6_RADMA     =    0;
+  AU_mDFE_CH5_WADMA     =    0;
+  AU_mDFE_CH6_WADMA     =    0;
+  
+  SDMA                  =    0x6284C000;
+  WDT                   =    0x62850000;
+  AIOADC                =    0x62854000;
+  
+  TIMER                 =    0x62858000;
+  TOP_DEBUG             =    0xA2010000;
+  GPIO_MODE             =    0xA20B0000;
+  BT_SLEEP				=	 0xB0000000;
+  rBb                   =    0xB0010000;
+  rRbist                =    0xB0030000;
+  CHA			        =    0x62862000;
+  MODEM                 =    0x62864000;
+  RINGTONE              =    0;
+  DIVIDER               =    0;
+  
+  P256                  =    0x62874000;
+  PWM1                  =    0x62878000;
+  PWM2                  =    0x6287C000;
+  LED                   =    0x62880000;
+  
+  
+  KEYSCAN               =    0;
+}
+

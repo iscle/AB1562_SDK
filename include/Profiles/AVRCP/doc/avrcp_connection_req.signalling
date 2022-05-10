@@ -1,0 +1,31 @@
+#This is the default signalling chart.
+#Edit and press F2 to see the result.
+#You can change the default chart
+#with the leftmost button on the Preferences pane of the ribbon.
+
+msc=qsd;
+title:AVRCP profile\n(AVRCP_ConnectRequest);
+defstyle note [line.color=red, text.color=red];
+
+m:MMI;
+r:AVRCP\nprofile;
+c:AVCTP\nprotocol;
+s:sdp;
+l:L2CAP;
+
+m,r,c,s,l;
+
+mark star;
+box ..: [line.corner=round]
+{
+    m->r:AVRCP_ConnectRequest(...);
+    r->s:BtSdpOpenSearchRequest(...);
+    s->r:BT_SDP_OPEN_SEARCH_CFM;
+    r->s:BtSdpServiceSearchRequest(...);
+    s->r:BT_SDP_SERVICE_SEARCH_CFM;
+    r->c:BtAvctpConnectRequest(...);
+    c->l:BtL2capConnectRequest(...);
+    l->c:BT_L2CAP_CONNECT_CFM;
+    c->r:Avctp_SendAvctpConnectCfm;
+    r->m:Avrcp_SendConnectCfm(...);
+};

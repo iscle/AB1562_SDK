@@ -1,0 +1,687 @@
+<root>
+	<CommandPool> 
+
+		<HexCommand name="ACTION_DEVICE_CHECK_MODEL">
+			<Transmit format="AA 00 43 48 45 43 4B 5F 4D 4F 44 45 4C 00 %1 %2 %3 %4">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="CHECK_MODEL_R1">
+			<Response format="BB 00 43 48 45 43 4B 5F 4D 4F 44 45 4C 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="CHECK_MODEL_R2">
+			<Response format="BB 00 43 48 45 43 4B 5F 4D 4F 44 45 4C 00 %1">
+				<P1>model{0:}</P1>
+			</Response>
+		</HexCommand>
+		<HexCommand name="CHECK_MODEL_R3">
+			<Response format="BB 00 43 48 45 43 4B 5F 4D 4F 44 45 4C 00 44 4F 4E 45"/>
+		</HexCommand>
+
+		<HexCommand name="ACTION_DEVICE_VIBRATE">
+			<Transmit format="AA 00 56 49 42 52 41 54 45 00 %1 %2 %3 %4">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="VIBRATE_R1">
+			<Response format="BB 00 56 49 42 52 41 54 45 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="VIBRATE_R2">
+			<Response format="BB 00 56 49 42 52 41 54 45 00 44 4F 4E 45"/>
+		</HexCommand>
+		
+		<HexCommand name="ACTION_ADD_MUSIC_TO_PLAYLIST">
+			<Transmit format="AA 00 41 44 44 5F 4D 55 53 49 43 5F 54 4F 5F 50 4C 41 59 4C 49 53 54 00 %1 %2 %3 %4 00 %5 00">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+				<P5>file_path{0:}</P5>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="ADD_MUSIC_TO_PLAYLIST_R1">
+			<Response format="BB 00 41 44 44 5F 4D 55 53 49 43 5F 54 4F 5F 50 4C 41 59 4C 49 53 54 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="ADD_MUSIC_TO_PLAYLIST_R2">
+			<Response format="BB 00 41 44 44 5F 4D 55 53 49 43 5F 54 4F 5F 50 4C 41 59 4C 49 53 54 00 %1">
+				<P1>state{0:}</P1>
+			</Response>
+		</HexCommand>
+		<HexCommand name="ADD_MUSIC_TO_PLAYLIST_R3">
+			<Response format="BB 00 41 44 44 5F 4D 55 53 49 43 5F 54 4F 5F 50 4C 41 59 4C 49 53 54 00 44 4F 4E 45"/>
+		</HexCommand> 		
+		
+		<HexCommand name="ACTION_CLEAR_PLAYLIST">
+			<Transmit format="AA 00 43 4C 45 41 52 5F 50 4C 41 59 4C 49 53 54 00 %1 %2 %3 %4">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="CLEAR_PLAYLIST_R1">
+			<Response format="BB 00 43 4C 45 41 52 5F 50 4C 41 59 4C 49 53 54 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="CLEAR_PLAYLIST_R2">
+			<Response format="BB 00 43 4C 45 41 52 5F 50 4C 41 59 4C 49 53 54 00 44 4F 4E 45"/>
+		</HexCommand>
+			
+		<HexCommand name="ACTION_MUSIC_PLAY">
+			<Transmit format="AA 00 4D 55 53 49 43 5F 50 4C 41 59 00 %1 %2 %3 %4">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="MUSIC_PLAY_R1">
+			<Response format="BB 00 4D 55 53 49 43 5F 50 4C 41 59 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="MUSIC_PLAY_R2">
+			<Response format="BB 00 4D 55 53 49 43 5F 50 4C 41 59 00 44 4F 4E 45"/>
+		</HexCommand>
+			
+		<HexCommand name="ACTION_MUSIC_PAUSE">
+			<Transmit format="AA 00 4D 55 53 49 43 5F 50 41 55 53 45 00 %1 %2 %3 %4">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="MUSIC_PAUSE_R1">
+			<Response format="BB 00 4D 55 53 49 43 5F 50 41 55 53 45 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="MUSIC_PAUSE_R2">
+			<Response format="BB 00 4D 55 53 49 43 5F 50 41 55 53 45 00 44 4F 4E 45"/>
+		</HexCommand>
+		
+		<HexCommand name="ACTION_MUSIC_NEXT_TRACK">
+			<Transmit format="AA 00 4D 55 53 49 43 5F 4E 45 58 54 5F 54 52 41 43 4B 00 %1 %2 %3 %4">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="MUSIC_NEXT_TRACK_R1">
+			<Response format="BB 00 4D 55 53 49 43 5F 4E 45 58 54 5F 54 52 41 43 4B 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="MUSIC_NEXT_TRACK_R2">
+			<Response format="BB 00 4D 55 53 49 43 5F 4E 45 58 54 5F 54 52 41 43 4B 00 44 4F 4E 45"/>
+		</HexCommand>
+
+		<HexCommand name="ACTION_MUSIC_PREVIOUS_TRACK">
+			<Transmit format="AA 00 4D 55 53 49 43 5F 50 52 45 56 49 4F 55 53 5F 54 52 41 43 4B 00 %1 %2 %3 %4">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="MUSIC_PREVIOUS_TRACK_R1">
+			<Response format="BB 00 4D 55 53 49 43 5F 50 52 45 56 49 4F 55 53 5F 54 52 41 43 4B 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="MUSIC_PREVIOUS_TRACK_R2">
+			<Response format="BB 00 4D 55 53 49 43 5F 50 52 45 56 49 4F 55 53 5F 54 52 41 43 4B 00 44 4F 4E 45"/>
+		</HexCommand>
+
+		<HexCommand name="ACTION_VOLUME_UP">
+			<Transmit format="AA 00 56 4F 4C 55 4D 45 5F 55 50 00 %1 %2 %3 %4">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="VOLUME_UP_R1">
+			<Response format="BB 00 56 4F 4C 55 4D 45 5F 55 50 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="VOLUME_UP_R2">
+			<Response format="BB 00 56 4F 4C 55 4D 45 5F 55 50 00 44 4F 4E 45"/>
+		</HexCommand>
+
+		<HexCommand name="ACTION_VOLUME_DOWN">
+			<Transmit format="AA 00 56 4F 4C 55 4D 45 5F 44 4F 57 4E 00 %1 %2 %3 %4">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="VOLUME_DOWN_R1">
+			<Response format="BB 00 56 4F 4C 55 4D 45 5F 44 4F 57 4E 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="VOLUME_DOWN_R2">
+			<Response format="BB 00 56 4F 4C 55 4D 45 5F 44 4F 57 4E 00 44 4F 4E 45"/>
+		</HexCommand>
+			
+			
+		<HexCommand name="ACTION_BLUETOOTH_ENABLE_ADAPTER">
+			<Transmit format="AA 00 42 54 5F 45 4E 41 42 4C 45 5F 41 44 41 50 54 45 52 00 %1 %2 %3 %4">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="BT_ENABLE_ADAPTER_R1">
+			<Response format="BB 00 42 54 5F 45 4E 41 42 4C 45 5F 41 44 41 50 54 45 52 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="BT_ENABLE_ADAPTER_R2">
+			<Response format="BB 00 42 54 5F 45 4E 41 42 4C 45 5F 41 44 41 50 54 45 52 00 44 4F 4E 45"/>
+		</HexCommand>		
+
+		<HexCommand name="ACTION_BLUETOOTH_DISABLE_ADAPTER">
+			<Transmit format="AA 00 42 54 5F 44 49 53 41 42 4C 45 5F 41 44 41 50 54 45 52 00 %1 %2 %3 %4">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="BT_DISABLE_ADAPTER_R1">
+			<Response format="BB 00 42 54 5F 44 49 53 41 42 4C 45 5F 41 44 41 50 54 45 52 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="BT_DISABLE_ADAPTER_R2">
+			<Response format="BB 00 42 54 5F 44 49 53 41 42 4C 45 5F 41 44 41 50 54 45 52 00 44 4F 4E 45"/>
+		</HexCommand>			
+
+		<HexCommand name="ACTION_BLUETOOTH_CHECK_ADAPTER">
+			<Transmit format="AA 00 42 54 5F 43 48 45 43 4B 5F 41 44 41 50 54 45 52 00 %1 %2 %3 %4">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="BT_CHECK_ADAPTER_R1">
+			<Response format="BB 00 42 54 5F 43 48 45 43 4B 5F 41 44 41 50 54 45 52 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="BT_CHECK_ADAPTER_R2">
+			<Response format="BB 00 42 54 5F 43 48 45 43 4B 5F 41 44 41 50 54 45 52 00 %1">
+				<P1>state{0:}</P1>
+			</Response>
+		</HexCommand>
+		<HexCommand name="BT_CHECK_ADAPTER_R3">
+			<Response format="BB 00 42 54 5F 43 48 45 43 4B 5F 41 44 41 50 54 45 52 00 44 4F 4E 45"/>
+		</HexCommand>
+	
+		<HexCommand name="ACTION_BLUETOOTH_START_SCAN">
+			<Transmit format="AA 00 42 54 5F 53 54 41 52 54 5F 53 43 41 4E 00 %1 %2 %3 %4">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="BT_START_SCAN_R1">
+			<Response format="BB 00 42 54 5f 53 54 41 52 54 5f 53 43 41 4e 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="BT_START_SCAN_R2">
+			<Response format="BB 00 42 54 5f 53 54 41 52 54 5f 53 43 41 4e 00 44 4F 4E 45"/>
+		</HexCommand>	
+
+		<HexCommand name="ACTION_BLUETOOTH_STOP_SCAN">
+			<Transmit format="AA 00 42 54 5F 53 54 4F 50 5F 53 43 41 4E 00 %1 %2 %3 %4">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="BT_STOP_SCAN_R1">
+			<Response format="BB 00 42 54 5F 53 54 4F 50 5F 53 43 41 4E 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="BT_STOP_SCAN_R2">
+			<Response format="BB 00 42 54 5F 53 54 4F 50 5F 53 43 41 4E 00 44 4F 4E 45"/>
+		</HexCommand>			
+	
+		<HexCommand name="ACTION_BLUETOOTH_CHECK_SCAN_STATE">
+			<Transmit format="AA 00 42 54 5F 43 48 45 43 4B 5F 53 43 41 4E 5F 53 54 41 54 45 00 %1 %2 %3 %4">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="BT_CHECK_SCAN_STATE_R1">
+			<Response format="BB 00 42 54 5F 43 48 45 43 4B 5F 53 43 41 4E 5F 53 54 41 54 45 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="BT_CHECK_SCAN_STATE_R2">
+			<Response format="BB 00 42 54 5F 43 48 45 43 4B 5F 53 43 41 4E 5F 53 54 41 54 45 00 %1">
+				<P1>state{0:}</P1>
+			</Response>
+		</HexCommand>
+		<HexCommand name="BT_CHECK_SCAN_STATE_R3">
+			<Response format="BB 00 42 54 5F 43 48 45 43 4B 5F 53 43 41 4E 5F 53 54 41 54 45 00 44 4F 4E 45"/>
+		</HexCommand>
+		
+		<HexCommand name="ACTION_BLUETOOTH_GET_BD_ADDR">
+			<Transmit format="AA 00 42 54 5F 47 45 54 5F 42 44 5F 41 44 44 52 00 %1 %2 %3 %4 00 %5">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+				<P5>device_name{0:}</P5>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="BT_GET_BD_ADDR_R1">
+			<Response format="BB 00 42 54 5F 47 45 54 5F 42 44 5F 41 44 44 52 00 41 43 4B"/>
+		</HexCommand>
+		
+		<HexCommand name="RESPONSE_BLUETOOTH_GET_BD_ADDR">
+			<Response format="BB 00 42 54 5F 47 45 54 5F 42 44 5F 41 44 44 52 00 %1">
+				<P1>data{0:}</P1>
+			</Response>
+		</HexCommand>
+		
+		<HexCommand name="RESPONSE_BLUETOOTH_INQUIRY_BD_ADDR">
+			<Response format="BB 00 45 56 45 4E 54 5F 42 54 5F 44 45 56 49 43 45 5F 46 4F 55 4E 44 00 %1">
+				<P1>data{0:}</P1>
+			</Response>
+		</HexCommand>
+		
+		<HexCommand name="ACTION_BLUETOOTH_CONNECT">
+			<Transmit format="AA 00 42 54 5F 43 4F 4E 4E 45 43 54 00 %1 %2 %3 %4 00 %5">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+				<P5>mac_addr{0:}</P5>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="BT_CONNECT_R1">
+			<Response format="BB 00 42 54 5F 43 4F 4E 4E 45 43 54 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="BT_CONNECT_R2">
+			<Response format="BB 00 42 54 5F 43 4F 4E 4E 45 43 54 00 44 4F 4E 45"/>
+		</HexCommand>  
+		
+		<HexCommand name="ACTION_BLUETOOTH_DISCONNECT">
+			<Transmit format="AA 00 42 54 5F 44 49 53 43 4F 4E 4E 45 43 54 00 %1 %2 %3 %4 00 %5">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+				<P5>mac_addr{0:}</P5>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="BT_DISCONNECT_R1">
+			<Response format="BB 00 42 54 5F 44 49 53 43 4F 4E 4E 45 43 54 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="BT_DISCONNECT_R2">
+			<Response format="BB 00 42 54 5F 44 49 53 43 4F 4E 4E 45 43 54 00 44 4F 4E 45"/>
+		</HexCommand>  		
+	
+		<HexCommand name="ACTION_BLUETOOTH_CHECK_CONNECT_STATE">
+			<Transmit format="AA 00 42 54 5F 43 48 45 43 4B 5F 43 4F 4E 4E 45 43 54 5F 53 54 41 54 45 00 %1 %2 %3 %4 00 %5">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+				<P5>mac_addr{0:}</P5>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="BT_CHECK_CONNECT_STATE_R1">
+			<Response format="BB 00 42 54 5F 43 48 45 43 4B 5F 43 4F 4E 4E 45 43 54 5F 53 54 41 54 45 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="BT_CHECK_CONNECT_STATE_R2">
+			<Response format="BB 00 42 54 5F 43 48 45 43 4B 5F 43 4F 4E 4E 45 43 54 5F 53 54 41 54 45 00 %1">
+				<P1>state{0:}</P1>
+			</Response>
+		</HexCommand>
+		<HexCommand name="BT_CHECK_CONNECT_STATE_R3">
+			<Response format="BB 00 42 54 5F 43 48 45 43 4B 5F 43 4F 4E 4E 45 43 54 5F 53 54 41 54 45 00 44 4F 4E 45"/>
+		</HexCommand>  
+	
+		<HexCommand name="ACTION_BLUETOOTH_PAIR_DEVICE">
+			<Transmit format="AA 00 42 54 5F 50 41 49 52 5F 44 45 56 49 43 45 00 %1 %2 %3 %4 00 %5">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+				<P5>mac_addr{0:}</P5>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="BT_PAIR_DEVICE_R1">
+			<Response format="BB 00 42 54 5F 50 41 49 52 5F 44 45 56 49 43 45 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="BT_PAIR_DEVICE_R2">
+			<Response format="BB 00 42 54 5F 50 41 49 52 5F 44 45 56 49 43 45 00 44 4F 4E 45"/>
+		</HexCommand> 
+
+		<HexCommand name="ACTION_BLUETOOTH_UNPAIR_DEVICE">
+			<Transmit format="AA 00 42 54 5F 55 4E 50 41 49 52 5F 44 45 56 49 43 45 00 %1 %2 %3 %4 00 %5">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+				<P5>mac_addr{0:}</P5>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="BT_UNPAIR_DEVICE_R1">
+			<Response format="BB 00 42 54 5F 55 4E 50 41 49 52 5F 44 45 56 49 43 45 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="BT_UNPAIR_DEVICE_R2">
+			<Response format="BB 00 42 54 5F 55 4E 50 41 49 52 5F 44 45 56 49 43 45 00 44 4F 4E 45"/>
+		</HexCommand> 		
+	
+		<HexCommand name="ACTION_BLUETOOTH_CHECK_BOND_STATE">
+			<Transmit format="AA 00 42 54 5F 43 48 45 43 4B 5F 42 4F 4E 44 5F 53 54 41 54 45 00 %1 %2 %3 %4 00 %5">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+				<P5>mac_addr{0:}</P5>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="BT_CHECK_BOND_STATE_R1">
+			<Response format="BB 00 42 54 5F 43 48 45 43 4B 5F 42 4F 4E 44 5F 53 54 41 54 45 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="BT_CHECK_BOND_STATE_R2">
+			<Response format="BB 00 42 54 5F 43 48 45 43 4B 5F 42 4F 4E 44 5F 53 54 41 54 45 00 %1">
+				<P1>state{0:}</P1>
+			</Response>
+		</HexCommand>
+		<HexCommand name="BT_CHECK_BOND_STATE_R3">
+			<Response format="BB 00 42 54 5F 43 48 45 43 4B 5F 42 4F 4E 44 5F 53 54 41 54 45 00 44 4F 4E 45"/>
+		</HexCommand>   
+
+		<HexCommand name="ACTION_BLUETOOTH_UNPAIR_ALL">
+			<Transmit format="AA 00 42 54 5F 55 4E 50 41 49 52 5F 41 4C 4C 00 %1 %2 %3 %4">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="BT_UNPAIR_ALL_R1">
+			<Response format="BB 00 42 54 5F 55 4E 50 41 49 52 5F 41 4C 4C 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="BT_UNPAIR_ALL_R2">
+			<Response format="BB 00 42 54 5F 55 4E 50 41 49 52 5F 41 4C 4C 00 44 4F 4E 45"/>
+		</HexCommand>
+		
+		<HexCommand name="ACTION_BLUETOOTH_CONNECT_A2DP">
+			<Transmit format="AA 00 42 54 5F 43 4F 4E 4E 45 43 54 5F 41 32 44 50 00 %1 %2 %3 %4 00 %5">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+				<P5>mac_addr{0:}</P5>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="BT_CONNECT_A2DP_R1">
+			<Response format="BB 00 42 54 5F 43 4F 4E 4E 45 43 54 5F 41 32 44 50 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="BT_CONNECT_A2DP_R2">
+			<Response format="BB 00 42 54 5F 43 4F 4E 4E 45 43 54 5F 41 32 44 50 00 44 4F 4E 45"/>
+		</HexCommand> 		
+	
+		<HexCommand name="ACTION_BLUETOOTH_DISCONNECT_A2DP">
+			<Transmit format="AA 00 42 54 5F 44 49 53 43 4F 4E 4E 45 43 54 5F 41 32 44 50 00 %1 %2 %3 %4 00 %5">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+				<P5>mac_addr{0:}</P5>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="BT_DISCONNECT_A2DP_R1">
+			<Response format="BB 00 42 54 5F 44 49 53 43 4F 4E 4E 45 43 54 5F 41 32 44 50 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="BT_DISCONNECT_A2DP_R2">
+			<Response format="BB 00 42 54 5F 44 49 53 43 4F 4E 4E 45 43 54 5F 41 32 44 50 00 44 4F 4E 45"/>
+		</HexCommand> 		
+
+		<HexCommand name="ACTION_BLUETOOTH_CHECK_A2DP">
+			<Transmit format="AA 00 42 54 5F 43 48 45 43 4B 5F 41 32 44 50 00 %1 %2 %3 %4 00 %5">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+				<P5>mac_addr{0:}</P5>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="BT_CHECK_A2DP_R1">
+			<Response format="BB 00 42 54 5F 43 48 45 43 4B 5F 41 32 44 50 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="BT_CHECK_A2DP_R2">
+			<Response format="BB 00 42 54 5F 43 48 45 43 4B 5F 41 32 44 50 00 %1">
+				<P1>state{0:}</P1>
+			</Response>
+		</HexCommand>
+		<HexCommand name="BT_CHECK_A2DP_R3">
+			<Response format="BB 00 42 54 5F 43 48 45 43 4B 5F 41 32 44 50 00 44 4F 4E 45"/>
+		</HexCommand>   
+	
+		<HexCommand name="ACTION_BLUETOOTH_CHECK_A2DP_PLAYING">
+			<Transmit format="AA 00 42 54 5F 43 48 45 43 4B 5F 41 32 44 50 5F 50 4C 41 59 49 4E 47 00 %1 %2 %3 %4 00 %5">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+				<P5>mac_addr{0:}</P5>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="BT_CHECK_A2DP_PLAYING_R1">
+			<Response format="BB 00 42 54 5F 43 48 45 43 4B 5F 41 32 44 50 5F 50 4C 41 59 49 4E 47 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="BT_CHECK_A2DP_PLAYING_R2">
+			<Response format="BB 00 42 54 5F 43 48 45 43 4B 5F 41 32 44 50 5F 50 4C 41 59 49 4E 47 00 %1">
+				<P1>state{0:}</P1>
+			</Response>
+		</HexCommand>
+		<HexCommand name="BT_CHECK_A2DP_PLAYING_R3">
+			<Response format="BB 00 42 54 5F 43 48 45 43 4B 5F 41 32 44 50 5F 50 4C 41 59 49 4E 47 00 44 4F 4E 45"/>
+		</HexCommand>   
+	
+		<HexCommand name="ACTION_BLUETOOTH_CONNECT_HFP">
+			<Transmit format="AA 00 42 54 5F 43 4F 4E 4E 45 43 54 5F 48 46 50 00 %1 %2 %3 %4 00 %5">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+				<P5>mac_addr{0:}</P5>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="BT_CONNECT_HFP_R1">
+			<Response format="BB 00 42 54 5F 43 4F 4E 4E 45 43 54 5F 48 46 50 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="BT_CONNECT_HFP_R2">
+			<Response format="BB 00 42 54 5F 43 4F 4E 4E 45 43 54 5F 48 46 50 00 44 4F 4E 45"/>
+		</HexCommand> 		
+	
+		<HexCommand name="ACTION_BLUETOOTH_DISCONNECT_HFP">
+			<Transmit format="AA 00 42 54 5F 44 49 53 43 4F 4E 4E 45 43 54 5F 48 46 50 00 %1 %2 %3 %4 00 %5">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+				<P5>mac_addr{0:}</P5>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="BT_DISCONNECT_HFP_R1">
+			<Response format="BB 00 42 54 5F 44 49 53 43 4F 4E 4E 45 43 54 5F 48 46 50 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="BT_DISCONNECT_HFP_R2">
+			<Response format="BB 00 42 54 5F 44 49 53 43 4F 4E 4E 45 43 54 5F 48 46 50 00 44 4F 4E 45"/>
+		</HexCommand> 		
+
+		<HexCommand name="ACTION_BLUETOOTH_CHECK_HFP">
+			<Transmit format="AA 00 42 54 5F 43 48 45 43 4B 5F 48 46 50 00 %1 %2 %3 %4 00 %5">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+				<P5>mac_addr{0:}</P5>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="BT_CHECK_HFP_R1">
+			<Response format="BB 00 42 54 5F 43 48 45 43 4B 5F 48 46 50 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="BT_CHECK_HFP_R2">
+			<Response format="BB 00 42 54 5F 43 48 45 43 4B 5F 48 46 50 00 %1">
+				<P1>state{0:}</P1>
+			</Response>
+		</HexCommand>
+		<HexCommand name="BT_CHECK_HFP_R3">
+			<Response format="BB 00 42 54 5F 43 48 45 43 4B 5F 48 46 50 00 44 4F 4E 45"/>
+		</HexCommand>   
+
+		<HexCommand name="ACTION_BLUETOOTH_CHECK_SCO_AVAILABLE">
+			<Transmit format="AA 00 42 54 5F 43 48 45 43 4B 5F 53 43 4F 5F 41 56 41 49 4C 41 42 4C 45 00 %1 %2 %3 %4">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="BT_CHECK_SCO_AVAILABLE_R1">
+			<Response format="BB 00 42 54 5F 43 48 45 43 4B 5F 53 43 4F 5F 41 56 41 49 4C 41 42 4C 45 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="BT_CHECK_SCO_AVAILABLE_R2">
+			<Response format="BB 00 42 54 5F 43 48 45 43 4B 5F 53 43 4F 5F 41 56 41 49 4C 41 42 4C 45 00 %1">
+				<P1>state{0:}</P1>
+			</Response>
+		</HexCommand>
+		<HexCommand name="BT_CHECK_SCO_AVAILABLE_R3">
+			<Response format="BB 00 42 54 5F 43 48 45 43 4B 5F 53 43 4F 5F 41 56 41 49 4C 41 42 4C 45 00 44 4F 4E 45"/>
+		</HexCommand>   
+
+		<HexCommand name="ACTION_BLUETOOTH_CHECK_SCO_STATE">
+			<Transmit format="AA 00 42 54 5F 43 48 45 43 4B 5F 53 43 4F 5F 53 54 41 54 45 00 %1 %2 %3 %4 00 %5">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+				<P5>mac_addr{0:}</P5>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="BT_CHECK_SCO_STATE_R1">
+			<Response format="BB 00 42 54 5F 43 48 45 43 4B 5F 53 43 4F 5F 53 54 41 54 45 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="BT_CHECK_SCO_STATE_R2">
+			<Response format="BB 00 42 54 5F 43 48 45 43 4B 5F 53 43 4F 5F 53 54 41 54 45 00 %1">
+				<P1>state{0:}</P1>
+			</Response>
+		</HexCommand>
+		<HexCommand name="BT_CHECK_SCO_STATE_R3">
+			<Response format="BB 00 42 54 5F 43 48 45 43 4B 5F 53 43 4F 5F 53 54 41 54 45 00 44 4F 4E 45"/>
+		</HexCommand>   
+	 
+	 
+	 
+		<HexCommand name="ACTION_TASK_BT_SCAN_PAIR_CONNECT_DEVICE">
+			<Transmit format="AA 00 54 41 53 4B 5F 42 54 5F 53 43 41 4E 5F 50 41 49 52 5F 43 4F 4E 4E 45 43 54 5F 44 45 56 49 43 45 00 %1 %2 %3 %4 00 %5">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+				<P5>mac_addr{0:}</P5>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="TASK_BT_SCAN_PAIR_CONNECT_DEVICE_R1">
+			<Response format="BB 00 54 41 53 4B 5F 42 54 5F 53 43 41 4E 5F 50 41 49 52 5F 43 4F 4E 4E 45 43 54 5F 44 45 56 49 43 45 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="TASK_BT_SCAN_PAIR_CONNECT_DEVICE_R2">
+			<Response format="BB 00 54 41 53 4B 5F 42 54 5F 53 43 41 4E 5F 50 41 49 52 5F 43 4F 4E 4E 45 43 54 5F 44 45 56 49 43 45 00 %1">
+				<P1>state{0:}</P1>
+			</Response>
+		</HexCommand>
+		<HexCommand name="TASK_BT_SCAN_PAIR_CONNECT_DEVICE_R3">
+			<Response format="BB 00 54 41 53 4B 5F 42 54 5F 53 43 41 4E 5F 50 41 49 52 5F 43 4F 4E 4E 45 43 54 5F 44 45 56 49 43 45 00 44 4F 4E 45"/>
+		</HexCommand>   
+	
+		<HexCommand name="ACTION_TASK_POWER_OFF_BT">
+			<Transmit format="AA 00 54 41 53 4B 5F 50 4F 57 45 52 5F 4F 46 46 5F 42 54 00 %1 %2 %3 %4">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="TASK_POWER_OFF_BT_R1">
+			<Response format="BB 00 54 41 53 4B 5F 50 4F 57 45 52 5F 4F 46 46 5F 42 54 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="TASK_POWER_OFF_BT_R2">
+			<Response format="BB 00 54 41 53 4B 5F 50 4F 57 45 52 5F 4F 46 46 5F 42 54 00 %1">
+				<P1>state{0:}</P1>
+			</Response>
+		</HexCommand>
+		<HexCommand name="TASK_POWER_OFF_BT_R3">
+			<Response format="BB 00 54 41 53 4B 5F 50 4F 57 45 52 5F 4F 46 46 5F 42 54 00 44 4F 4E 45"/>
+		</HexCommand>  
+
+		<HexCommand name="ACTION_TASK_BT_DISCONNECT_UNPAIR_DEVICE">
+			<Transmit format="AA 00 54 41 53 4B 5F 42 54 5F 44 49 53 43 4F 4E 4E 45 43 54 5F 55 4E 50 41 49 52 5F 44 45 56 49 43 45 00 %1 %2 %3 %4 00 %5">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+				<P5>mac_addr{0:}</P5>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="TASK_BT_DISCONNECT_UNPAIR_DEVICE_R1">
+			<Response format="BB 00 54 41 53 4B 5F 42 54 5F 44 49 53 43 4F 4E 4E 45 43 54 5F 55 4E 50 41 49 52 5F 44 45 56 49 43 45 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="TASK_BT_DISCONNECT_UNPAIR_DEVICE_R2">
+			<Response format="BB 00 54 41 53 4B 5F 42 54 5F 44 49 53 43 4F 4E 4E 45 43 54 5F 55 4E 50 41 49 52 5F 44 45 56 49 43 45 00 %1">
+				<P1>state{0:}</P1>
+			</Response>
+		</HexCommand>
+		<HexCommand name="TASK_BT_DISCONNECT_UNPAIR_DEVICE_R3">
+			<Response format="BB 00 54 41 53 4B 5F 42 54 5F 44 49 53 43 4F 4E 4E 45 43 54 5F 55 4E 50 41 49 52 5F 44 45 56 49 43 45 00 44 4F 4E 45"/>
+		</HexCommand>   
+	
+		<HexCommand name="ACTION_TASK_PLAY_MUSIC_FILE">
+			<Transmit format="AA 00 54 41 53 4B 5F 50 4C 41 59 5F 4D 55 53 49 43 5F 46 49 4C 45 00 %1 %2 %3 %4 00 %5">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+				<P5>file_path{0:}</P5>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="TASK_PLAY_MUSIC_FILE_R1">
+			<Response format="BB 00 54 41 53 4B 5F 50 4C 41 59 5F 4D 55 53 49 43 5F 46 49 4C 45 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="TASK_PLAY_MUSIC_FILE_R2">
+			<Response format="BB 00 54 41 53 4B 5F 50 4C 41 59 5F 4D 55 53 49 43 5F 46 49 4C 45 00 %1">
+				<P1>state{0:}</P1>
+			</Response>
+		</HexCommand>
+		<HexCommand name="TASK_PLAY_MUSIC_FILE_R3">
+			<Response format="BB 00 54 41 53 4B 5F 50 4C 41 59 5F 4D 55 53 49 43 5F 46 49 4C 45 00 44 4F 4E 45"/>
+		</HexCommand>   
+	
+		<HexCommand name="ACTION_TASK_PAUSE_MUSIC">
+			<Transmit format="AA 00 54 41 53 4B 5F 50 41 55 53 45 5F 4D 55 53 49 43 00 %1 %2 %3 %4">
+				<P1>app_timeout_sec[0:8]</P1>
+				<P2>app_timeout_sec[8:8]</P2>
+				<P3>app_timeout_sec[16:8]</P3>
+				<P4>app_timeout_sec[24:8]</P4>
+			</Transmit>
+		</HexCommand>
+		<HexCommand name="TASK_PAUSE_MUSIC_R1">
+			<Response format="BB 00 54 41 53 4B 5F 50 41 55 53 45 5F 4D 55 53 49 43 00 41 43 4B"/>
+		</HexCommand>
+		<HexCommand name="TASK_PAUSE_MUSIC_R2">
+			<Response format="BB 00 54 41 53 4B 5F 50 41 55 53 45 5F 4D 55 53 49 43 00 %1">
+				<P1>state{0:}</P1>
+			</Response>
+		</HexCommand>
+		<HexCommand name="TASK_PAUSE_MUSIC_R3">
+			<Response format="BB 00 54 41 53 4B 5F 50 41 55 53 45 5F 4D 55 53 49 43 00 44 4F 4E 45"/>
+		</HexCommand>   
+		
+		
+	</CommandPool>
+</root>

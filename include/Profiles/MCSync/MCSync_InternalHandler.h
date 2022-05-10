@@ -1,0 +1,312 @@
+/* Copyright Statement:
+ *
+ * (C) 2018  Airoha Technology Corp. All rights reserved.
+ *
+ * This software/firmware and related documentation ("Airoha Software") are
+ * protected under relevant copyright laws. The information contained herein
+ * is confidential and proprietary to Airoha Technology Corp. ("Airoha") and/or its licensors.
+ * Without the prior written permission of Airoha and/or its licensors,
+ * any reproduction, modification, use or disclosure of Airoha Software,
+ * and information contained herein, in whole or in part, shall be strictly prohibited.
+ * You may only use, reproduce, modify, or distribute (as applicable) Airoha Software
+ * if you have agreed to and been bound by the applicable license agreement with
+ * Airoha ("License Agreement") and been granted explicit permission to do so within
+ * the License Agreement ("Permitted User").  If you are not a Permitted User,
+ * please cease any access or use of Airoha Software immediately.
+ * BY OPENING THIS FILE, RECEIVER HEREBY UNEQUIVOCALLY ACKNOWLEDGES AND AGREES
+ * THAT AIROHA SOFTWARE RECEIVED FROM AIROHA AND/OR ITS REPRESENTATIVES
+ * ARE PROVIDED TO RECEIVER ON AN "AS-IS" BASIS ONLY. AIROHA EXPRESSLY DISCLAIMS ANY AND ALL
+ * WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NONINFRINGEMENT.
+ * NEITHER DOES AIROHA PROVIDE ANY WARRANTY WHATSOEVER WITH RESPECT TO THE
+ * SOFTWARE OF ANY THIRD PARTY WHICH MAY BE USED BY, INCORPORATED IN, OR
+ * SUPPLIED WITH AIROHA SOFTWARE, AND RECEIVER AGREES TO LOOK ONLY TO SUCH
+ * THIRD PARTY FOR ANY WARRANTY CLAIM RELATING THERETO. RECEIVER EXPRESSLY ACKNOWLEDGES
+ * THAT IT IS RECEIVER'S SOLE RESPONSIBILITY TO OBTAIN FROM ANY THIRD PARTY ALL PROPER LICENSES
+ * CONTAINED IN AIROHA SOFTWARE. AIROHA SHALL ALSO NOT BE RESPONSIBLE FOR ANY AIROHA
+ * SOFTWARE RELEASES MADE TO RECEIVER'S SPECIFICATION OR TO CONFORM TO A PARTICULAR
+ * STANDARD OR OPEN FORUM. RECEIVER'S SOLE AND EXCLUSIVE REMEDY AND AIROHA'S ENTIRE AND
+ * CUMULATIVE LIABILITY WITH RESPECT TO AIROHA SOFTWARE RELEASED HEREUNDER WILL BE,
+ * AT AIROHA'S OPTION, TO REVISE OR REPLACE AIROHA SOFTWARE AT ISSUE,
+ * OR REFUND ANY SOFTWARE LICENSE FEES OR SERVICE CHARGE PAID BY RECEIVER TO
+ * AIROHA FOR SUCH AIROHA SOFTWARE AT ISSUE.
+ */
+
+#ifndef _AWS_MCE_INTERNALHANDLER_H_
+#define _AWS_MCE_INTERNALHANDLER_H_
+
+#include "bt.h"
+
+/*************************************************************************************************
+* Enum
+**************************************************************************************************/
+typedef enum AWSMCE_INRERNAL_MSG_E
+{
+	AWSMCE_INTERNAL_A2DP_CMD,
+	AWSMCE_INTERNAL_SCO_CMD,
+	AWSMCE_INTERNAL_STATE_CMD,
+	AWSMCE_INTERNAL_KEY_CMD,
+	AWSMCE_INTERNAL_VP_CMD,
+	AWSMCE_INTERNAL_ANCPASSTHRU_CMD, //5
+	AWSMCE_INTERNAL_AIROKEY_NOISE_CMD,
+	AWSMCE_INTERNAL_DEVICE_NAME_CMD,
+	AWSMCE_INTERNAL_AIROHA_KEY_CMD,
+	AWSMCE_INTERNAL_AIROKEY_SETTING_CMD,
+	AWSMCE_INTERNAL_LED_CMD, //10
+	AWSMCE_INTERNAL_VPRT_SYNC_CMD,
+	AWSMCE_INTERNAL_VPRT_SYNC_STOP_CMD,
+	AWSMCE_INTERNAL_VPRT_SYNC_PLAY_LATER_CMD,
+	AWSMCE_INTERNAL_CALLER_ID_SYNC_CMD, //15
+	AWSMCE_INTERNAL_PEQREALTIME_CMD,
+	AWSMCE_INTERNAL_PARTNERINFO_CMD,
+	AWSMCE_INTERNAL_DSP_CMD,
+	AWSMCE_INTERNAL_RHO_PARA_CMD, //20
+	AWSMCE_INTERNAL_SMTCHGCSE_CMD,
+	AWSMCE_INTERNAL_SYNC_IN_EAR_DETECTION_STATUS,
+	AWSMCE_INTERNAL_POWEROFF_SYNC_CMD, //23
+	AWSMCE_INTERNAL_KEYCODE_CMD,
+	AWSMCE_INTERNAL_SMART_CHARGE_CASE_STATE_CMD,
+	AWSMCE_INTERNAL_GENERAL_DATA_CMD,
+	#ifdef MTK_LEAKAGE_DETECTION_ENABLE
+	AWSMCE_INTERNAL_LEAKAGE_DETECT_INFO_CMD,
+	#endif
+   	AWSMCE_INTERNAL_XIAOAI_P2A_SYNC_DATA_CMD,
+    MCSYNC_INTERNAL_SHARE_MODE_INFO_CMD,
+	AWSMCE_INTERNAL_FOLLOWER_SOUNDLEVEL_CMD,
+	AWSMCE_INTERNAL_OTHER_AGENT_BDA_CMD,
+	AWSMCE_INTERNAL_FOLLOWER_CONN_CMD,
+	AWSMCE_INTERNAL_FOLLOWER_DISC_CMD,
+	AWSMCE_INTERNAL_AGENT_RETRANSMIT_FOLLOWER_DATA_CMD,
+	AWSMCE_INTERNAL_AGENT_NOTICE_FOLLOWER_LEAVE_CMD,
+	AWSMCE_INTERNAL_FOLLOWER_SEND_TO_AGENT_RETRIGGER_CMD,
+    AWSMCE_INTERNAL_PARTNER_SEND_TO_AGENT_EXIT_CMD,
+    AWSMCE_INTERNAL_SYNC_BATTERY,
+
+    MCSYNC_INTERNAL_MODULE_SEND_DATA,
+}AWSMCE_INRERNAL_MSG_E;
+
+enum
+{
+	ROLE_MODE_CHANGE_ACTION_START_TO_PARTNER,
+	ROLE_MODE_CHANGE_ACTION_MCSYNC_DISC_IND,
+	ROLE_MODE_CHANGE_ACTION_CHANGE_BDA_CFM,
+	ROLE_MODE_CHANGE_ACTION_CONNECT_CFM,
+
+	ROLE_MODE_CHANGE_ACTION_START_TO_AGENT,
+};
+
+/*************************************************************************************************
+* Structure
+**************************************************************************************************/
+typedef struct AWSMCE_INTERNAL_A2DP_CMD_T
+{
+	U8 codec;
+	U8 avrcpVolume;
+	U8 peqIndex;
+	U8 scms;
+	BOOL isGameMode;
+	U8 numOfAg;
+	U8 specificRole;
+}AWSMCE_INTERNAL_A2DP_CMD_T;
+
+typedef struct AWSMCE_INTERNAL_SCO_CMD_T
+{
+	U8 speakerSoundLevel;
+	U8 micSoundLevel;
+	U8 scoState;
+	U8 topState;
+}AWSMCE_INTERNAL_SCO_CMD_T;
+
+typedef struct AWSMCE_INTERNAL_KEY_CMD_T
+{
+	U16 keyEventCode;
+	U32 supportedState;
+
+}AWSMCE_INTERNAL_KEY_CMD_T;
+
+typedef struct AWSMCE_INTERNAL_AIROKEY_NOISE_CMD_T
+{
+	U8 action;
+}AWSMCE_INTERNAL_AIROKEY_NOISE_CMD_T;
+
+typedef struct AWSMCE_INTERNAL_DEVICE_NAME_CMD_T
+{
+	U16 length;
+	U8 name[1];
+}AWSMCE_INTERNAL_DEVICE_NAME_CMD_T;
+
+typedef struct AWSMCE_INTERNAL_AIROHA_KEY_CMD_T
+{
+	U8 rightAction;
+	U8 leftAction;
+	U8 noiseCtlMask;
+}AWSMCE_INTERNAL_AIROHA_KEY_CMD_T;
+
+typedef struct AWSMCE_INTERNAL_AIROKEY_SETTING_CMD_T
+{
+	U8 isEarDetectEnable;
+}AWSMCE_INTERNAL_AIROKEY_SETTING_CMD_T;
+
+typedef struct APP_MCSYNC_LED_STRU
+{
+	U8 patternIndex;
+	U8 patternType[6];
+	U8 overwriteTime;
+	BOOL isOverwrite;
+	U32 clockToStart;
+	U8 action;
+}APP_MCSYNC_LED_STRU;
+
+typedef struct AWSMCE_INTERNAL_VPRT_SYNC_CMD_T
+{
+	U16 rtIndex;
+	U16 vpIndex;
+	U16 eventIndex;
+	U32 currentPicoClock;
+	U8 overwriteTime;
+}AWSMCE_INTERNAL_VPRT_SYNC_CMD_T;
+
+typedef struct AWSMCE_INTERNAL_VPRT_SYNC_STOP_CMD_T
+{
+	U16 eventIndex;
+	U32 currentPicoClock;
+}AWSMCE_INTERNAL_VPRT_SYNC_STOP_CMD_T;
+
+typedef struct AWSMCE_INTERNAL_VPRT_SYNC_PLAY_LATER_CMD_T
+{
+	U16 eventIndex;
+	U32 clockToStart;
+}AWSMCE_INTERNAL_VPRT_SYNC_PLAY_LATER_CMD_T;
+
+typedef struct AWSMCE_INTERNAL_CALLER_ID_SYNC_CMD_T
+{
+	U8 callerIdLength;
+	U8 callId[1];
+}AWSMCE_INTERNAL_CALLER_ID_SYNC_CMD_T;
+
+typedef struct AWSMCE_INTERNAL_PEQREALTIME_CMD_T
+{
+	U16 dataLength;
+	U32 clockToStart;
+	U8 data[1];
+}AWSMCE_INTERNAL_PEQREALTIME_CMD_T;
+
+typedef struct AWSMCE_INTERNAL_DSP_INFO_T
+{
+	U32 clockToStart;
+	U32 length;
+	U8 data[1];
+}AWSMCE_INTERNAL_DSP_INFO_T;
+
+typedef struct AWSMCE_INTERNAL_SMTCHGCSE_INFO_T
+{
+	BOOL isTimerSet;
+}AWSMCE_INTERNAL_SMTCHGCSE_INFO_T;
+
+typedef struct AWSMCE_INTERNAL_POWEROFF_SYNC_CMD_T
+{
+	U8 reason;
+	U8 isFollowerIFPKT:1;
+	U8 isOnlyForFollower:1;
+	U8 reserved:6;
+}AWSMCE_INTERNAL_POWEROFF_SYNC_CMD_T;
+
+typedef struct AWSMCE_INTERNAL_GENERAL_DATA_T
+{
+	U32 length;
+	U8 data[1];
+}AWSMCE_INTERNAL_GENERAL_DATA_T;
+
+#ifdef MTK_LEAKAGE_DETECTION_ENABLE
+typedef struct AWSMCE_INTERNAL_LEAKAGE_DETECT_INFO_T
+{
+	BOOL isStart;
+	BOOL result;
+}AWSMCE_INTERNAL_LEAKAGE_DETECT_INFO_T;
+#endif
+
+typedef struct AWSMCE_INTERNAL_XIAOAI_P2A_SYNC_DATA_T
+{
+	U16 version;
+}AWSMCE_INTERNAL_XIAOAI_P2A_SYNC_DATA_T;
+
+typedef struct MCSYNC_INTERNAL_SHARE_MODE_INFO_SYNC_CMD_T
+{
+	U8 state;
+	U8 shareMode;
+}MCSYNC_INTERNAL_SHARE_MODE_INFO_SYNC_CMD_T;
+
+typedef struct AWSMCE_INTERNAL_FOLLOWER_SOUNDLEVEL_SYNC_CMD_T
+{
+	U8 soundLevel;
+	U8 isFollowerIFPkt;
+}AWSMCE_INTERNAL_FOLLOWER_SOUNDLEVEL_SYNC_CMD_T;
+
+typedef struct AWSMCE_INTERNAL_OTHER_AGENT_BDA_SYNC_CMD_T
+{
+	BD_ADDR_T bdAddr;
+}AWSMCE_INTERNAL_OTHER_AGENT_BDA_SYNC_CMD_T;
+
+typedef struct AWSMCE_INTERNAL_FOLLOWER_CONN_SYNC_CMD_T
+{
+	U8 		  doConn;
+}AWSMCE_INTERNAL_FOLLOWER_CONN_SYNC_CMD_T;
+
+typedef struct AWSMCE_INTERNAL_FOLLOWER_RETRIGGER_A2P_SYNC_CMD_T
+{
+	U8 reserved;
+}AWSMCE_INTERNAL_FOLLOWER_RETRIGGER_A2P_SYNC_CMD_T;
+
+typedef struct AWSMCE_INTERNAL_FOLLOWER_DISC_SYNC_CMD_T
+{
+	U8 isOnlyForFollower;
+	U8 isFollowerIFPkt;
+}AWSMCE_INTERNAL_FOLLOWER_DISC_SYNC_CMD_T;
+
+typedef struct AWSMCE_INTERNAL_AGENT_RETRANSMIT_FOLLOWER_DATA_SYNC_CMD_T
+{
+	U8 type;
+	U8 value;
+	U8 isFollowerIFPkt;
+}AWSMCE_INTERNAL_AGENT_RETRANSMIT_FOLLOWER_DATA_SYNC_CMD_T;
+
+typedef struct AWSMCE_INTERNAL_AGENT_NOTICE_FOLLOWER_LEAVE_SYNC_CMD_T
+{
+	U8 isLeaveShareMode;
+	U8 isFollowerIFPkt;
+}AWSMCE_INTERNAL_AGENT_NOTICE_FOLLOWER_LEAVE_SYNC_CMD_T;
+
+typedef struct AWSMCE_INTERNAL_SYNC_BATTERY_T
+{
+	U8 batteryLevel;
+}AWSMCE_INTERNAL_SYNC_BATTERY_T;
+
+typedef struct MCSYNC_INTERNAL_MODULE_DATA_T
+{
+	U16 module_id;
+    U16 length;
+    U8  data[1];
+}MCSYNC_INTERNAL_MODULE_DATA_T;
+/*************************************************************************************************
+* Public function
+**************************************************************************************************/
+Handler mcsync_internal_get_handle(void);
+void MCSYNC_StartServiceHandler(Handler app);
+void AWSMCE_ClearRoleChangeInfo(void);
+void AWSMCE_DisSpecialClient(void);
+void AWSMCE_EnableDiscoverable(BD_ADDR_T* pBdAddr);
+
+BOOL MCSYNC_ConnectRequestHandler(BD_ADDR_T *pBdAddr);
+BOOL AWSMCE_DisconnectRequestHandler(BD_ADDR_T *pBdAddr);
+void MCSYNC_SwitchNormalLinkRoleToSlave(BD_ADDR_T *pBdAddr);
+void AWSMCE_KeyEnableDiscoverable(void);
+void AWSMCE_AgentDisconnAwsLink(BD_ADDR_T *pBdAddr);
+BOOL MSCYNC_RoleModeChangeHandler(U8 action, U8 status);
+void MCSYNC_ResetSlaveRetryCount(void);
+<<<<<<< HEAD
+=======
+BOOL MCSYNC_IsAgentAbleToDisconnAwsLink(void);
+>>>>>>> db20e11 (second commit)
+
+
+#endif

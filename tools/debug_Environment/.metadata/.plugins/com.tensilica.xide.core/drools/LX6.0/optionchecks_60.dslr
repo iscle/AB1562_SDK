@@ -1,0 +1,77 @@
+# Copyright (c) 2015-2016 by Cadence Design Systems, Inc.  ALL RIGHTS RESERVED.
+# These coded instructions, statements, and computer programs are the
+# copyrighted works and confidential proprietary information of Cadence.
+# They may not be modified, copied, reproduced, distributed, or disclosed to
+# third parties in any manner, medium, or form, in whole or in part, without
+# the prior written consent of Cadence.
+
+package com.tensilica.xide.core.mccfg.rules
+ 
+global MCMessageSet messageSet;
+global CoreIsaController_T10XX controller;
+global ConfigBuildOptions configBuildOptions;
+
+expander ISARules.dsl
+
+
+rule "hifi4: byteOrder"
+	condition:
+		'hifi4' requires that 'byteOrder' is "le"
+    failure:
+    	Report error 
+end
+rule "fusion: byteOrder"
+	condition:
+		'fsn' requires that 'byteOrder' is "le"
+    failure:
+    	Report error 
+end
+
+#rule "fusion: softbit"
+#	condition:
+#		'fsn' conflicts with 'fsn_softdemap'
+#    failure:
+#    	Report custom error: "Fusion Soft Bit Demap: no XPG available for this option",["fsn_softdemap"] 
+#end
+#rule "fusion: viterbi"
+#	condition:
+#		'fsn' conflicts with 'fsn_viterbi'
+#    failure:
+#    	Report custom error: "Fusion Soft Viterbi Decoder: no XPG available for this option",["fsn_viterbi"] 
+#end
+
+rule "fusion: softbit size"
+	condition:
+		'fsn_softdemap' requires that 'instWidthBytes' is at least 8
+    failure:
+    	Report error
+end
+rule "fusion: viterbi"
+	condition:
+		'fsn_viterbi' requires that 'instWidthBytes' is at least 8
+
+    failure:
+    	Report error
+end
+
+rule "debugapb: ocd"
+	condition:
+		'debugAPB' requires 'ocd'
+    failure:
+    	Report error 
+end
+
+rule "ECC s32c1i LSE wide"
+    condition:
+            'dataMemErrorType' equ "2" plus 'dataMemErrorWidth' equ "4" requires 'condStoreSync'
+        failure:
+        Report custom error: "Selected Data Memory Error Width requires Conditional Store Sync option selected",["dataMemErrorType","condStoreSync","dataMemErrorWidth"]
+end
+
+rule "ECC s32c1i LSE narrow"
+    condition:
+            'dataMemErrorType' equ "2" plus 'dataMemErrorWidth' equ "1" requires 'condStoreSync'
+        failure:
+        Report custom warning: "It is recommended to select Conditional Store Sync option for the selected Data Error Width",["dataMemErrorType","condStoreSync","dataMemErrorWidth"]
+end
+

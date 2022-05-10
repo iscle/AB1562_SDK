@@ -1,0 +1,178 @@
+<root>
+  <Tcb1to8Command>
+
+    <!-- //head: 1     basic 0x06 -->
+    <!-- //type: 1     cmd: 0x00, ack: 0x01, log: 0x02 -->
+    <!-- //func: 1     GPIO: 0x01, I2C: 0x02 -->
+    <HexCommand name="VERSION">
+      <Transmit format="06 00 00 00">
+      </Transmit>
+      <Response format="06 01 00 00 %1">
+        <P1>version{0:}</P1>
+      </Response>
+    </HexCommand>
+    <!-- GPIO -->
+    <HexCommand name="GPIO_PIN_MODE">
+      <Transmit format="06 00 01 00 %1 %2">
+        <P1>pin</P1>
+        <P2>mode</P2>
+      </Transmit>
+      <Response format="06 01 01 00 %% %%">
+      </Response>
+    </HexCommand>
+    <HexCommand name="GPIO_READ">
+      <Transmit format="06 00 01 01 %1">
+        <P1>pin</P1>
+      </Transmit>
+      <Response format="06 01 01 01 %% %1 %2">
+        <P1>value[0:8]</P1>
+        <P2>value[8:8]</P2>
+      </Response>
+    </HexCommand>
+    <HexCommand name="GPIO_WRITE">
+      <Transmit format="06 00 01 02 %1 %2">
+        <P1>pin</P1>
+        <P2>logic</P2>
+      </Transmit>
+      <Response format="06 01 01 02 %% %%">
+      </Response>
+    </HexCommand>
+    <HexCommand name="GPIO_AIN">
+      <Transmit format="06 00 01 03 %1">
+        <P1>pin</P1>
+      </Transmit>
+      <Response format="06 01 01 03 %% %1 %2">
+        <P1>value[0:8]</P1>
+        <P2>value[8:8]</P2>
+      </Response>
+    </HexCommand>
+    <HexCommand name="MCU_RESET">
+      <Transmit format="06 00 01 04 %1 %2">
+        <P1>delay_ms[0:8]</P1>
+        <P2>delay_ms[8:8]</P2>
+      </Transmit>
+      <Response format="06 01 01 04 %% %%">
+      </Response>
+    </HexCommand>
+    <!-- I2C -->
+    <HexCommand name="I2C_OFFSET_READ">
+      <Transmit format="06 00 02 01 %1 %2 %3 %4 %5">
+        <P1>device_address</P1>
+        <P2>offset_address[0:8]</P2>
+        <P3>offset_address[8:8]</P3>
+        <P4>offset_address[16:8]</P4>
+        <P5>offset_address[24:8]</P5>
+      </Transmit>
+      <Response format="06 01 02 01 %% %% %% %% %% %1 %2">
+        <P1>value[0:8]</P1>
+        <P2>value[8:8]</P2>
+      </Response>
+    </HexCommand>
+    <HexCommand name="I2C_OFFSET_WRITE">
+      <Transmit format="06 00 02 02 %1 %2 %3 %4 %5 %6 %7">
+        <P1>device_address</P1>
+        <P2>offset_address[0:8]</P2>
+        <P3>offset_address[8:8]</P3>
+        <P4>offset_address[16:8]</P4>
+        <P5>offset_address[24:8]</P5>
+        <P6>data[0:8]</P6>
+        <P7>data[8:8]</P7>
+      </Transmit>
+      <Response format="06 01 02 02 %% %% %% %% %%">
+      </Response>
+    </HexCommand>
+    <HexCommand name="I2C_EEPROM_READ">
+      <Transmit format="06 00 02 05 %1 %2 %3 %4 %5 %6">
+        <P1>device_address</P1>
+        <P2>offset_address[0:8]</P2>
+        <P3>offset_address[8:8]</P3>
+        <P4>offset_address[16:8]</P4>
+        <P5>offset_address[24:8]</P5>
+        <P6>length</P6>
+      </Transmit>
+      <Response format="06 01 02 05 %% %% %% %% %% %% %1">
+        <P1>data{0:}</P1>
+      </Response>
+    </HexCommand>
+    <HexCommand name="I2C_EEPROM_WRITE">
+      <Transmit format="06 00 02 06 %1 %2 %3 %4 %5 %6 %7">
+        <P1>device_address</P1>
+        <P2>offset_address[0:8]</P2>
+        <P3>offset_address[8:8]</P3>
+        <P4>offset_address[16:8]</P4>
+        <P5>offset_address[24:8]</P5>
+        <P6>length</P6>
+        <P7>data{0:}</P7>
+      </Transmit>
+      <Response format="06 01 02 06 %% %% %% %% %% %%">
+      </Response>
+    </HexCommand>
+    <HexCommand name="I2C_FPGA_TRIM_EN">
+      <Transmit format="06 00 02 07 %1 %2 %3 %4 %5 %6">
+        <P1>device_address</P1>
+        <P2>setting</P2>
+        <P3>nxo[0:8]</P3>
+        <P4>nxo[8:8]</P4>
+        <P5>nxo[16:8]</P5>
+        <P6>nxo[24:8]</P6>
+      </Transmit>
+      <Response format="06 01 02 07 %% %% %% %% %% %% %1 %2">
+        <P1>result[0:8]</P1>
+        <P2>result[8:8]</P2>
+      </Response>
+    </HexCommand>
+    <HexCommand name="I2C_FPGA_FCTRL_SET">
+      <Transmit format="06 00 02 08 %1 %2">
+        <P1>pin</P1>
+        <P2>logic</P2>
+      </Transmit>
+      <Response format="06 01 02 08 %% %% %1 %2 %3 %4">
+        <P1>result[0:8]</P1>
+        <P2>result[8:8]</P2>
+        <P3>result[16:8]</P3>
+        <P4>result[24:8]</P4>
+      </Response>
+    </HexCommand>
+    <HexCommand name="I2C_ADC_READ">
+      <Transmit format="06 00 02 09 %1 %2">
+        <P1>device_address</P1>
+        <P2>channel</P2>
+      </Transmit>
+      <Response format="06 01 02 09 %% %% %1 %2">
+        <P1>value[0:8]</P1>
+        <P2>value[8:8]</P2>
+      </Response>
+    </HexCommand>
+    <HexCommand name="I2C_FPGA_RESETN_DUT">
+      <Transmit format="06 00 02 0A %1 %2 %3">
+        <P1>slot</P1>
+        <P2>delay_ms[0:8]</P2>
+        <P3>delay_ms[8:8]</P3>
+      </Transmit>
+      <Response format="06 01 02 0A %% %% %%">
+      </Response>
+    </HexCommand>
+    <HexCommand name="I2C_FPGA_RESET_DUT">
+      <Transmit format="06 00 02 0B %1 %2 %3">
+        <P1>slot</P1>
+        <P2>delay_ms[0:8]</P2>
+        <P3>delay_ms[8:8]</P3>
+      </Transmit>
+      <Response format="06 01 02 0B %% %% %%">
+      </Response>
+    </HexCommand>
+    <HexCommand name="I2C_FPGA_PIN_SIGNALS">
+      <Transmit format="06 00 02 0C %1 %2 %3 %4 %5 %6">
+        <P1>slot</P1>
+        <P2>delay_ms[0:8]</P2>
+        <P3>delay_ms[8:8]</P3>
+        <P4>pulse_num</P4>
+        <P5>pin</P5>
+        <P6>logic</P6>
+      </Transmit>
+      <Response format="06 01 02 0C %% %% %% %% %% %%">
+      </Response>
+    </HexCommand>
+
+	</Tcb1to8Command>
+</root>

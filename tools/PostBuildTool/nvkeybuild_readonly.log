@@ -1,0 +1,10 @@
+[NVKEY] Sector #0 Status: Status Bytes=0x3f Invalid Bytes=0 Space Bytes=0 Read-Only=1
+<<<<<<< HEAD
+[NVKEY] Sector #1 Status: Status Bytes=0x3f Invalid Bytes=0 Space Bytes=7 Read-Only=0
+[NVKEY] Sector #2 Status: Status Bytes=0x3f Invalid Bytes=0 Space Bytes=4055 Read-Only=0
+=======
+[NVKEY] Sector #1 Status: Status Bytes=0x3f Invalid Bytes=0 Space Bytes=10 Read-Only=0
+[NVKEY] Sector #2 Status: Status Bytes=0x3f Invalid Bytes=0 Space Bytes=431 Read-Only=0
+>>>>>>> db20e11 (second commit)
+[NVKEY] Sector #3 Status: Status Bytes=0xff Invalid Bytes=0 Space Bytes=0 Read-Only=0
+[NVKEY] Sector #4 Status: Status Bytes=0x3f Invalid Bytes=0 Space Bytes=4095 Read-Only=0

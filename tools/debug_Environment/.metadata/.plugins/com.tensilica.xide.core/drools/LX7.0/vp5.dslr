@@ -1,0 +1,95 @@
+# Copyright (c) 2016 by Cadence Design Systems, Inc.  ALL RIGHTS RESERVED.
+# These coded instructions, statements, and computer programs are the
+# copyrighted works and confidential proprietary information of Cadence.
+# They may not be modified, copied, reproduced, distributed, or disclosed to
+# third parties in any manner, medium, or form, in whole or in part, without
+# the prior written consent of Cadence.
+
+package com.tensilica.xide.core.mccfg.rules
+ 
+global MCMessageSet messageSet;
+global CoreIsaController_T10XX controller;
+global ConfigBuildOptions configBuildOptions;
+
+expander ISARules.dsl
+
+#########
+# VP5 generic LX7 set. these are uniformly enforced across all LX7 versions.
+# From RG.4 many rules went away from here and ended up in the RG.X sets
+#########
+
+rule "VP5: Scatter"
+    condition:
+    	'ivp2_32' requires 'sg_scatter'
+    failure:
+    	Report error 
+end
+rule "VP5: Gather"
+    condition:
+    	'ivp2_32' requires 'sg_gather'
+    failure:
+    	Report error 
+end
+
+rule "VP5: maxCoprocs"
+    condition:
+    	'ivp2_32' requires that 'maxCoprocs' is at least 2
+    failure:
+    	Report error 
+end
+
+rule "VP5: div32Int"
+    condition:
+    	'ivp2_32' requires 'div32Int'
+    failure:
+    	Report error 
+end
+
+rule "VP5: stdports"
+    condition:
+    	'ivp2_32' conflicts with 'stdports'
+    failure:
+    	Report error 
+end
+rule "VP5: stdqueues"
+    condition:
+    	'ivp2_32' conflicts with 'stdqueues'
+    failure:
+    	Report error 
+end
+
+rule "VP5: dfpassist"
+    condition:
+    	'ivp2_32' conflicts with 'dfpassist'
+    failure:
+    	Report error 
+end
+
+rule "VP5: zloops"
+    condition:
+    	'ivp2_32' requires 'loops'
+    failure:
+    	Report error 
+end
+
+rule "VP5: const16"
+	condition:
+		'ivp2_32' requires that 'l32r' is "l32r_const16"
+    failure:
+    	Report error 
+end
+
+rule "VP5: MAC16"
+    condition:
+    	'ivp2_32' conflicts with 'mac16'
+    failure:
+    	Report error 
+end
+
+rule "VP5 VFP: FP"
+    condition:
+    	'ivp2_spvfp' conflicts with 'fp'
+    failure:
+    	Report error 
+end
+

@@ -1,0 +1,71 @@
+#This is the default signalling chart.
+#Edit and press F2 to see the result.
+#You can change the default chart
+#with the leftmost button on the Preferences pane of the ribbon.
+
+msc=qsd;
+title:SPP profile (client);
+
+include "spp_object.signalling";
+
+mark star;
+box ..: {
+    replay API_SPP("SppConnectRequest(...)");
+    replay API_SDP("BtSdpOpenSearchRequest(...)");
+    replay MSG_SDP("BT_SDP_OPEN_SEARCH_CFM");
+    replay API_SDP("BtSdpServiceSearchAttributeRequest(...)");
+    replay MSG_SDP("BT_SDP_SERVICE_SEARCH_ATTRIBUTE_CFM");
+    replay API_SDP("BtSdpCloseSearchRequest(...)");
+    replay MSG_SDP("BT_SDP_CLOSE_SEARCH_CFM");
+    replay API_RFCOMM("BtRfcommConnectRequest(...)");
+    replay MSG_RFCOMM("BT_RFCOMM_CLIENT_CONNECT_CFM");
+    replay MSG_SPP("SPP_CLIENT_CONNECT_CFM");
+};
+vertical range star<-> at a-: Connected;
+
+mark data;
+box .. : [tag="receive(manual)"]
+{
+    replay MSG_STREAM("MESSAGE_MORE_DATA");
+    replay API_STREAM("SourceSize(...)");
+    replay API_STREAM("SourceMap(...)");
+    box a==a: Manipulate\ndata;
+    replay API_STREAM("SourceDrop(...)");
+}
+ ..: [tag="manual(manual)"]
+{
+    replay MSG_STREAM("MESSAGE_MORE_SPACE");
+    note: Only appeared while \nlast SinkClaim(...) failed.;
+    replay API_STREAM("SinkClaim(...)");
+    replay API_STREAM("SinkMap(...)");
+    box a==a: Fill data;
+    replay API_STREAM("SinkFlush(...)");
+};
+vertical bracket data<=> at a-: manual;
+mark data_type;
+box ..: [tag="receive(auto)"]
+{
+    replay API_STREAM("StreamConnect(\bRFCOMM source\b, other sink)");
+}
+..: [tag="send(auto)"]
+{
+    replay API_STREAM("StreamConnect(other source, \bRFCOMM sink\b)");
+};
+vertical bracket data_type<=> at a-: auto;
+vertical range data<-> at a-: Exchange data;
+
+mark dis;
+box ..:  [tag="remote issue"]
+{
+    replay MSG_RFCOMM("BT_RFCOMM_DISCONNECT_IND");
+    replay API_RFCOMM("BtRfcommDisconnectResponse(...)");
+    replay MSG_SPP("SPP_DISCONNECT_IND");
+};
+box ..: [tag="local issue"]
+{
+    replay API_SPP("SppDisconnectRequest(...)");
+    replay API_RFCOMM("BtRfcommDisconnectRequest(...)");
+    replay MSG_RFCOMM("BT_RFCOMM_DISCONNECT_CFM");
+    replay MSG_SPP("SPP_DISCONNECT_CFM");
+};
+vertical range dis<-> at a-: Disconnected;

@@ -1,0 +1,649 @@
+/* ===========================================================================
+ *
+ * @COPYRIGHT	Copyright(c) 2015 AIROHA TECHNOLOGY CORP. CO., LTD. ALL RIGHTS RESERVED
+ *
+ * @DETAILS		The reference linker command file for the Andes.  Applications
+ *   			may use unmodified, or copy this to an application directory to
+ *   			modify as needed.
+ *
+ * =========================================================================== */
+ENTRY(_ResetVector_text_start)
+
+MEMORY {
+     ROM_DSP0(rx)                   : ORIGIN = 0x0812C000, LENGTH = 668K
+     VROM_DSP0(rx)                  : ORIGIN = 0x8812C000, LENGTH = 668K
+     IRAM(rx)                       : ORIGIN = 0x04580000, LENGTH = 160K
+     DRAM(rw)                       : ORIGIN = 0x04500000, LENGTH = 384K
+     SYSRAM_DSP0 (rwx)              : ORIGIN = 0x04200000, LENGTH = 8K
+     VSYSRAM_DSP0 (rwx)             : ORIGIN = 0x84200000, LENGTH = 8K
+     FLASH_DSP0 (rwx)               : ORIGIN = 0x28000000, LENGTH = 1920K
+     VFLASH_DSP0 (rwx)              : ORIGIN = 0x88000000, LENGTH = 1920K
+
+     SRAM_FLASH_NVKEY               : ORIGIN = 0x281E0000, LENGTH = 40K
+     SRAM_FLASH_FS                  : ORIGIN = 0x281EA000, LENGTH = 800K
+     SRAM_FLASH_FOTA                : ORIGIN = 0x282B2000, LENGTH = 1336K
+
+     ROM_LOG_STRING(rx)             : ORIGIN = 0x06000000, LENGTH = 32M
+     SRAM_FLASH_IRAM                : ORIGIN = 0x07000000, LENGTH = 160K
+}
+
+ /* Highest address of the stack */
+__stack = ORIGIN(DRAM) + _stack_size;    /* begin of DRAM */
+
+/* Generate a link error if stack don't fit into DRAM */
+_stack_size = 0x1000; /* required amount of stack 4KB */
+
+/* stack start */
+_stack_start = ORIGIN(DRAM);
+
+/* swla size */
+_swla_size = 0;
+
+/* offline dump region size */
+<<<<<<< HEAD
+_exceptionlog_size  = 0x2000;   /*total  8K, cell size 8KB(log buffer size), total 1 cells*/
+_minidump_size      = 0x2000;   /*total  8K, cell size 8KB(mini dump size),  total 1 cells*/
+_offlinelog_size    = 0x8000;   /*total  32K, cell size 8KB(log buffer size), total 4 cells*/
+=======
+_exceptionlog_size  = 0x4000;     /*total 16K,   cell size 8KB(log buffer size),  total 2 cells*/
+_minidump_size      = 0x114000;   /*total 1104K, cell size 552KB(mini dump size), total 2 cells*/
+_offlinelog_size    = 0x2000;    /*total 144K,  cell size 8KB(log buffer size),  total 1 cells*/
+
+/* offline dump cell size */
+_exceptionlog_cell_size  = 0x2000;         /*cell size 8KB*/
+_minidump_cell_size      = 0x8a000;        /*cell size 552KB*/
+_offlinelog_cell_size    = 0x2000;         /*cell size 8KB*/
+>>>>>>> db20e11 (second commit)
+
+/* Linker symbol provided for C/Assembly Code */
+_iram_start     = ORIGIN(IRAM);
+_iram_length    = LENGTH(IRAM);
+_dram_start     = ORIGIN(DRAM);
+_dram_length    = LENGTH(DRAM);
+_sysram_start   = ORIGIN(SYSRAM_DSP0);
+_sysram_length  = LENGTH(SYSRAM_DSP0);
+_vsysram_start  = ORIGIN(VSYSRAM_DSP0);
+_vsysram_length = LENGTH(VSYSRAM_DSP0);
+
+flashAddr       = 0x08000000;
+remapAddr       = 0x20000000;
+<<<<<<< HEAD
+=======
+_FOTA_start_    = ORIGIN(SRAM_FLASH_FOTA);
+
+>>>>>>> db20e11 (second commit)
+INCLUDE "../release.lcf"
+
+SECTIONS {
+
+      .AB1562_Header : ALIGN(4)
+      {
+          /* flash partition */
+          _flash_start = ABSOLUTE(.);
+
+          /* type */
+          BYTE(0);
+
+          /* total length */
+          SHORT(_FLASH_SIZE);
+
+          /* DFU */
+          BYTE(1);
+          BYTE(8);
+          LONG(ADDR(.AB1562_bootloader) - remapAddr);
+          LONG (_BootLoader_SIZE);
+
+          /* extension flash partition */
+          BYTE(2);
+          BYTE(8);
+          LONG(ADDR(.AB1530_extension) - remapAddr);
+          LONG(_EXTENSION_FLASH_SIZE);
+
+          /* ic version */
+          BYTE(3);
+          BYTE(12);
+          LONG (ADDR(.package))
+          LONG (0)
+          LONG (MP_VER)
+
+          /* FOTA address */
+          BYTE(4);
+          BYTE(4);
+          LONG(_FOTA_start_ - remapAddr);
+
+          /* Uart Download Timeout */
+          BYTE(5);
+          BYTE(4);
+          LONG(50);
+
+          /* BROM Log enable/disable */
+          BYTE(6);
+          BYTE(4);
+          LONG(1);
+
+          /* with rom */
+          BYTE(7);
+          BYTE(4);
+          LONG(0);
+
+          _flash_end = ABSOLUTE(.);
+
+          /* crc */
+          FILL(0xFF);
+          . = ALIGN(0x1000);
+      }  > FLASH_DSP0
+
+      .AB1562_bootloader : ALIGN(4)
+      {
+          _bootloader_start = ABSOLUTE(.);
+          KEEP(*AB1562_bootloader.o)
+          . = ALIGN(0x2800D000);
+          _bootloader_end = ABSOLUTE(.);
+      }  > FLASH_DSP0
+
+      .AB1530_nvkey_nofota : ALIGN(4)
+      {
+          _nvkey_nofota_text_start = ABSOLUTE(.);
+          KEEP(*nvkey_nofota_bin.o)
+          . = ALIGN(0x1000);
+          _nvkey_nofota_text_end = ABSOLUTE(.);
+      }  > FLASH_DSP0
+
+      .AB1530_extension : ALIGN(4)
+      {
+          _extensiton_flash_start = ABSOLUTE(.);
+
+          /* extension flash partition */
+          /* type */
+          BYTE(1);
+
+          /* length */
+          SHORT(_EXTENSION_FLASH_SIZE);
+
+          /* rom patch header */
+          BYTE(1);
+          BYTE(8);
+          LONG(0);
+          LONG(0);
+
+          /* AB1530 flash code */
+          BYTE(2);
+          BYTE(8);
+          LONG(_ResetVector_text_start - remapAddr);
+          LONG(_AB1530_BIN_SIZE);
+
+          /* file system header */
+          BYTE(4);
+          BYTE(8);
+          LONG(_filesystem_start_ - remapAddr);
+          LONG(_FILE_SYSTEM_SIZE);
+
+          /* NVKEY no fota header */
+          BYTE(5);
+          BYTE(8);
+          LONG(_nvkey_nofota_text_start);
+          LONG(_NVKEY_nofota_SIZE);
+
+          /* NVKEY fota header */
+          BYTE(7);
+          BYTE(8);
+          LONG(_nvkey_fota_start_);
+          LONG(_NVKEY_fota_SIZE);
+
+          /* WWE */
+          BYTE(8);
+          BYTE(8);
+          LONG(_nvkey_fota_start_);
+          LONG(_NVKEY_fota_SIZE);
+
+          _extensiton_flash_end = ABSOLUTE(.);
+          /* crc */
+          SHORT(0x55AA);
+          FILL(0xFF);
+
+          . = ALIGN(0x800);
+          KEEP(*(.Ver*))
+          FILL(0xFF);
+
+          . = ALIGN(0x400);
+          _offline_dump_partition_start_ =  ABSOLUTE(.);
+          /* exception log dump */
+          LONG(0x00000000);  /* BinaryId    */
+          LONG(0x00000000);  /* PartitionId */
+          LONG(0x00000000);  /* LoadAddressHigh */
+          LONG(_exceptionlog_start_); /* LoadAddressLow */
+          LONG(0x00000000);  /* BinaryMaxLengthHigh */
+          LONG(_exceptionlog_size);   /* BinaryMaxLengthLow */
+          LONG(0x00000000);  /* ExecutionAddress */
+<<<<<<< HEAD
+          LONG(0x00002000);  /* OfflineCellSize  */
+=======
+          LONG(_exceptionlog_cell_size);  /* OfflineCellSize  */
+>>>>>>> db20e11 (second commit)
+          LONG(0x00000000);  /* ReservedItem3 */
+          LONG(0x00000000);  /* ReservedItem2 */
+          LONG(0x00000000);  /* ReservedItem1 */
+          LONG(0x00000000);  /* ReservedItem0 */
+
+          /* mini dump */
+          LONG(0x00000001);  /* BinaryId    */
+          LONG(0x00000000);  /* PartitionId */
+          LONG(0x00000000);  /* LoadAddressHigh */
+          LONG(_minidump_start_); /* LoadAddressLow */
+          LONG(0x00000000);  /* BinaryMaxLengthHigh */
+          LONG(_minidump_size);   /* BinaryMaxLengthLow */
+          LONG(0x00000000);  /* ExecutionAddress */
+<<<<<<< HEAD
+          LONG(0x00002000);  /* OfflineCellSize  */
+=======
+          LONG(_minidump_cell_size);  /* OfflineCellSize  */
+>>>>>>> db20e11 (second commit)
+          LONG(0x00000000);  /* ReservedItem3 */
+          LONG(0x00000000);  /* ReservedItem2 */
+          LONG(0x00000000);  /* ReservedItem1 */
+          LONG(0x00000000);  /* ReservedItem0 */
+
+          /* offline log dump */
+          LONG(0x00000002);  /* BinaryId    */
+          LONG(0x00000000);  /* PartitionId */
+          LONG(0x00000000);  /* LoadAddressHigh */
+          LONG(_offlinelog_start_); /* LoadAddressLow */
+          LONG(0x00000000);  /* BinaryMaxLengthHigh */
+          LONG(_offlinelog_size);   /* BinaryMaxLengthLow */
+          LONG(0x00000000);  /* ExecutionAddress */
+<<<<<<< HEAD
+          LONG(0x00002000);  /* OfflineCellSize  */
+=======
+          LONG(_offlinelog_cell_size);  /* OfflineCellSize  */
+>>>>>>> db20e11 (second commit)
+          LONG(0x00000000);  /* ReservedItem3 */
+          LONG(0x00000000);  /* ReservedItem2 */
+          LONG(0x00000000);  /* ReservedItem1 */
+          LONG(0x00000000);  /* ReservedItem0 */
+
+          _offline_dump_partition_end_ = ABSOLUTE(.);
+          . = ALIGN(0x1000);
+      }  > FLASH_DSP0
+
+     /* @@@static vector@@@ */
+       _ResetVector_load = LOADADDR(.ResetVector.text);
+       .ResetVector.text : ALIGN(8)
+       {
+       _AB1530_BIN_ADDR = ABSOLUTE(.);
+       _ResetVector_text_start = ABSOLUTE(.);
+       KEEP (*(.ResetVector.literal .ResetVector.text))
+       KEEP (*(.Reset.literal .Reset.text))
+       . = ABSOLUTE(_ResetVector_text_start) + 0x400;
+       _ResetVector_text_end = ALIGN(0x8);
+       } >FLASH_DSP0
+
+      /* @@@Dynamic vectors@@@ */
+       _DynamicVectors_load = LOADADDR(.DynamicVectors.text);
+       .DynamicVectors.text : ALIGN(8)
+       {
+       _DynamicVectors_start = ABSOLUTE(.);
+
+       /* WindowVectors literal and text */
+       _WindowVectors_text_start = ABSOLUTE(.);
+       KEEP (*(.WindowVectors.text))
+       . = ALIGN(4);
+       _WindowVectors_text_end = ABSOLUTE(.);
+       . = ABSOLUTE(_WindowVectors_text_start) + 0x178;
+
+       /* Level2 literal and text */
+       _Level2InterruptVector_literal_start = ABSOLUTE(.);
+       *(.Level2InterruptVector.literal)
+       . = ABSOLUTE(_Level2InterruptVector_literal_start) + 0x4;
+       _Level2InterruptVector_text_start = ABSOLUTE(.);
+       KEEP (*(.Level2InterruptVector.text))
+       . = ABSOLUTE(_Level2InterruptVector_text_start) + 0x1c;
+
+       /* Level3 literal and text */
+       _Level3InterruptVector_literal_start = ABSOLUTE(.);
+       *(.Level3InterruptVector.literal)
+       . = ABSOLUTE(_Level3InterruptVector_literal_start) + 0x4;
+       _Level3InterruptVector_text_start = ABSOLUTE(.);
+       KEEP (*(.Level3InterruptVector.text))
+       . = ABSOLUTE(_Level3InterruptVector_text_start) + 0x1c;
+
+       /* Level4 literal and text */
+       _Level4InterruptVector_literal_start = ABSOLUTE(.);
+       *(.Level4InterruptVector.literal)
+       . = ABSOLUTE(_Level4InterruptVector_literal_start) + 0x4;
+       _Level4InterruptVector_text_start = ABSOLUTE(.);
+       KEEP (*(.Level4InterruptVector.text))
+       . = ABSOLUTE(_Level4InterruptVector_text_start) + 0x1c;
+
+       /* DebugException literal and text */
+       _DebugExceptionVector_literal_start = ABSOLUTE(.);
+       *(.DebugExceptionVector.literal)
+       . = ABSOLUTE(_DebugExceptionVector_literal_start) + 0x4;
+       _DebugExceptionVector_text_start = ABSOLUTE(.);
+       KEEP (*(.DebugExceptionVector.text))
+       . = ABSOLUTE(_DebugExceptionVector_text_start) + 0x1c;
+
+       /* NMIException literal and text */
+       _NMIExceptionVector_literal_start = ABSOLUTE(.);
+       *(.NMIExceptionVector.literal)
+       . = ABSOLUTE(_NMIExceptionVector_literal_start)+ 0x4;
+       _NMIExceptionVector_text_start = ABSOLUTE(.);
+       KEEP (*(.NMIExceptionVector.text))
+       . = ABSOLUTE(_NMIExceptionVector_text_start) + 0x1c;
+
+       /* KernelException literal and text */
+       _KernelExceptionVector_literal_start = ABSOLUTE(.);
+       *(.KernelExceptionVector.literal)
+       . = ABSOLUTE(_KernelExceptionVector_literal_start) + 0x4;
+       _KernelExceptionVector_text_start = ABSOLUTE(.);
+       KEEP (*(.KernelExceptionVector.text))
+       . = ABSOLUTE(_KernelExceptionVector_text_start) + 0x1c;
+
+       /* UserException literal and text */
+       _UserExceptionVector_literal_start = ABSOLUTE(.);
+       *(.UserExceptionVector.literal)
+       . = ABSOLUTE(_UserExceptionVector_literal_start) + 0x4;
+       _UserExceptionVector_text_start = ABSOLUTE(.);
+       KEEP (*(.UserExceptionVector.text))
+       . = ABSOLUTE(_UserExceptionVector_text_start) + 0x1c;
+
+       /* DoubleException literal and text */
+       _DoubleExceptionVector_literal_start = ABSOLUTE(.);
+       *(.DoubleExceptionVector.literal)
+       . = ABSOLUTE(_DoubleExceptionVector_literal_start) + 0x4;
+       _DoubleExceptionVector_text_start = ABSOLUTE(.);
+       KEEP (*(.DoubleExceptionVector.text))
+       . = ABSOLUTE(_DoubleExceptionVector_text_start) + 0x1c;
+
+       _DynamicVectors_end = ABSOLUTE(.);
+       } > IRAM   AT > FLASH_DSP0
+
+       /* @@@iram text@@@ */
+       _iram_text_load = LOADADDR(.iram.text);
+       .iram.text : ALIGN(8)
+       {
+       . = ALIGN(8);
+       _iram_text_start = ABSOLUTE(.);
+
+       *(.iram*)
+       *(.ram_code)
+       *(.ram_code.*)
+       *(.tcm_code.*)
+       *(.sysram_code.*)
+       *FreeRTOS*.o(.literal*)
+       *FreeRTOS*.o(.text*)
+       *libhal.a:*(.literal*)
+       *libhal.a:*(.text*)
+       *libhandlers-board.a:*(.literal*)
+       *libhandlers-board.a:*(.text*)
+       . = ALIGN(8);
+       _iram_text_end = ABSOLUTE(.);
+       } > IRAM    AT > SRAM_FLASH_IRAM
+
+       /* @@@rom text and rodata@@@ */
+       _text_load = LOADADDR(.text);
+       . = ALIGN(8);
+       .text : ALIGN(8)
+       {
+       _text_start = ABSOLUTE(.);
+
+
+       *(.literal* .text*)
+       *(.init.literal .init)
+       *(.fini.literal .fini)
+       *(.dtors.literal .dtors)
+       *(.ctors.literal .ctors)
+
+       . = ALIGN(8);
+       _text_end = ABSOLUTE(.);
+       }  > FLASH_DSP0
+
+       /* @@@region loader@@@ */
+       _region_loader_load = LOADADDR(.region_loader);
+       .region_loader : ALIGN(8)
+       {
+       . = ALIGN(8);
+       _region_loader_start = ABSOLUTE(.);
+
+       *(.region_loader.literal .region_loader.text)
+
+       . = ALIGN(8);
+       _region_loader_end = ABSOLUTE(.);
+       } >IRAM    AT > FLASH_DSP0
+
+       /* @@@iram pic memory@@@ */
+       .preloader_pic_iram (NOLOAD) :
+       {
+       . = ALIGN(8);
+       _preloader_pic_iram_start = .;
+
+       . = ALIGN(8);
+       _preloader_pic_iram_end   = ORIGIN(IRAM)+ LENGTH(IRAM);
+       } > IRAM
+
+       .stack (NOLOAD) :
+       {
+       . = ALIGN(8);
+
+       . = . + _stack_size;
+
+       . = ALIGN(8);
+       } > DRAM
+
+       /* @@@dram data and bss@@@ */
+       _data_load = LOADADDR(.data);
+       _cached_ram_text_data_load = LOADADDR(.data);
+       _noncached_ram_data_load = LOADADDR(.data);
+       _cached_sysram_text_data_load = LOADADDR(.data);
+       _noncached_sysram_data_load = LOADADDR(.data);
+       .data : ALIGN(8)
+       {
+       . = ALIGN(8);
+       _data_start = ABSOLUTE(.);
+       _cached_ram_text_data_start = .;
+       _noncached_ram_data_start = .;
+       _cached_sysram_text_data_start = .;
+       _noncached_sysram_data_start = .;
+
+       *(.data)
+       *(.data.*)
+       *(.tcm_rodata.*)
+       *(.ram_rodata)
+       *(.ram_rodata.*)
+       *(.tcm_rwdata.*)
+       *(.cached_ram_data.*)
+       *(.noncached_ram_rwdata.*)
+       *(.sysram_rodata.*)
+       *(.cached_sysram_rwdata.*)
+       *(.noncached_sysram_rwdata.*)
+
+	   . = ALIGN(4);
+	   KEEP(*libAACdec.a:*(.rodata))
+       KEEP(*libAACdec.a:*(.rodata*))
+
+       . = ALIGN(4);
+       _log_filter_start = .;
+       KEEP(*(SORT_BY_NAME(.log_filter.*)))
+       _log_filter_end = .;
+
+       . = ALIGN(8);
+       _data_end = ABSOLUTE(.);
+       _cached_ram_text_data_end = .;
+       _noncached_ram_data_end = .;
+       _cached_sysram_text_data_end = .;
+       _noncached_sysram_data_end = .;
+       } >DRAM   AT > FLASH_DSP0
+
+       .bss (NOLOAD):
+       {
+       . = ALIGN(8);
+       _bss_start = ABSOLUTE(.);
+       _cached_ram_bss_start = .;
+       _noncached_ram_bss_start = .;
+       _cached_sysram_bss_start = .;
+       _noncached_sysram_bss_start = .;
+
+       _iram_compress_buffer = ABSOLUTE(.);
+
+       *(.bss)
+       *(.bss.*)
+       *(COMMON)
+       *(.tcm_zidata.*)
+       *(.cached_ram_bss.*)
+       *(.noncached_ram_zidata.*)
+       *(.cached_sysram_zidata.*)
+       *(.noncached_sysram_zidata.*)
+
+       . = ALIGN(8);
+       _bss_end = ABSOLUTE(.);
+       _cached_ram_bss_end = .;
+       _noncached_ram_bss_end = .;
+       _cached_sysram_bss_end = .;
+       _noncached_sysram_bss_end = .;
+       } > DRAM
+
+      .esd_workaround (NOLOAD): ALIGN(4)
+      {
+          esd_state_start = ABSOLUTE(.);
+          *(.esd)
+          esd_state_end = ABSOLUTE(.);
+      } > DRAM
+
+       /* @@@dram pic memory@@@ */
+       .preloader_pic_dram (NOLOAD) :
+       {
+       . = ALIGN(8);
+       _preloader_pic_dram_start = .;
+
+       . = ALIGN(8);
+       _preloader_pic_dram_end   = ORIGIN(DRAM)+ LENGTH(DRAM);
+       } > DRAM
+
+
+
+      .flash_data : ALIGN(4)
+      {
+          . = ALIGN (8);
+          _flash_data_start = ABSOLUTE(.);
+          *(.flash.data)
+          *(.flash.data.*)
+          KEEP(*libdspalg.a:*(.rodata))
+          KEEP(*libdspalg.a:*(.rodata*))
+          . = ALIGN (8);
+          _flash_data_end = ABSOLUTE(.);
+      }  > FLASH_DSP0
+
+      .rodata : ALIGN(4)
+      {
+          . = ALIGN (8);
+          _rodata_start = ABSOLUTE(.);
+          *(.rodata)
+          *(.rodata.*)
+          KEEP (*(.eh_frame))
+          . = ALIGN(4);     /* this table MUST be 4-byte aligned */
+          _rodata_end = ABSOLUTE(.);
+      } > FLASH_DSP0
+
+      .AB1530_iram_compress : ALIGN(0x4)
+      {
+          _iram_compress_start_ =  ABSOLUTE(.);
+          KEEP(*iram_compress.o)
+          _iram_compress_end_ =  ABSOLUTE(.);
+          . = ALIGN (8);
+          _AB1530_BIN_END_ = ABSOLUTE(.);
+      } > FLASH_DSP0
+
+      .AB1562_fill : ALIGN(0x4)
+      {
+          LONG(0xFFFFFFFF)
+          FILL(0xFF);
+          . = ALIGN( 0x28000000 + LENGTH(FLASH_DSP0));
+      } > FLASH_DSP0
+
+      .AB1562_fota_nvkey : ALIGN(0x4)
+      {
+          _nvkey_fota_start_ =  ABSOLUTE(.);
+          KEEP(*nvkey_fota_bin.o)
+          _nvkey_fota_end_ =  ABSOLUTE(.);
+      } > SRAM_FLASH_NVKEY
+
+      .AB1562_filesystem : ALIGN(0x1000)
+      {
+          _filesystem_start_ =  ABSOLUTE(.);
+          KEEP(*filesystem.o)
+          _filesystem_end_ =  ABSOLUTE(.);
+          . = ALIGN(0x1000);
+      } > SRAM_FLASH_FS
+
+      .AB1562_exceptionlogdump : ALIGN(0x1000)
+      {
+          _exceptionlog_start_ =  ABSOLUTE(.);
+          . = ABSOLUTE(.) + _exceptionlog_size;
+          _exceptionlog_end_ =  ABSOLUTE(.);
+          . = ALIGN(0x1000);
+<<<<<<< HEAD
+      } > SRAM_FLASH_FS
+=======
+      } > SRAM_FLASH_FOTA
+>>>>>>> db20e11 (second commit)
+
+      .AB1562_minidump : ALIGN(0x1000)
+      {
+          _minidump_start_ =  ABSOLUTE(.);
+          . = ABSOLUTE(.) + _minidump_size;
+          _minidump_end_ =  ABSOLUTE(.);
+          . = ALIGN(0x1000);
+<<<<<<< HEAD
+      } > SRAM_FLASH_FS
+=======
+      } > SRAM_FLASH_FOTA
+>>>>>>> db20e11 (second commit)
+
+      .AB1562_offlinelogdump : ALIGN(0x1000)
+      {
+          _offlinelog_start_ =  ABSOLUTE(.);
+          . = ABSOLUTE(.) + _offlinelog_size;
+          _offlinelog_end_ =  ABSOLUTE(.);
+          . = ALIGN(0x1000);
+      } > SRAM_FLASH_FS
+
+      .AB1562_wwe : ALIGN(0x4)
+      {
+          . = ALIGN(0x1000);
+          _wwe_start_ =  ABSOLUTE(.);
+          _wwe_end_ =  ABSOLUTE(.);
+      } > SRAM_FLASH_FS
+
+<<<<<<< HEAD
+      .AB1562_FOTA : ALIGN(0x1000)
+      {
+          _FOTA_start_ =  ABSOLUTE(.);
+      } > SRAM_FLASH_FOTA
+
+=======
+>>>>>>> db20e11 (second commit)
+       /* @@@log string@@@ */
+       .log_str :
+       {
+       KEEP(*(.log_version))
+       KEEP(*(.log_timestamp))
+       KEEP(*(SORT_BY_NAME(.log_filter_mirror*)))
+       KEEP(*(.log_filter_end))
+        *(.log_string)
+       } > ROM_LOG_STRING
+
+        /* @@@reserved section for debug symbol when add --gc-sections for LDFLAG @@@ */
+       .xt.prop 0:
+       {
+       KEEP (*(.xt.prop))
+       KEEP (*(.xt.prop.*))
+       KEEP (*(.gnu.linkonce.prop.*))
+       }
+
+       _EXTENSION_FLASH_SIZE   = _extensiton_flash_end - _extensiton_flash_start;
+       _FLASH_SIZE             = _flash_end - _flash_start;
+       _NVKEY_nofota_SIZE      = _nvkey_nofota_text_end - _nvkey_nofota_text_start;
+       _NVKEY_fota_SIZE        = _nvkey_fota_end_ - _nvkey_fota_start_;
+       _BootLoader_SIZE        = _bootloader_end - _bootloader_start;
+       _FILE_SYSTEM_SIZE       = _filesystem_end_ - _filesystem_start_;
+       _AB1530_BIN_SIZE        = _AB1530_BIN_END_ - _AB1530_BIN_ADDR;
+}

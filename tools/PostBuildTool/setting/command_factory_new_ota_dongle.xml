@@ -1,0 +1,89 @@
+<root>
+  <NewOtaDongle>
+    <HexCommand name="RACE_AIR_DONGLE_INQUIRY_REQUEST"> <!--Inquiry-->
+      <Transmit format="05 5A %1 E0 0C 00 32">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <!--
+        <P2>inquiry_time[0:8]</P2>
+        <P3>inquiry_time[8:8]</P3>-->
+      </Transmit>
+      <Response format="05 5B %% %% E0 0C %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_AIR_DONGLE_INQUIRY_CANCEL"> 
+      <Transmit format="05 5A %1 E3 0C">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="05 5B %% %% E3 0C %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    
+    <HexObserverResponse name="RACE_AIR_DONGLE_INQUIRY_COMPELTE"> <!-- InquiryFinished-->
+      <Response format="05 5D %% %% E2 0C %1 ">
+        <P1>status</P1>
+      </Response>
+    </HexObserverResponse>
+
+    <HexObserverResponse name="RACE_AIR_DONGLE_INQUIRY_INDICATION"> <!--InquiryResult-->
+      <Response format="05 5D %% %% E1 0C %1">
+        <P1>data{0:}</P1>
+      </Response>
+    </HexObserverResponse>
+
+    <HexCommand name="RACE_AIR_DONGLE_CREATE_CONNECTION">
+      <Transmit format="05 5A %1 E6 0C %2">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>bd_address{0:}</P2>
+      </Transmit>
+      <Response format="05 5B %% %% E6 0C %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    
+    <HexCommand name="RACE_AIR_DONGLE_CONNECTION_COMPELTE"> <!-- ConnectDeviceCompleted -->
+      <Response format="05 5D %% %% E7 0C %1 %2">
+        <P1>status</P1>
+        <P2>BDA{0:}</P2>
+      </Response>
+    </HexCommand>
+    
+    <HexCommand name="RACE_AIR_DONGLE_DISCONNECT"> <!-- DisconnectDevice -->
+      <Transmit format="05 5A %1 E8 0C">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="05 5B %% %% E8 0C %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_AIR_DONGLE_DISCONNECT_COMPLETE">
+      <Response format="05 5D %% %% E9 0C %1 %2">
+        <P1>dis_reason</P1>
+        <P2>BDA{0:}</P2>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_AIR_DONGLE_CHANGE_BDA">
+      <Transmit format="05 5A %1 EA 0C %2">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>bd_address{0:}</P2>
+      </Transmit>
+      <Response format="05 5B %% %% EA 0C %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    
+    <!--
+    <HexCommand name="HCIReset">
+      <Transmit format="01 03 0C 00">
+      </Transmit>
+    </HexCommand>
+    <HexCommand name="SoftReset">
+        <Transmit format="01 00 FC 02 04 30">
+        </Transmit>
+      </HexCommand>-->
+	</NewOtaDongle>
+</root>

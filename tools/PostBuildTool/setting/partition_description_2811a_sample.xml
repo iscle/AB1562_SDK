@@ -1,0 +1,19 @@
+<PartitionTable>
+
+  <Partition>
+    <Selected>False</Selected>
+    <Name>N9</Name>
+    <SourceType>WholeFile</SourceType>
+    <TargetAddress>0x00012000</TargetAddress>
+    <SourceFilename>E:\Bin\mt2811_patch_e1_hdr.bin</SourceFilename>
+  </Partition>
+
+  <Partition>
+    <Selected>True</Selected>
+    <Name>CM4</Name>
+    <SourceType>WholeFile</SourceType>
+    <TargetAddress>0x00032000</TargetAddress>
+    <SourceFilename>E:\Bin\headset_ref_design.bin</SourceFilename>
+  </Partition>
+
+</PartitionTable>

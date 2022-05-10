@@ -1,0 +1,26 @@
+<build_properties>
+<makesizing value="true" />
+<com.tensilica.xide.cdt.bldprop.init value="yes" />
+<removeable attr="com.tensilica.xide.cdt.bldprop.as.generic">
+<values>
+<entry key="--gdwarf2" value=""/>
+</values>
+<removes>
+</removes>
+</removeable>
+<ordervector attr="com.tensilica.xide.cdt.bldprop.as.generic">
+<entry attr="--gdwarf2"/>
+</ordervector>
+<removeable attr="com.tensilica.xide.cdt.bldprop.cc.generic">
+<values>
+<entry key="-O" value="0"/>
+<entry key="-g" value=""/>
+</values>
+<removes>
+</removes>
+</removeable>
+<ordervector attr="com.tensilica.xide.cdt.bldprop.cc.generic">
+<entry attr="-g"/>
+<entry attr="-O"/>
+</ordervector>
+</build_properties>

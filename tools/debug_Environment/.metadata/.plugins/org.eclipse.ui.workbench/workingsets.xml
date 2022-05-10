@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workingSetManager>
+<workingSet editPageId="org.eclipse.ui.resourceWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1473408155840_1" label="Active Set Content" name="Active Set Content"/>
+<workingSet editPageId="org.eclipse.ui.resourceWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1473408158489_2" label="My C Projects and TIE" name="My C Projects and TIE">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/XtensaInfo/TIEFiles" type="2"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/AB1530" type="4"/>
+</workingSet>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1473408154728_0" label="Window Working Set" name="Aggregate for window 1473408154727"/>
+<mruList name="My C Projects and TIE"/>
+<mruList name="Active Set Content"/>
+</workingSetManager>

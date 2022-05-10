@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xxProperties>
+<propertyGroup name="project.information">
+<version value="2.0"/>
+</propertyGroup>
+<propertyGroup name="build.auto.includes">
+<exportDirs autoConsumeDirs="false" includeDepDirs="false" mode="auto"/>
+</propertyGroup>
+</xxProperties>

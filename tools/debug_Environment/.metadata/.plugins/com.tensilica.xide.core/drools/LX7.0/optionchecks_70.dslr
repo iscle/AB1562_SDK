@@ -1,0 +1,334 @@
+# Copyright (c) 2016 by Cadence Design Systems, Inc.  ALL RIGHTS RESERVED.
+# These coded instructions, statements, and computer programs are the
+# copyrighted works and confidential proprietary information of Cadence.
+# They may not be modified, copied, reproduced, distributed, or disclosed to
+# third parties in any manner, medium, or form, in whole or in part, without
+# the prior written consent of Cadence.
+
+package com.tensilica.xide.core.mccfg.rules
+ 
+global MCMessageSet messageSet;
+global CoreIsaController_T10XX controller;
+global ConfigBuildOptions configBuildOptions;
+
+expander ISARules.dsl
+
+###
+# LX7 generic rules (non-vision)
+###
+
+rule "Gather: Scatter"
+    condition:
+    	'sg_gather' requires 'sg_scatter'
+    failure:
+    	Report error 
+end
+rule "Scatter: Gather"
+    condition:
+    	'sg_scatter' requires 'sg_gather'
+    failure:
+    	Report error 
+end
+
+rule "GS: vision"
+    condition:
+        'sg_scatter' equals "1" requires either 'ivp2_32' or 'ivp26_32'
+    failure:
+        Report custom error: "Gather/Scatter can only be configured together with Vision P5 or Vision P6",["sg_scatter","sg_gather","ivp2_32","ivp26_32"]
+end
+
+# these 3 (unalign, sregs, gregs) are really just hard-coded values
+
+rule "GS: Unalign"
+    condition:
+    	'sg_scatter' conflicts with 'sg_unalign'
+    failure:
+    	Report error 
+end
+rule "Scatter: Scatregs"
+    condition:
+    	'sg_scatter' requires that 'sg_scatregs' is equal to '2'
+    failure:
+    	Report error 
+end
+rule "Gather: Gatregs"
+    condition:
+    	'sg_gather' requires that 'sg_gatregs' is equal to '4'
+    failure:
+    	Report error 
+end
+
+rule "GS: PIF"
+    condition:
+    	'sg_scatter' requires that 'pifWidthBits' is equal to '128'
+    failure:
+    	Report error 
+end
+
+rule "GS: dataWidthBits"
+    condition:
+		'sg_scatter' requires that 'dataWidthBits' is at least 512
+    failure:
+    	Report error
+end
+
+rule "GS: EPS512"
+    condition:
+                'sg_scatter' together with 'dataWidthBits' equal to 512 require that 'sg_els_per_cycle' equals 32
+    failure:
+        Report custom error: "Gather/Scatter with Data Width 512 requires that Elements per Cycle is 32",["dataWidthBits","sg_scatter","sg_gather","sg_els_per_cycle"]
+end
+
+rule "GS: 2DRAMS:Banks"
+    condition:
+		'sg_scatter' together with 'lmem_4.sizeBytes' greater than 0 requires that 'lmem_3.numBanks' equals 2
+    failure:
+    	Report custom error: "Gather/Scatter with 2 DataRAMs requires that the number of DataRAM banks is 2",["sg_scatter","sg_gather","lmem.4"]
+end
+rule "GS: 1DRAM:Banks"
+    condition:
+		'sg_scatter' together with 'lmem_4.sizeBytes' equals 0 requires that 'lmem_3.numBanks' equals 4
+    failure:
+    	Report custom error: "Gather/Scatter with 1 DataRAM requires that the number of DataRAM banks is 4",["sg_scatter","sg_gather","lmem.4"]
+end
+
+rule "GS: SubBanks"
+    condition:
+		'sg_scatter' requires that 'sg_subbanks' is one of 4 or 8
+    failure:
+    	Report custom error: "Gather/Scatter requires that the number of DataRAM sub-banks is 4 or 8",["sg_scatter","sg_gather","sg_subbanks"]
+end
+
+rule "GS: 4SubBanks"
+    condition:
+        'sg_scatter' together with 'sg_subbanks' equals 4 requires that 'lmem_4.sizeBytes' gt 0
+    failure:
+        Report custom error: "Gather/Scatter with 4 DataRAM sub-banks requires that 2 DataRAMs are configured",["sg_scatter","sg_gather","sg_subbanks","lmem.4"]
+end
+
+rule "GS: mindramsize"
+    condition:
+        'sg_scatter' requires that 'lmem_3.sizeBytes' is at least 16384
+    failure:
+        Report custom error: "Gather/Scatter requires that Data RAMs are at least 16kB ",["sg_scatter","sg_gather","lmem.3"]
+end
+
+rule "GS: 2 DRAMs or feature sg_onedram"
+    condition:
+        'sg_scatter' together with 'lmem_4.sizeBytes' equals 0 needs feature "sg_onedram"
+    failure:
+        Report custom error: "Gather/Scatter requires that 2 DataRAMs are configured",["sg_scatter","sg_gather","lmem.4"]
+end
+
+rule "MPU: Bridge"
+    condition:
+        'mmuType' equals "IMMU" requires that 'busBridge' is "AXI4"
+    failure:
+        Report error 
+end
+
+rule "MPU: wb dcache"
+    condition:
+        'mmuType' as "IMMU" plus 'dc_size' gt 0 necessitates 'dc_writeBack'
+    failure:
+        Report custom error: "If MPU is configured with data cache, then the data cache must be configured as write-back",["mmuType","dc_writeBack"]
+end
+
+rule "MPU: condstoresync"
+    condition:
+        'mmuType' equals "IMMU" requires that 'condStoreSync' is not equal to 1
+    failure:
+        Report custom error: "The MPU is not compatible with Conditional Store Sync - consider Exclusive Access",["mmuType","condStoreSync"]
+end
+
+rule "GS: MPU"
+    condition:
+        'sg_scatter' requires that 'mmuType' is "IMMU"
+    failure:
+        Report custom error: "Gather/Scatter requires that the MMU selection is Memory Protection Unit (MPU)",["sg_scatter","sg_gather","mmuType"]
+end
+
+rule "GS: DRAM Retry"
+    condition:
+        'sg_scatter' conflicts with 'dramRetry'
+    failure:
+        Report error 
+end
+
+# generic is dram1 >=16k if configured
+rule "GS: 2DRAM:Size"
+    condition:
+        'sg_scatter' together with 'lmem_4.sizeBytes' greater than 0 requires that 'lmem_4.sizeBytes' is ge 16384
+    failure:
+        Report custom error: "Gather/Scatter with 2 DataRAM requires that both DataRAMs are at least 16KB",["sg_scatter","sg_gather","lmem.4","lmem.3"]
+end
+
+rule "LSM exclusive: MPU"
+    condition:
+        'master_exclaccess' requires that 'mmuType' is "IMMU"
+    failure:
+        Report custom error: "Master Exclusive access requires that the MMU selection is Memory Protection Unit (MPU)",["master_exclaccess","mmuType"]
+end
+
+rule "LSS exclusive: MPU"
+    condition:
+        'slave_exclaccess' requires that 'mmuType' is "IMMU"
+    failure:
+        Report custom error: "Slave Exclusive access requires that the MMU selection is Memory Protection Unit (MPU)",["slave_exclaccess","mmuType"]
+end
+
+
+rule "ECC s32c1i LSE wide"
+    condition:
+        'dataMemErrorType' eq "2" plus 'dataMemErrorWidth' eq "4" requires either 'master_exclaccess' or 'condStoreSync'
+    failure:
+        Report custom error: "Data-side ECC with wide errors requires that either Conditional Store Sync or Load/Store Exclusive is configured",["dataMemErrorType","master_exclaccess","condStoreSync","dataMemErrorWidth"]
+end
+
+rule "ECC s32c1i LSE narrow"
+    condition:
+        'dataMemErrorType' eq "2" plus 'dataMemErrorWidth' eq "1" requires either 'master_exclaccess' or 'condStoreSync'
+    failure:
+        Report custom warning: "Data-side ECC recommends that either Conditional Store Sync or Load/Store Exclusive is configured",["dataMemErrorType","master_exclaccess","condStoreSync","dataMemErrorWidth"]
+end
+
+rule "axi_ecc ocd"
+    condition:
+        'axi_ecc' notequals "none" requires that 'ocd' is "1"
+    failure:
+        Report custom error: "AXI-ECC requires that OCD is also configured",["axi_ecc","ocd"]
+end
+
+rule "axi_ecc immu"
+    condition:
+        'axi_ecc' notequals "none" requires that 'mmuType' is "IMMU"
+    failure:
+        Report custom error: "AXI-ECC requires that MMU selection is MPU",["axi_ecc","mmuType"]
+end
+
+rule "axi_sec_if immu"
+    condition:
+        'axi_sec_interface' requires that 'mmuType' is "IMMU"
+    failure:
+        Report custom error: "AXI SEC Interface requires that MMU selection is MPU",["axi_sec_interface","mmuType"]
+end
+
+
+###
+# iDMA
+###
+
+rule "idma: transpose"
+    condition:
+        'sg_scatter' together with 'udma' equals 1 requires that 'udma_transpose' equals 0
+    failure:
+        Report custom error: "Gather/Scatter with iDMA requires transpose is not selected",["sg_scatter","sg_gather","udma","udma_transpose"]
+end
+
+rule "idma: udma_bufferwidth"
+    condition:
+        'sg_scatter' together with 'udma' equals 1 requires that 'udma_bufferwidth' equals 4
+    failure:
+        Report custom error: "Gather/Scatter with iDMA requires that the buffer width is 4",["sg_scatter","sg_gather","udma","udma_bufferwidth"]
+end
+
+rule "idma: udma_outstanding_rows"
+    condition:
+        'sg_scatter' together with 'udma' equals 1 requires that 'udma_outstanding_rows' equals 16
+    failure:
+        Report custom error: "Gather/Scatter with iDMA requires number of outstanding rows is 16",["sg_scatter","sg_gather","udma","udma_outstanding_rows"]
+end
+
+rule "hifi4: byteOrder"
+    condition:
+	'hifi4' requires that 'byteOrder' is "le"
+    failure:
+    	Report error 
+end
+rule "fusion: byteOrder"
+    condition:
+	'fsn' requires that 'byteOrder' is "le"
+    failure:
+    	Report error 
+end
+
+rule "fusion: softbit size"
+    condition:
+	'fsn_softdemap' requires that 'instWidthBytes' is at least 8
+    failure:
+    	Report error
+end
+rule "fusion: viterbi"
+    condition:
+	'fsn_viterbi' requires that 'instWidthBytes' is at least 8
+    failure:
+    	Report error
+end
+
+rule "debugapb: ocd"
+    condition:
+        'debugAPB' requires 'ocd'
+    failure:
+        Report error 
+end
+
+rule "axi yes sec no ecc"
+    condition:
+        'axi_sec_interface' equals "1" requires that 'axi_ecc' is not "none"
+    failure:
+        Report custom error: "If AXI SEC is selected, then AXI ECC must also be selected",["axi_sec_interface","axi_ecc"]
+end
+
+rule "axi no sec yes ecc"
+    condition:
+        'axi_sec_interface' equals "0" requires that 'axi_ecc' is "none"
+    failure:
+        Report custom error: "If AXI ECC is selected, then AXI SEC must also be selected",["axi_sec_interface","axi_ecc"]
+end
+
+rule "pdx4b spvfp: fp"
+    condition:
+    	'pdx4b_sfp' conflicts with 'fp'
+    failure:
+    	Report error 
+end
+
+rule "bbep spvfp: fp"
+    condition:
+    	'cxep_spvfp' conflicts with 'fp'
+    failure:
+    	Report error 
+end
+
+rule "bbep spvfp: adprecvmul"
+    condition:
+    	'cxep_spvfp' conflicts with 'cxep_advprec'
+    failure:
+    	Report error 
+end
+
+rule "udma_reorder gating"
+    condition:
+        'udma_reorder_buffer' requires symmetry of 'scan' and 'implCgFunctionalUnit' and 'implCgGlobal'
+    failure:
+        Report custom error: "iDMA Re-order buffer requires symmetry of full scan and clock-gating options (all off or all on)",["udma_reorder_buffer","scan","implCgFunctionalUnit","implCgGlobal"]
+end
+
+rule "reorder vision"
+    condition:
+	'udma_reorder_buffer' equals "1" requires either 'ivp2_32' or 'ivp26_32'
+    failure:
+	Report custom error: "iDMA Re-order buffer can only be configured together with Vision P5 or Vision P6",["udma_reorder_buffer","ivp2_32","ivp26_32"]
+end
+
+###
+# upgrade net
+###
+
+rule "isa7 req xx704 or derp"
+    condition:
+    	'mmuType' notequal "fake" withisa "LX7.0" req minxx 704 orfeat "early_lx7"
+    failure:
+    	Report custom error: "Configuration of ISA LX7 requires Xplorer 7.0.4 or later (RG-2016.4)",["connx", "hifi2","mmuType"]
+end
+

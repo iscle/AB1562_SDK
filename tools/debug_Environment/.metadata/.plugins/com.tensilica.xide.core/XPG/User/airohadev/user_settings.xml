@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<userSettings dataExpiration="1475136441410" email="garenLee@airoha.com.tw" loginExpiration="1475218800000" passwordCRC="iaJtpnBz.b80E" preferredVersion="" user="airoha/dev">
+<release version="RF-2015.2">
+<productVersion product="Xtensa Tools" version="11.0.2"/>
+<productVersion product="Xtensa LX6.0" version="6.0.2"/>
+<productVersion product="Xtensa X11.0" version="11.0.2"/>
+<productVersion product="Xtensa MX1.2" version="1.3.2"/>
+<productVersion product="Xtensa TX3.0" version="3.0.2"/>
+<productVersion product="CFGid" version="111"/>
+<productVersion product="BuildStat" version="sw:0;emul:0;ngo:0;hw:0"/>
+<productVersion product="seqID" version="11090"/>
+<XXrange>600:899</XXrange>
+</release>
+<release version="RF-2015.3">
+<productVersion product="Xtensa Tools" version="11.0.3"/>
+<productVersion product="Xtensa LX6.0" version="6.0.3"/>
+<productVersion product="Xtensa X11.0" version="11.0.3"/>
+<productVersion product="Xtensa MX1.2" version="1.3.3"/>
+<productVersion product="Xtensa TX3.0" version="3.0.3"/>
+<productVersion product="CFGid" version="111"/>
+<productVersion product="BuildStat" version="sw:0;emul:0;ngo:0;hw:0"/>
+<productVersion product="seqID" version="11105"/>
+<XXrange>600:899</XXrange>
+</release>
+<release version="RF-2016.4">
+<productVersion product="Xtensa Tools" version="11.0.4"/>
+<productVersion product="Xtensa LX6.0" version="6.0.4"/>
+<productVersion product="Xtensa X11.0" version="11.0.4"/>
+<productVersion product="Xtensa MX1.2" version="1.3.4"/>
+<productVersion product="Xtensa TX3.0" version="3.0.4"/>
+<productVersion product="CFGid" version="111"/>
+<productVersion product="BuildStat" version="sw:0;emul:0;ngo:0;hw:0"/>
+<productVersion product="seqID" version="11202"/>
+<XXrange>600:899</XXrange>
+</release>
+<feature>xtboard=0</feature>
+<feature>isaLX6=0</feature>
+<feature>hardware=0</feature>
+<feature>TRAX=0</feature>
+<feature>flix=0</feature>
+<feature>seamless=0</feature>
+<feature>dataport=0</feature>
+<feature>emul_fpga=0</feature>
+<feature>DL_hifi2=0</feature>
+<feature>errata=0</feature>
+<feature>doclevel=3</feature>
+<feature>can_build=0</feature>
+<feature>tiepkgs=0</feature>
+<feature>redist=0</feature>
+<feature>mpdebug=0</feature>
+<feature>hardware_linux=0</feature>
+<feature>prefetch=0</feature>
+<feature>vxworks=0</feature>
+<feature>linux=0</feature>
+<feature>pipe7=0</feature>
+<feature>mmu=0</feature>
+<feature>longtimebomb=0</feature>
+<feature>maxcfg=12</feature>
+<feature>x_hifi2=0</feature>
+<feature>x_hifi2hd=0</feature>
+<feature>prod_build=0</feature>
+<feature>xcal=0</feature>
+<feature>xide=0</feature>
+<feature>nucleus=1</feature>
+<feature>cfgedit=0</feature>
+</userSettings>

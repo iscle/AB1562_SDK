@@ -1,0 +1,97 @@
+defstyle note [line.color=red, text.color=red];
+defstyle box [color=lgray+50, line.corner=round,tag.fill.color=green];
+defstyle vertical_range [text.bold=yes];
+defcolor my_orange=orange+50;
+defcolor my_fuchsia=fuchsia+50;
+defcolor my_indigo=indigo+50;
+defcolor my_red=red+50;
+
+defproc API($e1, $e2, $e3, $linecolor=black, $color=black)
+{
+    defstyle arrow [text.color=$color, arrow.color=$linecolor, line.color=$linecolor];
+    
+    $e1->$e2: \Q($e3);
+};
+
+defproc API_SPP($e3)
+{
+  defstyle arrow [arrow.color=orange, line.color=orange];
+  a -> s:\Q($e3);
+};
+
+defproc API_RFCOMM($e3)
+{
+  defstyle arrow [arrow.color=fuchsia, line.color=indigo];
+  s -> r:\Q($e3);
+};
+
+defproc API_SDP($e3)
+{
+  defstyle arrow [arrow.color=indigo, line.color=fuchsia];
+  s -> d:\Q($e3);
+};
+
+defproc API_STREAM($e3)
+{
+  defstyle arrow [arrow.color=red, line.color=red];
+  a -> str:\Q($e3);
+};
+
+defproc MSG($e1, $e2, $e3, $linecolor=white, $color=black)
+{
+    defstyle blockarrow [text.bold=yes,
+                         text.color=$color,
+                         fill.color=$linecolor,
+                         line.color=$linecolor];
+    block $e1 -> $e2: \Q($e3);
+};
+
+defproc MSG_SPP($e3)
+{
+    defstyle blockarrow [text.bold=yes,
+                         text.color=black,
+                         fill.color=my_orange,
+                         line.color=my_orange];
+    block s -> a: \Q($e3);
+};
+
+defproc MSG_RFCOMM($e3)
+{
+    defstyle blockarrow [text.bold=yes,
+                         text.color=black,
+                         fill.color=my_indigo,
+                         line.color=my_indigo];
+    block r -> s: \Q($e3);
+};
+
+defproc MSG_SDP($e3)
+{
+    defstyle blockarrow [text.bold=yes,
+                         text.color=black,
+                         fill.color=my_fuchsia,
+                         line.color=my_fuchsia];
+    block d -> s: \Q($e3);
+};
+
+defproc MSG_STREAM($e3)
+{
+    defstyle blockarrow [text.bold=yes,
+                         text.color=black,
+                         fill.color=my_red,
+                         line.color=my_red];
+    block str -> a: \Q($e3);
+};
+
+a:application;
+BP : BT Profiles [fill.color=aqua]{
+    s:spp\nprofile [fill.color=my_orange];
+};
+
+BI : BT Libraries [fill.color=yellow]{
+    r:rfcomm [fill.color=my_indigo];
+    d:sdp [fill.color=my_fuchsia];
+};
+
+str: stream\n(rfcomm) [fill.color=my_red];
+
+a,s,r,d,str;

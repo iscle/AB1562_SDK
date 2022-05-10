@@ -1,0 +1,4 @@
+Ruleset_name=RG-2015.2
+Dependency=common
+Files=RG-2015.2/xpgchecks.dslr, RG-2015.2/optionchecks.dslr, RG-2015.2/vp5.dslr, RG-2015.2/vp6.dslr
+

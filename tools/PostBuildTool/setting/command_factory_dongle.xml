@@ -1,0 +1,48 @@
+<root>
+  <CommandPool>
+    <!-- OGF 0x40 -->
+    <Action name="DongleScanStart">
+      <Command format="01 00 FC %1 0B 40 %2 %3 %4 %5 %6 %7 %8 %9">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>scan_type</P2>
+        <P3>scan_interval[0:8]</P3>
+        <P4>scan_interval[8:8]</P4>
+        <P5>scan_window[0:8]</P5>
+        <P6>scan_window[8:8]</P6>
+        <P7>owner_addr_type</P7>
+        <P8>policy</P8>
+        <P9>filter_duplicated</P9>
+      </Command>
+      <!-- %% 在 event 中表示忽略 -->
+      <Event format="04 FF %% 0B 40 %1">
+        <P1>status</P1>
+      </Event>
+    </Action>
+
+    <Action name="DongleScanRsp">
+      <!-- %% 在 event 中表示忽略 -->
+      <Event format="04 FF %% FF 40 %1 00 %2 %3 %4 %5 %6 %7 %8 04 %% %9">
+        <P1>status</P1>
+        <P2>peer_addr[0:8]</P2>
+        <P3>peer_addr[8:8]</P3>
+        <P4>peer_addr[16:8]</P4>
+        <P5>peer_addr[24:8]</P5>
+        <P6>peer_addr[32:8]</P6>
+        <P7>peer_addr[40:8]</P7>
+        <P8>rssi</P8>
+        <P9>addata{0:}</P9>
+      </Event>
+    </Action>
+
+    <Action name="DongleScanStop">
+      <Command format="01 00 FC %1 0C 40">
+        <P1>_one_byte_right_count_of_bytes</P1>
+      </Command>
+      <!-- %% 在 event 中表示忽略 -->
+      <Event format="04 FF %% 0C 40 %1">
+        <P1>status</P1>
+      </Event>
+    </Action>
+    
+  </CommandPool>
+</root>

@@ -1,0 +1,16 @@
+<build_properties>
+<makesizing value="true" />
+<com.tensilica.xide.cdt.bldprop.init value="yes" />
+<removeable attr="com.tensilica.xide.cdt.bldprop.cc.generic">
+<values>
+<entry key="-O" value="2"/>
+<entry key="-g" value=""/>
+</values>
+<removes>
+</removes>
+</removeable>
+<ordervector attr="com.tensilica.xide.cdt.bldprop.cc.generic">
+<entry attr="-g"/>
+<entry attr="-O"/>
+</ordervector>
+</build_properties>

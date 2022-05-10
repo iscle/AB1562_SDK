@@ -1,0 +1,44 @@
+package com.tensilica.xide.core.mccfg.rules
+ 
+global MCMessageSet messageSet;
+global CoreIsaController_T10XX controller;
+global ConfigBuildOptions configBuildOptions;
+
+expander ISARules.dsl
+
+// Write the rules for feature checks
+// When the condition fails then action will be taken
+rule "Feature check: hifi3_vector_fp"
+    condition:
+    	'hifi3_vector_fp' requires feature "hifi_vector_fp"
+    failure:
+    	Report custom error: "Drools - HiFi3 Vector FP option requires feature hifi_vector_fp",["hifi3_vector_fp"]
+end
+
+rule "Min ISA check: hifi3_vector_fp"
+    condition:
+    	'hifi3_vector_fp' requires minimum ISA "LX6.0"
+    failure:
+    	Report custom error: "Drools - HiFi3 Vector FP option requires min ISA LX6.0",["hifi3_vector_fp"]
+end
+
+rule "Family check: hifi3_vector_fp"
+    condition:
+    	'hifi3_vector_fp' requires family "LX"
+    failure:
+    	Report custom error: "Drools - HiFi3 Vector FP option requires family LX",["hifi3_vector_fp"]
+end
+
+rule "XPG version check: hifi3_vector_fp"
+    condition:
+    	'hifi3_vector_fp' requires minimum XPG 601
+    failure:
+    	Report custom error: "Drools - HiFi3 Vector FP option requires min XPG 601",["hifi3_vector_fp"]
+end
+
+rule "Xplorer version check: hifi3_vector_fp"
+    condition:
+    	'hifi3_vector_fp' requires minimum Xplorer version 600
+    failure:
+    	Report custom error: "Drools - HiFi3 Vector FP option requires min Xplorer 600",["hifi3_vector_fp"]
+end

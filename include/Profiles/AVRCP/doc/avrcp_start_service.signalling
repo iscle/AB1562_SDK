@@ -1,0 +1,33 @@
+#This is the default signalling chart.
+#Edit and press F2 to see the result.
+#You can change the default chart
+#with the leftmost button on the Preferences pane of the ribbon.
+
+msc=qsd;
+title:AVRCP profile\n(StartSerive);
+defstyle note [line.color=red, text.color=red];
+
+m:MMI;
+r:AVRCP\nprofile;
+c:AVCTP\nprotocol;
+s:sdp;
+l:L2CAP;
+
+m,r,c,s,l;
+
+mark star;
+box ..: [line.corner=round]
+{
+    m->r:AVRCP_StartService(...);
+    r->s:BtSdpRegisterServiceRecord(...);
+    s->r:BT_SDP_REGISTER_CFM;
+    r->c:BtAvctpRegister(...);
+    c->l:BtL2capRegisterRequest;
+    l->c:BT_L2CAP_REGISTER_CFM;
+    c->r:BT_AVCTP_REGISTER_CFM;
+    r->m:AVRCP_START_SERVICE_CFM;
+    #r->c:BtAvctpConnectRequest(...);
+    #c->l:BtL2capConnectRequest;
+    #l->c:BT_L2CAP_CONNECT_CFM;
+    #c->r:BT_AVCTP_CONNECT_CFM;
+};

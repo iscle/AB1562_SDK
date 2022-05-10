@@ -1,0 +1,700 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FileManagement>
+
+	<Partition number="2"/>
+
+	<!-- 0x0000~0x00FF for general share files -->
+	<File ID="0x0001" include="false" partition="0">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="0" codec="1" file_name="fm.mp3" folder="Share"/>
+	</File>
+	
+	<File ID="0x0002" include="false" partition="0">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="0" codec="3" file_name="C_connected_bp56.msbc" folder="Share"/>
+	</File>
+	
+	<!-- 0x0100~0x0FFF for VC files -->
+	<File ID="0x0100" include="true" partition="0">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="2" language="1028" file_name="db.bin" folder="VC"/>
+	</File>
+	
+	<File ID="0x0101" include="true" partition="0">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="3" language="1033" file_name="1530_vc.txt" folder="VC"/>
+	</File>
+	
+	<!-- 0x1000~0x1FFF for ringtone files -->
+	
+	<!-- 0x2000~0x2FFF for vp files -->
+	<!--英文VP-->
+	<File ID="0x2000" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_0.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2001" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_1.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2002" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_2.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2003" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_3.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2004" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_4.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2005" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_5.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2006" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_6.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2007" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_7.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2008" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_8.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2009" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_9.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x200A" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Answer_a_second_call.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x200B" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Battery_Level_High.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x200C" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Battery_Level_Low.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x200D" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Battery_Level_Median.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x200E" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Bluetooth_Mode.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x200F" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Call_Cancelled.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2010" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Call_Ended.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2011" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Call_on_hold.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2012" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Call_Rejected.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2013" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Caller_ID_Annc_OFF.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2014" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Caller_ID_Annc_ON.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2015" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Charging.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2016" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Charging_Complete.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2017" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Clear_Pairing_Info.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2018" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Connected.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2019" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Disconnected.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x201A" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_English_Selected.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x201B" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_English_voice_prompt.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x201C" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_FM.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x201D" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_FM_radio_Mode.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x201E" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_From.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x201F" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Incoming_Call.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2020" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Left_Channel.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2021" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Line-in_Mode.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2022" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Low_Battery_Please_Charge.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2023" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Multi-point_Mode_OFF.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2024" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Multi-point_Mode_ON.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2025" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Music_Mode.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2026" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Mute_OFF.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2027" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Mute_ON.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2028" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Pairing.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2029" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Pairing_Fail_Restart_Dev.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x202A" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Pairing_Successful.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x202B" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Pause.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x202C" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Point.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x202D" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Power_OFF.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x202E" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Power_ON.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x202F" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Press_Call_Btn_to_Sel_Eng.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2030" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Re-dialing.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2031" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Right_Channel.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2032" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Second_Device_Connected.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2033" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Seek_Down.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2034" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Seek_Up.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2035" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Voice_Command_OFF.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2036" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Voice_Command_ON.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2037" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Voice_Dialing.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2038" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Voice_Prompt_OFF.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x2039" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Voice_Prompt_ON.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x203A" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Voice_Transfers_to_Bt.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x203B" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Voice_Transfers_to_Phone.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x203C" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Volume_Down.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x203D" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Volume_Maximum.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x203E" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Volume_Minimum.vp" folder="en-US"/>
+	</File>
+	
+	<File ID="0x203F" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1033" codec="4" file_name="EN_Volume_Up.vp" folder="en-US"/>
+	</File>
+	
+	<!--中文VP-->
+	<File ID="0x2040" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_0.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2041" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_1.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2042" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_2.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2043" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_3.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2044" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_4.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2045" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_5.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2046" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_6.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2047" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_7.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2048" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_8.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2049" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_9.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x204A" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Answer_a_second_call.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x204B" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Battery_Level_High.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x204C" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Battery_Level_Low.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x204D" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Battery_Level_Median.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x204E" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Bluetooth_Mode.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x204F" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Call_Cancelled.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2050" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Call_Ended.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2051" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Call_on_hold.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2052" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Call_Rejected.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2053" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Caller_ID_Annc_OFF.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2054" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Caller_ID_Annc_ON.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2055" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Charging.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2056" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Charging_Complete.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2057" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Clear_Pairing_Info.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2058" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Connected.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2059" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Disconnected.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x205A" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Chinese_Selected.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x205B" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Chinese_voice_prompt.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x205C" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Enter_Pairing_Mode.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x205D" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_FM.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x205E" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_FM_radio_Mode.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x205F" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Incoming_Call.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2060" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Left_Channel.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2061" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Line_In_Mode.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2062" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Low_Battery_Please_Charge.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2063" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Multi-point_Mode_OFF.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2064" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Multi-point_Mode_ON.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2065" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Music_Mode.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2066" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Music_Stop.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2067" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Mute_OFF.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2068" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Mute_ON.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2069" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Number.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x206A" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Pairing_Fail_Restart_Dev.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x206B" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Pairing_Successful.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x206C" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Point.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x206D" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Power_OFF.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x206E" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Power_ON.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x206F" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Press_Call_Btn_to_Selt_CH.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2070" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Re-dialing.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2071" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Right_Channel.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2072" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Second_Device_Connected.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2073" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Seek_Down.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2074" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Seek_Up.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2075" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Voice_Command_OFF.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2076" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Voice_Command_ON.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2077" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Voice_Dialing.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2078" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Voice_Prompt_OFF.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2079" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Voice_Prompt_ON.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x207A" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Voice_Transfers_to_Bt.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x207B" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Voice_Transfers_to_Phone.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x207C" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Volume_Down.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x207D" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Volume_Maximum.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x207E" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Volume_Minimum.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x207F" include="false" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Volume_Up.vp" folder="zh-TW"/>
+	</File>
+	
+	<File ID="0x2080" include="true" partition="1">
+	  <FileInfo type="0" address="" length=""/>
+	  <FileInfo type="1" language="1028" codec="4" file_name="CH_Incoming_Call_Ended.vp" folder="zh-TW"/>
+	</File>
+	
+</FileManagement>
+
+<!--
+File Type
+Basic Info = 0
+VP = 1
+VC_DB = 2
+TXT = 3
+-->
+
+<!--
+language information
+ENG = 1033
+CHI = 1028
+-->
+
+<!--
+codec information
+MP3  = 1
+AAC  = 2
+MSBC = 3
+VP	 = 4
+-->

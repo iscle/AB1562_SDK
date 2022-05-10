@@ -1,0 +1,29 @@
+<root>
+  <FcdDongle>
+    <HexCommand name="TwsImportNearHeadset">
+      <Transmit format="01 00 FC %1 A8 34 %2 %3 %4 %5 %6 %7 0F 0F">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>bd_address_b0</P2>
+        <P3>bd_address_b1</P3>
+        <P4>bd_address_b2</P4>
+        <P5>bd_address_b3</P5>
+        <P6>bd_address_b4</P6>
+        <P7>bd_address_b5</P7>
+      </Transmit>
+      <Response format="04 ff %% A8 34 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="TwsFactoryReset">
+      <Transmit format="01 00 FC 02 A5 34"/>
+      <Response format="04 ff 03 a5 0c ff">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="TwsFcdResetKeyEvent">
+      <Transmit format="01 00 FC 04 B4 34 00 1A "/>
+    </HexCommand>
+  </FcdDongle>
+</root>

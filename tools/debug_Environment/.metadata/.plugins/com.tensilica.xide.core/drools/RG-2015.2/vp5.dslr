@@ -1,0 +1,177 @@
+# Copyright (c) 2016 by Cadence Design Systems, Inc.  ALL RIGHTS RESERVED.
+# These coded instructions, statements, and computer programs are the
+# copyrighted works and confidential proprietary information of Cadence.
+# They may not be modified, copied, reproduced, distributed, or disclosed to
+# third parties in any manner, medium, or form, in whole or in part, without
+# the prior written consent of Cadence.
+
+package com.tensilica.xide.core.mccfg.rules
+ 
+global MCMessageSet messageSet;
+global CoreIsaController_T10XX controller;
+global ConfigBuildOptions configBuildOptions;
+
+expander ISARules.dsl
+
+#########
+# VP5 "old" rules tested for RG.3 because the generic LX7 config space is more open from
+# RG.4 onwards. THis is largely duplicated for RG2 and RG3 now.
+#
+# Rules that are safely LX7 generic are removed from here and are tested at LX7 level
+#########
+
+rule "VP5 no irom"
+    condition:
+        'ivp2_32' requires that 'lmem_2.sizeBytes' is equal to '0'
+    failure:
+        Report custom error: "Vision Processors require that Instruction ROM is not configured",["ivp2_32","lmem.2"]
+end
+rule "VP5 no drom"
+    condition:
+        'ivp2_32' requires that 'lmem_5.sizeBytes' is equal to '0'
+    failure:
+        Report custom error: "Vision Processors require that Data ROM is not configured",["ivp2_32","lmem.5"]
+end
+
+rule "VP5: mpu entries"
+    condition:
+    	'ivp2_32' requires that 'immu_noofmpuentries' is equal to '16'
+    failure:
+    	Report error 
+end
+rule "VP5: mpu lsb"
+    condition:
+    	'ivp2_32' requires that 'immu_virtualaddrstart' is equal to '12'
+    failure:
+    	Report error 
+end
+rule "VP5: maxCoprocs"
+    condition:
+    	'ivp2_32' requires that 'maxCoprocs' is equal to '3'
+    failure:
+    	Report error 
+end
+
+rule "VP5: miscSpecRegs"
+    condition:
+    	'ivp2_32' requires that 'miscSpecRegs' is equal to '0'
+    failure:
+    	Report error 
+end
+
+rule "VP5: bs_req_ctl_dep"
+    condition:
+    	'ivp2_32' requires that 'bs_req_ctl_dep' is equal to '4'
+    failure:
+    	Report error 
+end
+rule "VP5: bs_req_data_dep"
+    condition:
+    	'ivp2_32' requires that 'bs_req_data_dep' is equal to '8'
+    failure:
+    	Report error 
+end
+rule "VP5: bs_rsp_dep"
+    condition:
+    	'ivp2_32' requires that 'bs_rsp_dep' is equal to '8'
+    failure:
+    	Report error 
+end
+rule "VP5: dmaDepth"
+    condition:
+    	'ivp2_32' requires that 'dmaDepth' is equal to '2'
+    failure:
+    	Report error 
+end
+
+rule "VP5: pif_arb_byte_enable"
+    condition:
+    	'ivp2_32' requires 'pif_arb_byte_enable'
+    failure:
+    	Report error 
+end
+rule "VP5: wbBypassAddrBits"
+    condition:
+    	'ivp2_32' conflicts with 'wbBypassAddrBits'
+    failure:
+    	Report error 
+end
+rule "VP5: ace"
+    condition:
+    	'ivp2_32' conflicts with 'axi_acelite'
+    failure:
+    	Report error 
+end
+
+rule "VP5: prid"
+    condition:
+    	'ivp2_32' requires 'prid'
+    failure:
+    	Report error 
+end
+rule "VP5: threadptr"
+    condition:
+    	'ivp2_32' requires 'threadptr'
+    failure:
+    	Report error 
+end
+
+rule "VP5: pifAsync"
+    condition:
+    	'ivp2_32' conflicts with 'pifAsync'
+    failure:
+    	Report error 
+end
+
+rule "VP5 ic.size"
+    condition:
+		'ivp2_32' requires that 'ic_size' is at least 2048
+    failure:
+    	Report error
+end
+
+rule "VP5: bibo"
+    condition:
+    	'ivp2_32' requires 'breakInBreakOut'
+    failure:
+    	Report custom error: "Vision P5 requires that Debug / OCD / Break-in/Break-out are selected",["ivp2_32","debugEnabled","ocd","breakInBreakOut"] 
+end
+rule "VP5: ibreak"
+    condition:
+    	'ivp2_32' requires that 'instTraps' is equal to '2'
+    failure:
+    	Report error 
+end
+rule "VP5: dbreak"
+    condition:
+    	'ivp2_32' requires that 'dataTraps' is equal to '2'
+    failure:
+    	Report error 
+end
+rule "VP5: perfcounters"
+    condition:
+    	'ivp2_32' requires that 'perfcounters' is equal to '4'
+    failure:
+    	Report error 
+end
+rule "VP5: trace"
+    condition:
+    	'ivp2_32' requires 'trace'
+    failure:
+    	Report error 
+end
+
+rule "VP5: vectorsReloc"
+    condition:
+    	'ivp2_32' requires 'vectorsReloc'
+    failure:
+    	Report error 
+end
+
+rule "VP5: intLevelCount"
+    condition:
+    	'ivp2_32' requires that 'intLevelCount' is equal to '3'
+    failure:
+    	Report error 
+end
+

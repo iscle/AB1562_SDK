@@ -1,0 +1,26 @@
+# Copyright (c) 2015-2016 by Cadence Design Systems, Inc.  ALL RIGHTS RESERVED.
+# These coded instructions, statements, and computer programs are the
+# copyrighted works and confidential proprietary information of Cadence.
+# They may not be modified, copied, reproduced, distributed, or disclosed to
+# third parties in any manner, medium, or form, in whole or in part, without
+# the prior written consent of Cadence.
+
+package com.tensilica.xide.core.mccfg.rules
+ 
+global MCMessageSet messageSet;
+global CoreIsaController_T10XX controller;
+global ConfigBuildOptions configBuildOptions;
+
+expander ISARules.dsl
+
+#
+# this is now bogus - leave a bogus rule to zap out the file content
+#
+
+rule "Feat chk: VP3 Feature"
+    condition:
+    	'ivp2_16' requires feature "NOSUCHFEATURE"
+    failure:
+    	Report custom error: "Vision P3 requires a corresponding account feature - contact support",["ivp2_16"]
+end
+

@@ -1,0 +1,234 @@
+package com.tensilica.xide.core.mccfg.rules
+ 
+import com.tensilica.xide.core.mccfg.CoreIsaController_T10XX;
+import com.tensilica.xide.core.mc.MCModel; 
+import com.tensilica.xide.core.mc.MCValue; 
+import com.tensilica.xide.core.mc.MCMessageSet;
+import com.tensilica.xide.core.mc.MCMessage;
+import com.tensilica.xide.core.mc.MCModelUtils;
+import com.tensilica.xide.core.mccfg.CoreIsaDefs;
+import com.tensilica.xide.core.xpg.session.XPGUserManager;
+import com.tensilica.xide.core.mccfg.ConfigBuildOptions;
+import com.tensilica.xide.core.version.XPGReleaseUtils;
+import com.tensilica.xide.core.mccfg.rules.DroolsRulesSet;
+import com.tensilica.xide.core.mcrules.Rule;
+import com.tensilica.xide.core.XIDECorePlugin;
+import com.tensilica.xide.core.mccfg.rules.DroolsHelper;
+import com.tensilica.xide.core.util.NumUtils;
+import com.tensilica.xide.core.util.StringUtils;
+import org.drools.definition.type.FactType;
+import java.util.List;
+import java.util.Map;
+import java.text.MessageFormat;
+
+////////////////////////////////////////////////////////////////////
+//
+// WARNING: you cannot simply add methods to, say, controller
+// and call them from here because these functions are called
+// from Xplorers of all versions from RF.2 onwards
+//
+////////////////////////////////////////////////////////////////////
+
+ 
+//
+// Certain situations (drools) don't work with dotted names like cxep.spvfp
+// So in drools the name is underbarr'ed (cxep_spvfp) but in order to mark
+// fields with errors we need to turn it back into dotted form. This tries
+// to resolve the dotted name given an underbarred name
+//  
+// @param name
+// @return
+//
+function String fixFld(CoreIsaController_T10XX ctl, String name)
+{
+	Map items = ctl.getModel().getItems();
+	if (items.containsKey(name))
+		return name;
+
+	int ubar = -1;
+	String name2 = name;
+		
+	// try forwards
+	while ((ubar = name.indexOf('_')) >= 0)
+	{
+		name = name.substring(0, ubar) + '.' + name.substring(ubar + 1);
+		if (items.containsKey(name))
+			break;
+	}
+
+	// nope ... try backwards
+	name = name2;
+	while ((ubar = name.lastIndexOf('_')) >= 0)
+	{
+		name = name.substring(0, ubar) + '.' + name.substring(ubar + 1);
+		if (items.containsKey(name))
+			break;
+	}
+	return name;
+}
+
+//
+// take a list of option names and fix them all as best we can
+// 
+// @param names
+// @return
+//
+function String[] fixFlds(CoreIsaController_T10XX ctl, String[] names)
+{
+	String[] names2 = new String[names.length];
+	for (int i = 0 ; i < names.length ; i++)
+		names2[i] = fixFld(ctl, names[i]);
+	return names2;
+}
+
+// Function to add message 
+function void addMessage(MCMessageSet messageSet, CoreIsaController_T10XX ctl, String ruleName, String message, int sev, String[] fieldsToDisplay)
+{
+	String[] flds = fixFlds(ctl, fieldsToDisplay);
+	MCMessage msg = new MCMessage(sev, ruleName, message, flds);
+	messageSet.addMessage(msg, DroolsRulesSet.NAME);
+}
+
+function void addAutoGenMessage(MCMessageSet messageSet, CoreIsaController_T10XX controller, String msgkey, String[] fields, String ruleName, int sev, String[] fieldsToDisplay)
+{
+	String fs = controller.getResourceProvider().getResourceString(msgkey);
+	if (msgkey.equals(fs))
+	{
+		if (sev == MCMessage.WARNING)	
+		    msgkey = msgkey+".warn.msg";
+		else
+		    msgkey = msgkey+".msg";
+	        msgkey = controller.getResourceProvider().getResourceString(msgkey);
+	}
+	else
+	{
+		msgkey = fs;
+	}
+	// System.out.println(msgkey+":"+Rule.niceName(controller, fields[0])+":"+ Rule.niceName(controller, fields[1])+":"+  fields[2]);
+	String[] flds = fixFlds(controller, fields);
+	String[] fldsD = fixFlds(controller, fieldsToDisplay);
+	String message =  MessageFormat.format(msgkey, new Object[] { Rule.niceName(controller, flds[0]), Rule.niceName(controller, flds[1]), fields[2]});
+	MCMessage msg = new MCMessage(sev, ruleName, message, fldsD);
+	messageSet.addMessage(msg, DroolsRulesSet.NAME);
+}
+
+// true if has feature; false if does not or if bad controller
+function boolean hasFeature(CoreIsaController_T10XX controller, String feature){
+	if(controller != null)
+	    return controller.hasFeature(feature);
+	return false;
+}
+
+// true if has feature OR if xx is >= requiredmin. False if neither, or if bad controller
+function boolean hasMinXXorFeature(CoreIsaController_T10XX controller, int minxx, String feature)
+{
+	if (controller != null)
+	{
+	    String xver = XIDECorePlugin.getAboutMappingStr(XIDECorePlugin.AM_XX_XPG_KEY);
+	    int ver = NumUtils.safeToInt(xver);
+	    return (controller.hasFeature(feature) || ver >= minxx);
+	}
+	return false;
+}
+
+// false if bad controller
+// true if controller is < isaver (i.e. uninteresting)
+// true if controller >= isaver AND EITHER (has feature OR xx >= required min) ........ else false
+function boolean hasISAreqMinXXorFeature(CoreIsaController_T10XX controller, String isaver, int minxx, String feature)
+{
+	//System.err.println("## hasISAreqMinXXorFeature " + isaver + " " + Integer.toString(minxx) + " " + feature);
+	if (controller != null) 
+	{
+	    int ctliv = CoreIsaDefs.extractMajorVersion(controller.getIsaVersion());
+	    int miniv = CoreIsaDefs.extractMajorVersion(isaver);
+	    if (ctliv < miniv)
+	    {
+		return true;
+	    }
+	    String xver = XIDECorePlugin.getAboutMappingStr(XIDECorePlugin.AM_XX_XPG_KEY);
+	    int ver = NumUtils.safeToInt(xver);
+	    return (controller.hasFeature(feature) || ver >= minxx);
+	}
+	return false;
+}
+
+function boolean hasMinISA(CoreIsaController_T10XX controller, String minISA)
+{
+	return CoreIsaDefs.extractMajorVersion(controller.getIsaVersion()) >= CoreIsaDefs.extractMajorVersion(minISA);
+}
+
+function boolean hasMinXPG(CoreIsaController_T10XX controller, ConfigBuildOptions buildOptions, int minISA)
+{
+	if(buildOptions==null)
+		return true;
+	String hwvs = XPGUserManager.getInstance().getXPGUserInfo().getVersionForReleaseProduct(buildOptions.getBuildRelease(),
+					XPGReleaseUtils.getBuildableProductFromIsa(controller.getIsaVersion()));
+	int hwv=0;
+	if(hwvs!=null)
+		hwv = toVersionNumeric(hwvs);
+	return hwv >= minISA;
+}
+
+
+function boolean hasMinXplorer(CoreIsaController_T10XX controller, int minXp)
+{
+	String xver = XIDECorePlugin.getAboutMappingStr(XIDECorePlugin.AM_XX_XPG_KEY);
+	int ver = NumUtils.safeToInt(xver);
+	return ver >= minXp;
+}
+
+function int toVersionNumeric(String v)
+{
+    	int occ3 = StringUtils.findOccurrenceN(v, '.', 2);
+    	if (occ3 > 0)
+    		v = v.substring(0, occ3);
+    	
+    	int dash = v.indexOf('-');
+    	if (dash < 5)
+    		dash = v.indexOf('_');
+    	if (dash < 5)
+    		dash = v.length();
+        String v2 = v.substring(0,dash).replaceAll("\\.", "");
+        return NumUtils.safeToInt(v2);
+}
+
+function boolean isSameFamily(CoreIsaController_T10XX controller, String family)
+{
+	return  controller.getIsaVersion().startsWith(family);
+}
+
+function boolean clearMessage(MCMessageSet messageSet, String ruleName)
+{
+		messageSet.removeMessage(ruleName);
+		return true;
+}
+
+function boolean println(String text)
+{
+	System.out.println(text);
+	return true;
+}
+
+declare MessageKeys
+	SimpleDepBool : String
+	SimpleDepBoolNot : String
+	DepBoolString : String
+	DepBoolStringNot : String
+	DepBoolNumber : String
+	DepBoolMaxNumber : String
+end 
+
+rule "Insert MessageKeys object"
+salience 110
+	when
+		not MessageKeys()
+	then
+	   MessageKeys keys = new MessageKeys();
+	   keys.setSimpleDepBool("RuleSimpleDepBoolean");
+	   keys.setSimpleDepBoolNot("RuleSimpleDepBoolean.not");
+	   keys.setDepBoolString("dep.bool.str.err.msg");
+	   keys.setDepBoolStringNot("dep.bool.str.neg.err.msg");
+	   keys.setDepBoolNumber("RuleDepBooleanNumber");
+	   keys.setDepBoolMaxNumber("dep.bool.numb.max.err.msg");
+	   insert(keys);
+end

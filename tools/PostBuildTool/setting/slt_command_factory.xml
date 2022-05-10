@@ -1,0 +1,671 @@
+<root>
+  <SltCommand>
+    <HexCommand name="ResetDutTo">
+      <Transmit format="01 00 FC %1 06 05 %2 %3 %4">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>blBypassEpm</P2>
+        <P3>interval</P3>
+        <P4>blChargerOn</P4>
+      </Transmit>
+      <Response format="04 FF 05 00 00 %1 06 05">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="TcbDutReadGpio">
+      <Transmit format="01 00 FC %1 78 05">
+        <P1>_one_byte_right_count_of_bytes</P1>
+      </Transmit>
+      <!-- %% 在 Response 中表示忽略 -->
+      <Response format="04 FF 0F 00 00 00 78 05 %1 %2 %3 %4 %5 %6 %7 %8 00 00">
+        <P1>gpio_value[0:8]</P1>
+        <P2>gpio_value[8:8]</P2>
+        <P3>gpio_value[16:8]</P3>
+        <P4>gpio_value[24:8]</P4>
+        <P5>gpio_output_enable[0:8]</P5>
+        <P6>gpio_output_enable[8:8]</P6>
+        <P7>gpio_output_enable[16:8]</P7>
+        <P8>gpio_output_enable[24:8]</P8>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="TcbDutWriteGpio">
+      <Transmit format="01 00 FC %1 77 05 %2 %3 %4 %5 %6 %7 %8 %9">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>gpio_value[0:8]</P2>
+        <P3>gpio_value[8:8]</P3>
+        <P4>gpio_value[16:8]</P4>
+        <P5>gpio_value[24:8]</P5>
+        <P6>gpio_output_enable[0:8]</P6>
+        <P7>gpio_output_enable[8:8]</P7>
+        <P8>gpio_output_enable[16:8]</P8>
+        <P9>gpio_output_enable[24:8]</P9>
+      </Transmit>
+      <!-- %% 在 Response 中表示忽略 -->
+      <Response format="04 FF 05 00 00 %1 77 05">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="TcbRead3Wired">
+      <Transmit format="01 00 FC %1 11 31 %2">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>address</P2>
+      </Transmit>
+      <Response format="04 FF 07 01 30 11 31 %1 %2 %3">
+        <P1>status</P1>
+        <P2>low_byte</P2>
+        <P3>high_byte</P3>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="TcbWrite3Wired">
+      <Transmit format="01 00 FC %1 10 31 %2 %3 %4">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>low_byte</P2>
+        <P3>high_byte</P3>
+        <P4>address</P4>
+      </Transmit>
+      <Response format="04 FF 05 01 30 10 31 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="TcbReadSfr">
+      <Transmit format="01 00 FC %1 0D 31 %3 %2">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>address</P2>
+        <P3>offset</P3>
+      </Transmit>
+      <Response format="04 FF 08 01 30 0D 31 %1 %4 %3 %2">
+        <P1>status</P1>
+        <P2>address</P2>
+        <P3>offset</P3>
+        <P4>value</P4>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="TcbWriteSfr">
+      <Transmit format="01 00 FC %1 0C 31 %4 %3 %2">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>address</P2>
+        <P3>offset</P3>
+        <P4>value</P4>
+      </Transmit>
+      <!-- %% 在 Response 中表示忽略 -->
+      <Response format="04 FF 05 01 30 0C 31 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="TcbCfgSfr">
+      <Transmit format="01 00 FC %1 46 05 %2 %3 %4">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>address</P2>
+        <P3>offset</P3>
+        <P4>value</P4>
+      </Transmit>
+      <!-- %% 在 Response 中表示忽略 -->
+      <Response format="04 FF 05 %% %% %1 46 05 ">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="DriverI2CAck">
+      <Transmit format="01 00 FC %1 01 35">
+        <P1>_one_byte_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="04 FF 0F 01 30 01 35 %1 06 00 02 A1 00 %2 %3 00 00 00">
+        <P1>status</P1>
+        <P2>data[0:8]</P2>
+        <P3>data[8:16]</P3>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="ReadRomVersion">
+      <Transmit format="01 00 FC %1 61 00">
+        <P1>_one_byte_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="04 FF 22 02 %1 %2">
+        <P1>status</P1>
+        <P2>payload{0:}</P2>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="SetWakeKey">
+      <Transmit format="01 00 FC %1 61 00">
+        <P1>_one_byte_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="04 FF 05 01 30 61 00 %1 %2">
+        <P1>status</P1>
+        <P2>payload{0:}</P2>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="LabTestStart">
+      <Transmit format="01 00 FC %1 01 05">
+        <P1>_one_byte_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="04 FF 05 00 00 %1 01 05">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="LabTestPause">
+      <Transmit format="01 00 FC %1 02 05">
+        <P1>_one_byte_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="04 FF 05 00 00 %1 02 05 ">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="SetRxReportRate">
+      <Transmit format="01 00 FC %1 05 05 %2 %3">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>low_byte_rx_report_rate</P2>
+        <P3>high_byte_rx_report_rate</P3>
+      </Transmit>
+      <Response format="04 FF 05 00 00 %1 05 05">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="BtxPacket">
+      <Transmit format="01 00 FC %1 12 05 %2 %3 %4 %5 %6 30 %7 00 %8 %9 00 00 %10 FF %11">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>bChannel</P2>
+        <P3>bPower</P3>
+        <P4>pktType</P4>
+        <P5>lengthB0</P5>
+        <P6>lengthB1</P6>
+        <P7>edr</P7>
+        <P8>bGc2</P8>
+        <P9>bBias2_1</P9>
+        <P10>bBias2_2</P10>
+        <P11>sfr_data</P11>
+      </Transmit>
+      <Response format="04 FF 05 00 00 %1 12 05">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <!-- HCI_VCMDCODE_LABTEST_LE_TRANSMITTER_TEST
+    01 00 FC 9F 1C 31
+    00 14 00 29 41 76 71 05 79 BC A8 FF FF 00 00
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    00 00 00 00 00 00 00 00 00 00 00 00 00
+    00
+    -->
+    <HexCommand name="BleBtxPacket">
+      <Transmit format="01 00 FC %1 1C 31 %2 %3 %4 %5 %6 %7 %8 %9 %10 %11 %12 %13 %14 %15 %16 %17 %18">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>Channel</P2>
+        <P3>LengthOfTestData</P3>
+        <P4>PacketPayload</P4>
+        <P5>AccessAddress[0:8]</P5>
+        <P6>AccessAddress[8:8]</P6>
+        <P7>AccessAddress[16:8]</P7>
+        <P8>AccessAddress[24:8]</P8>
+        <P9>TxGCB0</P9>
+        <P10>TxGCB1</P10>
+        <P11>TxBiasB0</P11>
+        <P12>TxBiasB1</P12>
+        <P13>PacketNumber[0:8]</P13>
+        <P14>PacketNumber[8:8]</P14>
+        <P15>CompensationInterval[0:8]</P15>
+        <P16>CompensationInterval[8:8]</P16>
+        <P17>CompensationTable{0:141}</P17>
+        <P18>HoppingEnable</P18>
+      </Transmit>
+      <!-- 04 FF 05 01 30 1C 31 00  -->
+      <Response format="04 FF 05 01 30 1C 31 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="BrxPacket">
+      <Transmit format="01 00 FC %1 21 05 %2 %3 %4 %5 %6 %7 %8 %9 %10 %11">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>bChannel</P2>
+        <P3>bHopping</P3>
+        <P4>bHsRxlo</P4>
+        <P5>bRxAttenuation</P5>
+        <P6>bEdr</P6>
+        <P7>bBer</P7>
+        <P8>bEsco</P8>
+        <P9>bLow</P9>
+        <P10>bHigh</P10>
+        <P11>bDvEnable</P11>
+      </Transmit>
+      <Response format="04 FF 05 00 00 %1 22 05">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="BrxPacketReport">
+      <Response format="04 FF 16 12 05 22 %1 %2 %3 %4 %5 %6 %7 %8 %9 %10 %11 %12 %13 %14 %15 %16 %17 %18 %19">
+        <P1>bits[0:8]</P1>
+        <P2>bits[8:8]</P2>
+        <P3>bits[16:8]</P3>
+        <P4>bits[24:8]</P4>
+        <P5>rpkt[0:8]</P5>
+        <P6>rpkt[8:8]</P6>
+        <P7>epkt[0:8]</P7>
+        <P8>epkt[8:8]</P8>
+        <P9>acloss[0:8]</P9>
+        <P10>acloss[8:8]</P10>
+        <P11>hdr[0:8]</P11>
+        <P12>hdr[8:8]</P12>
+        <P13>crc[0:8]</P13>
+        <P14>crc[8:8]</P14>
+        <P15>error_bits[0:8]</P15>
+        <P16>error_bits[8:8]</P16>
+        <P17>error_bits[16:8]</P17>
+        <P18>error_bits[24:8]</P18>
+        <P19>rssi</P19>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="BleBrxPacket">
+                   <!-- 01 00 FC 0A 1B 31 00 29 41 76 71 00 00 00 -->
+      <Transmit format="01 00 FC %1 1B 31 %2 %3 %4 %5 %6 %7 %8 00">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>channel</P2>
+        <P3>access_address[0:8]</P3>
+        <P4>access_address[8:8]</P4>
+        <P5>access_address[16:8]</P5>
+        <P6>access_address[24:8]</P6>
+        <P7>AgcFixGainEnable</P7>
+        <P8>AgcFixGain</P8>
+      </Transmit>
+      <Response format="04 FF 05 01 30 1B 31 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="BleBrxPacketReport">
+      <Response format="04 FF 04 06 31 %1 %2">
+        <P1>packet_num[0:8]</P1>
+        <P2>packet_num[8:8]</P2>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="MeasureCrystalTrim">
+      <Transmit format="01 00 FC %1 58 05 %2 %3 %4 %5 %6 %7 %8 %9 %10">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>setting</P2>
+        <P3>timeout[0:8]</P3>
+        <P4>timeout[8:8]</P4>
+        <P5>timeout[16:8]</P5>
+        <P6>timeout[24:8]</P6>
+        <P7>xo_count[24:8]</P7>
+        <P8>xo_count[16:8]</P8>
+        <P9>xo_count[8:8]</P9>
+        <P10>xo_count[0:8]</P10>
+      </Transmit>
+      <Response format="04 FF 05 00 00 %1 58 05">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="MeasureCrystalTrimReport">
+      <Response format="04 FF 05 %1 05 58 %2">
+        <P1>status</P1>
+        <P2>result{0:}</P2>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="ResetTcb">
+      <Transmit format="01 00 FC %1 03 03">
+        <P1>_one_byte_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="04 FF 05 01 30 03 03 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="CfgUapLap">
+      <Transmit format="01 00 FC %1 40 05 %2 %3 %4 %5">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>UapLap_1</P2>
+        <P3>UapLap_2</P3>
+        <P4>UapLap_3</P4>
+        <P5>UapLap_4</P5>
+      </Transmit>
+      <Response format="04 FF 05 00 00 %1 40 05">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="CfgLtAddr">
+      <Transmit format="01 00 FC %1 42 05 %2">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>bLtaddr</P2>
+      </Transmit>
+      <Response format="04 FF 05 00 00 %1 42 05">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="SetCharger">
+      <Transmit format="01 00 FC %1 0E 05 %2">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>blChargerOn</P2>
+      </Transmit>
+      <Response format="04 FF 05 00 00 %1 0E 05">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="ChargerOnOff">
+      <Transmit format="01 00 FC %1 7B 05 %2">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>blChargerOn</P2>
+      </Transmit>
+      <Response format="04 FF 07 %% %% 7B 05 %1 00 00">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="ReadExtAdc">
+      <Transmit format="01 00 FC %1 7A 05 %2 %3">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>deviceId</P2>
+        <P3>interval</P3>
+      </Transmit>
+      <Response format="04 FF 0B %% %% 7A 05 %1 %2 %3 %4 %5 %6 %7">
+        <P1>status</P1>
+        <P2>adcMax[8:8]</P2>
+        <P3>adcMax[0:8]</P3>
+        <P4>adcMin[8:8]</P4>
+        <P5>adcMin[0:8]</P5>
+        <P6>adcAvg[8:8]</P6>
+        <P7>adcAvg[0:8]</P7>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="ReadTcbFalshInfo">
+      <Transmit format="02 00 0F 07 00 09 01 07 F0 00 01 00">
+      </Transmit>
+      <Response format="02 00 0F 06 01 09 01 %1 %4 %3 %2 %5">
+        <P1>status</P1>
+        <P2>addr[0:8]</P2>
+        <P3>addr[8:8]</P3>
+        <P4>addr[16:8]</P4>
+        <P5>data{0:}</P5>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_SLT_SCO">
+      <Transmit format="05 5A %1 01 11 3B 00">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+    </HexCommand>
+
+    <HexCommand name="RACE_SLT_A2DP_IS_READY">
+      <Transmit format="05 5A %1 01 10">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="05 5D %% %% 01 10 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_SLT_A2DP_IS_CONNECT">
+      <Transmit format="05 5A %1 03 10">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="05 5D %% %% 03 10 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_SLT_A2DP_GET_RESULT">
+      <Transmit format="05 5A %1 00 10">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="05 5D %% %% 00 10 %1 %2 %3 %4 %5 %6 %7 %8">
+        <P1>snp[0:8]</P1>
+        <P2>snp[8:8]</P2>
+        <P3>snp[16:8]</P3>
+        <P4>snp[24:8]</P4>
+        <P5>sndr[0:8]</P5>
+        <P6>sndr[8:8]</P6>
+        <P7>sndr[16:8]</P7>
+        <P8>sndr[24:8]</P8>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_SLT_DA_TO_AD">
+      <Transmit format="05 5A %1 02 10 %2">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+        <P2>mode</P2>
+      </Transmit>
+      <Response format="05 5B %1 %% 00 10 %2 %3 %4 %5 %6 %7 %8 %9 %10">
+        <P1>payload_length</P1>
+        <P2>status</P2>
+        <P3>snp[0:8]</P3>
+        <P4>snp[8:8]</P4>
+        <P5>snp[16:8]</P5>
+        <P6>snp[24:8]</P6>
+        <P7>snpr[0:8]</P7>
+        <P8>snpr[8:8]</P8>
+        <P9>snpr[16:8]</P9>
+        <P10>snpr[24:8]</P10>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="HCI_VCMD_CREAT_CONNECTION">
+      <Transmit format="01 00 FC %1 B9 08 %2 %3 %4 %5 %6 %7">
+        <P1>_one_byte_right_count_of_bytes</P1>
+        <P2>addr1</P2>
+        <P3>addr2</P3>
+        <P4>addr3</P4>
+        <P5>addr4</P5>
+        <P6>addr5</P6>
+        <P7>addr6</P7>
+      </Transmit>
+      <Response format="04 FF 09 CE 0A %% %% %% %% %% %% %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="HCI_VCMD_KEY_AVRCP_PLAY">
+      <Transmit format="01 00 FC %1 54 08">
+        <P1>_one_byte_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="04 FF 03 54 09 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="HCI_VCMD_IS_MUSICE_PLAYED">
+      <Transmit format="01 00 FC %1 05 34">
+        <P1>_one_byte_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="04 FF 54 03 26 34 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="HCI_VCMD_READ_BIST_RESULT">
+      <Transmit format="01 00 FC %1 02 34">
+        <P1>_one_byte_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="04 FF 07 01 30 0A 33 00 %1 %2">
+        <P1>snpr</P1>
+        <P2>sndr</P2>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="HCI_VCMD_KEY_AVRCP_STOP">
+      <Transmit format="01 00 FC %1 55 08">
+        <P1>_one_byte_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="04 FF 03 55 09 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="HCI_VCMD_INCOMING_CALL">
+      <Transmit format="01 00 FC %1 01 34">
+        <P1>_one_byte_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="04 FF 03 01 34 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="HCI_VCMD_CHECK_INCOMING_CALL">
+      <Transmit format="01 00 FC %1 03 34">
+        <P1>_one_byte_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="04 FF 03 24 34 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="HCI_VCMD_KEY_ACCEPT_CALL">
+      <Transmit format="01 00 FC %1 3C 08">
+        <P1>_one_byte_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="04 FF 03 3C 09 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="HCI_VCMD_CHECK_ESCO_ESTABLISHED">
+      <Transmit format="01 00 FC %1 04 34">
+        <P1>_one_byte_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="04 FF 03 25 34 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="HCI_VCMD_DISCONNECT">
+      <Transmit format="01 00 FC %1 05 08">
+        <P1>_one_byte_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="04 FF 09 CE %% %% %% %% %% %% %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>    
+
+    <HexCommand name="HCI_VCMD_KEY_ENDCALL">
+      <Transmit format="01 00 FC %1 3D 08">
+        <P1>_one_byte_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="04 FF 3D 09 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_AB_CONSOLE_PRINTF">
+      <Transmit format="05 5A %1 03 05 00">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="05 5B %1 %% 03 05 %2">
+        <P1>payload_length</P1>
+        <P2>status</P2>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_LOG_PRINT">
+      <Transmit format="05 5A %1 00 05 00 00 00 00">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="05 5B %1 %% 00 05 %2">
+        <P1>payload_length</P1>
+        <P2>status</P2>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_KEY_AVRCP_PLAY">
+      <Transmit format="05 5A %1 01 11 53 00">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="05 5B %% %% 01 11 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_KEY_AVRCP_STOP">
+      <Transmit format="05 5A %1 01 11 54 00">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="05 5B %% %% 01 11 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_ACCEPT_CALL">
+      <Transmit format="05 5A %1 01 11 3B 00">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="05 5B %% %% 01 11 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_KEY_END_CALL">
+      <Transmit format="05 5A %1 01 11 3C 00">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="05 5B %% %% 01 11 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+    
+    <HexCommand name="RACE_DISCOVERABLE">
+      <Transmit format="05 5A %1 00 11 02 00 00 00 00 00 00 00">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="05 5B %% %% 00 11 %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_READ_DEVICE_NAME">
+      <Transmit format="05 5A %1 01 0C">
+        <P1>_two_bytes_right_count_of_bytes</P1>
+      </Transmit>
+      <Response format="05 5D %% %% %% %% %% %% %% %% %% %% %% %% %% %% %% %% %% %% %1">
+        <P1>status</P1>
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_READ_IRAM">
+      <Transmit format="05 5A 08 00 00 06 20 01 FC 3F 10 00">
+      <!--<Transmit format="05 5A 08 00 00 06 00 00 00 40 10 00">-->
+      </Transmit>
+    </HexCommand>
+
+    <HexCommand name="RACE_SLEEP">
+      <Transmit format="05 5A 03 00 08 02 02">
+      </Transmit>
+      <Response format="05 5B 03 00 08 02 00">
+      </Response>
+    </HexCommand>
+    <HexCommand name="RACE_WAKEUP">
+      <Transmit format="05 5A 03 00 08 02 00">
+      </Transmit>
+      <Response format="05 5B 03 00 08 02 00">
+      </Response>
+    </HexCommand>
+
+    <HexCommand name="RACE_SLEEP_NOTIFY_REPORT">
+      <Response format="05 5D 03 00 01 05 31">
+      </Response>
+    </HexCommand>
+    
+  </SltCommand>
+</root>

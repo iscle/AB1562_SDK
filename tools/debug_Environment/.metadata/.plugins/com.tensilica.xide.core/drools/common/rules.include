@@ -1,0 +1,2 @@
+Baseruleset_name=common
+Files=common/CommonFunctions.drl,common/ConfigOptions.drl,common/ISARules.dsl

@@ -1,0 +1,103 @@
+<root>
+   <SLT1601>
+     <HexCommand name="TCB_UartTxHigh">
+       <Transmit format="01 00 FC 04 0B 36 0D 01" />
+       <Response format="04 FF %% 0B 36 %1" >
+         <P1>status</P1>
+       </Response>
+     </HexCommand>
+     <HexCommand name="TCB_UartTxLow">
+       <Transmit format="01 00 FC 04 0B 36 0D 00" />
+       <Response format="04 FF %% 0B 36 %1" >
+         <P1>status</P1>
+       </Response>
+     </HexCommand>
+     <HexCommand name="TCB_ByPassModeOn">
+       <Transmit format="01 00 FC 04 0B 36 11 00" />
+       <Response format="04 FF %% 0B 36 %1" >
+         <P1>status</P1>
+       </Response>
+     </HexCommand>
+     <HexCommand name="TCB_ByPassModeOff">
+       <Transmit format="01 00 FC 04 0B 36 11 01" />
+       <Response format="04 FF %% 0B 36 %1" >
+         <P1>status</P1>
+       </Response>
+     </HexCommand>
+     <HexCommand name="TCB_vBatPinHigh">
+       <Transmit format="01 00 FC 04 0B 36 09 01" />
+       <Response format="04 FF %% 0B 36 %1" >
+         <P1>status</P1>
+       </Response>
+     </HexCommand>
+     <HexCommand name="TCB_vBatPinLow">
+       <Transmit format="01 00 FC 04 0B 36 09 00" />
+       <Response format="04 FF %% 0B 36 %1" >
+         <P1>status</P1>
+       </Response>
+     </HexCommand>
+     <HexCommand name="TCB_ResetPinLow">
+       <Transmit format="01 00 FC 04 0B 36 06 00" />
+       <Response format="04 FF %% 0B 36 %1" >
+         <P1>status</P1>
+       </Response>
+     </HexCommand>
+     <HexCommand name="TCB_ResetPinHigh">
+       <Transmit format="01 00 FC 04 0B 36 06 01" />
+       <Response format="04 FF %% 0B 36 %1" >
+         <P1>status</P1>
+       </Response>
+     </HexCommand>
+     <HexCommand name="TCB_Od0Low">
+       <Transmit format="01 00 FC 04 0B 36 07 00" />
+       <Response format="04 FF %% 0B 36 %1" >
+         <P1>status</P1>
+       </Response>
+     </HexCommand>
+     <HexCommand name="SetBdAddress">
+       <Transmit format="01 00 FC 09 06 40 01 %1 %2 %3 %4 %5 %6">
+         <P1>bd_address_b0</P1>
+         <P2>bd_address_b1</P2>
+         <P3>bd_address_b2</P3>
+         <P4>bd_address_b3</P4>
+         <P5>bd_address_b4</P5>
+         <P6>bd_address_b5</P6>
+       </Transmit>
+       <Response format="04 FF 03 06 40 %1" >
+         <P1>status</P1>
+       </Response>
+     </HexCommand>
+     <HexCommand name="EnableADV">
+       <Transmit format="01 00 FC 11 04 40 00 00 00 00 00 00 00 00 01 00 20 00 20 00 07 "/>
+       <Response format="04 FF 03 04 40 %1" >
+         <P1>status</P1>
+       </Response>
+     </HexCommand>
+     <HexCommand name="TCB_Connect">
+       <Transmit format="01 00 FC 1B 0F 40 0A 00 0A 00 00 01 %1 %2 %3 %4 %5 %6 01 20 00 20 00 00 00 00 10 00 00 00 00">
+         <P1>bd_address_b0</P1>
+         <P2>bd_address_b1</P2>
+         <P3>bd_address_b2</P3>
+         <P4>bd_address_b3</P4>
+         <P5>bd_address_b4</P5>
+         <P6>bd_address_b5</P6>
+       </Transmit>
+       <Response format="04 FF %% 0F 40 00 00 83 00 00 01 %% %% %% %% %% %% 20 00 00 00 00 10" >
+       </Response>
+     </HexCommand>
+     <HexCommand name="TCB_MtuExchange">
+       <Transmit format="01 00 FC 06 01 42 83 00 20 00"/>
+       <Response format="04 FF 05 01 42 00 20 00" >
+       </Response>
+     </HexCommand>
+     <HexCommand name="GetMtuExchange">
+       <Response format="04 FF 05 00 42 00 20 00" >
+       </Response>
+     </HexCommand>
+     <HexCommand name="TCB_ResetTCB">
+       <Transmit format="01 00 FC 02 01 36"/>
+       <Response format="04 FF 03 00 00 00" >
+       </Response>
+     </HexCommand>
+   </SLT1601>
+</root>

@@ -1,0 +1,24 @@
+<PartitionTable>
+
+<Partition>
+  <Selected>True</Selected>
+	<Name>Code</Name>
+	<Address>0xD000</Address>
+	<Length>0x123000</Length>
+</Partition>
+
+<Partition>
+  <Selected>True</Selected>
+  <Name>NV key</Name>
+	<Address>0x130000</Address>
+	<Length>0x8000</Length>
+</Partition>
+
+<Partition>
+  <Selected>False</Selected>
+  <Name>File system</Name>
+	<Address>0x139000</Address>
+	<Length>0xA0000</Length>
+</Partition>
+
+</PartitionTable>

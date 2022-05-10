@@ -1,0 +1,3 @@
+Ruleset_name=RG-2015.1
+Dependency=common
+Files=RG-2015.1/xpgchecks.dslr

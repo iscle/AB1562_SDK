@@ -1,0 +1,175 @@
+# Copyright (c) 2016 by Cadence Design Systems, Inc.  ALL RIGHTS RESERVED.
+# These coded instructions, statements, and computer programs are the
+# copyrighted works and confidential proprietary information of Cadence.
+# They may not be modified, copied, reproduced, distributed, or disclosed to
+# third parties in any manner, medium, or form, in whole or in part, without
+# the prior written consent of Cadence.
+
+package com.tensilica.xide.core.mccfg.rules
+ 
+global MCMessageSet messageSet;
+global CoreIsaController_T10XX controller;
+global ConfigBuildOptions configBuildOptions;
+
+expander ISARules.dsl
+
+
+###############
+# VP6 set - the strict enforcements for RG.3 only. Generic persistent
+# restrictions are shared in the LX7 generic set
+###############
+
+rule "VP6: no irom"
+    condition:
+        'ivp26_32' requires that 'lmem_2.sizeBytes' is equal to '0'
+    failure:
+        Report custom error: "Vision Processors require that Instruction ROM is not configured",["ivp26_32","lmem.2"]
+end
+rule "VP6: no drom"
+    condition:
+        'ivp26_32' requires that 'lmem_5.sizeBytes' is equal to '0'
+    failure:
+        Report custom error: "Vision Processors require that Data ROM is not configured",["ivp26_32","lmem.5"]
+end
+
+rule "VP6: mpu entries"
+    condition:
+    	'ivp26_32' requires that 'immu_noofmpuentries' is equal to '16'
+    failure:
+    	Report error 
+end
+rule "VP6: mpu lsb"
+    condition:
+    	'ivp26_32' requires that 'immu_virtualaddrstart' is equal to '12'
+    failure:
+    	Report error 
+end
+rule "VP6: maxCoprocs"
+    condition:
+    	'ivp26_32' requires that 'maxCoprocs' is equal to '3'
+    failure:
+    	Report error 
+end
+rule "VP6: miscSpecRegs"
+    condition:
+    	'ivp26_32' requires that 'miscSpecRegs' is equal to '0'
+    failure:
+    	Report error 
+end
+
+rule "VP6: bs_req_ctl_dep"
+    condition:
+    	'ivp26_32' requires that 'bs_req_ctl_dep' is equal to '4'
+    failure:
+    	Report error 
+end
+rule "VP6: bs_req_data_dep"
+    condition:
+    	'ivp26_32' requires that 'bs_req_data_dep' is equal to '8'
+    failure:
+    	Report error 
+end
+rule "VP6: bs_rsp_dep"
+    condition:
+    	'ivp26_32' requires that 'bs_rsp_dep' is equal to '8'
+    failure:
+    	Report error 
+end
+rule "VP6: dmaDepth"
+    condition:
+    	'ivp26_32' requires that 'dmaDepth' is equal to '2'
+    failure:
+    	Report error 
+end
+
+rule "VP6: pif_arb_byte_enable"
+    condition:
+    	'ivp26_32' requires 'pif_arb_byte_enable'
+    failure:
+    	Report error 
+end
+rule "VP6: wbBypassAddrBits"
+    condition:
+    	'ivp26_32' conflicts with 'wbBypassAddrBits'
+    failure:
+    	Report error 
+end
+
+rule "VP6: ace"
+    condition:
+    	'ivp26_32' conflicts with 'axi_acelite'
+    failure:
+    	Report error 
+end
+
+rule "VP6: prid"
+    condition:
+    	'ivp26_32' requires 'prid'
+    failure:
+    	Report error 
+end
+rule "VP6: threadptr"
+    condition:
+    	'ivp26_32' requires 'threadptr'
+    failure:
+    	Report error 
+end
+
+rule "VP6: pifAsync"
+    condition:
+    	'ivp26_32' conflicts with 'pifAsync'
+    failure:
+    	Report error 
+end
+
+rule "VP6 ic.size"
+    condition:
+		'ivp26_32' requires that 'ic_size' is at least 2048
+    failure:
+    	Report error
+end
+
+rule "VP6: bibo"
+    condition:
+    	'ivp26_32' requires 'breakInBreakOut'
+    failure:
+    	Report custom error: "Vision P6 requires that Debug / OCD / Break-in/Break-out are selected",["ivp26_32","debugEnabled","ocd","breakInBreakOut"] 
+end
+rule "VP6: ibreak"
+    condition:
+    	'ivp26_32' requires that 'instTraps' is equal to '2'
+    failure:
+    	Report error 
+end
+rule "VP6: dbreak"
+    condition:
+    	'ivp26_32' requires that 'dataTraps' is equal to '2'
+    failure:
+    	Report error 
+end
+rule "VP6: perfcounters"
+    condition:
+    	'ivp26_32' requires that 'perfcounters' is equal to '4'
+    failure:
+    	Report error 
+end
+rule "VP6: trace"
+    condition:
+    	'ivp26_32' requires 'trace'
+    failure:
+    	Report error 
+end
+rule "VP6: vectorsReloc"
+    condition:
+    	'ivp26_32' requires 'vectorsReloc'
+    failure:
+    	Report error 
+end
+
+rule "VP6: intLevelCount"
+    condition:
+    	'ivp26_32' requires that 'intLevelCount' is equal to '3'
+    failure:
+    	Report error 
+end
+

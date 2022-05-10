@@ -1,0 +1,99 @@
+# Copyright (c) 2016 by Cadence Design Systems, Inc.  ALL RIGHTS RESERVED.
+# These coded instructions, statements, and computer programs are the
+# copyrighted works and confidential proprietary information of Cadence.
+# They may not be modified, copied, reproduced, distributed, or disclosed to
+# third parties in any manner, medium, or form, in whole or in part, without
+# the prior written consent of Cadence.
+
+package com.tensilica.xide.core.mccfg.rules
+ 
+global MCMessageSet messageSet;
+global CoreIsaController_T10XX controller;
+global ConfigBuildOptions configBuildOptions;
+
+expander ISARules.dsl
+
+
+###############
+# VP6 set
+###############
+
+rule "VP6: Scatter"
+    condition:
+    	'ivp26_32' requires 'sg_scatter'
+    failure:
+    	Report error 
+end
+rule "VP6: Gather"
+    condition:
+    	'ivp26_32' requires 'sg_gather'
+    failure:
+    	Report error 
+end
+
+rule "VP6: maxCoprocs"
+    condition:
+    	'ivp26_32' requires that 'maxCoprocs' is at least 2
+    failure:
+    	Report error 
+end
+
+rule "VP6: div32Int"
+    condition:
+    	'ivp26_32' requires 'div32Int'
+    failure:
+    	Report error 
+end
+
+rule "VP6: stdports"
+    condition:
+    	'ivp26_32' conflicts with 'stdports'
+    failure:
+    	Report error 
+end
+rule "VP6: stdqueues"
+    condition:
+    	'ivp26_32' conflicts with 'stdqueues'
+    failure:
+    	Report error 
+end
+rule "VP6: dfpassist"
+    condition:
+    	'ivp26_32' conflicts with 'dfpassist'
+    failure:
+    	Report error 
+end
+
+rule "VP6: zloops"
+    condition:
+    	'ivp26_32' requires 'loops'
+    failure:
+    	Report error 
+end
+rule "VP6: const16"
+    condition:
+		'ivp26_32' requires that 'l32r' is "l32r_const16"
+    failure:
+    	Report error 
+end
+
+rule "VP6: MAC16"
+    condition:
+    	'ivp26_32' conflicts with 'mac16'
+    failure:
+    	Report error 
+end
+
+rule "VP6 HPVFP: FP"
+    condition:
+    	'ivp26_hpvfp' conflicts with 'fp'
+    failure:
+    	Report error 
+end
+rule "VP6 SPVFP: FP"
+    condition:
+    	'ivp26_spvfp' conflicts with 'fp'
+    failure:
+    	Report error 
+end
+

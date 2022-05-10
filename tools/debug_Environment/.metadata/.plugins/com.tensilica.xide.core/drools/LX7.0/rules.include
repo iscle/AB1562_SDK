@@ -1,0 +1,3 @@
+Ruleset_name=LX7.0
+Dependency=common
+Files=LX7.0/featurechecks_70.dslr, LX7.0/optionchecks_70.dslr, LX7.0/vp5.dslr, LX7.0/vp6.dslr

@@ -1,0 +1,9 @@
+
+# AB1562 PostBuildTool
+
+## [1.0.0.0] - 2020-04-15
+### Added
+- Porting from AB153x
+1. nv2bin 按新的 SPEC 實作 (NVKEY_MetaData_Study_20170216.pptx) 
+2. 支援計算檔案 CRC16 的功能
+3. mediaFiles2bin function: 將 media files 轉為 airoha format 的 bin 檔

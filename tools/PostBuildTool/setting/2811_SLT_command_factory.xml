@@ -1,0 +1,21 @@
+<root>
+   <SLT2811>
+     <HexCommand name="SLT_TEST">
+       <Transmit format="41 54 2B 53 4C 54 53 54 41 52 54 0D" />
+       <Response format="44 4F 4E 45 0D 0A" />
+     </HexCommand>
+     <HexCommand name="SLT_RESULT">
+       <Transmit format="41 54 2B 53 4C 54 52 45 53 55 4C 54 0D"/>
+       <Response format="%1 %2 %3 %4 %5 %6 %7 %8 0D 0A">
+         <P1>PorF[0:8]</P1>
+         <P2>PorF[8:8]</P2>
+         <P3>PorF[16:8]</P3>
+         <P4>PorF[24:8]</P4>
+         <P5>ExitCode[0:8]</P5>
+         <P6>ExitCode[8:8]</P6>
+         <P7>ExitCode[16:8]</P7>
+         <P8>ExitCode[24:8]</P8>
+       </Response>
+     </HexCommand>
+   </SLT2811>
+</root>

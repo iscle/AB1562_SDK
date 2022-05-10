@@ -1,0 +1,24 @@
+# ==============================================================================
+# add all .S and .c files in sub-folder of src/bt/CONTROLLER/ into target source
+# ==============================================================================
+
+C_SRC		+=	\
+$(addprefix source/hal/src/, \
+hal_i2c_master.c \
+hal_uart.c \
+hal_spi_master.c \
+hal_adc.c \
+hal_gpio.c \
+hal_eint.c \
+hal_captouch.c \
+hal_pwm.c \
+hal_nvic.c \
+hal_nvic_internal.c \
+hal_gpt.c \
+hal_gpt_internal.c \
+hal_pdma_internal.c \
+hal_sw_dma_internal.c \
+hal_sw_dma.c \
+hal_cache_internal.c \
+hal_cache.c \
+)

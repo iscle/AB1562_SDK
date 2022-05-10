@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<userDefinedFormats>
+<udf name="hex" value="#'h%0h"/>
+<udf name="bin" value="#'b%0b"/>
+<udf name="dec" value="#'d%d"/>
+<udf name="h16:16" value="16:16"/>
+<udf name="h016*" value="{016|_}!*"/>
+<udf name="hexdec32" value="&quot;0x&quot;%32h=%[31:0]S"/>
+<udf name="byteswap" value="{0[7:0][15:8]|}!*"/>
+</userDefinedFormats>

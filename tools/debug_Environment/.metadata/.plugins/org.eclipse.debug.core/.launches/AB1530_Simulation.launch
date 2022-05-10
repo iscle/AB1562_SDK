@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="com.tensilica.xide.cdt.launch.ISSLaunch">
+<stringAttribute key="com.tensilica.xide.cdt.launch.LaunchType" value="ISS"/>
+<stringAttribute key="com.tensilica.xide.cdt.launch.attachingdo" value="resume and stop in main"/>
+<stringAttribute key="com.tensilica.xide.cdt.launch.attachingdo.stop.at.symbol" value="main"/>
+<listAttribute key="com.tensilica.xide.cdtcommandlist"/>
+<booleanAttribute key="com.tensilica.xide.cdtrunscriptafterload" value="false"/>
+<stringAttribute key="com.tensilica.xide.core.CLaunchSimTab.blockrepeat" value="0"/>
+<stringAttribute key="com.tensilica.xide.core.CLaunchSimTab.blockwriterepeat" value="0"/>
+<stringAttribute key="com.tensilica.xide.core.CLaunchSimTab.cacheass.dcache" value="XPG default"/>
+<stringAttribute key="com.tensilica.xide.core.CLaunchSimTab.cacheass.icache" value="XPG default"/>
+<stringAttribute key="com.tensilica.xide.core.CLaunchSimTab.cachelinesize.dcache" value="XPG default"/>
+<stringAttribute key="com.tensilica.xide.core.CLaunchSimTab.cachelinesize.icache" value="XPG default"/>
+<stringAttribute key="com.tensilica.xide.core.CLaunchSimTab.cachesize.dcache" value="XPG default"/>
+<stringAttribute key="com.tensilica.xide.core.CLaunchSimTab.cachesize.icache" value="XPG default"/>
+<booleanAttribute key="com.tensilica.xide.core.CLaunchSimTab.configcache.dcache" value="false"/>
+<booleanAttribute key="com.tensilica.xide.core.CLaunchSimTab.configcache.icache" value="false"/>
+<booleanAttribute key="com.tensilica.xide.core.CLaunchSimTab.ferret" value="false"/>
+<booleanAttribute key="com.tensilica.xide.core.CLaunchSimTab.isaprofile" value="false"/>
+<booleanAttribute key="com.tensilica.xide.core.CLaunchSimTab.liveprofile" value="false"/>
+<stringAttribute key="com.tensilica.xide.core.CLaunchSimTab.liveprofile_port" value=""/>
+<stringAttribute key="com.tensilica.xide.core.CLaunchSimTab.memlatency" value="0"/>
+<booleanAttribute key="com.tensilica.xide.core.CLaunchSimTab.memmodel" value="false"/>
+<stringAttribute key="com.tensilica.xide.core.CLaunchSimTab.memwritelatency" value="0"/>
+<booleanAttribute key="com.tensilica.xide.core.CLaunchSimTab.minmax" value="false"/>
+<booleanAttribute key="com.tensilica.xide.core.CLaunchSimTab.pchistory" value="false"/>
+<stringAttribute key="com.tensilica.xide.core.CLaunchSimTab.samplecycles" value="1000000"/>
+<stringAttribute key="com.tensilica.xide.core.CLaunchSimTab.sampleratio" value="100"/>
+<stringAttribute key="com.tensilica.xide.core.CLaunchSimTab.simmode" value="Cycle-Accurate"/>
+<booleanAttribute key="com.tensilica.xide.core.CLaunchSimTab.start" value="false"/>
+<booleanAttribute key="com.tensilica.xide.core.CLaunchSimTab.startturbo" value="false"/>
+<booleanAttribute key="com.tensilica.xide.core.CLaunchSimTab.summary" value="false"/>
+<booleanAttribute key="com.tensilica.xide.core.CLaunchSimTab.summarydisabled" value="false"/>
+<stringAttribute key="com.tensilica.xide.core.CLaunchSimTab.summaryfile" value="summary-${xt_config}-${xt_target}.txt"/>
+<booleanAttribute key="com.tensilica.xide.core.CLaunchSimTab.tieprint" value="false"/>
+<booleanAttribute key="com.tensilica.xide.core.CLaunchSimTab.trace" value="false"/>
+<booleanAttribute key="com.tensilica.xide.core.CLaunchSimTab.turbocache" value="false"/>
+<booleanAttribute key="com.tensilica.xide.core.CLaunchSimTab.when_profiling" value="false"/>
+<stringAttribute key="com.tensilica.xide.core.CLaunchSimTab.writebuffers" value="default"/>
+<stringAttribute key="com.tensilica.xide.dsf.core.launch.MEMORY_BLOCKS" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;memoryBlockExpressionList context=&quot;Context string&quot;/&gt;&#13;&#10;"/>
+<stringAttribute key="cyclemodel" value="--pipe"/>
+<stringAttribute key="extraargs" value="--vector=1"/>
+<stringAttribute key="org.eclipse.cdt.launch.DEBUGGER_REGISTER_GROUPS" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;registerGroups&gt;&#13;&#10;&lt;debugTarget debugTargetName=&quot;ISS&quot;/&gt;&#13;&#10;&lt;/registerGroups&gt;&#13;&#10;"/>
+<stringAttribute key="org.eclipse.cdt.launch.PROGRAM_NAME" value="debug/AB1530.out"/>
+<stringAttribute key="org.eclipse.cdt.launch.PROJECT_ATTR" value="AB1530"/>
+<stringAttribute key="org.eclipse.cdt.launch.VARIABLE_FORMAT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;variableFormatList/&gt;&#13;&#10;"/>
+<booleanAttribute key="org.eclipse.debug.ui.ATTR_LAUNCH_IN_BACKGROUND" value="false"/>
+<stringAttribute key="org.eclipse.dsf.launch.MEMORY_BLOCKS" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;memoryBlockExpressionList context=&quot;Context string&quot;/&gt;&#13;&#10;"/>
+<stringAttribute key="udfMap" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;udfMap&gt;&#13;&#10;&lt;map fmt=&quot;xt_hifi2:ae_q56s_reg&quot; item=&quot;ae_q56s&quot; kind=&quot;reg_ctype&quot;/&gt;&#13;&#10;&lt;map fmt=&quot;xt_hifi2:ae_q32s_reg&quot; item=&quot;ae_q32s&quot; kind=&quot;reg_ctype&quot;/&gt;&#13;&#10;&lt;map fmt=&quot;xt_hifi2:ae_p24x2s_reg&quot; item=&quot;ae_p24x2s&quot; kind=&quot;reg_ctype&quot;/&gt;&#13;&#10;&lt;map fmt=&quot;xt_hifi2:ae_p24f_reg&quot; item=&quot;ae_p24f&quot; kind=&quot;reg_ctype&quot;/&gt;&#13;&#10;&lt;map fmt=&quot;xt_hifi2:ae_p24s_reg&quot; item=&quot;ae_p24s&quot; kind=&quot;reg_ctype&quot;/&gt;&#13;&#10;&lt;map fmt=&quot;xt_hifi2:ae_p16x2s_reg&quot; item=&quot;ae_p16x2s&quot; kind=&quot;reg_ctype&quot;/&gt;&#13;&#10;&lt;map fmt=&quot;xt_hifi2:ae_p24x2f_reg&quot; item=&quot;ae_p24x2f&quot; kind=&quot;reg_ctype&quot;/&gt;&#13;&#10;&lt;map fmt=&quot;xt_hifi2:ae_p16s_reg&quot; item=&quot;ae_p16s&quot; kind=&quot;reg_ctype&quot;/&gt;&#13;&#10;&lt;map fmt=&quot;xt_hifi2:ae_q56s_mem&quot; item=&quot;ae_q56s&quot; kind=&quot;mem_ctype&quot;/&gt;&#13;&#10;&lt;map fmt=&quot;xt_hifi2:ae_q32s_mem&quot; item=&quot;ae_q32s&quot; kind=&quot;mem_ctype&quot;/&gt;&#13;&#10;&lt;map fmt=&quot;xt_hifi2:ae_p24x2s_mem&quot; item=&quot;ae_p24x2s&quot; kind=&quot;mem_ctype&quot;/&gt;&#13;&#10;&lt;map fmt=&quot;xt_hifi2:ae_p24f_mem&quot; item=&quot;ae_p24f&quot; kind=&quot;mem_ctype&quot;/&gt;&#13;&#10;&lt;map fmt=&quot;xt_hifi2:ae_p24s_mem&quot; item=&quot;ae_p24s&quot; kind=&quot;mem_ctype&quot;/&gt;&#13;&#10;&lt;map fmt=&quot;xt_hifi2:ae_p16x2s_mem&quot; item=&quot;ae_p16x2s&quot; kind=&quot;mem_ctype&quot;/&gt;&#13;&#10;&lt;map fmt=&quot;xt_hifi2:ae_p24x2f_mem&quot; item=&quot;ae_p24x2f&quot; kind=&quot;mem_ctype&quot;/&gt;&#13;&#10;&lt;map fmt=&quot;xt_hifi2:ae_p16s_mem&quot; item=&quot;ae_p16s&quot; kind=&quot;mem_ctype&quot;/&gt;&#13;&#10;&lt;/udfMap&gt;&#13;&#10;"/>
+</launchConfiguration>
