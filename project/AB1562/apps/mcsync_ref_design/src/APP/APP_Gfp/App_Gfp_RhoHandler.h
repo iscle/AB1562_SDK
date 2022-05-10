@@ -33,40 +33,17 @@
  */
 
 
-<<<<<<< HEAD
-#ifndef _GFP_RHOHANDLER_H_
-#define _GFP_RHOHANDLER_H_
-
-=======
 #ifndef __APP_GFP_RHO_HANDLER_H__
 #define __APP_GFP_RHO_HANDLER_H__
 
 #include "gfp_features.h"
 #ifdef GFP_MCSYNC_ENABLE
->>>>>>> db20e11 (second commit)
 #include "bt_gap.h"
 
 
 /**************************************************************************************************
 * Public Functions
 **************************************************************************************************/
-<<<<<<< HEAD
-BOOL gfp_rho_lock();
-BOOL gfp_rho_unlock();
-BOOL gfp_rho_is_allow();
-U16  gfp_rho_get_data_length(void);
-BOOL gfp_rho_get_data(U8 *pBuffer);
-BOOL gfp_rho_apply_agent_data(BD_ADDR_T *pBdAddr, U8 *pData, U16 length);
-BOOL gfp_rho_apply_partner_data(BD_ADDR_T *pBdAddr, U8 *pData, U16 length);
-
-
-U16 BtGfpGetRhoDataLength();
-BOOL BtGfpGetRhoData(U8 *pBuffer);
-BOOL BtGfpApplyAgentRhoData(BD_ADDR_T *pBdAddr, U8 *pAwsMceData, U16 length);
-BOOL BtGfpApplyPartnerRhoData(BD_ADDR_T *pBdAddr, U8 *pAwsMceData, U16 length);
-
-#endif //_GFP_RHOHANDLER_H_
-=======
 BOOL APP_Gfp_RhoLock(void);
 BOOL APP_Gfp_RhoUnlock(void);
 BOOL APP_Gfp_RhoIsAllow(void);
@@ -79,4 +56,3 @@ BOOL APP_Gfp_RhoNewPartnerProcess(BD_ADDR_T *pBdAddr, U8 *pData, U16 length);
 
 #endif /* __APP_GFP_RHO_HANDLER_H__ */
 
->>>>>>> db20e11 (second commit)

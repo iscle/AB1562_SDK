@@ -51,11 +51,8 @@ typedef enum{
     FATAL_ERROR_AUDIO_END            = 0x600, /**< 0x600: Audio fatal error code end. */
     FATAL_ERROR_UI_START             = 0x601, /**< 0x601: UI fatal error code start. */
     FATAL_ERROR_UI_END               = 0x800, /**< 0x800: UI fatal error code end. */
-<<<<<<< HEAD
-=======
     FATAL_ERROR_ESCO_START           = 0x801, /**< 0x801: ESCO fatal error code start. */
     FATAL_ERROR_ESCO_END             = 0xA00, /**< 0xA00: ESCO fatal error code end. */
->>>>>>> db20e11 (second commit)
 }fatal_code_type_t;
 
 /**

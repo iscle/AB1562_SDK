@@ -49,11 +49,8 @@
 #include "chargercase_common.h"
 #include "App_ChargeBattery.h"
 #include "App_System.h"
-<<<<<<< HEAD
-=======
 #include "App_PeqManage.h"
 #include "Peq_NvkeyHandler.h"
->>>>>>> db20e11 (second commit)
 
 /**************************************************************************************************
 * Prototype
@@ -94,11 +91,7 @@ static APP_ANCPASSTHRU_CTRL_STRU gAppAncCtl;
 **************************************************************************************************/
 static U32 app_ANCPassThruTimerHandler(Handler handler, U16 id, void *msg, U32 handler_id)
 {
-<<<<<<< HEAD
-	APP_ANCPASSTHRU_PARA_STRU masterData; 
-=======
 	APP_ANCPASSTHRU_PARA_STRU masterData;
->>>>>>> db20e11 (second commit)
 	APP_ANCPASSTHRU_SLAVE_MSG_STRU slaveData;
 	UNUSED(handler); UNUSED(handler_id);
 	switch(id)
@@ -111,24 +104,14 @@ static U32 app_ANCPassThruTimerHandler(Handler handler, U16 id, void *msg, U32 h
 
 		case ANC_SLAVE_TIMER:
 			FW_Memcpy(&slaveData, msg, sizeof(APP_ANCPASSTHRU_SLAVE_MSG_STRU));
-<<<<<<< HEAD
-			APP_MCSync_SyncAgentANCPassThruIndHandler(slaveData.userRegister, slaveData.enable, 
-=======
 			APP_MCSync_SyncAgentANCPassThruIndHandler(slaveData.userRegister, slaveData.enable,
->>>>>>> db20e11 (second commit)
 				slaveData.flash_no, slaveData.type, slaveData.runtime_gain);
 			break;
 		default:
 			break;
-<<<<<<< HEAD
-			
-	}
-	
-=======
 
 	}
 
->>>>>>> db20e11 (second commit)
 	return 0;
 }
 
@@ -166,22 +149,14 @@ static void APP_ANCPassThru_Open(void)
 
 static void app_ANCPassThru_SendMasterMessage(APP_ANCPASSTHRU_PARA_STRU *pPara)
 {
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> db20e11 (second commit)
 	APP_ANCPASSTHRU_PARA_STRU *pMsg;
 	pMsg = (APP_ANCPASSTHRU_PARA_STRU *)FW_GetMemory(sizeof(APP_ANCPASSTHRU_PARA_STRU));
 	FW_Memcpy(pMsg, pPara, sizeof(APP_ANCPASSTHRU_PARA_STRU));
 
 	//FW_SetTimer((Handler)&gAppPassThruTimerHandle, ANC_MASTER_TIMER, pMsg, 0, ANC_SYNC_TIME);
 
-<<<<<<< HEAD
-	FW_SetDPCTimerWithData(&gAppAncPassThruDpcBlock, app_ANCPassThru_MasterDPCCallback, 
-=======
 	FW_SetDPCTimerWithData(&gAppAncPassThruDpcBlock, app_ANCPassThru_MasterDPCCallback,
->>>>>>> db20e11 (second commit)
 		ANC_SYNC_TIME, pMsg, sizeof(APP_ANCPASSTHRU_PARA_STRU));
 
 	FW_FreeMemory(pMsg);
@@ -194,11 +169,7 @@ static void app_ANCPassThru_SendSlaveMessage(APP_ANCPASSTHRU_SLAVE_MSG_STRU *pPa
 	FW_Memcpy(pMsg, pPara, sizeof(APP_ANCPASSTHRU_SLAVE_MSG_STRU));
 	//FW_SetTimer((Handler)&gAppPassThruTimerHandle, ANC_SLAVE_TIMER, pMsg, 0, timerValue);
 
-<<<<<<< HEAD
-	FW_SetDPCTimerWithData(&gAppAncPassThruDpcBlock, app_ANCPassThru_SlaveDPCCallback, 
-=======
 	FW_SetDPCTimerWithData(&gAppAncPassThruDpcBlock, app_ANCPassThru_SlaveDPCCallback,
->>>>>>> db20e11 (second commit)
 		timerValue, pMsg, sizeof(APP_ANCPASSTHRU_SLAVE_MSG_STRU));
 
 	FW_FreeMemory(pMsg);
@@ -206,14 +177,10 @@ static void app_ANCPassThru_SendSlaveMessage(APP_ANCPASSTHRU_SLAVE_MSG_STRU *pPa
 
 static void app_ANCPassThru_SetAncData(APP_ANCPASSTHRU_PARA_STRU para)
 {
-<<<<<<< HEAD
-	U8 userReg = AudioDsp_GetANCPassThruRegister();	
-=======
 	U8 userReg = AudioDsp_GetANCPassThruRegister();
 
 	DBG_LOG_APP_DSP_CONTROL( "[APP][DSP] AiroThru SetAncData userReg:%d, action:%d", 2, userReg, para.action);
 
->>>>>>> db20e11 (second commit)
 	switch(para.action)
 	{
 		case ACTION_OFF:
@@ -263,19 +230,11 @@ static void app_ANCPassThru_SetAncData(APP_ANCPASSTHRU_PARA_STRU para)
                     break;
             }
 	}
-<<<<<<< HEAD
-	
-=======
->>>>>>> db20e11 (second commit)
 }
 
 static void app_ANCPassThru_MasterDPCCallback(void *Para)
 {
-<<<<<<< HEAD
-	APP_ANCPASSTHRU_PARA_STRU *pMasterData = (APP_ANCPASSTHRU_PARA_STRU*)FW_GetMemory(sizeof(APP_ANCPASSTHRU_PARA_STRU)) ; 
-=======
 	APP_ANCPASSTHRU_PARA_STRU *pMasterData = (APP_ANCPASSTHRU_PARA_STRU*)FW_GetMemory(sizeof(APP_ANCPASSTHRU_PARA_STRU)) ;
->>>>>>> db20e11 (second commit)
 
 	DBG_LOG_APP_DSP_CONTROL( "[APP][DSP][ANC] passthru master dpc expired", 0);
 	gAppAncPassThruDpcBlock.dpcHandle = NULL;
@@ -305,11 +264,7 @@ static void app_ANCPassThru_Init(APP_ANCPASSTHRU_PARA_STRU para)
 									para.flash_no, para.type, para.runtime_gain);
 
 
-<<<<<<< HEAD
-	clockToStart = currentPicoClock + (ANC_SYNC_TIME * 1000) / HALF_SLOT;		
-=======
 	clockToStart = currentPicoClock + (ANC_SYNC_TIME * 1000) / HALF_SLOT;
->>>>>>> db20e11 (second commit)
 
 	DBG_LOG_APP_DSP_CONTROL( "[APP][DSP] ANCPassThruHandler, clock to start:%d", 1, clockToStart);
 
@@ -327,26 +282,16 @@ static U8 app_ANCPassThru_ControlDsp(APP_ANCPASSTHRU_PARA_STRU para)
 	U8 status = 0;
 	U8 userReg = AudioDsp_GetANCPassThruRegister();
 	DBG_LOG_APP_DSP_CONTROL( "[APP][DSP] ControlDsp data:%d %d %d", 3, para.action, userReg, APP_ANCPassThru_GetAncSwitch());
-<<<<<<< HEAD
-		
-=======
 
->>>>>>> db20e11 (second commit)
     switch(para.action)
     {
         case ACTION_OFF:
             APP_ANCPassThru_Close();
-<<<<<<< HEAD
-            break;
-        case ACTION_ON:
-			APP_ANCPassThru_Open();
-=======
             APP_PeqManage_LoadPeqGroup(PEQ_A2DP);// BTA-16047
             break;
         case ACTION_ON:
 			APP_ANCPassThru_Open();
 			APP_PeqManage_LoadPeqGroup(PEQ_A2DP);//BTA-16270
->>>>>>> db20e11 (second commit)
             break;
         case ACTION_TOGGLE:
             switch(userReg)
@@ -362,10 +307,7 @@ static U8 app_ANCPassThru_ControlDsp(APP_ANCPASSTHRU_PARA_STRU para)
 					{
 						APP_ANCPassThru_Close();
 					}
-<<<<<<< HEAD
-=======
 					APP_PeqManage_LoadPeqGroup(PEQ_A2DP);//BTA-16270
->>>>>>> db20e11 (second commit)
                     break;
             }
             break;
@@ -434,11 +376,8 @@ U8 AudioDsp_ANCPassThruHandler(APP_ANCPASSTHRU_PARA_STRU para)
 {
     U8 status = 0;
 
-<<<<<<< HEAD
-=======
 	DBG_LOG_APP_DSP_CONTROL( "[APP][DSP] ANCPassThruHandler", 0);
 
->>>>>>> db20e11 (second commit)
 	app_ANCPassThru_Init(para);
 
 	if(para.sync == 0)
@@ -476,15 +415,9 @@ void AudioDsp_ANCPassThruSlaveSyncHandler(U8 userRegister, U8 enable, U8 flash_n
 	U32 currentPicoClock = BtAwsMce_GetCurrentBtClock();
 	APP_ANCPASSTHRU_SLAVE_MSG_STRU msg;
 
-<<<<<<< HEAD
-	DBG_LOG_APP_DSP_CONTROL( "[APP][DSP] ANCPassThruSlaveSyncHandler, current clock:%d, expired clock:%d", 2, currentPicoClock, clockToStart);	
-	DBG_LOG_APP_DSP_CONTROL( "[APP][DSP] ANCPassThruSlaveSyncHandler data1: userRegister:%d, enable:%d, flash_no:%d", 3, userRegister, enable, flash_no);	
-	DBG_LOG_APP_DSP_CONTROL( "[APP][DSP] ANCPassThruSlaveSyncHandler data2: type:%d, runtime_gain:%d", 2, type, runtime_gain);	
-=======
 	DBG_LOG_APP_DSP_CONTROL( "[APP][DSP] ANCPassThruSlaveSyncHandler, current clock:%d, expired clock:%d", 2, currentPicoClock, clockToStart);
 	DBG_LOG_APP_DSP_CONTROL( "[APP][DSP] ANCPassThruSlaveSyncHandler data1: userRegister:%d, enable:%d, flash_no:%d", 3, userRegister, enable, flash_no);
 	DBG_LOG_APP_DSP_CONTROL( "[APP][DSP] ANCPassThruSlaveSyncHandler data2: type:%d, runtime_gain:%d", 2, type, runtime_gain);
->>>>>>> db20e11 (second commit)
 
 	timeToWait = ((clockToStart - currentPicoClock) * HALF_SLOT) / 1000; //ms
 
@@ -493,15 +426,9 @@ void AudioDsp_ANCPassThruSlaveSyncHandler(U8 userRegister, U8 enable, U8 flash_n
 	msg.flash_no = flash_no;
 	msg.type = type;
 	msg.runtime_gain = runtime_gain;
-<<<<<<< HEAD
-	
-	DBG_LOG_APP_DSP_CONTROL( "[APP][DSP] ANCPassThruSlaveSyncHandler, timeToWait:%d, ANC Sync time:%d", 2, timeToWait , ANC_SYNC_TIME);	
-		
-=======
 
 	DBG_LOG_APP_DSP_CONTROL( "[APP][DSP] ANCPassThruSlaveSyncHandler, timeToWait:%d, ANC Sync time:%d", 2, timeToWait , ANC_SYNC_TIME);
 
->>>>>>> db20e11 (second commit)
 	if(timeToWait > ANC_SYNC_TIME || clockToStart == 0)
 	{
 		APP_MCSync_SyncAgentANCPassThruIndHandler(userRegister, enable, flash_no, type, runtime_gain);
@@ -526,11 +453,7 @@ BOOL APP_ANCPassThru_GetAncSwitch(void)
 void APP_ANCPassThru_SetMpMode(BOOL value)
 {
 	DBG_LOG_APP_DSP_CONTROL( "[APP][DSP][ANC] SetMpMode:%d -> %d", 2, gAppAncCtl.isMpMode, value);
-<<<<<<< HEAD
-	gAppAncCtl.isMpMode= value;
-=======
 	gAppAncCtl.isMpMode = value;
->>>>>>> db20e11 (second commit)
 }
 
 BOOL APP_ANCPassThru_GetMpMode(void)

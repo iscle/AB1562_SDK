@@ -88,11 +88,7 @@ void APP_Mcsync_SyncNotReconnMaskIndHandler(U8 mask);
 void APP_Mcsync_ClearSuperReconnTimer(void);
 BOOL APP_Mcsync_IsReconnectStateWaitToPartner(void);
 void APP_Mcsync_SetReconnectLater(U8 type, U32 time);
-<<<<<<< HEAD
-#ifdef DISCONNECT_AGENT_RECOVERY
-=======
 #ifdef AIR_AGENT_RECOVERY_MODE_AFTER_DISCONNECTION_FROM_PHONE_ENABLE
->>>>>>> db20e11 (second commit)
 U16 app_mcsync_reconnect_check_super_reconnect_timer(U32 reconnect_type);
 #endif
 

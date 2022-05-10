@@ -34,12 +34,8 @@
 
 #ifndef _GENERAL_API_H_
 #define _GENERAL_API_H_
-<<<<<<< HEAD
-#include "bt.h"
-=======
 #include "bt_gap.h"
 #include "message.h"
->>>>>>> db20e11 (second commit)
 #include "nvkey.h"
 #include "nvkey_list.h"
 #include "stdlib.h"

@@ -5,23 +5,14 @@ CLS
 set AB1562_LIC_FILE_NAME=1562_node.lic
 
 if defined XTENSA_RG_2019_12_ROOT (
-<<<<<<< HEAD
-	set XTENSA_EXE_PATH="C:\Airoha_toolchain\RG-2019.12-win32\XtensaTools\bin"
-=======
 	set XTENSA_EXE_PATH="%XTENSA_RG_2019_12_ROOT%\RG-2019.12-win32\XtensaTools\bin"
->>>>>>> db20e11 (second commit)
 	set XTENSA_SYSTEM=%XTENSA_RG_2019_12_ROOT%\RG-2019.12-win32\XtensaTools\config
 	set AB1562_LICENSE_FILE_GLOBAL=%XTENSA_RG_2019_12_ROOT%\license\%AB1562_LIC_FILE_NAME%
 )else (
 
-<<<<<<< HEAD
-	set XTENSA_EXE_PATH=C:\usr\xtensa\XtDevTools\install\tools\RG-2019.12-win32\XtensaTools\bin
-	set XTENSA_SYSTEM=C:\usr\xtensa\XtDevTools\XtensaRegistry\RG-2019.12-win32
-=======
 	set XTENSA_EXE_PATH=C:\Airoha_toolchain\RG-2019.12-win32\XtensaTools\bin
 	set XTENSA_SYSTEM=C:\Airoha_toolchain\RG-2019.12-win32
 	
->>>>>>> db20e11 (second commit)
 )
 
 set PATH=%XTENSA_EXE_PATH%;%PATH%

@@ -146,8 +146,6 @@
 </NVKey>
 
 <!--
-<<<<<<< HEAD
-=======
     BLE_ADV_DATA_USER_DEFINED
 -->
 <NVKey KeyID="0x3904">
@@ -155,7 +153,6 @@
 </NVKey>
 
 <!--
->>>>>>> db20e11 (second commit)
     Chip Series
 -->
 <NVKey KeyID="0x1002">

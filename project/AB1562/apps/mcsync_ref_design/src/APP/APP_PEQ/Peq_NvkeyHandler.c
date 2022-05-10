@@ -37,19 +37,11 @@
 #include "Peq_NvkeyHandler.h"
 #include "Peq_Nvkey.h"
 #include "App_PeqMount.h"
-<<<<<<< HEAD
-
-=======
 #include "drv_anc.h"
->>>>>>> db20e11 (second commit)
 /**************************************************************************************************
 * Define
 **************************************************************************************************/
 #define PEQ_AUDIO_PATH_ERROR		0xFF
-<<<<<<< HEAD
-
-=======
->>>>>>> db20e11 (second commit)
 /**************************************************************************************************
 * Structure
 **************************************************************************************************/
@@ -138,9 +130,6 @@ static U16 app_PeqNvkey_GetAudioPathNvkeyId(U8 index, U8 groupIndex, U8 phaseInd
 		pAddr += sizeof(PEQ_SINGLE_PHASE_STRU) * phaseNum; //singleSetPhase
 	}
 
-<<<<<<< HEAD
-	pAddr += sizeof(U16); //numOfPhase
-=======
 	U16 numOfPhase_set2;
 
 	memcpy(&numOfPhase_set2, pAddr, sizeof(U16));
@@ -149,18 +138,13 @@ static U16 app_PeqNvkey_GetAudioPathNvkeyId(U8 index, U8 groupIndex, U8 phaseInd
 	if(numOfPhase_set2 <= 1)
 		goto GetPeqPhase;
 
->>>>>>> db20e11 (second commit)
 	for(U8 indexPhase = 0; indexPhase < phaseIndex; indexPhase++)
 	{
 		pAddr += sizeof(PEQ_SINGLE_PHASE_STRU); //singleSetPhase
 	}
 
 	//return ((PEQ_SINGLE_PHASE_STRU *)pAddr)->PEQParaNvkeyID;
-<<<<<<< HEAD
-
-=======
 GetPeqPhase:
->>>>>>> db20e11 (second commit)
 	pAddr += sizeof(U16); //peqPhase
 	//U16 result = ((*(pAddr + sizeof(U8)) << 8) | *(pAddr));
 	//printf("result:%X", result);
@@ -233,11 +217,7 @@ void APP_PeqNvkey_Init(void)
         {
             continue;
         }
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> db20e11 (second commit)
         if(NVKEY_ReadFullKey(nvkeyID, pPeqData, dataSize) != dataSize)
         {
             FW_FreeMemory(pPeqData);
@@ -294,9 +274,6 @@ U16 APP_PeqNvkey_GetNvkeyId(U8 peqComponent, U8 groupIndex, U8 phaseIndex, U8 nv
 	{
 		return 0xFFFF;
 	}
-<<<<<<< HEAD
-
-=======
 #ifdef AIR_PEQ_SPEAKER_ENBALE
 	if(phaseIndex != 0)
 	{
@@ -310,7 +287,6 @@ U16 APP_PeqNvkey_GetNvkeyId(U8 peqComponent, U8 groupIndex, U8 phaseIndex, U8 nv
 	}
 #endif
 	DBG_LOG_APP_PEQ("[APP_PEQ] Pre peq nvkey = %X, path index = %X, group index = %X, nvkey mode = %X", 4, app_PeqNvkey_GetAudioPathNvkeyId(app_PeqNvkey_GetAudioPathIndex(peqComponent, nvkeyMode), groupIndex, phaseIndex, nvkeyMode), app_PeqNvkey_GetAudioPathIndex(peqComponent, nvkeyMode), groupIndex, nvkeyMode);
->>>>>>> db20e11 (second commit)
 	return app_PeqNvkey_GetAudioPathNvkeyId(app_PeqNvkey_GetAudioPathIndex(peqComponent, nvkeyMode), groupIndex, phaseIndex, nvkeyMode);
 }
 

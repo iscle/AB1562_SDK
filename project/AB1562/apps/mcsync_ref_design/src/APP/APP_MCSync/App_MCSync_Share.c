@@ -58,18 +58,12 @@
 #include "drv_a2dp.h"
 #include "App_Nvkey_KeymapHandler.h"
 #include "app_mcsync_share_mode_nvstruc.h"
-<<<<<<< HEAD
-
-
-#ifdef MCSYNC_SHARE_MODE
-=======
 #include "Pairing_NvkeyHandler.h"
 #include "App_State.h"
 
 
 
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 /*************************************************************************************************
 * Define
 **************************************************************************************************/
@@ -97,10 +91,7 @@ enum
 	APP_SHARE_TIMER_FOLLOWER_DISC_TIMER,
 	APP_SHARE_TIMER_AGENT_SEND_FOLLOWER_DISC_IF_REPEAT_TIMER,
 	APP_SHARE_TIMER_AGENT_NOTICE_FOLLOWER_TO_LEAVE_REPEAT_TIMER,
-<<<<<<< HEAD
-=======
 	APP_SHARE_TIMER_PAGE_TIMEOUT_RETRY
->>>>>>> db20e11 (second commit)
 };
 
 enum
@@ -119,42 +110,13 @@ enum
 
 enum
 {
-<<<<<<< HEAD
-	APP_SHARE_STATE_NONE,
-	APP_SHARE_STATE_PREPARING,
-	APP_SHARE_STATE_ENTERED_MODE,
-	APP_SHARE_STATE_LEAVING,
-	APP_SHARE_STATE_SHARE_PAIRING_START,
-	APP_SHARE_STATE_PARTNER_GET_PAIRING_DATA,
-};
-
-enum
-{
-    APP_SHARE_SUBSTATE_NONE,
-    APP_SHARE_SUBSTATE_WAITING_CFM,
-    APP_SHARE_SUBSTATE_WAITING_TIMEOUT,
-};
-
-enum
-{
-=======
->>>>>>> db20e11 (second commit)
 	FOLLOWER_1_CONNECTED,
 	FOLLOWER_2_CONNECTED,
 	FOLLOWER_1_DISCONNECTED,
 	FOLLOWER_2_DISCONNECTED
 };
 
-<<<<<<< HEAD
-enum
-{
-    APP_SHARE_MODE_OFF,
-    APP_SHARE_MODE_FOLLOWER,
-    APP_SHARE_MODE_AGENT_PARTNER,
-};
-=======
 
->>>>>>> db20e11 (second commit)
 
 /*************************************************************************************************
 * Prototype
@@ -162,10 +124,6 @@ enum
 static void app_MCSync_Share_SetRole(U8 role);
 static U8   app_MCSync_Share_GetRole(void);
 static void app_MCSync_Share_SetState(U8 state, U8 subState);
-<<<<<<< HEAD
-static U8   app_MCSync_Share_GetState(void);
-=======
->>>>>>> db20e11 (second commit)
 static void app_MCSync_Share_SetFollowerConnectionTO(U8 isConnectTimeout);
 static U8   app_MCSync_Share_GetFollowerConnectionTO(void);
 
@@ -195,15 +153,9 @@ static void app_MCSync_Share_StopAgentConnection(void);
 static void app_MCSync_Share_StartFollowerConnection(void);
 static void app_MCSync_Share_StopFollowerConnection(void);
 
-<<<<<<< HEAD
-static void app_MCSync_Share_AgentStart(void);
-static void app_MCSync_Share_AgentStop(void);
-static void app_MCSync_Share_FollowerStart(void);
-=======
 static void app_MCSync_Share_AgentStart(U8 isTriggerByUser);
 static void app_MCSync_Share_AgentStop(void);
 static void app_MCSync_Share_FollowerStart(U8 isTriggerByUser);
->>>>>>> db20e11 (second commit)
 static void app_MCSync_Share_FollowerStop(void);
 static void app_MCSync_Share_ClearCtl(void);
 
@@ -279,14 +231,6 @@ static void app_MCSync_Share_SetState(U8 state, U8 subState)
     gAppShareModeCtrl.subState = subState;
 }
 
-<<<<<<< HEAD
-static U8 app_MCSync_Share_GetState(void)
-{
-	return gAppShareModeCtrl.state;
-}
-
-=======
->>>>>>> db20e11 (second commit)
 static U8 app_MCSync_Share_GetSubState(void)
 {
 	return gAppShareModeCtrl.subState;
@@ -374,11 +318,6 @@ static U32 app_MCSync_Share_TimerHandler(Handler handler, U16 id, void *msg, U32
 
 	switch(id)
 	{
-<<<<<<< HEAD
-		case APP_SHARE_TIMER_TO_STOP_AGENT:
-			DBG_LOG_APP_MCSYNC("[APP_MCSync][Share] APP_SHARE_TIMER_TO_STOP_AGENT", 0);
-			app_MCSync_Share_StopAgentConnection();
-=======
 		case APP_SHARE_TIMER_PAGE_TIMEOUT_RETRY:
 			DBG_LOG_APP_MCSYNC("[APP_MCSync][Share] APP_SHARE_TIMER_PAGE_TIMEOUT_RETRY timeout", 0);
 			APP_MCSync_Share_EnterMode(FALSE);
@@ -387,7 +326,6 @@ static U32 app_MCSync_Share_TimerHandler(Handler handler, U16 id, void *msg, U32
 			DBG_LOG_APP_MCSYNC("[APP_MCSync][Share] APP_SHARE_TIMER_TO_STOP_AGENT", 0);
 			app_MCSync_Share_StopAgentConnection();
             app_MCSync_Share_AgentClearCtl();
->>>>>>> db20e11 (second commit)
 			break;
 		case APP_SHARE_TIMER_SHARE_AGENT_RECONNECT:
 			DBG_LOG_APP_MCSYNC("[APP_MCSync][Share] APP_SHARE_TIMER_SHARE_AGENT_RECONNECT", 0);
@@ -396,23 +334,15 @@ static U32 app_MCSync_Share_TimerHandler(Handler handler, U16 id, void *msg, U32
 			break;
 		case APP_SHARE_TIMER_FOLLOWER_RECONNECT:
 			
-<<<<<<< HEAD
-			plusState = app_MCSync_Share_GetState();
-=======
 			plusState = APP_MCSync_Share_GetState();
->>>>>>> db20e11 (second commit)
 			
 			DBG_LOG_APP_MCSYNC("[APP_MCSync][Share] APP_SHARE_TIMER_FOLLOWER_RECONNECT,plus state:%d, handler_id:%d", 2, plusState, handler_id);
 
             if(handler_id == 1)
-<<<<<<< HEAD
-                app_MCSync_Share_SetFollowerConnectionTO(TRUE);
-=======
             {
                 app_MCSync_Share_SetFollowerConnectionTO(TRUE);
 				app_MCSync_Share_FollowerStart(FALSE);
 			}
->>>>>>> db20e11 (second commit)
 			else
             {
                 if(plusState != APP_SHARE_STATE_ENTERED_MODE)
@@ -430,17 +360,10 @@ static U32 app_MCSync_Share_TimerHandler(Handler handler, U16 id, void *msg, U32
 
 		case APP_SHARE_TIMER_FOLLOWER_DISCONNECT:
 			DBG_LOG_APP_MCSYNC("[APP_MCSync][Share] TIMER_FOLLOWER_DISCONNECT:%d %d %d, %d", 4,
-<<<<<<< HEAD
-			BtMCSync_GetShareMode(),  app_MCSync_Share_GetState(), handler_id, gAppShareModeCtrl.countOfFollowerDiscIF);
-
-			if(BtMCSync_GetShareMode() == MCSYNC_SHARE_MODE_FOLLOWER_ENABLE &&
-				app_MCSync_Share_GetState() == APP_SHARE_STATE_ENTERED_MODE)
-=======
 			BtMCSync_GetShareMode(),  APP_MCSync_Share_GetState(), handler_id, gAppShareModeCtrl.countOfFollowerDiscIF);
 
 			if(BtMCSync_GetShareMode() == MCSYNC_SHARE_MODE_FOLLOWER_ENABLE &&
 				APP_MCSync_Share_GetState() == APP_SHARE_STATE_ENTERED_MODE)
->>>>>>> db20e11 (second commit)
 			{
 				if(gAppShareModeCtrl.countOfFollowerDiscIF >= 2)
 				{
@@ -480,11 +403,7 @@ static U32 app_MCSync_Share_TimerHandler(Handler handler, U16 id, void *msg, U32
 			break;
 
 		case APP_SHARE_TIMER_AGENT_NOTICE_FOLLOWER_TO_LEAVE_REPEAT_TIMER:
-<<<<<<< HEAD
-			 if(gAppShareModeCtrl.noticeFollowerToLeaveNum >= 2)	
-=======
 			 if(gAppShareModeCtrl.noticeFollowerToLeaveNum >= 3)	
->>>>>>> db20e11 (second commit)
 			 {
 			 	gAppShareModeCtrl.noticeFollowerToLeaveNum = 0;	
 			 }
@@ -506,11 +425,7 @@ static void app_MCSync_Share_AgentDoNextAction(void)
 {
     U8 subState = app_MCSync_Share_GetSubState();
     U8 action = app_MCSync_Share_GetAction();
-<<<<<<< HEAD
-    U8 shareState = app_MCSync_Share_GetState();
-=======
     U8 shareState = APP_MCSync_Share_GetState();
->>>>>>> db20e11 (second commit)
     
     DBG_LOG_APP_MCSYNC("[APP_MCSync][Share] Agent Do NextAction: action:%d, state:%d, subState:%d", 3, action, shareState, subState);
     
@@ -581,10 +496,7 @@ static void app_MCSync_Share_AgentDoNextAction(void)
                 app_MCSync_Share_SetRole(APP_SHARE_MODE_ROLE_NONE);
                 app_MCSync_Share_StopSharePairing();
                 app_MCSync_Share_SetAction(APP_SHARE_ACTION_NONE);
-<<<<<<< HEAD
-=======
 				FW_ReleaseTimer(&gAppMCSyncShareTimerHandle, APP_SHARE_TIMER_PUSH_SHARE_PAIRING_MODE_MEDIA, 0);
->>>>>>> db20e11 (second commit)
                 break;
         }        
     }
@@ -601,11 +513,6 @@ static void app_MCSync_Share_AgentDoNextAction(void)
 
             case APP_SHARE_STATE_LEAVING:
                 if(gAppShareModeCtrl.follower1Connected && gAppShareModeCtrl.follower2Connected)
-<<<<<<< HEAD
-                    app_MCSync_Share_SetState(APP_SHARE_STATE_ENTERED_MODE, APP_SHARE_SUBSTATE_NONE);
-                else
-                    app_MCSync_Share_SetState(APP_SHARE_STATE_PREPARING, APP_SHARE_SUBSTATE_NONE);
-=======
                 {
 		        	PM_Sniff_SetLinkPolicyDisableAllMode(APP_GetServiceBdAddr());
                 	app_MCSync_Share_SetState(APP_SHARE_STATE_ENTERED_MODE, APP_SHARE_SUBSTATE_NONE);
@@ -614,7 +521,6 @@ static void app_MCSync_Share_AgentDoNextAction(void)
                 {
                     app_MCSync_Share_SetState(APP_SHARE_STATE_PREPARING, APP_SHARE_SUBSTATE_NONE);
                 }
->>>>>>> db20e11 (second commit)
                 /* fallthrough */
             case APP_SHARE_STATE_ENTERED_MODE:
             case APP_SHARE_STATE_SHARE_PAIRING_START:
@@ -629,11 +535,7 @@ static void app_MCSync_Share_FollowerDoNextAction(void)
 {
     U8 subState = app_MCSync_Share_GetSubState();
     U8 action = app_MCSync_Share_GetAction();
-<<<<<<< HEAD
-    U8 shareState = app_MCSync_Share_GetState();
-=======
     U8 shareState = APP_MCSync_Share_GetState();
->>>>>>> db20e11 (second commit)
     
     DBG_LOG_APP_MCSYNC("[APP_MCSync][Share] Follower Do Next Action: action:%d, state:%d, subState:%d", 3, action, shareState, subState);
     
@@ -647,15 +549,9 @@ static void app_MCSync_Share_FollowerDoNextAction(void)
             case APP_SHARE_STATE_NONE:
                 app_MCSync_Share_SetState(APP_SHARE_STATE_NONE, APP_SHARE_SUBSTATE_WAITING_TIMEOUT);
                 FW_SetTimer(&gAppMCSyncShareTimerHandle, APP_SHARE_TIMER_FOLLOWER_RECONNECT, NULL, 0, 20000);
-<<<<<<< HEAD
-                if(BtAwsMce_IsDefaultRoleAgent())
-                {
-                    
-=======
 
 				if(BtAwsMce_IsDefaultRoleAgent())
                 {
->>>>>>> db20e11 (second commit)
                     BtMCSync_SendSyncFollowerConn(TRUE);
                     FW_SetTimer(&gAppMCSyncShareTimerHandle, APP_SHARE_TIMER_TO_CONNECT_FOLLOWER, NULL, 0, 1200);                     
                 }
@@ -663,10 +559,7 @@ static void app_MCSync_Share_FollowerDoNextAction(void)
                 {
                     FW_SetTimer(&gAppMCSyncShareTimerHandle, APP_SHARE_TIMER_TO_CONNECT_FOLLOWER, NULL, 0, 0); 
                 }
-<<<<<<< HEAD
-=======
 				
->>>>>>> db20e11 (second commit)
                 break;
 
             case APP_SHARE_STATE_LEAVING:
@@ -712,11 +605,7 @@ static U32 app_MCSync_Share_MsgHandler(Handler handler, U16 id, void *msg, U32 h
 	UNUSED(handler);
 	UNUSED(handler_id);
 	
-<<<<<<< HEAD
-	U8 plusState = app_MCSync_Share_GetState();
-=======
 	U8 plusState = APP_MCSync_Share_GetState();
->>>>>>> db20e11 (second commit)
     U8 subState = app_MCSync_Share_GetSubState();
     U8 status;
 
@@ -725,9 +614,6 @@ static U32 app_MCSync_Share_MsgHandler(Handler handler, U16 id, void *msg, U32 h
 		case BT_AWS_MCE_SHARE_MODE_ENABLE_CFM:
             status = ((BT_AWS_MCE_SHARE_MODE_ENABLE_CFM_T *)msg)->hci_status;
             DBG_LOG_APP_MCSYNC("[APP_MCSync][Share] MsgHandler: BT_AWS_MCE_SHARE_MODE_ENABLE_CFM, status:%d, state:%d, subState:%d", 3, status, plusState, subState);
-<<<<<<< HEAD
-            if(plusState == APP_SHARE_STATE_NONE)
-=======
 
 			if(status != 0)
 			{
@@ -736,7 +622,6 @@ static U32 app_MCSync_Share_MsgHandler(Handler handler, U16 id, void *msg, U32 h
 			}
 
 			if(plusState == APP_SHARE_STATE_NONE)
->>>>>>> db20e11 (second commit)
             {
                 if(subState == APP_SHARE_SUBSTATE_WAITING_CFM)
                 {
@@ -744,14 +629,11 @@ static U32 app_MCSync_Share_MsgHandler(Handler handler, U16 id, void *msg, U32 h
                         app_MCSync_Share_Agent_Prepare_OK();
                     else
                         app_MCSync_Share_Agent_Prepare_Fail();
-<<<<<<< HEAD
-=======
 
 					if(status == HCI_STATUS_PAGE_TIMEOUT)
 					{
 						FW_SetTimer(&gAppMCSyncShareTimerHandle, APP_SHARE_TIMER_PAGE_TIMEOUT_RETRY, NULL, 1, 5000);
 					}
->>>>>>> db20e11 (second commit)
                 }
                 else
                 {           
@@ -816,11 +698,7 @@ static void app_MCSync_Share_FollowerBackNormalState(void)
 {
 	U8 role = BtAwsMce_GetDefaultRole();
 	U8 shareMode = BtMCSync_GetShareMode();
-<<<<<<< HEAD
-	U8 plusState = app_MCSync_Share_GetState();
-=======
 	U8 plusState = APP_MCSync_Share_GetState();
->>>>>>> db20e11 (second commit)
 	BOOL isOutofCase = APP_SmtChgCse_IsOutOfChargerCase();
 	BOOL isPowerOn = APP_PowerOff_IsPowerOn();
 	
@@ -858,11 +736,7 @@ static void app_MCSync_Share_StartSharePairing(void)
 {
 	U32 pairingTime;
 
-<<<<<<< HEAD
-	DBG_LOG_APP_MCSYNC( "[APP_MCSync][Share] Start Share Pairing, share state:%d", 1, app_MCSync_Share_GetState());
-=======
 	DBG_LOG_APP_MCSYNC( "[APP_MCSync][Share] Start Share Pairing, share state:%d", 1, APP_MCSync_Share_GetState());
->>>>>>> db20e11 (second commit)
 	if(MCSYNC_LINK_CONNECTED != BtAwsMce_GetMcsyncState())
 	{
 		DBG_LOG_APP_MCSYNC( "[APP_MCSync][Share] Start Share Pairing: Mcsync Not connected", 0);
@@ -884,15 +758,9 @@ static void app_MCSync_Share_StartSharePairing(void)
 		return;
 	}
     
-<<<<<<< HEAD
-    if(app_MCSync_Share_GetState() != APP_SHARE_STATE_SHARE_PAIRING_START)
-    {
-		DBG_LOG_APP_MCSYNC( "[APP_MCSync][Share] Start Share Pairing: share state is wrong, state:%d", 1, app_MCSync_Share_GetState());
-=======
     if(APP_MCSync_Share_GetState() != APP_SHARE_STATE_SHARE_PAIRING_START)
     {
 		DBG_LOG_APP_MCSYNC( "[APP_MCSync][Share] Start Share Pairing: share state is wrong, state:%d", 1, APP_MCSync_Share_GetState());
->>>>>>> db20e11 (second commit)
 		app_MCSync_Share_FollowerStop();
 		return;        
     }
@@ -947,11 +815,7 @@ static void app_MCSync_Share_StopSharePairing(void)
 			{
                 if(BtAwsMce_IsDefaultRoleAgent())
                 {
-<<<<<<< HEAD
-                    app_MCSync_Share_SetAction( APP_SHARE_ACTION_FOLLOWER_START);
-=======
                     app_MCSync_Share_SetAction(APP_SHARE_ACTION_FOLLOWER_START);
->>>>>>> db20e11 (second commit)
                     app_MCSync_Share_FollowerDoNextAction();
                 }
 			}
@@ -981,13 +845,9 @@ static void app_MCSync_Share_AgentClearCtl(void)
 	app_MCSync_Share_StopSharePairing();
 	FW_ReleaseTimer(&gAppMCSyncShareTimerHandle, APP_SHARE_TIMER_PUSH_SHARE_PAIRING_MODE_MEDIA, 0);
     FW_ReleaseTimer(&gAppMCSyncShareTimerHandle, APP_SHARE_TIMER_TO_STOP_AGENT, 0);
-<<<<<<< HEAD
-
-=======
 	
 	FW_ReleaseTimer(&gAppMCSyncShareTimerHandle, APP_SHARE_TIMER_PAGE_TIMEOUT_RETRY, 0);
 		
->>>>>>> db20e11 (second commit)
 	APP_Media_PushMediaEvent(MEDIA_EVT_SHARE_MODE_STOP);
 	app_MCSync_Share_SetState(APP_SHARE_STATE_NONE, APP_SHARE_SUBSTATE_NONE);
 	BtMCSync_SendSyncShareModeInfo(APP_SHARE_STATE_NONE, MCSYNC_SHARE_MODE_DISABLE);
@@ -1003,11 +863,7 @@ static void app_MCSync_Share_StartAgentConnection(void)
 	U8 shareMode = BtMCSync_GetShareMode();
 	U8 agState = APP_Conn_GetAgLinkState();
 	U8 mcsyncState = BtAwsMce_GetMcsyncState();
-<<<<<<< HEAD
-	U8 shareState = app_MCSync_Share_GetState();
-=======
 	U8 shareState = APP_MCSync_Share_GetState();
->>>>>>> db20e11 (second commit)
     U8 subState = app_MCSync_Share_GetSubState();
 	
 	DBG_LOG_APP_MCSYNC("[APP_MCSync][Share] Start Agent Connection: role:%d, shareMode:%d, agState:%d, mcsyncState:%d", 4, role, shareMode, agState, mcsyncState);
@@ -1032,11 +888,7 @@ static void app_MCSync_Share_StopAgentConnection(void)
 {
 	U8 role = BtAwsMce_GetDefaultRole();
 	U8 shareMode = BtMCSync_GetShareMode();
-<<<<<<< HEAD
-	U8 shareState = app_MCSync_Share_GetState();
-=======
 	U8 shareState = APP_MCSync_Share_GetState();
->>>>>>> db20e11 (second commit)
     U8 subState = app_MCSync_Share_GetSubState();
 	
 	DBG_LOG_APP_MCSYNC("[APP_MCSync][Share] Stop Agent Connection: role:%d, shareMode:%d, plusState:%d, subState:%d", 4, role, shareMode, shareState, subState);
@@ -1057,11 +909,7 @@ static void app_MCSync_Share_StartFollowerConnection(void)
 {
 	U8 role = BtAwsMce_GetDefaultRole();
 	U8 shareMode = BtMCSync_GetShareMode();
-<<<<<<< HEAD
-	U8 shareState = app_MCSync_Share_GetState();
-=======
 	U8 shareState = APP_MCSync_Share_GetState();
->>>>>>> db20e11 (second commit)
 	U8 mcsyncState = BtAwsMce_GetMcsyncState();
 	BD_ADDR_T *pBdAddr = drv_a2dp_get_bdaddr();
 	
@@ -1085,11 +933,7 @@ static void app_MCSync_Share_StopFollowerConnection(void)
 {
 	U8 role = BtAwsMce_GetDefaultRole();
 	U8 shareMode = BtMCSync_GetShareMode();
-<<<<<<< HEAD
-	U8 plusState = app_MCSync_Share_GetState();
-=======
 	U8 plusState = APP_MCSync_Share_GetState();
->>>>>>> db20e11 (second commit)
 	
 	DBG_LOG_APP_MCSYNC("[APP_MCSync][Share] Follower Stop Conn:%d,%d,%d", 3, role, shareMode, plusState);
 
@@ -1113,11 +957,7 @@ static void app_MCSync_Share_StopFollowerConnection(void)
 	}
 }
 
-<<<<<<< HEAD
-static void app_MCSync_Share_AgentStart(void)
-=======
 static void app_MCSync_Share_AgentStart(U8 isTriggerByUser)
->>>>>>> db20e11 (second commit)
 {	
 	if(APP_MCSync_Rho_IsRhoing() == TRUE)
 	{
@@ -1146,13 +986,8 @@ static void app_MCSync_Share_AgentStart(U8 isTriggerByUser)
 		return;
 	}
     
-<<<<<<< HEAD
-    DBG_LOG_APP_MCSYNC("[APP_MCSync][Share] Agent Start: state:%d, linkloss:%d", 2, 
-		app_MCSync_Share_GetState(), APP_MCSync_Share_GetLinkLoss());
-=======
     DBG_LOG_APP_MCSYNC("[APP_MCSync][Share] Agent Start: state:%d, linkloss:%d, trigger by user:%d", 3, 
 		APP_MCSync_Share_GetState(), APP_MCSync_Share_GetLinkLoss(), isTriggerByUser);
->>>>>>> db20e11 (second commit)
 	
 	FW_ReleaseTimer(&gAppMCSyncShareTimerHandle, APP_SHARE_TIMER_PUSH_SHARE_PAIRING_MODE_MEDIA, 0);
 	FW_SetTimer(&gAppMCSyncShareTimerHandle, APP_SHARE_TIMER_PUSH_SHARE_PAIRING_MODE_MEDIA, NULL, 0, 2500);
@@ -1168,12 +1003,8 @@ static void app_MCSync_Share_AgentStart(U8 isTriggerByUser)
 	}
 	
 	if(!FW_IsBdAddrZero(BtMCSync_GetShareModeBdAddr()) &&
-<<<<<<< HEAD
-		(app_MCSync_Share_GetState() != APP_SHARE_STATE_PARTNER_GET_PAIRING_DATA))
-=======
 		(APP_MCSync_Share_GetState() != APP_SHARE_STATE_PARTNER_GET_PAIRING_DATA) &&
 		!isTriggerByUser)
->>>>>>> db20e11 (second commit)
 	{
 		FW_SetTimer(&gAppMCSyncShareTimerHandle, APP_SHARE_TIMER_SHARE_AGENT_RECONNECT, NULL, 0, 2000 /*40000*/);
 		DBG_LOG_APP_MCSYNC("[APP_MCSync][Share] Agent Start: set 2s timer", 0);
@@ -1183,10 +1014,7 @@ static void app_MCSync_Share_AgentStart(U8 isTriggerByUser)
     {
        app_MCSync_Share_SetAction(APP_SHARE_ACTION_SHARE_PAIRING);
     }
-<<<<<<< HEAD
-=======
 	
->>>>>>> db20e11 (second commit)
     app_MCSync_Share_AgentDoNextAction();	
 }
 
@@ -1198,11 +1026,7 @@ static void app_MCSync_Share_AgentStop(void)
 	
 }
 
-<<<<<<< HEAD
-static void app_MCSync_Share_FollowerStart(void)
-=======
 static void app_MCSync_Share_FollowerStart(U8 isTriggerByUser)
->>>>>>> db20e11 (second commit)
 {
 	if(APP_MCSync_Rho_IsRhoing() == TRUE)
 	{
@@ -1234,15 +1058,6 @@ static void app_MCSync_Share_FollowerStart(U8 isTriggerByUser)
 	FW_ReleaseTimer(&gAppMCSyncShareTimerHandle, APP_SHARE_TIMER_PUSH_SHARE_PAIRING_MODE_MEDIA, 0);
 	FW_SetTimer(&gAppMCSyncShareTimerHandle, APP_SHARE_TIMER_PUSH_SHARE_PAIRING_MODE_MEDIA, NULL, 0, 2500);
 
-<<<<<<< HEAD
-	if(BtAwsMce_IsDefaultRoleAgent())
-	{
-		app_MCSync_Share_SetRole(APP_SHARE_MODE_ROLE_AGENT_TO_FOLLOWER);
-        
-        if( !FW_IsBdAddrZero(BtMCSync_GetShareModeBdAddr()) &&
-            app_MCSync_Share_GetState() != APP_SHARE_STATE_PARTNER_GET_PAIRING_DATA  &&
-            app_MCSync_Share_GetFollowerConnectionTO() == 0)
-=======
 	DBG_LOG_APP_MCSYNC("[APP_MCSync][Share] Follower Start: trigger by user:%d, ag state:%d", 
 		2, isTriggerByUser, PM_GetAgLinkState());
 	
@@ -1259,7 +1074,6 @@ static void app_MCSync_Share_FollowerStart(U8 isTriggerByUser)
         if(!FW_IsBdAddrZero(BtMCSync_GetShareModeBdAddr()) &&
             APP_MCSync_Share_GetState() != APP_SHARE_STATE_PARTNER_GET_PAIRING_DATA  &&
             app_MCSync_Share_GetFollowerConnectionTO() == 0 && !isTriggerByUser)
->>>>>>> db20e11 (second commit)
         {
             DBG_LOG_APP_MCSYNC("[APP_MCSync][Share] Follower Start: reconn share mode", 0);
             app_MCSync_Share_SetAction(APP_SHARE_ACTION_FOLLOWER_START);
@@ -1288,11 +1102,7 @@ void APP_MCSyncPlus_FollowerStop(void)
 {
 	BD_ADDR_T *pBdAddr = BtMCSync_GetShareModeBdAddr();
 
-<<<<<<< HEAD
-	U8 plusState = app_MCSync_Share_GetState();
-=======
 	U8 plusState = APP_MCSync_Share_GetState();
->>>>>>> db20e11 (second commit)
 	U8 shareMode  = BtMCSync_GetShareMode();
 
 	DBG_LOG_APP_MCSYNC("[APP_MCSync][Share] Follower Stop, shareState:%d, shareMode:%d", 2, plusState, shareMode);
@@ -1338,11 +1148,7 @@ void APP_MCSyncPlus_FollowerStop(void)
 static void app_MCSync_Share_FollowerStop(void)
 {
 	U8 shareMode = BtMCSync_GetShareMode();
-<<<<<<< HEAD
-	U8 plusState = app_MCSync_Share_GetState();
-=======
 	U8 plusState = APP_MCSync_Share_GetState();
->>>>>>> db20e11 (second commit)
 	
 	DBG_LOG_APP_MCSYNC("[APP_MCSync][Share] Follower Stop, mode:%d, state:%d", 2, shareMode, plusState);
     
@@ -1414,11 +1220,7 @@ void APP_MCSync_Share_KeySharePairingStop(void)
 U8 APP_MCSync_Share_StatusChangeHandler(BD_ADDR_T *pBdAddr, U8 role)
 {
     U8 agState = APP_Conn_GetAgLinkState();
-<<<<<<< HEAD
-    U8 plusState = app_MCSync_Share_GetState();
-=======
     U8 plusState = APP_MCSync_Share_GetState();
->>>>>>> db20e11 (second commit)
     U8 shareMode = BtMCSync_GetShareMode();
 
 	UNUSED(pBdAddr);
@@ -1492,17 +1294,6 @@ U8 APP_MCSync_Share_StatusChangeHandler(BD_ADDR_T *pBdAddr, U8 role)
 
 void APP_MCSync_Share_AgentEventHandler(U8 event)
 {
-<<<<<<< HEAD
-	DBG_LOG_APP_MCSYNC("[APP_MCSync][Share] AgentEventHandler:%d %d", 2, APP_Conn_GetAgLinkState(), APP_MCSync_Share_GetLinkLoss());  
-    switch(event)
-    {
-        case APP_SHARE_AGENT_EVENT_PARTNER_CONNECTED_CFM:
-			if(APP_Conn_GetAgLinkState() == LINK_CONNECTED && APP_MCSync_Share_GetLinkLoss()) //Iverson, sp linkloss
-			{
-                if(APP_MCSync_Share_IsEnable())
-                {
-                    app_MCSync_Share_AgentStart();
-=======
 	DBG_LOG_APP_MCSYNC("[APP_MCSync][Share] AgentEventHandler:%d %d %d %d", 4, 
 		APP_GetAGNum(), APP_MCSync_Share_GetLinkLoss(), APP_MCSync_Share_IsEnable(), 
 		event); 
@@ -1515,7 +1306,6 @@ void APP_MCSync_Share_AgentEventHandler(U8 event)
                 //if(APP_MCSync_Share_IsEnable())
                 {
                     app_MCSync_Share_AgentStart(FALSE);
->>>>>>> db20e11 (second commit)
 					APP_MCSync_Share_SetLinkLoss(FALSE);
                 }
 			}	        
@@ -1557,11 +1347,7 @@ void APP_MCSync_Share_PartnerEventHandler(U8 event, U8 *pMsg)
 BOOL APP_MCSync_Share_FollowerEventHandler(U8 event, BD_ADDR_T *pBdAddr, U8 *pMsg)
 {
 	U8 shareMode = BtMCSync_GetShareMode();
-<<<<<<< HEAD
-	U8 plusState = app_MCSync_Share_GetState();
-=======
 	U8 plusState = APP_MCSync_Share_GetState();
->>>>>>> db20e11 (second commit)
 	U8 mcsyncState = BtAwsMce_GetMcsyncState();
 	U8 profilePlusState = BtMCSync_GetShareState();
 	
@@ -1573,11 +1359,7 @@ BOOL APP_MCSync_Share_FollowerEventHandler(U8 event, BD_ADDR_T *pBdAddr, U8 *pMs
         DBG_LOG_APP_Connection( "[APP_CONN] isSpecial:%d isAgent:%d connTO:%d", 3, BtAwsMce_IsSpecialLink(pBdAddr), BtAwsMce_IsDefaultRoleAgent(), app_MCSync_Share_GetFollowerConnectionTO());
         if(BtAwsMce_IsSpecialLink(pBdAddr) && BtAwsMce_IsDefaultRoleAgent() && app_MCSync_Share_GetFollowerConnectionTO())
         {
-<<<<<<< HEAD
-            app_MCSync_Share_FollowerStart();
-=======
             app_MCSync_Share_FollowerStart(FALSE);
->>>>>>> db20e11 (second commit)
         }
     }
 
@@ -1662,20 +1444,14 @@ BOOL APP_MCSync_Share_FollowerEventHandler(U8 event, BD_ADDR_T *pBdAddr, U8 *pMs
 			{
 				if(((AWSMCE_CONNECT_CFM_T *)pMsg)->status == BT_STATUS_SUCCESS)
 				{
-<<<<<<< HEAD
-=======
 					drv_a2dp_update_audio_channel(AUDIO_CH_MONO);
->>>>>>> db20e11 (second commit)
 					switch(plusState)
 					{
 						case APP_SHARE_STATE_PREPARING:
 							FW_ReleaseTimer(&gAppMCSyncShareTimerHandle, APP_SHARE_TIMER_PUSH_SHARE_PAIRING_MODE_MEDIA, 0);
-<<<<<<< HEAD
-=======
 
 							APP_Pairing_CancelTimer(TIMER_PAIRING_MODE_PDL_EMPTY_TIMEOUT);
 							
->>>>>>> db20e11 (second commit)
 							app_MCSync_Share_SetState(APP_SHARE_STATE_ENTERED_MODE, APP_SHARE_SUBSTATE_NONE);
 							APP_PowerOff_CancelTimer(TIMER_AUTO_SWITCH_OFF_TIMEOUT);
 							break;
@@ -1789,30 +1565,18 @@ void APP_MCSync_Share_EnterMode(BOOL isFollow)
     if(isFollow)
     {
     	APP_MCSync_Share_SetMode(APP_SHARE_MODE_FOLLOWER);
-<<<<<<< HEAD
-        drv_a2dp_mute_spk();
-        app_MCSync_Share_FollowerStart();        
-=======
 		APP_MCSYNC_SendNoticeMasterPartnerToShareMode(APP_SHARE_MODE_FOLLOWER);
         //drv_a2dp_mute_spk();
         app_MCSync_Share_FollowerStart(TRUE);        
->>>>>>> db20e11 (second commit)
     }
     else
     {
     	APP_MCSync_Share_SetMode(APP_SHARE_MODE_AGENT_PARTNER);
-<<<<<<< HEAD
-        if(BtAwsMce_IsDefaultRoleAgent())
-        {
-            drv_a2dp_mute_spk();
-            app_MCSync_Share_AgentStart();
-=======
 		APP_MCSYNC_SendNoticeMasterPartnerToShareMode(APP_SHARE_MODE_AGENT_PARTNER);
         if(BtAwsMce_IsDefaultRoleAgent())
         {
             //drv_a2dp_mute_spk();
             app_MCSync_Share_AgentStart(TRUE);
->>>>>>> db20e11 (second commit)
         }        
     }
 }
@@ -1822,30 +1586,18 @@ void APP_MCSync_Share_ExitMode(void)
     U8 shareRole = app_MCSync_Share_GetRole();
     U8 shareMode = BtMCSync_GetShareMode();
 	U32 supportedState;
-<<<<<<< HEAD
-	
-	DBG_LOG_APP_MCSYNC("[APP_MCSync][Share] Exit Mode, mcsync share mode:%d, share role:%d, state:%d", 3, shareMode, shareRole, app_MCSync_Share_GetState());
-
-	APP_MCSync_Share_SetMode(APP_SHARE_MODE_OFF);
-=======
 	U8 shareState = APP_MCSync_Share_GetState();
 	U8 appShareMode = APP_MCSync_Share_IsEnable();
 	
 	DBG_LOG_APP_MCSYNC("[APP_MCSync][Share] Exit Mode, mcsync share mode:%d, share role:%d, state:%d, app share mode:%d", 4, 
 		shareMode, shareRole, shareState, APP_MCSync_Share_IsEnable());
->>>>>>> db20e11 (second commit)
 
 	if(shareMode == MCSYNC_SHARE_MODE_NORMAL_ENABLE)
 	{
         if(BtAwsMce_IsDefaultRolePartner())
         {
-<<<<<<< HEAD
-            supportedState = APP_NVKEY_GetSupportedStateByEventCode(KEY_AGENT_STOPS_SHARE_MODE);
-            APP_MCSYNC_SendSyncKeyInfo(KEY_AGENT_STOPS_SHARE_MODE, supportedState);
-=======
             supportedState = APP_NVKEY_GetSupportedStateByEventCode(KEY_MASTER_SHARE_MODE_STOP);
             APP_MCSYNC_SendSyncKeyInfo(KEY_MASTER_SHARE_MODE_STOP, supportedState);
->>>>>>> db20e11 (second commit)
         }
         else
         {
@@ -1856,12 +1608,6 @@ void APP_MCSync_Share_ExitMode(void)
     {
         app_MCSync_Share_FollowerStop();        
     }
-<<<<<<< HEAD
-	else
-	{
-		app_MCSync_Share_ClearCtl();
-	}
-=======
 	else if(appShareMode == APP_SHARE_MODE_FOLLOWER && BtAwsMce_IsDefaultRolePartner())
 	{
        supportedState = APP_NVKEY_GetSupportedStateByEventCode(KEY_FOLLOWER_SHARE_MODE_STOP);
@@ -1888,7 +1634,6 @@ void APP_MCSync_Share_ExitMode(void)
 	}
 
 	APP_MCSync_Share_SetMode(APP_SHARE_MODE_OFF);
->>>>>>> db20e11 (second commit)
     
 }
 
@@ -1927,17 +1672,6 @@ BOOL APP_MCSync_Share_IsKeyNeedSync(U16 keyEventCode)
     {
 		case KEY_SHARE_PAIRING_START:
 		case KEY_SHARE_PAIRING_STOP:
-<<<<<<< HEAD
-		case KEY_AGENT_STARTS_SHARE_MODE:
-		case KEY_AGENT_STOPS_SHARE_MODE:
-		case KEY_FOLLOWER_STARTS_SHARE_MODE:
-		case KEY_AGENT_TOGGLE_SHARE_MODE:
-		case KEY_FOLLOWER_TOGGLE_SHARE_MODE:
-			return TRUE;
-		case KEY_FOLLOWER_STOPS_SHARE_MODE:
-			DBG_LOG_APP_MCSYNC("[APP_MCSync] follower stop key, state:%d", 1, app_MCSync_Share_GetState());
-			if(app_MCSync_Share_GetState() == APP_SHARE_STATE_ENTERED_MODE)
-=======
 		case KEY_MASTER_SHARE_MODE_START:
 		case KEY_MASTER_SHARE_MODE_STOP:
 		case KEY_FOLLOWER_SHARE_MODE_START:
@@ -1947,7 +1681,6 @@ BOOL APP_MCSync_Share_IsKeyNeedSync(U16 keyEventCode)
 		case KEY_FOLLOWER_SHARE_MODE_STOP:
 			DBG_LOG_APP_MCSYNC("[APP_MCSync] follower stop key, state:%d", 1, APP_MCSync_Share_GetState());
 			if(APP_MCSync_Share_GetState() == APP_SHARE_STATE_ENTERED_MODE)
->>>>>>> db20e11 (second commit)
 				return TRUE;
 			else
 				return FALSE;
@@ -1966,13 +1699,8 @@ BOOL APP_MCSync_Share_IsKeyEventAllowed(U16 keyEventCode)
 		switch(keyEventCode)
 		{
 			case KEY_POWER_OFF:
-<<<<<<< HEAD
-			case KEY_FOLLOWER_STOPS_SHARE_MODE:
-			case KEY_FOLLOWER_TOGGLE_SHARE_MODE:
-=======
 			case KEY_FOLLOWER_SHARE_MODE_STOP:
 			case KEY_FOLLOWER_SHARE_MODE_TOGGLE:
->>>>>>> db20e11 (second commit)
 				value = TRUE;
 				break;
 				
@@ -2030,11 +1758,7 @@ void APP_MCSync_Share_WriteCurentIACCfmHandler(U8 status)
 void APP_MCSync_Share_SyncFollowerDiscStatusHandler(U8 isFollowerIFPkt, U8 isOnlyForFollower)
 {
 	U8 shareMode = BtMCSync_GetShareMode();
-<<<<<<< HEAD
-	U8 plusState = app_MCSync_Share_GetState();
-=======
 	U8 plusState = APP_MCSync_Share_GetState();
->>>>>>> db20e11 (second commit)
 
 	DBG_LOG_APP_MCSYNC( "[APP_MCSync][Share] FollowerDiscStatusHandler, role:0x%x, share mode:%d, share state:%d, isFPkt:%d", 
 		4, BtAwsMce_GetDefaultRole(), shareMode, plusState, isFollowerIFPkt);
@@ -2043,19 +1767,12 @@ void APP_MCSync_Share_SyncFollowerDiscStatusHandler(U8 isFollowerIFPkt, U8 isOnl
 	if(BtAwsMce_IsDefaultRoleAgent() && shareMode == MCSYNC_SHARE_MODE_NORMAL_ENABLE
         && plusState == APP_SHARE_STATE_ENTERED_MODE && isFollowerIFPkt == TRUE)
     {
-<<<<<<< HEAD
-    	DBG_LOG_APP_MCSYNC( "[APP_MCSync][Share] agent send follower disc 2 times", 0);
-		APP_MCSYNC_SendSyncFollowerDisc(FALSE, TRUE);
-		FW_SetTimer(&gAppMCSyncShareTimerHandle, APP_SHARE_TIMER_AGENT_SEND_FOLLOWER_DISC_IF_REPEAT_TIMER, 
-			NULL, 0, 100);		
-=======
     	DBG_LOG_APP_MCSYNC( "[APP_MCSync][Share] agent send follower disc 3 times", 0);
 		APP_MCSYNC_SendSyncFollowerDisc(FALSE, TRUE);
 		FW_SetTimer(&gAppMCSyncShareTimerHandle, APP_SHARE_TIMER_AGENT_SEND_FOLLOWER_DISC_IF_REPEAT_TIMER, 
 			NULL, 0, 100);
 		FW_SetTimer(&gAppMCSyncShareTimerHandle, APP_SHARE_TIMER_AGENT_SEND_FOLLOWER_DISC_IF_REPEAT_TIMER, 
 			NULL, 0, 200);
->>>>>>> db20e11 (second commit)
 
 	}
     else if(shareMode == MCSYNC_SHARE_MODE_FOLLOWER_ENABLE 
@@ -2106,28 +1823,17 @@ U8 APP_MCSync_Share_FollowerFilter(BD_ADDR_T *pBdAddr, U8 role)
 		return role;
 	}
 	
-<<<<<<< HEAD
-	plusState = app_MCSync_Share_GetState();
-	
-	DBG_LOG_APP_MCSYNC("[APP_MCSync][Share] Follower Filter: role:0x%x, plusState:%d", 2, role, plusState);
-	
-
-=======
 	plusState = APP_MCSync_Share_GetState();
 	
 	DBG_LOG_APP_MCSYNC("[APP_MCSync][Share] Follower Filter: role:0x%x, plusState:%d, share linkloss:%d", 3, 
 		role, plusState, APP_MCSync_Share_GetLinkLoss());
 	
->>>>>>> db20e11 (second commit)
 	if(role == 0x51 && APP_MCSync_Share_GetLinkLoss() &&
 		APP_Conn_GetAgLinkState() != LINK_CONNECTED)
 	{
 		app_MCSync_Share_AgentStop();
 		APP_MCSync_Share_SetLinkLoss(TRUE);
-<<<<<<< HEAD
-=======
 		APP_State_ConnectabilityHandle(CMD_SET_CONNECTABLE);
->>>>>>> db20e11 (second commit)
 	}
 	
 	if(role & SHARE_FOLLOWER_NUMBER_1_FILTER)
@@ -2173,12 +1879,9 @@ U8 APP_MCSync_Share_FollowerFilter(BD_ADDR_T *pBdAddr, U8 role)
 		|| plusState == APP_SHARE_STATE_ENTERED_MODE || plusState == APP_SHARE_STATE_NONE))
 	{
 		FW_ReleaseTimer(&gAppMCSyncShareTimerHandle, APP_SHARE_TIMER_SHARE_AGENT_RECONNECT, 0);
-<<<<<<< HEAD
-=======
 
 		PM_Sniff_SetLinkPolicyDisableAllMode(APP_GetServiceBdAddr());
 		BtSetAclDetachTimeout(APP_GetServiceBdAddr()->addr, 2500);
->>>>>>> db20e11 (second commit)
 		
 		app_MCSync_Share_SetState(APP_SHARE_STATE_ENTERED_MODE, APP_SHARE_SUBSTATE_NONE);
 		
@@ -2214,8 +1917,6 @@ U8 APP_MCSync_Share_GetLinkLoss(void)
 /**************************************************************************************************
 * Public (Share NVKEY)
 **************************************************************************************************/
-<<<<<<< HEAD
-=======
 U8 APP_MCSync_Share_GetState(void)
 {
 	return gAppShareModeCtrl.state;
@@ -2228,6 +1929,5 @@ bool APP_MCSync_IsShareConn(void)
 	else
 		return FALSE;
 }
->>>>>>> db20e11 (second commit)
 
 #endif

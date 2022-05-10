@@ -164,10 +164,7 @@ typedef enum
     FUNC_VP_CPD,
     FUNC_DUMP_STREAM1,
     FUNC_DUMP_STREAM2,
-<<<<<<< HEAD
-=======
     FUNC_AU_DRC2,
->>>>>>> db20e11 (second commit)
     FUNC_PEQ_SPEAKER,
     FUNC_AUDIO_BIST,
     FUNC_PURE_DRC,
@@ -180,11 +177,7 @@ typedef enum
     FUNC_INS,
     FUNC_AFC,
     FUNC_PEQ_AT,
-<<<<<<< HEAD
-    FUNC_AT_DRC = 0x40,
-=======
     FUNC_AT_DRC = 0x41,
->>>>>>> db20e11 (second commit)
     FUNC_AT_NR,
     FUNC_AT_AGC,
     FUNC_CLK_SKEW_UL,
@@ -201,19 +194,12 @@ typedef enum
     FUNC_TX_EQ,
     FUNC_RANDOM_NOISE,
     FUNC_POWER_DETECT,
-<<<<<<< HEAD
-=======
 	FUNC_AUDIO_PLC,
->>>>>>> db20e11 (second commit)
     FUNC_SAMPLE,
 
     DSP_SRC = DSP_FUNC_TYPE-1,
 
-<<<<<<< HEAD
-    DSP_FEATURE_MAX_NUM = 0x51,
-=======
     DSP_FEATURE_MAX_NUM = FUNC_SAMPLE+1,
->>>>>>> db20e11 (second commit)
     FUNC_CUSTOM_A,
     FUNC_CUSTOM_B,
     FUNC_CUSTOM_C,
@@ -1024,17 +1010,11 @@ uint16_t stream_function_get_codec_input_size(void* para);
 /**
  * @}
  */
-<<<<<<< HEAD
-/**
- * @}
- */
-=======
 uint8_t stream_codec_get_mute_flag(void *para);
 /**
  * @}
  */
 VOID stream_codec_set_mute_flag(void *para, uint8_t value);
->>>>>>> db20e11 (second commit)
 
 /**
  * @}

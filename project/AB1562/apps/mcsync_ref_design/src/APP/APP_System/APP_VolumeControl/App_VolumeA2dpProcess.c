@@ -73,11 +73,7 @@ static void app_VolA2dp_SetLink(BD_ADDR_T *pBdAddr, U8 soundLevel, bool isLocalT
 		APP_VolA2dp_SetCurrentSoundLevel(pBdAddr, soundLevel);
 		if(isLocalTriggered)
 		{
-<<<<<<< HEAD
-			#ifdef AVRCP_Profile
-=======
 			#ifdef AIR_AVRCP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 			APP_Avrcp_SendVolumeChangeNotification(pBdAddr, soundLevel);
 			#endif
 		}
@@ -180,11 +176,7 @@ void APP_VolA2dp_VolumeUpDown(BD_ADDR_T *pBdAddr, BOOL isVolumeUp, BOOL isFollow
 		}
 	}
 
-<<<<<<< HEAD
-	#ifdef MCSYNC_SHARE_MODE
-=======
 	#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 	if(BtMCSync_GetShareMode() == MCSYNC_SHARE_MODE_FOLLOWER_ENABLE)
 	{
 		APP_MCSYNC_SendSyncFollowerSoundLevel(soundLevel, 1);
@@ -203,11 +195,7 @@ void APP_VolA2dp_RemoteHandler(BD_ADDR_T *pBdAddr, U8 soundLevel)
 {
     DBG_LOG_APP_SYSTEM( "[Volume]A2DP Remote set soundlevel:%d", 1, soundLevel);
 	app_VolA2dp_SetLink(pBdAddr, soundLevel, FALSE);
-<<<<<<< HEAD
-	#ifdef A2DP_Profile
-=======
 	#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 	app_VolA2dp_SendVolumeToDSP(pBdAddr, soundLevel);
 	#endif
 }

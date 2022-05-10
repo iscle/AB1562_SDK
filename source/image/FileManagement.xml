@@ -14,14 +14,11 @@
 	  <FileInfo type="1" language="0" codec="3" file_name="C_connected_bp56.msbc" folder="Share"/>
 	</File>
 	
-<<<<<<< HEAD
-=======
 	<File ID="0xFFFF" include="true" partition="1">
 	 <FileInfo type="0" address="" length="" />
 	 <FileInfo type="3" language="0" codec="" file_name="ui.nvr.lz4" folder="Share" />
 	</File>
 
->>>>>>> db20e11 (second commit)
 	<!-- 0x0100~0x0FFF for VC files -->
 	<File ID="0x0100" include="true" partition="0">
 	  <FileInfo type="0" address="" length=""/>

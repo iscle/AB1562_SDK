@@ -90,8 +90,6 @@ typedef struct APP_MCSYNC_DATA_FOLLOWER_DISC_T
 	U8 isOnlyForFollower;
 }APP_MCSYNC_DATA_FOLLOWER_DISC_T;
 
-<<<<<<< HEAD
-=======
 typedef struct APP_MCSYNC_TAKE_OVER_STATE_T
 {
 	U8 takeOverState;
@@ -101,20 +99,11 @@ typedef struct APP_MCSYNC_NOTICE_MASTER_PARTNER_TO_ENTER_SHARE_MODE_T
 {
 	U8 enterShareMode;
 }APP_MCSYNC_NOTICE_MASTER_PARTNER_TO_ENTER_SHARE_MODE_T;
->>>>>>> db20e11 (second commit)
 
 /**************************************************************************************************
 * Structure gva group
 **************************************************************************************************/
-<<<<<<< HEAD
-typedef struct APP_MCSYNC_GFP_INFO_STRU
-{
-	U32 length;
-	U8 data[1];
-}APP_MCSYNC_GFP_INFO_STRU;
-=======
 
->>>>>>> db20e11 (second commit)
 
 /**************************************************************************************************
 * Structure ama group
@@ -200,8 +189,6 @@ typedef struct APP_MCSYNC_DATA_KEYCODE_T
 * Structure newton group
 **************************************************************************************************/
 
-<<<<<<< HEAD
-=======
 /**************************************************************************************************
 * Structure Tile group
 **************************************************************************************************/
@@ -218,7 +205,6 @@ typedef struct APP_MCSYNC_TILE_INFO_STRU
 	U8 streamState;//HFP and A2DP Streaming State
 }APP_MCSYNC_TILE_INFO_STRU;
 
->>>>>>> db20e11 (second commit)
 
 /**************************************************************************************************
 *Public API

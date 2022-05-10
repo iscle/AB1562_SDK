@@ -65,18 +65,12 @@
 #include "App_Customer_Func.h"
 #include "App_Customer.h"
 #include "App_Media.h"
-<<<<<<< HEAD
-#include "gfps_api.h"
-
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_GFP_ENABLE
 #include "gfps_api.h"
 #include "App_Ble.h"
 #endif
 
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 #include "App_MCSync_Share.h"
 #endif
 
@@ -124,11 +118,7 @@ static void app_SmtChgCse_MCSyncConntingHandler(void);
 #endif
 
 
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 static U32 app_SmtChgCse_MCSyncShareHandler(Handler handler, U16 id, void *msg, U32 ext_id);
 #endif
 
@@ -140,22 +130,14 @@ static HandlerData gAppSccTimerHandle = { app_SmtChgCse_TimerHandler };
 HandlerData gAppSccRsvHandle = { app_SmtChgCse_RsvHandler };
 static APP_SMTCHGCSE_CTL_STRU gAppSccCtl;
 
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 static HandlerData gAppMCSyncShareHandle = { app_SmtChgCse_MCSyncShareHandler };
 #endif
 
 /**************************************************************************************************
 * Static Functions
 **************************************************************************************************/
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 static U32 app_SmtChgCse_MCSyncShareHandler(Handler handler, U16 id, void *msg, U32 ext_id)
 {
 	UNUSED(handler);UNUSED(msg); UNUSED(ext_id);
@@ -170,17 +152,10 @@ static U32 app_SmtChgCse_MCSyncShareHandler(Handler handler, U16 id, void *msg, 
 			break;
 		case CASE_LONG_PATTERN:
 			DBG_LOG_APP_SMART_CASE( "[APP SMART V2] long pattern expired, trigger share agent", 0);
-<<<<<<< HEAD
-			
-			if(BtAwsMce_IsDefaultRoleAgent())
-				APP_MCSync_Share_KeyAgentStart();
-			
-=======
 
 			if(BtAwsMce_IsDefaultRoleAgent())
 				APP_MCSync_Share_KeyAgentStart();
 
->>>>>>> db20e11 (second commit)
 			break;
 	}
 
@@ -193,11 +168,7 @@ static U32 app_SmtChgCse_RsvHandler(Handler handler, U16 id, void *msg, U32 ext_
 	UNUSED(handler);
 	UNUSED(msg);;
 
-<<<<<<< HEAD
-	if(APP_ChgCase_GetCaseType() == CASE_TYPE_SMART)
-=======
         if(APP_ChgCase_GetCaseType() == CASE_TYPE_SMART)
->>>>>>> db20e11 (second commit)
 	{
 		switch(id)
 			{
@@ -226,36 +197,23 @@ static U32 app_SmtChgCse_RsvHandler(Handler handler, U16 id, void *msg, U32 ext_
 			{
 				case SMARTV2_CASE_BATTERY_IND: //5
 					APP_Customer_LidOnBatteryHanler(ext_id);
-<<<<<<< HEAD
-=======
 					APP_Battery_SetSmartCaseBatLevel(ext_id);
->>>>>>> db20e11 (second commit)
 					break;
 				case SMARTV2_KEY_IND:
 					{
 						U16 keyCode;
 						U32 supportedState;
 						U32 stateBitMask;
-<<<<<<< HEAD
-						#ifdef MCSYNC_SHARE_MODE
-=======
 						#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 						if(ext_id == 0)
                         {
 							DBG_LOG_APP_SMART_CASE( "[APP SMART V2] set share mode short pattern, timer:13.5s", 0);
 							APP_Media_PushMediaEvent(MEDIA_EVT_SHARE_MODE_SHORT_PATTERN);
 							APP_Media_PushMediaEvent(MEDIA_EVT_SHARE_MODE_SHORT_PATTERN);
 							APP_Media_PushMediaEvent(MEDIA_EVT_SHARE_MODE_SHORT_PATTERN);
-<<<<<<< HEAD
-									
-							FW_SetTimer((Handler)&gAppMCSyncShareHandle, CASE_SHORT_PATTERN, NULL, 0, 13500);
-            		
-=======
 
 							FW_SetTimer((Handler)&gAppMCSyncShareHandle, CASE_SHORT_PATTERN, NULL, 0, 13500);
 
->>>>>>> db20e11 (second commit)
                             return 0;
                         }
                         else if(ext_id == 1)
@@ -280,31 +238,19 @@ static U32 app_SmtChgCse_RsvHandler(Handler handler, U16 id, void *msg, U32 ext_
 							APP_Customer_KeyIndex1Handler();
 						}
 						#endif
-<<<<<<< HEAD
-                        #if 0//def MCSYNC_SHARE_MODE
-=======
                         #if 0//def AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
                         else if(ext_id == 2)
                         {
                             if(BtAwsMce_IsDefaultRoleAgent())
                                 APP_MCSync_Share_KeyAgentStart();
-<<<<<<< HEAD
-                            
-=======
 
->>>>>>> db20e11 (second commit)
                             return 0;
                         }
                         else if(ext_id == 3)
                         {
                             if(BtAwsMce_IsDefaultRoleAgent())
                                 APP_MCSync_Share_KeyFollowerStart();
-<<<<<<< HEAD
-                            
-=======
 
->>>>>>> db20e11 (second commit)
                             return 0;
                         }
                         #endif
@@ -326,12 +272,9 @@ static U32 app_SmtChgCse_RsvHandler(Handler handler, U16 id, void *msg, U32 ext_
 					}
 					break;
 				case SMARTV2_USR1_IND:
-<<<<<<< HEAD
-=======
                     #ifdef AIR_GFP_ENABLE
                     gfp_ble_adv_update(GFP_UPDATE_BLE_ADV_REASON_LID_OFF);
                     #endif
->>>>>>> db20e11 (second commit)
 					APP_Customer_SmartUsr1IndHandler();
 					break;
 				case SMARTV2_USR2_IND:
@@ -431,14 +374,6 @@ static void app_SmtChgCse_LidOnHandler(void)
 	DBG_LOG_APP_SMART_CASE( "[APP_SmtChgCse]app_SmtChgCse_LidOnHandler checktimer:%d", 1,
 		FW_CheckTimer(&gAppSccTimerHandle, TIMER_CHECK_STATE, 0));
 
-<<<<<<< HEAD
-	AudioDsp_ANCPassThruLidOnHandler();
-
-#ifdef PROFILE_GFP_ENABLE
-    App_gfp_set_agent_case_LidOn();
-#endif 
-
-=======
     #ifdef AIR_GFP_ENABLE
     if (!gfp_ble_adv_is_enabled())
     {
@@ -448,7 +383,6 @@ static void app_SmtChgCse_LidOnHandler(void)
     #endif
 
 	AudioDsp_ANCPassThruLidOnHandler();
->>>>>>> db20e11 (second commit)
 
 	if(!APP_SmtChgCse_IsConnToAGNeeded())
 		APP_Mcsync_SetNotReconnMask(MCS_RECONN_MASK_CHARGER_CASE);
@@ -460,11 +394,7 @@ static void app_SmtChgCse_LidOnHandler(void)
 	#endif
 	APP_VolSetting_SetSpeakerMuteOn(SPKR_MUTE_MASK_CHG_CASE);
 	nvkey_hdl_set_state(NVKEY_HDL_STATE_MASK_APP_SMART_CASE);
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 	APP_MCSync_Share_ExitMode();
 #endif
 	#ifdef SMART_CHG_CSE_LIDON_RECONNECT
@@ -473,14 +403,6 @@ static void app_SmtChgCse_LidOnHandler(void)
 		case MCSYNC_LINK_CONNECTED:
 			switch(connState)
 			{
-<<<<<<< HEAD
-				case LINK_CONNECTED:
-					FW_SetTimer(&gAppSccTimerHandle, TIMER_CHECK_STATE, NULL, 0, (APP_IsActiveAudioDevInCall()) ? 500 : ChgCase_Smart_GetCaseRHOTimer());
-					break;
-			}
-			break;
-
-=======
 				//charger out -> lid on
 				case LINK_CONNECTED:
 				//lid off -> lid on, acl is disconnecting, need timer to reconnect phone after acl disc
@@ -488,7 +410,6 @@ static void app_SmtChgCse_LidOnHandler(void)
 					FW_SetTimer(&gAppSccTimerHandle, TIMER_CHECK_STATE, NULL, 0, (APP_IsActiveAudioDevInCall()) ? 500 : ChgCase_Smart_GetCaseRHOTimer());
 			}
 		//fall through, for lid off -> lid on, need power on.
->>>>>>> db20e11 (second commit)
 		default:
 			if(!APP_PowerOff_IsPowerOn())
 			{
@@ -667,12 +588,6 @@ static void app_SmtChgCse_LidOffHandler(void)
 
 	DBG_LOG_APP_SMART_CASE( "[APP_SmtChgCse] LidOff, McsState:%s(%d), role:0x%x", 3, APP_McSyncLinkString[mcsyncState], mcsyncState, BtMCSync_GetCurrentRole());
 
-<<<<<<< HEAD
-	APP_VolSetting_SetSpeakerMuteOn(SPKR_MUTE_MASK_CHG_CASE);
-	nvkey_hdl_set_state(NVKEY_HDL_STATE_MASK_APP_SMART_CASE);
-
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_GFP_ENABLE
     gfp_ble_adv_update(GFP_UPDATE_BLE_ADV_REASON_LID_OFF);
 #endif
@@ -681,7 +596,6 @@ static void app_SmtChgCse_LidOffHandler(void)
 	nvkey_hdl_set_state(NVKEY_HDL_STATE_MASK_APP_SMART_CASE);
 
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 	APP_MCSync_Share_ExitMode();
 #endif
 	if(!APP_SmtChgCse_IsConnToAGNeeded())
@@ -701,10 +615,7 @@ static void app_SmtChgCse_OutOfCaseHandler(void)
 	DBG_LOG_APP_SMART_CASE( "[APP_SmtChgCse] OutOfCase, McsState:%s(%d), ConnState:%s(%d), role0x%x", 5, APP_McSyncLinkString[mcsyncState], mcsyncState, APP_LinkConnString[connState], connState, BtMCSync_GetCurrentRole());
 
 	APP_Media_StopMediaEvt(MEDIA_EVT_SLC_DISCONNECTED);
-<<<<<<< HEAD
-=======
 	APP_Conn_ReleaseTimer(TIMER_ID_DISCONNECTED_VP);
->>>>>>> db20e11 (second commit)
 
 	#ifndef SMART_CHG_CSE_LIDON_RECONNECT
 	PM_SetRejectConnectInd(FALSE);
@@ -719,13 +630,6 @@ static void app_SmtChgCse_OutOfCaseHandler(void)
 	else
 		APP_Mcsync_ClearNotReconnMask(MCS_RECONN_MASK_CHARGER_CASE);
 
-<<<<<<< HEAD
-#ifdef PROFILE_GFP_ENABLE
-    App_gfp_set_agent_case_LidOff();
-#endif 
-
-=======
->>>>>>> db20e11 (second commit)
 	#ifdef SMART_CHG_CSE_LIDON_RECONNECT
 	if(mcsyncState == MCSYNC_LINK_CONNECTED)
 	{
@@ -936,15 +840,10 @@ static void app_SmtChgCse_AgentConnHandler(void)
 	APP_ReConn_Reconnect(RECONNECT_PWR_ON);
 	if(APP_System_IsMpTestMode() || (!(APP_NO_DISCAVERABLE_IN_LINE_IN_FEAT && APP_State_CheckInLineInState()) && !(APP_NO_DISCAVERABLE_IN_FM_FEAT && APP_State_CheckInFMState())))
 	{
-<<<<<<< HEAD
-		if(APP_SmtChgCse_IsConnToAGNeeded())
-			APP_State_DiscoverabilityHandle(CMD_SET_NORMAL_DISCOVERABLE);
-=======
 #if 0 // (337)entry disdcoveralbe mode will cancel re-connect SP
 		if(APP_SmtChgCse_IsConnToAGNeeded())
 			APP_State_DiscoverabilityHandle(CMD_SET_NORMAL_DISCOVERABLE);
 #endif
->>>>>>> db20e11 (second commit)
 	}
 }
 
@@ -1106,11 +1005,7 @@ BOOL APP_SmtChgCse_GetIsNeedRHO(void)
 }
 
 BOOL APP_SmtChgCse_IsConnToAGNeeded(void)
-<<<<<<< HEAD
-{	
-=======
 {
->>>>>>> db20e11 (second commit)
 	#ifdef SMART_CHG_CSE_DEVELOPMENT
 
 		U8 sccPState = APP_GetPartnerSmartChargeCaseState();
@@ -1122,38 +1017,22 @@ BOOL APP_SmtChgCse_IsConnToAGNeeded(void)
 
 			DBG_LOG_APP_SMART_CASE( "[APP_SmtChgCse] sccPState:%d, sccAState:%d, mcsyncState:%d, connState:%d", 3, sccPState, sccAState, mcsyncState);
 
-<<<<<<< HEAD
-			#ifndef SMART_CHG_CSE_LIDON_RECONNECT	
-=======
 			#ifndef SMART_CHG_CSE_LIDON_RECONNECT
->>>>>>> db20e11 (second commit)
 				if((mcsyncState == MCSYNC_LINK_CONNECTED && sccPState == STATE_OUT_OF_CASE) || sccAState == STATE_OUT_OF_CASE)
 				{
 					return TRUE;
 				}
 			#else
-<<<<<<< HEAD
-				if((mcsyncState == MCSYNC_LINK_CONNECTED && (sccPState == STATE_OUT_OF_CASE || sccPState == STATE_LID_OPEN)) 
-=======
 				if((mcsyncState == MCSYNC_LINK_CONNECTED && (sccPState == STATE_OUT_OF_CASE || sccPState == STATE_LID_OPEN))
->>>>>>> db20e11 (second commit)
 					||(sccAState == STATE_OUT_OF_CASE || sccAState == STATE_LID_OPEN))
 				{
 					return TRUE;
 				}
-<<<<<<< HEAD
-			#endif 
-			
-			return FALSE;
-		}
-		
-=======
 			#endif
 
 			return FALSE;
 		}
 
->>>>>>> db20e11 (second commit)
 	#endif
 
 	return FALSE;

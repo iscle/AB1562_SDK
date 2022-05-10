@@ -54,10 +54,6 @@ extern "C" {
 /* This port is for task running period syslog output port. This Port can be USB or UART types
 * If your want use USB port, must be define  MTK_USB_ENABLED  in file( such as:
 * ./GCC/feature_ab1552_evb.mk).*/
-<<<<<<< HEAD
-#define     CONFIG_SYSLOG_RUNNING_STAGE_PORT    MUX_UART_1
-#define     CONFIG_SYSLOG_BAUDRATE              HAL_UART_BAUDRATE_921600
-=======
 #ifdef MTK_DEBUG_PLAIN_LOG_ENABLE
     #define     CONFIG_SYSLOG_RUNNING_STAGE_PORT    MUX_UART_1
     #define     CONFIG_SYSLOG_BAUDRATE              HAL_UART_BAUDRATE_921600
@@ -65,29 +61,10 @@ extern "C" {
     #define     CONFIG_SYSLOG_RUNNING_STAGE_PORT    MUX_UART_0
     #define     CONFIG_SYSLOG_BAUDRATE              HAL_UART_BAUDRATE_3000000
 #endif
->>>>>>> db20e11 (second commit)
 
 /*This port only for RACE communication port, And can be USB or UART Port.
 * If you want use USB Port for ATCI, must be define   MTK_ATCI_VIA_PORT_SERVICE  &
 * MTK_PORT_SERVICE_ENABLE   in file( such as:./GCC/feature_ab1552_evb.mk). */
-<<<<<<< HEAD
-#define     CONFIG_RACE_PORT            MUX_USB_COM_2  //SERIAL_PORT_DEV_USB_COM1
-#define     CONFIG_RACE_BAUDRATE        HAL_UART_BAUDRATE_3000000
-
-#define   GET_SERIAL_PORT_TYPE_INDEX_FROM_PORT_DEV(port_dev, type, idx)   \
-         do{                                                            \
-                if(port_dev <= MUX_UART_END) {         \
-                    type = SYSLOG_PORT_TYPE_UART;                       \
-                    idx  = port_dev - MUX_UART_BEGIN;  \
-                } else if(port_dev <= MUX_USB_END) {   \
-                    type = SYSLOG_PORT_TYPE_USB;                        \
-                    idx  = port_dev - MUX_USB_BEGIN;   \
-                } else {                                                \
-                    type = SYSLOG_PORT_TYPE_UART;                       \
-                    idx  = 0;                                           \
-                }                                                       \
-            }while(0)                                                   \
-=======
 #define     CONFIG_RACE_PORT            MUX_UART_0  //SERIAL_PORT_DEV_USB_COM1
 #define     CONFIG_RACE_BAUDRATE        HAL_UART_BAUDRATE_3000000
 
@@ -104,7 +81,6 @@ extern "C" {
                 idx  = 0;                           \
             }                                       \
         }while(0)                                   \
->>>>>>> db20e11 (second commit)
 
 
 

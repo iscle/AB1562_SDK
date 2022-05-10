@@ -130,10 +130,7 @@ void APP_PowerOn_Loader(void)
 	DBG_LOG_APP_SYSTEM( "[APP_PWRON] APP_SYSTEM_PowerOnHandler, power on:%d", 1, APP_PowerOff_IsPowerOn());
 
 	APP_Media_StopMediaEvt(MEDIA_EVT_SLC_DISCONNECTED);
-<<<<<<< HEAD
-=======
     APP_Conn_ReleaseTimer(TIMER_ID_DISCONNECTED_VP);
->>>>>>> db20e11 (second commit)
 
 	if(APP_PowerOff_IsPowerOn())
 	{
@@ -227,10 +224,7 @@ void APP_PowerOn_Loader(void)
         DBG_LOG_APP_SYSTEM( "[APP_PWRON] Charger In Power Off or init low bat", 0);
         //if(app_ChgBat_IsBelowInitPercent())
         {
-<<<<<<< HEAD
-=======
 	        APP_SetPowerOnStatus(FALSE);
->>>>>>> db20e11 (second commit)
             APP_PowerOff_SystemOff();
             return;
         }
@@ -332,11 +326,7 @@ void APP_PowerOn_Loader(void)
 	//#endif
 	APP_InEarDetection_Init();
 
-<<<<<<< HEAD
-	APP_AE_ProcessKeyEvent(NULL, 0);
-=======
 	//APP_AE_ProcessKeyEvent(NULL, 0);
->>>>>>> db20e11 (second commit)
 	AudioDsp_ANCPassThruOnByNVKeySettings();
 
 	#ifdef MODULE_LOG_FEATURE

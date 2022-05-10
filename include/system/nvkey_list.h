@@ -143,10 +143,7 @@ typedef enum
     NVKEYID_BT_BLE_BLE_ADV_NAME                        = 0x3901,
     NVKEYID_BT_BLE_BLE_ADV_ENABLE                      = 0x3902,
     NVKEYID_BT_BLE_BLE_SCAN_RESPONSE                   = 0x3903,
-<<<<<<< HEAD
-=======
     NVKEYID_BT_BLE_BLE_ADV_DATA_USER_DEFINED           = 0x3904,
->>>>>>> db20e11 (second commit)
     NVKEYID_FOTA_FOTA_PARA_RECONNECT                   = 0x3A00,
     NVKEYID_DSP_FW_PARA_AUDIOSETTING                   = 0xE000,
     NVKEYID_DSP_FW_PARA_DATADUMP                       = 0xE001,
@@ -215,10 +212,7 @@ typedef enum
     NVKEYID_DSP_ALG_PARA_AT_AU_CPD                     = 0xE108,
     NVKEYID_DSP_ALG_PARA_INS                           = 0xE110,
     NVKEYID_DSP_ALG_PARA_RESERVED                      = 0xE120,
-<<<<<<< HEAD
-=======
     NVKEYID_DSP_ALG_PARA_NON_FOTA_RESERVED             = 0xE121,
->>>>>>> db20e11 (second commit)
     NVKEYID_DSP_ALG_PARA_VC                            = 0xE130,
     NVKEYID_DSP_ALG_PARA_PLC                           = 0xE140,
     NVKEYID_DSP_ALG_PARA_AEC_NR                        = 0xE150,
@@ -421,10 +415,7 @@ typedef enum
     NVKEYID_IAP2_CONFIG_DATA					   	   = 0xF2F4,
     NVKEYID_PROFILE_O_DATA                             = 0xF2F5,
     NVKEYID_FACTORY_DEFAULT_SETTING_VALUE			   = 0xF2F6,
-<<<<<<< HEAD
-=======
     NVKEYID_GFP_PERSONALIZED_NAME                      = 0xF2F7,
->>>>>>> db20e11 (second commit)
     NVKEYID_CUSTOMER_PARA_USED0_00                     = 0xF400,
     NVKEYID_CUSTOMER_PARA_USED0_01                     = 0xF401,
     NVKEYID_CUSTOMER_PARA_USED0_02                     = 0xF402,

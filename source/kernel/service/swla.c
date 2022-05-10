@@ -84,11 +84,7 @@ static void SLA_get_region(uint32_t *pxBase, uint32_t *pxLen)
     *pxLen = SLA_WORKING_BUFFER_SIZE;
 }
 
-<<<<<<< HEAD
-static void SLA_MemoryCallbackInit(void)
-=======
 void SLA_MemoryCallbackInit(void)
->>>>>>> db20e11 (second commit)
 {
     /* get swla region location and length according to layout */
     uint32_t xBase, xLen;
@@ -254,8 +250,6 @@ ATTR_TEXT_IN_IRAM void SLA_CustomLogging(const char *pxCustomLabel, SA_ACTION_t 
 
 }
 
-<<<<<<< HEAD
-=======
 #if defined(MTK_SWLA_ENABLE_O2)
 volatile uint32_t UART_PORT[(hal_uart_port_t)2]={0xA0030000,0xA3070000};
 
@@ -432,5 +426,4 @@ ATTR_TEXT_IN_TCM void uart_debug_clear_fifo(hal_uart_port_t port, bool is_rx)
 }
 #endif /*(MTK_SWLA_ENABLE_O2)*/
 
->>>>>>> db20e11 (second commit)
 #endif /* MTK_SWLA_ENABLE */

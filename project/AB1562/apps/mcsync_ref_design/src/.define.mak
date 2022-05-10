@@ -100,21 +100,6 @@ endif
 ifeq ($(MTK_MINIDUMP_ENABLE),y)
 CCFLAG      +=  -DMTK_MINIDUMP_ENABLE
 endif
-<<<<<<< HEAD
-################################################################################
-# Audio
-################################################################################
-ifeq ($(MTK_INEAR_ENHANCEMENT),y)
-CCFLAG      +=  -DMTK_INEAR_ENHANCEMENT_ENABLE
-endif
-
-ifeq ($(MTK_DUALMIC_INEAR),y)
-CCFLAG      +=  -DMTK_DUALMIC_INEAR_ENABLE
-endif
-
-ifeq ($(MTK_3RD_PARTY_NR),y)
-CCFLAG      +=  -DMTK_3RD_PARTY_NR
-=======
 
 ifeq ($(MTK_OFFLINELOG_ENABLE),y)
 CCFLAG      +=  -DMTK_OFFLINELOG_ENABLE
@@ -136,7 +121,6 @@ endif
 
 ifeq ($(AIR_TXNR_MODE),mode_6)
 CCFLAG      +=  -DAIR_TXNR_3RD_PARTY_ENABLE
->>>>>>> db20e11 (second commit)
 endif
 
 ifeq ($(MTK_OPUS_ENCODER_ENABLE),y)
@@ -178,13 +162,8 @@ CCFLAG      +=  -DXIAOAI_TWO_STAGE_OTA
 endif
 endif
 
-<<<<<<< HEAD
-ifeq ($(MP3_VOICE_PROMPT_AUDIO_CTRL),y)
-CCFLAG      +=  -DMP3_VOICE_PROMPT_AUDIO_CTRL
-=======
 ifeq ($(AIR_MP3_VOICE_PROMPT_AUDIO_CTRL_ENABLE),y)
 CCFLAG      +=  -DAIR_MP3_VOICE_PROMPT_AUDIO_CTRL_ENABLE
->>>>>>> db20e11 (second commit)
 endif
 
 ################################################################################
@@ -195,18 +174,6 @@ ifeq ($(PROFILE_AMA_ENABLE),y)
 CCFLAG      +=  -DPROFILE_AMA_ENABLE
 endif
 
-<<<<<<< HEAD
-ifeq ($(PROFILE_GFP_ENABLE),y)
-CCFLAG      +=  -DPROFILE_GFP_ENABLE
-endif
-
-ifeq ($(PROFILE_SWIFT_ENABLE),y)
-CCFLAG      +=  -DPROFILE_SWIFT_ENABLE
-endif
-
-ifeq ($(PROFILE_HEADSET_ENABLE),y)
-CCFLAG      +=  -DPROFILE_HEADSET_ENABLE	
-=======
 ifeq ($(AIR_GFP_ENABLE),y)
 CCFLAG      +=  -DAIR_GFP_ENABLE
 CCFLAG      +=  -DAIR_GFP_MCSYNC_ENALE
@@ -218,7 +185,6 @@ endif
 
 ifeq ($(AIR_HEADSET_PROFILE_ENABLE),y)
 CCFLAG      +=  -DAIR_HEADSET_PROFILE_ENABLE	
->>>>>>> db20e11 (second commit)
 endif
 ################################################################################
 # Project Feature config
@@ -243,21 +209,12 @@ ifeq ($(LOG_PRINT_156X),y)
 CCFLAG      +=  -DLOG_PRINT_156X
 endif
 
-<<<<<<< HEAD
-ifeq ($(AVRCP_Profile),y)
-CCFLAG      +=  -DAVRCP_Profile
-endif
-
-ifeq ($(A2DP_Profile),y)
-CCFLAG      +=  -DA2DP_Profile
-=======
 ifeq ($(AIR_AVRCP_PROFILE_ENABLE),y)
 CCFLAG      +=  -DAIR_AVRCP_PROFILE_ENABLE
 endif
 
 ifeq ($(AIR_A2DP_PROFILE_ENABLE),y)
 CCFLAG      +=  -DAIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 endif
 
 ifeq ($(SMART_CHG_CSE_DEVELOPMENT),y)
@@ -276,13 +233,8 @@ ifeq ($(AIROHA_BT_SPP_ENABLE),y)
 CCFLAG      +=  -DAIROHA_BT_SPP_ENABLE
 endif
 
-<<<<<<< HEAD
-ifeq ($(SMART_CHARGING_RECOVERY_MODE),y)
-CCFLAG      +=  -DSMART_CHARGING_RECOVERY_MODE
-=======
 ifeq ($(AIR_GATT_OVER_BREDR_ENABLE),y)
 CCFLAG      +=  -DAIR_GATT_OVER_BREDR_ENABLE
->>>>>>> db20e11 (second commit)
 endif
 
 ifeq ($(MP3_LOCAL_PLAYBACK),y)
@@ -297,13 +249,6 @@ ifeq ($(CHANNEL_SELECTION_ENABLE),y)
 CCFLAG      +=  -DCHANNEL_SELECTION_ENABLE
 endif
 
-<<<<<<< HEAD
-ifeq ($(CAPTOUCH_FUNCTION_ENABLE),y)
-CCFLAG      +=  -DCAPTOUCH_FUNCTION_ENABLE
-endif
-
-=======
->>>>>>> db20e11 (second commit)
 ifeq ($(ANC_FF_MMI_CTRL),y)
 CCFLAG      +=  -DANC_FF_MMI_CTRL
 endif
@@ -328,51 +273,26 @@ ifeq ($(DO_RHO_IMMEDIATELY),y)
 CCFLAG      +=  -DDO_RHO_IMMEDIATELY
 endif
 
-<<<<<<< HEAD
-ifeq ($(CODEC_SWITCH_WORKAROUND_MI9),y)
-CCFLAG      +=  -DCODEC_SWITCH_WORKAROUND_MI9
-=======
 ifeq ($(AIR_CODEC_SWITCH_WORKAROUND_MI9_ENABLE),y)
 CCFLAG      +=  -DAIR_CODEC_SWITCH_WORKAROUND_MI9_ENABLE
->>>>>>> db20e11 (second commit)
 endif
 
 ifeq ($(SPECIAL_WHITE_LIST_HANDLE),y)
 CCFLAG      +=  -DSPECIAL_WHITE_LIST_HANDLE
 endif
 
-<<<<<<< HEAD
-ifeq ($(CODEC_SWITCH_WORKAROUND_SONY_XPERIA),y)
-CCFLAG      +=  -DCODEC_SWITCH_WORKAROUND_SONY_XPERIA
-endif
-
-ifeq ($(MCSYNC_SHARE_MODE),y)
-CCFLAG      +=  -DMCSYNC_SHARE_MODE
-=======
 ifeq ($(AIR_CODEC_SWITCH_WORKAROUND_SONY_XPERIA_ENABLE),y)
 CCFLAG      +=  -DAIR_CODEC_SWITCH_WORKAROUND_SONY_XPERIA_ENABLE
 endif
 
 ifeq ($(AIR_MCSYNC_SHARE_MODE_ENABLE),y)
 CCFLAG      +=  -DAIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 endif
 
 ifeq ($(AMA_IAP2_SUPPORT_ENABLE),y)
 CCFLAG      +=  -DAMA_IAP2_SUPPORT_ENABLE
 endif
 
-<<<<<<< HEAD
-ifeq ($(APP_TILE_ENABLE),y)
-CCFLAG      +=  -DAPP_TILE_ENABLE
-endif
-ifeq ($(TAKE_OVER_LINK),y)
-CCFLAG      +=  -DTAKE_OVER_LINK
-endif
-
-ifeq ($(PRESSURE_SENSOR),y)
-CCFLAG      +=  -DPRESSURE_SENSOR
-=======
 ifeq ($(AIR_TILE_ADV_ENABLE),y)
 CCFLAG      +=  -DAIR_TILE_ADV_ENABLE
 endif
@@ -382,17 +302,12 @@ endif
 
 ifeq ($(AIR_CAPTOUCH_PRESSURE_SENSOR_ENABLE),y)
 CCFLAG      +=  -DAIR_CAPTOUCH_PRESSURE_SENSOR_ENABLE
->>>>>>> db20e11 (second commit)
 endif
 
 ifeq ($(A2DP_LOW_LATENCY),y)
 CCFLAG      +=  -DA2DP_LOW_LATENCY
 endif
 
-<<<<<<< HEAD
-ifeq ($(DISCONNECT_AGENT_RECOVERY),y)
-CCFLAG      +=  -DDISCONNECT_AGENT_RECOVERY
-=======
 ifeq ($(AIR_AGENT_RECOVERY_MODE_AFTER_DISCONNECTION_FROM_PHONE_ENABLE),y)
 CCFLAG      +=  -DAIR_AGENT_RECOVERY_MODE_AFTER_DISCONNECTION_FROM_PHONE_ENABLE
 endif
@@ -403,5 +318,4 @@ endif
 
 ifeq ($(AIR_PEQ_SPEAKER_ENBALE),y)
 CCFLAG      +=  -DAIR_PEQ_SPEAKER_ENBALE
->>>>>>> db20e11 (second commit)
 endif

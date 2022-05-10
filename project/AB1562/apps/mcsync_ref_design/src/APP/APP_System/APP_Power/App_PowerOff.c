@@ -78,20 +78,12 @@
 #include "App_MCSync_RHO.h"
 #include "App_MCSyncRho_NvkeyHandler.h"
 #include "App_RhoDominator.h"
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 #include "App_MCSync_Share.h" 
 #endif
 #include "App_Ble.h"
 
-<<<<<<< HEAD
-#ifdef PROFILE_GFP_ENABLE
-=======
 #ifdef AIR_GFP_ENABLE
->>>>>>> db20e11 (second commit)
 #include "App_Gfp.h"
 #endif
 
@@ -160,11 +152,7 @@ static U32 app_PowerOff_TimerHandler(Handler handler, U16 id, void *payload, U32
 			if(APP_PowerOff_IsPowerOn())
 				APP_PowerOff_Loader(POWEROFF_REASON_XIAOAI);				
 			break;
-<<<<<<< HEAD
-		#ifdef MCSYNC_SHARE_MODE
-=======
 		#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 		case TIMER_SET_FOLLOWER_POWER_OFF_PKT_TIMEOUT:
 			if(gAppPowerCtl.followerIFPKTRetryCount >= 3)
 			{
@@ -292,11 +280,7 @@ void APP_PowerOff_Loader(U8 reason)
 		case POWEROFF_REASON_KEY:
 			if(BtMCSync_IsFeatureSupport(AWSMCE_SYNC_PWR_OFF_KEY_FEAT))
 			{
-<<<<<<< HEAD
-				#ifdef MCSYNC_SHARE_MODE
-=======
 				#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 				DBG_LOG_APP_SYSTEM( "[APP_PWROFF] Power Off Loader, share mode:%d, role:%d", 2, 
 					BtMCSync_GetShareMode(), BtAwsMce_GetDefaultRole());
 
@@ -339,11 +323,7 @@ void APP_PowerOff_Loader(U8 reason)
 			break;
 		case POWEROFF_REASON_SMARTCASE_POWEROFF:
 			break;
-<<<<<<< HEAD
-		#ifdef MCSYNC_SHARE_MODE
-=======
 		#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 		case POWEROFF_REASON_SYNC:
 			if(MCSYNC_SHARE_MODE_FOLLOWER_ENABLE == BtMCSync_GetShareMode())
 			{
@@ -398,11 +378,7 @@ void APP_PowerOff_Loader(U8 reason)
 	APP_Mcsync_ClearLinkLossBdAddr();
 	APP_System_RoleModeLeave(FALSE, TRUE);
 
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 	APP_MCSync_Share_ExitMode();
 #endif
 	APP_A2dp_GameModeOff();
@@ -421,22 +397,11 @@ void APP_PowerOff_Loader(U8 reason)
         #ifdef XIAOAI_DEVELOPMENT
         APP_Ble_DisableAdv(BLE_ADV_XIAOAI_MASK);
         #endif
-<<<<<<< HEAD
-		#ifdef PROFILE_GFP_ENABLE
-        APP_Gfp_DisableAdv();
-        #endif
-		APP_Ble_Disconnect(NULL);		
-	}
-
-    #ifdef PROFILE_GFP_ENABLE
-        APP_Gfp_DisableAdv();
-=======
 		APP_Ble_Disconnect(NULL);		
 	}
 
     #ifdef AIR_GFP_ENABLE
     APP_Ble_DisableAdv(BLE_ADV_GFP_MASK);
->>>>>>> db20e11 (second commit)
     #endif
 
 //    #if defined(LE_SUPPORTED_HOST_FLASH) && defined(MMI_LE_ENABLE)
@@ -467,8 +432,6 @@ void APP_PowerOff_Loader(U8 reason)
 	}
 }
 
-<<<<<<< HEAD
-=======
 void APP_PowerOff_KeepFakeOff(bool enable)
 {
     gAppPowerCtl.powerOff.KeepFakeOff = enable;
@@ -507,7 +470,6 @@ static bool app_PowerOff_CheckKeepFakeOff(void)
     return ret;
 }
 
->>>>>>> db20e11 (second commit)
 void APP_PowerOff_Proce(void)
 {
 	U8 linkIndex;
@@ -527,11 +489,7 @@ void APP_PowerOff_Proce(void)
 
 
 	APP_Conn_DetachAllLinks();
-<<<<<<< HEAD
-	if(APP_ChgBat_GetBatStatus() >= APP_BAT_CHARGER_IN)
-=======
 	if(APP_ChgBat_GetBatStatus() >= APP_BAT_CHARGER_IN || app_PowerOff_CheckKeepFakeOff())
->>>>>>> db20e11 (second commit)
 	{//Charging battery Now
 		APP_State_AddTopState(APP_EOF, APP_FAKEOFF);
 	}
@@ -603,11 +561,7 @@ void APP_PowerOff_SetTimer(U8 timerType)
 		case TIMER_AUTO_SWITCH_OFF_SYNC_TIMEOUT:
 			FW_SetTimer(&gPowerOffTimerHandlerData, timerType, NULL, 0, 600);
 			break;
-<<<<<<< HEAD
-		#ifdef MCSYNC_SHARE_MODE
-=======
 		#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 		case TIMER_SET_FOLLOWER_POWER_OFF_PKT_TIMEOUT:
 			FW_SetTimer(&gPowerOffTimerHandlerData, timerType, NULL, 0, 2000);
 			break;		
@@ -659,12 +613,8 @@ U8 APP_PowerOff_IsPowerOn(void)
 
 void APP_PowerOff_SystemOff(void)
 {
-<<<<<<< HEAD
-	//APP_AudioDspClose();
-=======
     bool KeepFakeOff;
     //APP_AudioDspClose();
->>>>>>> db20e11 (second commit)
     DSP_AudioCommand_AudioOff();
 
 	DBG_LOG_APP_SYSTEM( "[APP_PWROFF] System off, charger in:%d, power on:%d", 2, APP_ChgBat_IsChargerIn(), APP_PowerOff_IsPowerOn());
@@ -674,14 +624,9 @@ void APP_PowerOff_SystemOff(void)
 		return;
 	}
 
-<<<<<<< HEAD
-	//if(APP_POWER_KEY_TO_DEEP_SLEEP_FEAT)
-	if((!APP_ChgBat_IsChargerIn()) && captouch_wakeup_enable() && (!APP_ChgCase_IsCaseSmartType() || (DrvCharger_GetSmartCaseState() != STATE_CASE_OFF)))
-=======
     KeepFakeOff = app_PowerOff_CheckKeepFakeOff();
 	//if(APP_POWER_KEY_TO_DEEP_SLEEP_FEAT)
 	if((!APP_ChgBat_IsChargerIn()) && captouch_wakeup_enable() && (!APP_ChgCase_IsCaseSmartType() || (DrvCharger_GetSmartCaseState() != STATE_CASE_OFF)) && !KeepFakeOff)
->>>>>>> db20e11 (second commit)
 	{
 		U8 PwrLv = 3;
 		APP_AudioDspClose();
@@ -692,11 +637,7 @@ void APP_PowerOff_SystemOff(void)
 	}
 	else
 	{
-<<<<<<< HEAD
-		if(APP_ChgBat_IsChargerIn())
-=======
 		if(APP_ChgBat_IsChargerIn() || KeepFakeOff)
->>>>>>> db20e11 (second commit)
 		{
 			APP_State_AddTopState(APP_EOF, APP_FAKEOFF);
 		}

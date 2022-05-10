@@ -60,10 +60,7 @@
 #define DBG_LOG_APP_SYSTEM(_message, arg_cnt, ...) 
 #else
 #define DBG_LOG_APP_SYSTEM(_message, arg_cnt, ...)   LOG_MSGID_I(APP_SYSTEM, _message, arg_cnt, ##__VA_ARGS__)
-<<<<<<< HEAD
-=======
 #define ERR_LOG_APP_SYSTEM(_message, arg_cnt, ...)   LOG_MSGID_E(APP_SYSTEM, _message, arg_cnt, ##__VA_ARGS__)
->>>>>>> db20e11 (second commit)
 #endif
 
 /**************************************************************************************************
@@ -202,11 +199,7 @@ void APP_System_RoleModeLeaveInd(U8 mode);
 void APP_System_RoleModeChangeInd(U8 status);
 void APP_System_Discoverable(void);
 
-<<<<<<< HEAD
-#ifdef TAKE_OVER_LINK
-=======
 #ifdef AIR_TAKE_OVER_LINK_ENABLE
->>>>>>> db20e11 (second commit)
 void APP_System_DetachAclLink(BD_ADDR_T *pBdAddr);
 #endif
 void APP_System_SetSystemFactoryValue(void);

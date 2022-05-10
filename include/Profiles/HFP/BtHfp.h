@@ -39,29 +39,17 @@
 void HFP_StartService(Handler app, U8 profileBit);
 void HFP_StopService(Handler app, U8 profileBit);
 BOOL HFP_ConnectRequest(BD_ADDR_T *pBdAddr);
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 BOOL HSP_ConnectRequest(BD_ADDR_T *pBdAddr);
 #endif
 BOOL HFP_ConnectResponse(BD_ADDR_T *pBdAddr, BOOL isAccept);
 BOOL HFP_DisconnectRequest(BD_ADDR_T *pBdAddr);
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 void HFP_Send_CKPD200(BD_ADDR_T *pBdAddr);
 #endif
 void HFP_Send_ATA(BD_ADDR_T *pBdAddr);
 void HFP_SetRemoteScn(BD_ADDR_T *pBdAddr, BT_SDP_SERVICE_SEARCH_ATTRIBUTE_CFM_T *cfm);
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 void HSP_SetRemoteScn(BD_ADDR_T *pBdAddr, BT_SDP_SERVICE_SEARCH_ATTRIBUTE_CFM_T *cfm);
 #endif
 U8 HFP_GetProfileState(BD_ADDR_T *pBdAddr);

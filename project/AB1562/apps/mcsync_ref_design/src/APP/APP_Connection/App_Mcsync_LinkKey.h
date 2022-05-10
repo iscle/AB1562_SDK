@@ -44,10 +44,7 @@ void APP_Mcsync_LinkKeyInit(void);
 void APP_Mcsync_SyncLinkKey(void);
 void APP_Mcsync_SyncLinkKeyInd(U32 length, U8 *pData);
 void APP_Mcsync_SyncBleLinkKeyInd(U32 length, U8 *pData);
-<<<<<<< HEAD
-=======
 void APP_Mcsync_GetLocalLinkKey(void);
->>>>>>> db20e11 (second commit)
 #ifdef PROFILE_AMA_ENABLE
 void APP_Mcsync_SyncAmaData(void);
 void APP_Mcsync_SendAmaData(U8 *pData, U16 length);

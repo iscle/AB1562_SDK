@@ -44,11 +44,6 @@
 #include "App_Pairing.h"
 #include "PM_Interface.h"
 #include "nvkey_list.h"
-<<<<<<< HEAD
-#include "gfps_api.h"
-#include "PM_Interface.h"
-=======
->>>>>>> db20e11 (second commit)
 #include "AudioDSP_StreamManager.h"
 #include "BtMCSync.h"
 #include "App_RhoHandler.h"
@@ -128,15 +123,9 @@ static const BLE_EXT_ADV_PARAM_T gAppAirAppAdvParam =
 {
     .advType = BLE_ADV_IND,
     .ownAddrType = RANDOM_DEVICE_ADDR,
-<<<<<<< HEAD
-    .AdvParms = 
-    {
-        .undirectedAdvParams = 
-=======
     .AdvParms =
     {
         .undirectedAdvParams =
->>>>>>> db20e11 (second commit)
         {
             .advIntervalMin = 0x0320,
             .advIntervalMax = 0x0320,
@@ -159,11 +148,7 @@ static BOOL app_AirAppGattServerReady(void)
 	if ((NULL == ptr) || (FALSE == *ptr))
 	{
         DBG_LOG_APP_AIRAPP( "[APP_AIRAPP] NVKEYID ADV NOT ENABLE", 0);
-<<<<<<< HEAD
-		 return TRUE;
-=======
         return TRUE;
->>>>>>> db20e11 (second commit)
 	}
 
     memset(&advParamEx, 0, sizeof(BLE_EXT_ADV_PARAM_EX_T));
@@ -184,20 +169,12 @@ static BOOL app_AirAppGattServerReady(void)
     advParamEx.setAdvData = TRUE;
     if (gApp_AirAppCtrl.pRhoData == NULL)
     {
-<<<<<<< HEAD
-        advParamEx.sizeAdvData = NVKEY_GetPayloadLength(NVKEYID_BT_BLE_BLE_ADV_DATA);
-=======
         advParamEx.sizeAdvData = PM_Nvkey_GetBleAdvDataLength();
->>>>>>> db20e11 (second commit)
         if (advParamEx.sizeAdvData > BLE_MAX_DATA_SIZE)
         {
             advParamEx.sizeAdvData = BLE_MAX_DATA_SIZE;
         }
-<<<<<<< HEAD
-        memcpy(pAdvData, (U8 *)NVKEY_GetPayloadFlashAddress(NVKEYID_BT_BLE_BLE_ADV_DATA), advParamEx.sizeAdvData);
-=======
         memcpy(pAdvData, (U8 *)PM_Nvkey_GetBleAdvData(), advParamEx.sizeAdvData);
->>>>>>> db20e11 (second commit)
     }
     else
     {
@@ -229,11 +206,7 @@ static BOOL app_AirAppEnableBleAdv(BOOL enable)
     if (NULL == ptr || FALSE == *ptr)
     {
         return FALSE;
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> db20e11 (second commit)
     }
     BleSetAdvEnableReq((Handler)&gAppAirAppHandler, enable);
     return TRUE;
@@ -393,18 +366,11 @@ static void APP_AirApp_HandleDisconnectInd(AIRAPP_DISCONNECT_IND_T* ind)
 
         pProfileInfo = &gApp_AirAppCtrl.BleInfo;
 
-<<<<<<< HEAD
-		if(!APP_MCSync_Rho_IsRhoing())
-		{
-            APP_Ble_EnableAdv(BLE_ADV_PRIMARY_MASK);
-		}
-=======
         /* Move to app_BleHandler() to handle BT_ACL_CLOSED_IND */
 		//if(!APP_MCSync_Rho_IsRhoing())
 		//{
         //    APP_Ble_EnableAdv(BLE_ADV_PRIMARY_MASK);
 		//}
->>>>>>> db20e11 (second commit)
 
         APP_Pairing_SetPairModeTimer();
     }
@@ -412,11 +378,7 @@ static void APP_AirApp_HandleDisconnectInd(AIRAPP_DISCONNECT_IND_T* ind)
     pBdAddr = APP_GetServiceBdAddr();
     if(pBdAddr)
         PM_Sniff_Enable(pBdAddr, PM_SNIFF_OTA);
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> db20e11 (second commit)
 	if(!AirApp_IsFOTASuccess())
 		APP_ReleaseDspSuspend();
 
@@ -445,98 +407,11 @@ static void APP_AirApp_HandleDisconnectCfm(AIRAPP_DISCONNECT_CFM_T* cfm)
     pBdAddr = APP_GetServiceBdAddr();
     if(pBdAddr)
         PM_Sniff_Enable(pBdAddr, PM_SNIFF_OTA);
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> db20e11 (second commit)
 	if(!AirApp_IsFOTASuccess())
 		APP_ReleaseDspSuspend();
 }
 
-<<<<<<< HEAD
-void cb_set_bt_discoverable(U8 action)
-{
-  BD_ADDR_T bd;
-  U8 *pAddr;
-
-  pAddr = (U8*)NVKEY_GetPayloadFlashAddress(NVKEYID_BT_CON_BR_EDR_BDADDR);
-  memcpy(bd.addr, pAddr, 6);
-
-  if (action) {
-    APP_State_AddTopState(&bd, APP_CONDISCABLE);
-  } else {
-    APP_State_RmvState(&bd, APP_CONDISCABLE);
-  }
-}
-
-U8 cb_is_bt_discoverable()
-{
-  U8 state, retval;
-
-  if (BtAwsMce_GetDefaultRole() == ROLE_AGENT) {
-    BD_ADDR_T bd;
-    U8 *pAddr;
-    U8 is_mcsync;
-
-    pAddr = (U8*)NVKEY_GetPayloadFlashAddress(NVKEYID_BT_CON_BR_EDR_BDADDR);
-    memcpy(bd.addr, pAddr, 6);
-    state = APP_State_GetTopState(&bd);
-
-    // Check the special linke exist or not ...
-    is_mcsync = BtAwsMce_IsSpecialLink(&bd);
-    if (is_mcsync) {
-      if (APP_State_CheckNestStateByLink(&bd, APP_CONDISCABLE)) {
-        state = APP_CONDISCABLE;
-      }
-    }
-  } else {
-    state = APP_State_GetTopState(APP_EOF);
-  }
-
-  if (state == APP_CONDISCABLE) {
-    retval = TRUE;
-  } else {
-    retval = FALSE;
-  }
-
-  return retval;
-}
-
-U8 cb_get_bt_connected_cnt()
-{
-  return CURRENT_ACTIVE_LINK_CNT;
-}
-
-U8 cb_get_bt_maximum_link()
-{
-  return MAX_MULTI_POINT_NO;
-}
-
-#ifdef PROFILE_GFP_ENABLE
-static uint8_t bAirADVEnable = 0;
-static void APP_AirApp_EnableAdvForGFPSv2()
-{
-    app_cbfunc_module_t module;
-
-    DBG_LOG_APP_AIRAPP( "[APP_AIRAPP_GFP] APP_AirApp_EnableAdvForGFPSv2+++1", 0);
-
-    if ( bAirADVEnable == 0 )
-    {
-        bAirADVEnable = 1;
-        DBG_LOG_APP_AIRAPP( "[APP_AIRAPP_GFP] APP_AirApp_EnableAdvForGFPSv2+++2", 0);
-
-        module.set_bt_discoverable = cb_set_bt_discoverable;
-        module.is_bt_discoverable = cb_is_bt_discoverable;
-        module.get_bt_connected_cnt = cb_get_bt_connected_cnt;
-        module.get_bt_maximum_link = cb_get_bt_maximum_link;
-
-        GFPSv2_Enable(TRUE, &module);
-    }
-}
-#endif
-=======
->>>>>>> db20e11 (second commit)
 
 static void APP_AirApp_HandleBleDisconnectRsp(BT_BLE_DISCONNECT_REQ_RSP_T* rsp)
 {
@@ -583,16 +458,6 @@ static U32 APP_AirAppHandler(Handler handler, U16 id, void *msg, U32 handler_id)
                 {
                     APP_Ble_EnableAdv(BLE_ADV_PRIMARY_MASK);
                 }
-<<<<<<< HEAD
-
-#ifdef PROFILE_GFP_ENABLE
-                if (GFPSv2_IsEnable())
-                {
-                    APP_AirApp_EnableAdvForGFPSv2();
-                }
-#endif
-=======
->>>>>>> db20e11 (second commit)
             }
         }
         break;
@@ -600,11 +465,7 @@ static U32 APP_AirAppHandler(Handler handler, U16 id, void *msg, U32 handler_id)
         case BT_BLE_DISCONNECT_REQ_RSP:
             APP_AirApp_HandleBleDisconnectRsp((BT_BLE_DISCONNECT_REQ_RSP_T*)msg);
             break;
-<<<<<<< HEAD
-            
-=======
 
->>>>>>> db20e11 (second commit)
         default:
             break;
 
@@ -629,13 +490,6 @@ BOOL APP_AirApp_AssignRhoData(void *pData)
         FW_Assert(FALSE);
     }
 
-<<<<<<< HEAD
-    nvkey_hdl_save_nvkey(NVKEYID_BT_BLE_BLE_ADV_DATA, pDataToFill->advsize, pDataToFill->advdata);
-    nvkey_hdl_save_nvkey(NVKEYID_BT_CON_BLE_BDADDR, 6, pDataToFill->randomAddr);
-
-    app_AirAppGattServerReady();
-    
-=======
     /* save nvkey when user defined adb data is exist or is different from default adv data */
     if (PM_NvKey_IsUserDefineBleAdvDataExist() || ((PM_NvKey_GetDefaultBleAdvDataLength() != pDataToFill->advsize) || memcmp(pDataToFill->advdata, PM_NvKey_GetDefaultBleAdvDataAddr(), pDataToFill->advsize)))
     {
@@ -651,28 +505,17 @@ BOOL APP_AirApp_AssignRhoData(void *pData)
 
     app_AirAppGattServerReady();
 
->>>>>>> db20e11 (second commit)
     return TRUE;
 }
 
 BOOL APP_AirApp_FillRhoData(void *pData)
 {
 	APP_RHO_AIRAPP_STRU *pDataToGet = &((APP_RHO_DATA_STRU *)pData)->appAirApp;
-<<<<<<< HEAD
-
-
-    U8* pAdvData;
-    U8 DataSize;
-    /*NvkeyDefine NVKEYID_BT_BLE_BLE_ADV_DATA*/
-    DataSize = NVKEY_GetPayloadLength(NVKEYID_BT_BLE_BLE_ADV_DATA);
-    pAdvData =  (U8*)NVKEY_GetPayloadFlashAddress(NVKEYID_BT_BLE_BLE_ADV_DATA);
-=======
     U8* pAdvData;
     U8 DataSize;
 
     DataSize = PM_Nvkey_GetBleAdvDataLength();
     pAdvData =  PM_Nvkey_GetBleAdvData();
->>>>>>> db20e11 (second commit)
 
     pDataToGet->advsize = DataSize;
     memcpy(pDataToGet->advdata, pAdvData, DataSize);

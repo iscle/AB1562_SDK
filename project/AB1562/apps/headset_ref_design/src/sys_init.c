@@ -157,11 +157,7 @@ void check_force_bt_controller_mode(void)
         BT_Controller_Cfg();
 
         hal_core_status_write(HAL_CORE_DSP,HAL_CORE_ACTIVE);
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> db20e11 (second commit)
         hal_uart_disable_flowcontrol(HAL_UART_0);
 
         vTaskStartScheduler();
@@ -219,12 +215,6 @@ void system_init(void)
 
     hal_sleep_manager_init();
 
-<<<<<<< HEAD
-    pmu_get_power_on_reason();
-    pmu_get_power_off_reason();
-
-=======
->>>>>>> db20e11 (second commit)
     SYS_GET_CHG_CONFIG_from_NVKEY();
     SYS_Get_CHG_Case_Type_from_NVKEY();
 
@@ -233,20 +223,12 @@ void system_init(void)
 
     AFE_Init_from_NVKEY_CSR();
     AFE_Init_from_NVKEY_Reg_I2C();
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> db20e11 (second commit)
     otp_calibration();
 	NTC_StartStop_Init();
     mpk_init();
 
-<<<<<<< HEAD
-    DRV_BAT_Init();
-=======
     pmu_bat_init();
->>>>>>> db20e11 (second commit)
     pmu_chg_init();
     pmu_auxadc_init();
 

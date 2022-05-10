@@ -45,11 +45,7 @@ extern "C" {
 extern GPIO_BASE_REGISTER_T *gpio_base;
 
 const hal_gpio_cfg_reg_t gpio_cfg_table[] = {
-<<<<<<< HEAD
-       //DRV_REG     shift    IES_REG    shift     PD_REG         PU_REG        shift     PUPD_REG      R0_REG       R1_REG      shift       RDSEL_RG  shift    SMT_REG       SR_REG      shift
-=======
        //DRV_REG   shift IES_REG    shift  PD_REG   PU_REG     shift PUPD_REG      R0_REG       R1_REG    shift  RDSEL_RG  shift  SMT_REG    SR_REG      shift
->>>>>>> db20e11 (second commit)
     {   0xa20c0000,  0, 0xa20c0040,  0, 0xa20c0060, 0xa20c0080,  0, 0xffffffff, 0xffffffff, 0xffffffff, 0xff,  0xa20c00a0,  0, 0xa20c00d0, 0xa20c00f0,  0, },  // HAL_GPIO_0
     {   0xa20c0000,  2, 0xa20c0040,  1, 0xa20c0060, 0xa20c0080,  1, 0xffffffff, 0xffffffff, 0xffffffff, 0xff,  0xa20c00a0,  2, 0xa20c00d0, 0xa20c00f0,  1, },  // HAL_GPIO_1
     {   0xa20c0000,  4, 0xa20c0040,  2, 0xa20c0060, 0xa20c0080,  2, 0xffffffff, 0xffffffff, 0xffffffff, 0xff,  0xa20c00a0,  4, 0xa20c00d0, 0xa20c00f0,  2, },  // HAL_GPIO_2

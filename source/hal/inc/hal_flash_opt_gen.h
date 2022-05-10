@@ -45,10 +45,7 @@
 
 #define __PAGE_BUFFER_PROGRAM__
 #define __SERIAL_FLASH__
-<<<<<<< HEAD
-=======
 #define SF_DAL_XMC
->>>>>>> db20e11 (second commit)
 #define SF_DAL_MXIC
 #define SF_DAL_WINBOND
 #define SF_DAL_GIGADEVICE

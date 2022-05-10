@@ -87,14 +87,10 @@ typedef uint8_t anc_callback_level_t;
 #define ANC_REALTIME_UPDATE_CH_FF_L  (0)
 #define ANC_REALTIME_UPDATE_CH_FF_R  (1)
 #define ANC_REALTIME_UPDATE_CH_FB_L  (2)
-<<<<<<< HEAD
-#define ANC_REALTIME_UPDATE_CH_FBC_L (4)
-=======
 #define ANC_REALTIME_UPDATE_CH_FB_R  (3)
 #define ANC_REALTIME_UPDATE_CH_FBC_L (4)
 #define ANC_REALTIME_UPDATE_CH_FBC_R (5)
 
->>>>>>> db20e11 (second commit)
 typedef uint8_t anc_realtime_update_ch_t;
 
 typedef void (*anc_control_callback_t)(anc_control_event_t event_id, anc_control_result_t result);

@@ -41,8 +41,6 @@
 #define IMG_AUDIO_VOICE_TIMER_TO	0x03
 #define IMG_AUDIO_VOICE_STOP		0x04
 #define IMG_AUDIO_VOICE_NOT_FOUND	0x05
-<<<<<<< HEAD
-=======
 
 typedef struct
 {
@@ -50,7 +48,6 @@ typedef struct
 	BD_ADDR_T bdAddr;
 }APP_HFP_IMG_MEDIA_STRU;
 
->>>>>>> db20e11 (second commit)
 PUBLIC void APP_ImgMedia_AudioVoiceHandler(BD_ADDR_T *pBdAddr, U8 action);
 void APP_ImgMedia_FakeEvtHandler(BD_ADDR_T *pBdAddr);
 void App_HfpImgCallMediaInitNvkey(U32 pNvkey, U16 length);

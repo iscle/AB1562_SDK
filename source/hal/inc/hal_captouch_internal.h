@@ -232,10 +232,7 @@ uint8_t captouch_get_channelearin(VOID);
 uint8_t captouch_get_initialstatus(VOID);
 uint8_t captouch_wakeup_enable(VOID);
 void captouch_send_press_msg(void);
-<<<<<<< HEAD
-=======
 void captouch_get_tune_delay_time(uint8_t clk_k, uint8_t mavg_r);
->>>>>>> db20e11 (second commit)
 VOID captouch_find_baseline(hal_captouch_channel_t channel);
 void captouch_check_event(TimerHandle_t xTimer);
 void captouch_sw_ear_check(TimerHandle_t xTimer);
@@ -243,21 +240,12 @@ void captouch_set_Cfine_threshold(U8 thr);
 void captouch_set_MovAvg_num(U8 num);
 void  captouch_start_timer(void);
 void captouch_channel_debounce_check(hal_captouch_channel_t channel, hal_captouch_key_state_t state, uint32_t time_stamp);
-<<<<<<< HEAD
-bool captouch_intr_bounce_check(hal_captouch_channel_t channel, uint32_t time_stamp);
-void captouch_key_press_event_handler(TimerHandle_t xTimer);
-void captouch_key_release_event_handler(TimerHandle_t channel_timer);
-=======
 void captouch_key_event_handler(void *user_data);
->>>>>>> db20e11 (second commit)
 int16_t  captouch_get_mavg_adc(hal_captouch_channel_t channel);
 int16_t captouch_round(int32_t val1, int16_t val2);
 bool captouch_is_feature_enable(void);
 void captouch_normsetting_to_nvkey(captouch_normalsetting_id id, uint8_t channel, int16_t value);
-<<<<<<< HEAD
-=======
 uint8_t captouch_set_auto_tune_feature(uint8_t en);
->>>>>>> db20e11 (second commit)
 uint8_t captouch_coarsecap_from_nvkey(uint8_t channel);
 void captouch_coarsecap_to_nvkey(uint8_t channel, uint8_t value);
 void captouch_fine_cap_to_nvkey(uint8_t channel, int8_t value);

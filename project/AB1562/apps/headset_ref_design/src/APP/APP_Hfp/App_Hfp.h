@@ -54,11 +54,7 @@ BOOL APP_Hfp_IsConnected(BD_ADDR_T *pBdAddr);//MMI_HFP_IsConnected
 //**************************************************************************************************
 //* Public Functions (battery send)
 //**************************************************************************************************
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 BOOL APP_Hfp_IsHspConnected(BD_ADDR_T * pBdAddr);
 #endif
 BOOL APP_Hfp_IsFeatureOn(U32 feature);

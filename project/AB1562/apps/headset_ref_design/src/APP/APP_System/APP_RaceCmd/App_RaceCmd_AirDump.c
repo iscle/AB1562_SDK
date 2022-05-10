@@ -36,11 +36,7 @@
 #include "race_cmd.h"
 #include "drv_sco.h"
 
-<<<<<<< HEAD
-#if (defined(MTK_INEAR_ENHANCEMENT_ENABLE) || defined(MTK_DUALMIC_INEAR_ENABLE))
-=======
 #if (defined(AIR_TXNR_1_MIC_INEAR_ENABLE) || defined(AIR_TXNR_2_MIC_INEAR_ENABLE))
->>>>>>> db20e11 (second commit)
 #define dumpsize 48
 #else
 #define dumpsize 36 //sizeof(S16)*(AEC_PRELIM_COEF_SIZE+AEC_REF_GAIN_SIZE)

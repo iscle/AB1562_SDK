@@ -78,11 +78,7 @@ typedef struct {
 typedef struct {
     BD_ADDR_T bdAddr;
     U8 transactionLabel;
-<<<<<<< HEAD
-    U8 length;
-=======
     U16 length;
->>>>>>> db20e11 (second commit)
     U8 data[1];
 } PACKED BT_AVCTP_MORE_DATA_T;
 

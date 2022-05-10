@@ -122,8 +122,6 @@ typedef enum {
     RTC_TIME_CALI_K_EOSC = 1,
 }rtc_time_cali_mode_t;
 
-<<<<<<< HEAD
-=======
 
 typedef enum {
     RTC_POWERED_REASON_UNKNOW = 0,
@@ -138,7 +136,6 @@ typedef enum {
 }hal_rtc_power_reason_t;
 
 
->>>>>>> db20e11 (second commit)
 typedef enum {
     KEY_BBPU_MASK_ALL       = 0x43,
     KEY_BBPU_MASK_ALARM     = 0xA2, //bit0
@@ -204,8 +201,6 @@ typedef enum {
     RTC_BACK_FROM_PWR_EXCEPTION,
 }rtc_previou_mode_t;
 
-<<<<<<< HEAD
-=======
 #define     RTC_STATE_INIT_BY_BL_FLG        0x1    /* flag for indicate whether rtc init by bl */
 #define     RTC_STATE_POWER_LOST_FLG        0x2  /* flag for indicate whether rtc power lost */
 #define     RTC_STATE_RTC_MODE_FLG          0x4  /* flag for indicate whether back from  rtc mode */
@@ -213,20 +208,12 @@ typedef enum {
 
 
 
->>>>>>> db20e11 (second commit)
 
 typedef struct {
     bool       used_xosc;
     bool       used_gpio;
-<<<<<<< HEAD
-    bool       flag_power_st;//1:off; 0:on
-    bool       flag_rtc_mode;//1:rtc mode, 0: others
-    bool       hw_init_st; //0:init;1:not init
-    uint8_t    sram_mode;
-=======
     uint8_t    sram_mode;
     uint16_t   op_state;
->>>>>>> db20e11 (second commit)
     uint16_t   irq_status;
     int        cali_eosc; /*only for eosc adjust*/
     int        cali_time;  /*for all osc32 adjust*/
@@ -286,12 +273,9 @@ hal_rtc_status_t    rtc_internal_get_data(uint16_t idx, uint8_t *data);
 hal_rtc_status_t    rtc_internal_set_ldocon0(uint32_t value);
 hal_rtc_status_t    rtc_internal_set_ldocon1(uint32_t value);
 hal_rtc_status_t    rtc_internal_set_ldocon2(uint32_t value);
-<<<<<<< HEAD
-=======
 uint32_t            rtc_internal_power_reason(uint32_t irq_status);
 
 
->>>>>>> db20e11 (second commit)
 
 hal_rtc_status_t    rtc_internal_set_ldo08_boost(bool is_boost);
 hal_rtc_status_t    rtc_internal_set_ldo_lowpower(bool is_lp);
@@ -319,15 +303,12 @@ void                rtc_internal_sram_setting(hal_rtc_sram_cell_t cell, hal_rtc_
 void                rtc_internal_sram_setting(hal_rtc_sram_cell_t cell, hal_rtc_sram_mode_t mode);
 #endif
 
-<<<<<<< HEAD
-=======
 void                rtc_internal_lp_switch_32k(hal_rtc_osc32k_mode_t mode);
 void                rtc_internal_lp_cg_setting(hal_rtc_osc32k_mode_t mode);
 
 hal_rtc_power_reason_t  hal_rtc_get_power_on_reason();
 
 
->>>>>>> db20e11 (second commit)
 /*internal using*/
 uint32_t            rtc_internal_time_to_tick(uint8_t  year,uint8_t month, uint8_t day,uint8_t hour, uint8_t min, uint8_t second);
 bool                rtc_internal_tick_to_time(uint32_t tick, hal_rtc_time_t *time);

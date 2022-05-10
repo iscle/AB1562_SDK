@@ -35,11 +35,8 @@
 #ifndef __BT_COMMON_HH
 #define __BT_COMMON_HH
 
-<<<<<<< HEAD
-=======
 #include "types.h"
 #include "message.h"
->>>>>>> db20e11 (second commit)
 
 /**************************************************************************************************/
 /*                            Macros                                                              */
@@ -330,13 +327,10 @@ typedef enum {
 
     BT_SET_LOW_LATENCY_MODE_ENABLE_CFM,
 
-<<<<<<< HEAD
-=======
     BT_CONNECT_REQUEST_IND,
 
     BT_SET_LC_CONTROL_MODE_ENABLE_CFM,
 
->>>>>>> db20e11 (second commit)
     BT_MSG_E_MAX,
 } BT_MSG_E;
 
@@ -376,10 +370,7 @@ typedef enum
     PSM_HID_INT = 0x0013,
     PSM_AVCTP = 0x0017,
     PSM_AVDTP = 0x0019,
-<<<<<<< HEAD
-=======
     PSM_ATT   = 0x001F,
->>>>>>> db20e11 (second commit)
 } PSM_ENUM_E;
 
 /*!

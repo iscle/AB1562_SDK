@@ -94,11 +94,7 @@ void App_Avrcp_KeyVolUpDownCmdHandler(BD_ADDR_T *pBdAddr, BOOL isVolUp)
 	if (isVolUp && APP_VolManage_GetCurrentA2dpSoundLevel(pBdAddr) < APP_MAX_A2DP_SOUND_LEVEL)
 	{
 		currentSoundLevel += 1;
-<<<<<<< HEAD
-		#ifdef A2DP_Profile
-=======
 		#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 		APP_VolManage_SetCurrentA2dpSoundLevel(pBdAddr, (U8)(currentSoundLevel));
 		#endif
 		APP_VolManage_SetCurrentAbsoluteVolume(pBdAddr, APP_VolManage_GetAbsoluteVolumeBySoundLevel(currentSoundLevel));
@@ -109,11 +105,7 @@ void App_Avrcp_KeyVolUpDownCmdHandler(BD_ADDR_T *pBdAddr, BOOL isVolUp)
 	else if (!isVolUp && APP_VolManage_GetCurrentA2dpSoundLevel(pBdAddr) > 0)
 	{
 		currentSoundLevel -= 1;
-<<<<<<< HEAD
-		#ifdef A2DP_Profile
-=======
 		#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 		APP_VolManage_SetCurrentA2dpSoundLevel(pBdAddr, (U8)(currentSoundLevel));
 		#endif
 		APP_VolManage_SetCurrentAbsoluteVolume(pBdAddr, APP_VolManage_GetAbsoluteVolumeBySoundLevel(currentSoundLevel));
@@ -146,11 +138,7 @@ static void app_AvrcpGetRemotePlayStatus(BD_ADDR_T *pBdAddr, U8 playStatus)
 	if(pLinkInfo)
 	{
 		//For LG phone send pause-->play-->pause event notification after sending AVRCP pause
-<<<<<<< HEAD
-		#ifdef A2DP_Profile
-=======
 		#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 		//if (A2DP_IsMusicSuspending(pBdAddr)) //Now suspend timer is cancelled
 		//{
 		//	if (pLinkInfo->playStatus != playStatus && playStatus == AVRCP_PLAYBACK_STATUS_PLAYING)
@@ -175,11 +163,7 @@ static void app_AvrcpGetRemotePlayStatus(BD_ADDR_T *pBdAddr, U8 playStatus)
 				{
 					APP_AvrcpSetMusicPlay(pBdAddr, FALSE);
 				}
-<<<<<<< HEAD
-				#if defined(A2DP_Profile) && defined(AVRCP_Profile)
-=======
 				#if defined(AIR_A2DP_PROFILE_ENABLE) && defined(AIR_AVRCP_PROFILE_ENABLE)
->>>>>>> db20e11 (second commit)
 				APP_A2dp_PlayStatusChanged(pBdAddr, playStatus);
 				#endif
 				pLinkInfo->isPlayStatusWorking = TRUE;
@@ -187,22 +171,14 @@ static void app_AvrcpGetRemotePlayStatus(BD_ADDR_T *pBdAddr, U8 playStatus)
 			}
 			else
 			{
-<<<<<<< HEAD
-				#if defined(A2DP_Profile) && defined(AVRCP_Profile)
-=======
 				#if defined(AIR_A2DP_PROFILE_ENABLE) && defined(AIR_AVRCP_PROFILE_ENABLE)
->>>>>>> db20e11 (second commit)
 				APP_A2dp_PlayStatusTheSame(pBdAddr, playStatus);
 				#endif
 			}
 		}
 		else
 		{
-<<<<<<< HEAD
-			#if defined(A2DP_Profile) && defined(AVRCP_Profile)
-=======
 			#if defined(AIR_A2DP_PROFILE_ENABLE) && defined(AIR_AVRCP_PROFILE_ENABLE)
->>>>>>> db20e11 (second commit)
 			APP_A2dp_CheckPlayStatusConsistency(pBdAddr, playStatus, TRUE);
 			#endif
 		}
@@ -266,11 +242,7 @@ void APP_AvrcpDecideOperation(BD_ADDR_T *pBdAddr, U8 opID)
 					else
 					{
 						if (!pLinkInfo->isMusicPlay
-<<<<<<< HEAD
-							#ifdef A2DP_Profile
-=======
 							#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 							|| !APP_a2dp_is_in_streaming(pBdAddr)
 							#endif
 							)
@@ -315,11 +287,7 @@ void APP_AvrcpDecideOperation(BD_ADDR_T *pBdAddr, U8 opID)
 					else
 					{
 						if (pLinkInfo->isMusicPlay
-<<<<<<< HEAD
-							#ifdef A2DP_Profile
-=======
 							#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 							&& APP_a2dp_is_in_streaming(pBdAddr)
 							#endif
 							)
@@ -334,11 +302,7 @@ void APP_AvrcpDecideOperation(BD_ADDR_T *pBdAddr, U8 opID)
 
 		case AVC_OPERATION_PLAY:
 			if (!pLinkInfo->isGetPlayStatusSupported && pLinkInfo->isMusicPlay
-<<<<<<< HEAD
-				#ifdef A2DP_Profile
-=======
 				#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 				&& a2dp_is_in_streaming(pBdAddr)
 				#endif
 				)
@@ -349,11 +313,7 @@ void APP_AvrcpDecideOperation(BD_ADDR_T *pBdAddr, U8 opID)
 
 		case AVC_OPERATION_PAUSE:
 			if ((!pLinkInfo->isGetPlayStatusSupported && !pLinkInfo->isMusicPlay)
-<<<<<<< HEAD
-				#ifdef A2DP_Profile
-=======
 				#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 				|| !a2dp_is_in_streaming(pBdAddr)
 				#endif
 				)
@@ -369,11 +329,7 @@ void APP_AvrcpDecideOperation(BD_ADDR_T *pBdAddr, U8 opID)
 		case AVC_OPERATION_BACKWARD:
 		case AVC_OPERATION_INTERNAL_REWIND_RELEASE:
 		case AVC_OPERATION_INTERNAL_FAST_FORWARD_RELEASE:
-<<<<<<< HEAD
-			#ifdef A2DP_Profile
-=======
 			#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 			if (!a2dp_is_connected(pBdAddr))
 				return;
 			#endif
@@ -391,11 +347,7 @@ void APP_AvrcpDecideOperation(BD_ADDR_T *pBdAddr, U8 opID)
 			break;
 			
 		case AVC_OPERATION_FORCE_PAUSE:
-<<<<<<< HEAD
-			#ifdef CODEC_SWITCH_WORKAROUND_SONY_XPERIA
-=======
 			#ifdef AIR_CODEC_SWITCH_WORKAROUND_SONY_XPERIA_ENABLE
->>>>>>> db20e11 (second commit)
 			if(bt_sdps_pnp_is_sony_xperia(pBdAddr))
 			{
 				DBG_LOG_APP_AVRCP( "[APP_AVRCP] [Codec Work-Around] Force Pause", 0);
@@ -603,11 +555,7 @@ static void app_AvrcpTgGetSetAbsVolIndHandler(BD_ADDR_T *pBdAddr, U8 absVol)
 
 	DBG_LOG_APP_AVRCP( "[APP_AVRCP] AVRCP_GetSetAbsVol - BdAddr:0x%x%x, absVol:%d", 3, FW_bdaddr_to_2U32(pBdAddr, TRUE), FW_bdaddr_to_2U32(pBdAddr, FALSE) ,absVol);
 
-<<<<<<< HEAD
-	#ifdef A2DP_Profile
-=======
 	#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 	APP_VolManage_SpkVolumeRemoteHandler(pBdAddr, APP_VolManage_GetSoundLevelByAbsoluteVolume(absVol), COMPONENT_A2DP);
 	#endif
 
@@ -742,11 +690,7 @@ static void app_AvrcpGetPlayStatusRspIndHandler(BD_ADDR_T *pBdAddr, BOOL isSendP
 
 			default:
 				if (pLinkInfo->isMusicPlay
-<<<<<<< HEAD
-					#ifdef A2DP_Profile
-=======
 					#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 					&& APP_a2dp_is_in_streaming(pBdAddr)
 					#endif
 					)
@@ -846,11 +790,7 @@ void app_AvrcpPassThroughRspIndHandler(BD_ADDR_T *pBdAddr, U8 operationId)
 	switch (operationId)
 	{
 		case AVRCP_IND_GET_STOP_REJECTED:
-<<<<<<< HEAD
-			#ifdef A2DP_Profile
-=======
 			#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 			APP_A2dp_ClearResumeState(pBdAddr);
 			#endif
 			break;
@@ -866,8 +806,6 @@ void app_AvrcpPassThroughRspIndHandler(BD_ADDR_T *pBdAddr, U8 operationId)
 	}
 }
 
-<<<<<<< HEAD
-=======
 static void app_AvrcpGetElementRspIndHandler(AVRCP_GET_ELEMENT_IND_T *msg)
 {	
 
@@ -893,7 +831,6 @@ static void app_AvrcpGetElementRspIndHandler(AVRCP_GET_ELEMENT_IND_T *msg)
 	//DBG_LOG_APP_AVRCP("[APP_AVRCP][TEST]attid:0x%x CharaID:0x%x AttValLen:%d", 3,attid, msg->CharacterSetID, attlen);
 }
 
->>>>>>> db20e11 (second commit)
 /**************************************************************************************************
 * Static (Message Handler)
 **************************************************************************************************/
@@ -1027,10 +964,7 @@ static U32 app_AvrcpIndHandler(Handler handler, U16 id, void *msg, U32 handler_i
 			app_AvrcpPassThroughRspIndHandler(&((AVRCP_GET_PASS_THROUGH_IND_T *)msg)->bdAddr, ((AVRCP_GET_PASS_THROUGH_IND_T *)msg)->operationId);
 			break;
         case AVRCP_GET_ELEMENT_ATTRIBUTE_IND:
-<<<<<<< HEAD
-=======
 			app_AvrcpGetElementRspIndHandler((AVRCP_GET_ELEMENT_IND_T *)msg);
->>>>>>> db20e11 (second commit)
             break;
         case AVRCP_GET_CABILITY_IND:
             break;
@@ -1086,11 +1020,7 @@ static U32 app_AvrcpTimerHandler(Handler handler, U16 id, void *msg, U32 handler
 			break;
 
 		case APP_AVRCP_TIMER_QUERY_CURRENT_PLAY_STATUS:
-<<<<<<< HEAD
-			#ifdef A2DP_Profile
-=======
 			#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 			APP_A2dp_PlayStatusTheSame(pBdAddr, APP_Avrcp_GetPlayStatus(pBdAddr));
 			#endif
 			break;
@@ -1110,11 +1040,7 @@ static U32 app_AvrcpTimerHandler(Handler handler, U16 id, void *msg, U32 handler
 					if (!APP_IsActiveAudioDevInAUX() && !APP_IsActiveAudioDevInCall()
 						&& !(APP_A2dp_NVKeyIsFeatureOn(APP_A2DP_MEMPUT_WHEN_OTHER_IN_MUSIC_FEAT) && APP_IsActiveAudioDevInMusic()))
 					{
-<<<<<<< HEAD
-						#ifdef CODEC_SWITCH_WORKAROUND_SONY_XPERIA
-=======
 						#ifdef AIR_CODEC_SWITCH_WORKAROUND_SONY_XPERIA_ENABLE
->>>>>>> db20e11 (second commit)
 						if(!bt_a2dp_get_reconfigure_status(pBdAddr))
 						#endif
 						{
@@ -1125,11 +1051,7 @@ static U32 app_AvrcpTimerHandler(Handler handler, U16 id, void *msg, U32 handler
 			}
 			break;
 
-<<<<<<< HEAD
-	#ifdef CODEC_SWITCH_WORKAROUND_SONY_XPERIA
-=======
 	#ifdef AIR_CODEC_SWITCH_WORKAROUND_SONY_XPERIA_ENABLE
->>>>>>> db20e11 (second commit)
 		case APP_AVRCP_TIMER_CHECK_STREAMING_WORK_AROUND1:
 			if(bt_sdps_pnp_is_sony_xperia(pBdAddr))
 			{

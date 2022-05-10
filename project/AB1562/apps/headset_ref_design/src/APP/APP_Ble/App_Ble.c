@@ -35,10 +35,7 @@
 #include "App_Ble.h"
 #include "App_PowerOff.h"
 #include "App_Connection.h"
-<<<<<<< HEAD
-=======
 #include "APP_AirApp.h"
->>>>>>> db20e11 (second commit)
 
 log_create_module(APP_BLE, PRINT_LEVEL_INFO);
 /**************************************************************************************************
@@ -250,12 +247,6 @@ static U32 app_BleHandler(Handler handler, U16 id, void *msg, U32 handler_id)
             if (!ind->status)
             {
                 U8 i;
-<<<<<<< HEAD
-                if (APP_PowerOff_IsPowerOn())
-                {
-                    APP_Ble_EnableAdv(gAppBleCtl.advHandleMask);
-                }
-=======
                 if (APP_PowerOff_IsPowerOn() && !APP_AirApp_FOTA_Reconnect())
                 {
                     APP_Ble_EnableAdv(gAppBleCtl.advHandleMask);
@@ -264,7 +255,6 @@ static U32 app_BleHandler(Handler handler, U16 id, void *msg, U32 handler_id)
                 {
                     APP_Ble_DisableAdv(BLE_ADV_ALL);
                 }
->>>>>>> db20e11 (second commit)
 
                 for (i = 0; i < NUM_OF_LE_ACL_LINKS; i++)
                 {

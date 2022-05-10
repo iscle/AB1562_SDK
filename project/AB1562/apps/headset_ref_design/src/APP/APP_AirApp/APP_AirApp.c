@@ -44,10 +44,6 @@
 #include "App_Pairing.h"
 #include "PM_Interface.h"
 #include "nvkey_list.h"
-<<<<<<< HEAD
-#include "gfps_api.h"
-=======
->>>>>>> db20e11 (second commit)
 #include "PM_Interface.h"
 #include "App_Avrcp.h"
 #include "App_A2dp.h"
@@ -158,20 +154,12 @@ static BOOL app_AirAppGattServerReady(void)
 
     /* adv data */
     advParamEx.setAdvData = TRUE;
-<<<<<<< HEAD
-    advParamEx.sizeAdvData = NVKEY_GetPayloadLength(NVKEYID_BT_BLE_BLE_ADV_DATA);
-=======
     advParamEx.sizeAdvData = PM_Nvkey_GetBleAdvDataLength();
->>>>>>> db20e11 (second commit)
     if (advParamEx.sizeAdvData > BLE_MAX_DATA_SIZE)
     {
         advParamEx.sizeAdvData = BLE_MAX_DATA_SIZE;
     }
-<<<<<<< HEAD
-    memcpy(pAdvData, (U8 *)NVKEY_GetPayloadFlashAddress(NVKEYID_BT_BLE_BLE_ADV_DATA), advParamEx.sizeAdvData);
-=======
     memcpy(pAdvData, (U8 *)PM_Nvkey_GetBleAdvData(), advParamEx.sizeAdvData);
->>>>>>> db20e11 (second commit)
     advParamEx.advData = pAdvData;
 
     /* adv random addr */
@@ -393,55 +381,6 @@ static void APP_AirApp_HandleDisconnectCfm(AIRAPP_DISCONNECT_CFM_T* cfm)
 		APP_ReleaseDspSuspend();
 }
 
-<<<<<<< HEAD
-void cb_set_bt_discoverable(U8 action)
-{
-  if (action) {
-    APP_State_AddTopState(APP_EOF, APP_CONDISCABLE);
-  } else {
-    APP_State_RmvState(APP_EOF, APP_CONDISCABLE);
-  }
-}
-
-U8 cb_is_bt_discoverable()
-{
-  U8 state, retval;
-
-  state = APP_State_GetTopState(APP_EOF);
-  if (state == APP_CONDISCABLE) {
-    retval = TRUE;
-  } else {
-    retval = FALSE;
-  }
-
-  return retval;
-}
-
-U8 cb_get_bt_connected_cnt()
-{
-  return CURRENT_ACTIVE_LINK_CNT;
-}
-
-U8 cb_get_bt_maximum_link()
-{
-  return MAX_MULTI_POINT_NO;
-}
-
-#ifdef PROFILE_GFP_ENABLE
-static void APP_AirApp_EnableAdvForGFPSv2()
-{
-  app_cbfunc_module_t module;
-
-  module.set_bt_discoverable = cb_set_bt_discoverable;
-  module.is_bt_discoverable = cb_is_bt_discoverable;
-  module.get_bt_connected_cnt = cb_get_bt_connected_cnt;
-  module.get_bt_maximum_link = cb_get_bt_maximum_link;
-
-  GFPSv2_Enable(TRUE, &module);
-}
-#endif
-=======
->>>>>>> db20e11 (second commit)
 
 static void APP_AirApp_HandleBleDisconnectRsp(BT_BLE_DISCONNECT_REQ_RSP_T* rsp)
 {
@@ -486,15 +425,6 @@ static U32 APP_AirAppHandler(Handler handler, U16 id, void *msg, U32 handler_id)
             if (BT_STATUS_SUCCESS == ((BT_BLE_SET_ADV_PARAMS_EX_CFM_T *)msg)->status)
             {
                 APP_Ble_EnableAdv(BLE_ADV_PRIMARY_MASK);
-<<<<<<< HEAD
-#ifdef PROFILE_GFP_ENABLE
-                if (GFPSv2_IsEnable())
-                {
-                    APP_AirApp_EnableAdvForGFPSv2();
-                }
-#endif
-=======
->>>>>>> db20e11 (second commit)
             }
         }
         break;

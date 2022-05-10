@@ -132,11 +132,7 @@ void APP_EvtKey_KeyEventHandler(BD_ADDR_T *pBdAddr, U16 keyEventCode)
 			#endif
 			break;
 		case AVRCP_KEY_EVENT:
-<<<<<<< HEAD
-			#ifdef AVRCP_Profile
-=======
 			#ifdef AIR_AVRCP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 			APP_AVRCP_ProcessKeyEvent(pBdAddr, keyEventIndex);
 			#endif
 			break;

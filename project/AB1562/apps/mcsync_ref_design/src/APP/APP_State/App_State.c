@@ -84,8 +84,6 @@
 #include "chargercase_common.h"
 #include "ChgCase.h"
 
-<<<<<<< HEAD
-=======
 #ifdef AIR_GFP_ENABLE
 #include "gfps_api.h"
 #endif
@@ -95,7 +93,6 @@
 #endif
 
 
->>>>>>> db20e11 (second commit)
 #define DBG_LOG_APP_STATE(_message, arg_cnt, ...)  LOG_MSGID_I(APP_STATE, _message, arg_cnt, ##__VA_ARGS__)
 
 log_create_module(APP_STATE, PRINT_LEVEL_INFO);
@@ -513,12 +510,9 @@ static void app_State_ConnectDiscoverableEntry(BD_ADDR_T *pBdAddr)
 	}
 
 	APP_Pairing_SetPairModeTimer();
-<<<<<<< HEAD
-=======
 #ifdef AIR_GFP_ENABLE
     gfp_ble_adv_update(GFP_UPDATE_BLE_ADV_REASON_DISCOVERABLE_ENTER);
 #endif
->>>>>>> db20e11 (second commit)
 }
 
 static void app_State_ConnectDiscoverableHandler(BD_ADDR_T *pBdAddr, APP_MSG_TYPE_STRU *pMsg)
@@ -547,12 +541,9 @@ static void app_State_ConnectDiscoverableExit(BD_ADDR_T *pBdAddr)
 
 	APP_Media_PushMediaEvent(MEDIA_EVT_EXIT_DISCOVERABLE);
 	gAppCtl.miscMask2 |= APP_EXIT_DISCOVERABLE_STATE;
-<<<<<<< HEAD
-=======
 #ifdef AIR_GFP_ENABLE
     gfp_ble_adv_update(GFP_UPDATE_BLE_ADV_REASON_DISCOVERABLE_EXIT);
 #endif
->>>>>>> db20e11 (second commit)
 }
 
 static void app_State_ConnectableEntry(BD_ADDR_T *pBdAddr)
@@ -1737,8 +1728,6 @@ bool APP_State_AllLinksInCallRelatedState(void)
 	return FALSE;
 }
 
-<<<<<<< HEAD
-=======
 bool APP_State_IsAnyLinkInSpecifiedState(U8 state)
 {
 	U8 linkIndex;
@@ -1756,7 +1745,6 @@ bool APP_State_IsAnyLinkInSpecifiedState(U8 state)
 	return FALSE;
 }
 
->>>>>>> db20e11 (second commit)
 bool APP_State_CheckLinkInCallActiveState(BD_ADDR_T *pBdAddr)
 {
 	APP_INFO_STRU *pLinkInfo = APP_GetAppLinkByBdAddr(pBdAddr);
@@ -1972,11 +1960,7 @@ void APP_State_ConnectabilityHandle(U8 action)
 			{
 				APP_Pairing_ConnectableHandler(CONNECTABLE_MODE);
 
-<<<<<<< HEAD
-				#ifndef TAKE_OVER_LINK
-=======
 				#ifndef AIR_TAKE_OVER_LINK_ENABLE
->>>>>>> db20e11 (second commit)
 				if(APP_PairNvkey_GetTimer(TIMER_PAIRING_CONNECTABLE_TIMEOUT))
 				{
 					APP_Pairing_SetTimer(TIMER_PAIRING_CONNECTABLE_TIMEOUT);
@@ -2045,8 +2029,6 @@ void APP_State_DiscoverabilityHandle(U8 action)
 			{
 				return;
 			}
-<<<<<<< HEAD
-=======
             #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
             if(BtMCSync_GetShareMode() == MCSYNC_SHARE_MODE_FOLLOWER_ENABLE && APP_MCSync_IsShareConn())
             {
@@ -2054,7 +2036,6 @@ void APP_State_DiscoverabilityHandle(U8 action)
                 return;
             }
             #endif
->>>>>>> db20e11 (second commit)
 
 			APP_Pairing_DiscoverableHandler(GENERAL_DISCOVERABLE_MODE);
 
@@ -2150,11 +2131,7 @@ void APP_State_ConnectedEntry(BD_ADDR_T *pBdAddr)
 	if(pLinkInfo->stateEntryExit & (APP_EXIT_IMGCALL_STATE|APP_EXIT_OUTGOING_STATE|APP_EXIT_CALLACTIVE_STATE))
 	{
 		pLinkInfo->stateEntryExit &= ~(APP_EXIT_IMGCALL_STATE|APP_EXIT_OUTGOING_STATE|APP_EXIT_CALLACTIVE_STATE);
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 		if(APP_Hfp_IsHspConnected(pBdAddr))
 		{
 			APP_AudioDeviceDeRegister(pBdAddr, AUDIO_DEVICE_SCO_HSP);
@@ -2206,11 +2183,7 @@ void APP_State_ConnectedExit(BD_ADDR_T *pBdAddr)
 		{
 			if(APP_GetAppLinkByBdAddr(pBdAddr)->linkPara.miscMask & APP_LINK_LOSS)
 			{
-<<<<<<< HEAD
-				APP_Media_PushMediaEvent(MEDIA_EVT_LINK_LOSS);
-=======
 				//APP_Media_PushMediaEvent(MEDIA_EVT_LINK_LOSS);
->>>>>>> db20e11 (second commit)
 			}
 			else
 			{
@@ -2224,11 +2197,7 @@ void APP_State_ConnectedExit(BD_ADDR_T *pBdAddr)
 				{
 					if(!APP_IsRmvDetachState())
 					{
-<<<<<<< HEAD
-						APP_Media_PushMediaEvent(MEDIA_EVT_SLC_DISCONNECTED);
-=======
 						//APP_Media_PushMediaEvent(MEDIA_EVT_SLC_DISCONNECTED);
->>>>>>> db20e11 (second commit)
 					}
 					else
 					{

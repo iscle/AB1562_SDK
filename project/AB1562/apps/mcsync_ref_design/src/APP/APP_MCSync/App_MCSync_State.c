@@ -58,11 +58,7 @@
 #include "App_Ble.h"
 #include "hal_captouch.h"
 
-<<<<<<< HEAD
-#ifdef PROFILE_GFP_ENABLE
-=======
 #ifdef AIR_GFP_ENABLE
->>>>>>> db20e11 (second commit)
 #include "App_Gfp.h"
 #endif
 
@@ -160,11 +156,8 @@ static BOOL app_mcsync_IsAirPairingMaskReady(void)
 
 static void app_mcsync_PairingEntry(BD_ADDR_T *pBdAddr)
 {
-<<<<<<< HEAD
-=======
     DBG_LOG_APP_McsyncRho( "[MCSync] MCSync Pairing Enter", 0);
 
->>>>>>> db20e11 (second commit)
     UNUSED(pBdAddr);
     #ifdef PROFILE_AMA_ENABLE
     APP_Ble_DisableAdv(BLE_ADV_AMA_MASK);
@@ -173,14 +166,8 @@ static void app_mcsync_PairingEntry(BD_ADDR_T *pBdAddr)
     APP_Ble_DisableAdv(BLE_ADV_XIAOAI_MASK);
     #endif
     APP_Ble_DisableAdv(BLE_ADV_PRIMARY_MASK);
-<<<<<<< HEAD
-	
-	#ifdef PROFILE_GFP_ENABLE
-	APP_Gfp_DisableAdv();
-=======
 	#ifdef AIR_GFP_ENABLE
 	APP_Ble_DisableAdv(BLE_ADV_GFP_MASK);
->>>>>>> db20e11 (second commit)
 	#endif
 
 	APP_Ble_Disconnect(NULL);
@@ -191,11 +178,7 @@ static void app_mcsync_PairingEntry(BD_ADDR_T *pBdAddr)
     app_mcsync_InquiryDataInit();
     APP_Media_PushMediaEvent(MEDIA_EVT_TWS_ENTER_PAIRING); // add vp rt
 
-<<<<<<< HEAD
-	if(BtAwsMce_IsDefaultRoleAgent() && PM_GetNormalLinkNum())
-=======
 	if(BtAwsMce_IsDefaultRoleAgent() && APP_GetNormalLinkNum())
->>>>>>> db20e11 (second commit)
 	{
 		DBG_LOG_APP_McsyncRho( "[MCSync] Air Pairing. Release AG", 0);
 		APP_Conn_ReleaseMultiLink();
@@ -244,15 +227,12 @@ static void app_mcsync_PairingExit(BD_ADDR_T *pBdAddr)
 
 	DBG_LOG_APP_McsyncRho( "[MCSync] MCSync Pairing Exit State, pairing result:%d", 1, gAppMCSyncCtl.inquiryPara.isFoundRssi);
 
-<<<<<<< HEAD
-=======
 #ifdef AIR_GFP_ENABLE
     if (!gAppMCSyncCtl.inquiryPara.isFoundRssi)
     {
         APP_Ble_EnableAdv(BLE_ADV_GFP_MASK);
     }
 #endif
->>>>>>> db20e11 (second commit)
 	BtAwsMce_SetAirPairing(FALSE);
 	APP_MCSYNC_SystemStopAirPairingInquiry();
 
@@ -279,11 +259,7 @@ static void app_mcsync_PairingExit(BD_ADDR_T *pBdAddr)
 
 		if(defaultRole == ROLE_AGENT)
 		{
-<<<<<<< HEAD
-			#ifdef MCSYNC_SHARE_MODE
-=======
 			#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 			FW_SetTimer(&gAppMCSyncStateTimerHandle, 
 				APP_MCSYNC_STATE_ENTER_DISCOVERABLE, NULL, 0, 3000);			
 			#endif
@@ -307,11 +283,7 @@ static U32 app_mcsync_StateTimerHandler(Handler handler, U16 id, void *payload, 
 
 	switch(id)
 	{
-<<<<<<< HEAD
-		#ifdef MCSYNC_SHARE_MODE
-=======
 		#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 		case APP_MCSYNC_STATE_ENTER_DISCOVERABLE:
 			break;
 		#endif

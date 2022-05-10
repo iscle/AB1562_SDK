@@ -68,10 +68,7 @@ var searchData=
   ['hal_5fgpio_5finit',['hal_gpio_init',['../group___g_p_i_o.html#ga19985c2e5d4b22d47d08103be800331d',1,'hal_gpio.h']]],
   ['hal_5fgpio_5fpull_5fdown',['hal_gpio_pull_down',['../group___g_p_i_o.html#gafc092ca55bf3e9f1b7b15e5344773eea',1,'hal_gpio.h']]],
   ['hal_5fgpio_5fpull_5fup',['hal_gpio_pull_up',['../group___g_p_i_o.html#gafad3b85f8569d715f4772fd045192490',1,'hal_gpio.h']]],
-<<<<<<< HEAD
-=======
   ['hal_5fgpio_5fset_5fclockout',['hal_gpio_set_clockout',['../group___g_p_i_o.html#gad7b47b13e9584f643d2fb1d2852c95bf',1,'hal_gpio.h']]],
->>>>>>> db20e11 (second commit)
   ['hal_5fgpio_5fset_5fdirection',['hal_gpio_set_direction',['../group___g_p_i_o.html#ga290f8e259302f1e6eb6caa5c3aeb8a9e',1,'hal_gpio.h']]],
   ['hal_5fgpio_5fset_5fdriving_5fcurrent',['hal_gpio_set_driving_current',['../group___g_p_i_o.html#ga4f2b9732372813716c994140f8758580',1,'hal_gpio.h']]],
   ['hal_5fgpio_5fset_5fhigh_5fimpedance',['hal_gpio_set_high_impedance',['../group___g_p_i_o.html#ga29169c4f1126b5aa55a6139dd9cdb79e',1,'hal_gpio.h']]],

@@ -360,11 +360,7 @@ void APP_HFP_Key3WayCallTransfer(BD_ADDR_T *pBdAddr)
 {
 	APP_SendATCmdUnderConnection(pBdAddr, HFP_ATCMD_3WAY_CALLTRANSFER);
 }
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 void APP_HFP_KeyHSPButtonPressed(BD_ADDR_T *pBdAddr)
 {
 	APP_SendATCmdUnderConnection(pBdAddr, HFP_ATCMD_CKPD_200);
@@ -493,11 +489,7 @@ void APP_HFP_ProcessKeyEvent(BD_ADDR_T *pBdAddr, U16 keyCode)
 			break;
 
 		case HFP_KEY_EVENT_KEY_HSP_BUTTON_PRESSED:							//KEY_HSP_BUTTON_PRESSED,
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE		
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE		
->>>>>>> db20e11 (second commit)
 			APP_HFP_KeyHSPButtonPressed(pBdAddr);
 #endif
 			break;

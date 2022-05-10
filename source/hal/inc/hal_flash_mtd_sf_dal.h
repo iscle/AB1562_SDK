@@ -210,13 +210,9 @@ typedef union {
 // Note: This must match with JECDEC vendor id
 typedef enum {
     SF_DAL_TYPE_NONE       = 0,
-<<<<<<< HEAD
-    SF_DAL_TYPE_NUMONYX    = 0x20,
-=======
 #ifdef SF_DAL_NUMONYX
     SF_DAL_TYPE_NUMONYX    = 0x20,
 #endif
->>>>>>> db20e11 (second commit)
     SF_DAL_TYPE_NUMONYX_W  = 0x2C,
     SF_DAL_TYPE_EON        = 0x1C,
     SF_DAL_TYPE_SST        = 0xBF,
@@ -226,12 +222,9 @@ typedef enum {
     SF_DAL_TYPE_WINBOND    = 0xEF,
     SF_DAL_TYPE_FIDELIX    = 0xF8,
     SF_DAL_TYPE_ESMT       = 0x8C,
-<<<<<<< HEAD
-=======
 #ifdef SF_DAL_XMC
     SF_DAL_TYPE_XMC        = 0x20,
 #endif
->>>>>>> db20e11 (second commit)
     SF_DAL_TYPE_COUNT
 } SF_DAL_Type;
 

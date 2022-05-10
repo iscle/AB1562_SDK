@@ -72,14 +72,6 @@ enum
 /******************************************************************************
  * Structure
 *******************************************************************************/
-<<<<<<< HEAD
-typedef struct
-{
-	U8 imgAudioVoiceState;
-	BD_ADDR_T bdAddr;
-}APP_HFP_IMG_MEDIA_STRU;
-=======
->>>>>>> db20e11 (second commit)
 
 typedef struct
 {
@@ -91,11 +83,7 @@ typedef struct
  * Variable
 *******************************************************************************/
 static U32 app_ImgCallMediaTimerHandler(Handler handler, U16 id, void* msg, U32 handler_id);
-<<<<<<< HEAD
-static const HandlerData gAppImgCallMediaTimerHandler = {app_ImgCallMediaTimerHandler};
-=======
 HandlerData gAppImgCallMediaTimerHandler = {app_ImgCallMediaTimerHandler};
->>>>>>> db20e11 (second commit)
 
 APP_HFP_IMG_MEDIA_STRU	gAppHfpImgMediaCtl;
 
@@ -198,11 +186,7 @@ static U8 app_ImgMedia_CallerIDHandler(BD_ADDR_T *pBdAddr)
 
 	if(!APP_State_CheckLinkInIncomingState(pBdAddr) || !pHfpLinkInfo)
 		return IMG_AUDIO_VOICE_LOAD_STATE_ERROR;
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 	if(APP_Hfp_IsHspConnected(pBdAddr))
 		return IMG_AUDIO_VOICE_LOAD_INVALID;
 #endif
@@ -257,11 +241,7 @@ static U8 app_ImgMedia_RingHandler(BD_ADDR_T *pBdAddr)
 	BOOL isInCall = FALSE;
 	if(!APP_State_CheckLinkInIncomingState(pBdAddr))
 		return IMG_AUDIO_VOICE_LOAD_STATE_ERROR;
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 	if(APP_Hfp_IsFeatureOn(APP_PLAY_DEFAULT_RING_INCOMING_FEAT) || APP_Hfp_IsHspConnected(pBdAddr))
 #else
     if(APP_Hfp_IsFeatureOn(APP_PLAY_DEFAULT_RING_INCOMING_FEAT))

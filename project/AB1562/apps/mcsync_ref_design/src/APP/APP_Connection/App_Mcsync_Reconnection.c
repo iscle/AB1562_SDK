@@ -101,11 +101,7 @@ enum
 	MCS_RECONN_EVENT_AGENT_WITH_PARTNER,
 	MCS_RECONN_EVENT_AGENT_WITH_AG,
 	MCS_RECONN_EVENT_CANCEL_MODE,
-<<<<<<< HEAD
-	MCS_RECONN_EVENT_RECONNECT_FAILED_LMP_RESPONSE_TIMEOUT,
-=======
 	MCS_RECONN_EVENT_RECONNECT_FAIL_LMP_RESPONSE_TIMEOUT,
->>>>>>> db20e11 (second commit)
 };
 
 enum
@@ -289,10 +285,7 @@ static void app_Mcsync_Reconnect(void)
 			}
 			else
 			{
-<<<<<<< HEAD
-=======
                 APP_State_DiscoverabilityHandle(CMD_SET_NON_DISCOVERABLE);
->>>>>>> db20e11 (second commit)
 				APP_State_ConnectabilityHandle(CMD_SECURITY_MODE_COMPLETE);
 			}
 
@@ -324,19 +317,13 @@ static void app_Mcsync_Reconnect(void)
 				}
 				else
 				{
-<<<<<<< HEAD
-=======
                     APP_State_DiscoverabilityHandle(CMD_SET_NON_DISCOVERABLE);
->>>>>>> db20e11 (second commit)
 					APP_State_ConnectabilityHandle(CMD_SET_CONNECTABLE);
 				}
 			}
 			else
 			{
-<<<<<<< HEAD
-=======
                 APP_State_DiscoverabilityHandle(CMD_SET_NON_DISCOVERABLE);
->>>>>>> db20e11 (second commit)
 				APP_State_ConnectabilityHandle(CMD_SET_NON_CONNECTABLE);
 			}
 
@@ -352,11 +339,7 @@ static void app_Mcsync_SuperReconnectModeEnd(void)
 	if(MSG_MessageSearchAllEx3((Handler)&gAppMcsSuperReconnectHandle, ID_ENTER_SUPER_RECONNECT))
 	{
 		MSG_MessageCancelAllHandler((Handler)&gAppMcsSuperReconnectHandle);
-<<<<<<< HEAD
-		FW_SetTimer((Handler)&gAppMcsSuperReconnectHandle, ID_ENTER_SUPER_RECONNECT, NULL, RECONNECT_USER_INIT, 80);
-=======
 		FW_SetTimer((Handler)&gAppMcsSuperReconnectHandle, ID_ENTER_SUPER_RECONNECT, NULL, RECONNECT_USER_INIT, 10);
->>>>>>> db20e11 (second commit)
 	}
 	else
 	{
@@ -402,11 +385,7 @@ static U32 app_Mcsync_SuperReconnectHandler(Handler handler, U16 id, void *msg, 
 	{
 		case ID_RECONNECT_TIMEOUT:
 			DBG_LOG_APP_Connection( "[APP MCS Reconn] Reconnect Timeout. state:%s", 1, APP_McsReconn_State_String[state]);
-<<<<<<< HEAD
-			#ifdef MCSYNC_SHARE_MODE
-=======
 			#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 			if( MCSYNC_SHARE_MODE_DISABLE != BtMCSync_GetShareMode())
 			{
 				app_Mcsync_SuperReconnectModeEnd();
@@ -449,25 +428,11 @@ static void app_Mcsync_ReconnectStateHandler(U8 event)
 {
 	U8 state = app_Mcsync_GetReconnectState();
 
-<<<<<<< HEAD
-	DBG_LOG_APP_Connection( "[APP MCS Reconn] State Handler. event:%s, state:%s", 2, APP_McsReconn_Event_String[event], APP_McsReconn_State_String[state]);
-=======
 	DBG_LOG_APP_Connection( "[APP MCS Reconn] State Handler. event(%d):%s, state(%d):%s", 4, event, APP_McsReconn_Event_String[event], state, APP_McsReconn_State_String[state]);
->>>>>>> db20e11 (second commit)
 
 	switch(state)
 	{
 		case MCS_RECONN_STATE_IDLE:
-<<<<<<< HEAD
-			if(event == MCS_RECONN_EVENT_RECONNECT_FAILED_LMP_RESPONSE_TIMEOUT)
-			{
-				if(APP_System_SetRoleMode(APP_ROLE_MODE_SUPER_RECONNECT, ROLE_PARTNER))
-					app_Mcsync_SetReconnectState(MCS_RECONN_STATE_WAIT_TO_PARTNER);
-				else
-					app_Mcsync_SuperReconnectModeEnd();
-			}
-=======
->>>>>>> db20e11 (second commit)
 			break;
 
 		case MCS_RECONN_STATE_WAIT_TO_PARTNER:
@@ -606,13 +571,10 @@ static void app_Mcsync_ReconnectStateHandler(U8 event)
 			{
 				APP_Reconn_ReconnectSetSuspend(FALSE);
 				app_Mcsync_SuperReconnectModeEnd();
-<<<<<<< HEAD
-=======
                 if(event == MCS_RECONN_EVENT_AGENT_WITH_PARTNER && LINK_DISCONNECTED == PM_Conn_GetAgLinkState() && app_Mcsync_IsConnToAGNeeded())
                 {
                     APP_Reconn_SetDelayTimer(RECONNECT_USER_INIT, 0);
                 }
->>>>>>> db20e11 (second commit)
 			}
 			break;
 
@@ -692,11 +654,7 @@ BOOL APP_Mcsync_EnterSuperReconnectMode(U8 type)
 	if(!APP_Mcsync_ReconnectIsFeatureOn())
 		return TRUE;
 
-<<<<<<< HEAD
-	#ifdef MCSYNC_SHARE_MODE
-=======
 	#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 	if(MCSYNC_SHARE_MODE_DISABLE != BtMCSync_GetShareMode())
 		return TRUE;
 	#endif
@@ -717,8 +675,6 @@ BOOL APP_Mcsync_EnterSuperReconnectMode(U8 type)
 		return FALSE;
 	}
 
-<<<<<<< HEAD
-=======
     DBG_LOG_APP_Connection( "[APP MCS Reconn] ACL disconnecting check: ACL cnt:%d, diconnecting cnt:%d", 2, APP_GetACLLinkCount(), APP_GetLinkActiveDisconnectingCnt());
 	if(APP_GetACLLinkCount() && APP_GetLinkActiveDisconnectingCnt())
 	{
@@ -727,7 +683,6 @@ BOOL APP_Mcsync_EnterSuperReconnectMode(U8 type)
 		return FALSE;
 	}
 
->>>>>>> db20e11 (second commit)
 	if(mcsState == MCSYNC_LINK_CONNECTED)
 		return TRUE;
 
@@ -788,11 +743,7 @@ void APP_Mcsync_ReconnectNotify(U8 connectDev)
 	if(!APP_Mcsync_ReconnectIsFeatureOn())
 		return;
 
-<<<<<<< HEAD
-	#ifdef MCSYNC_SHARE_MODE
-=======
 	#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 	if(MCSYNC_SHARE_MODE_DISABLE != BtMCSync_GetShareMode())
 		return;
 	#endif
@@ -856,11 +807,7 @@ void APP_Mcsync_ReconnectFailedNotify(U8 reason)
 
 	if(!APP_Mcsync_ReconnectIsFeatureOn())
 		return;
-<<<<<<< HEAD
-	#ifdef MCSYNC_SHARE_MODE
-=======
 	#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 	if(MCSYNC_SHARE_MODE_DISABLE != BtMCSync_GetShareMode())
 		return;
 	#endif
@@ -886,18 +833,6 @@ void APP_Mcsync_ReconnectFailedNotify(U8 reason)
 				break;
 		}
 	}
-<<<<<<< HEAD
-	else if(state == MCS_RECONN_STATE_IDLE)
-	{
-		switch(reason)
-		{
-			case HCI_STATUS_LMP_RESPONSE_TIMEOUT:
-				eventId = MCS_RECONN_EVENT_RECONNECT_FAILED_LMP_RESPONSE_TIMEOUT;
-				break;
-		}
-	}
-=======
->>>>>>> db20e11 (second commit)
 
 	FW_MessageSendEx((Handler)&gAppMcsSuperReconnectHandle, ID_STATE_HANDLER, NULL, eventId);
 	#else
@@ -914,11 +849,7 @@ void APP_Mcsync_SetRoleNotify(U8 status)
 	if(!APP_Mcsync_ReconnectIsFeatureOn())
 		return;
 
-<<<<<<< HEAD
-	#ifdef MCSYNC_SHARE_MODE
-=======
 	#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 	if(MCSYNC_SHARE_MODE_DISABLE != BtMCSync_GetShareMode())
 		return;
 	#endif
@@ -940,10 +871,7 @@ void APP_Mcsync_SetRoleNotify(U8 status)
 		}
 		else if(defaultRole == ROLE_PARTNER)
 		{
-<<<<<<< HEAD
-=======
             APP_State_DiscoverabilityHandle(CMD_SET_NON_DISCOVERABLE);
->>>>>>> db20e11 (second commit)
 			APP_State_ConnectabilityHandle(CMD_SET_NON_CONNECTABLE);
 			APP_PowerOff_CancelTimer(TIMER_AWS_IDLE_POWEROFF);
 			app_Mcsync_ReconnectStateHandler(MCS_RECONN_EVENT_SET_PARTNER_SUCCESSFUL);
@@ -1146,11 +1074,7 @@ void APP_Mcsync_SetReconnectLater(U8 type, U32 time)
     FW_SetTimer((Handler)&gAppMcsSuperReconnectHandle, ID_ENTER_SUPER_RECONNECT, NULL, type, time);
 }
 
-<<<<<<< HEAD
-#ifdef DISCONNECT_AGENT_RECOVERY
-=======
 #ifdef AIR_AGENT_RECOVERY_MODE_AFTER_DISCONNECTION_FROM_PHONE_ENABLE
->>>>>>> db20e11 (second commit)
 U16 app_mcsync_reconnect_check_super_reconnect_timer(U32 reconnect_type)
 {
     return FW_CheckTimer((Handler)&gAppMcsSuperReconnectHandle, ID_ENTER_SUPER_RECONNECT, reconnect_type);

@@ -30,13 +30,10 @@ FPGA_ENV                                                ?= n
 ################################################################################
 MTK_FULLDUMP_ENABLE                                     ?= y
 MTK_MINIDUMP_ENABLE                                     ?= y
-<<<<<<< HEAD
-=======
 ifeq ($(PROJECT), AB1562M) 
 MTK_MINIDUMP_ENHANCE_ENABLE                             ?= y
 endif 
 MTK_OFFLINELOG_ENABLE                                   ?= y
->>>>>>> db20e11 (second commit)
 
 ################################################################################
 # Bootreason config
@@ -51,11 +48,6 @@ MTK_SYSTEM_HANG_TRACER_ENABLE                           ?= y
 ################################################################################
 # Audio Feature config
 ################################################################################
-<<<<<<< HEAD
-MTK_INEAR_ENHANCEMENT                                   ?= n
-MTK_DUALMIC_INEAR                                       ?= y
-MTK_3RD_PARTY_NR                                        ?= n
-=======
 
 ## Below TXNR options is mutually exclusive. Please only select one of them.
 ##
@@ -73,15 +65,11 @@ MTK_3RD_PARTY_NR                                        ?= n
 AIR_TXNR_MODE                                            = mode_3
 
 
->>>>>>> db20e11 (second commit)
 MTK_OPUS_ENCODER_ENABLE                                 ?= n
 MTK_DSP_HWVAD_ENABLE                                    ?= y
 MTK_LEAKAGE_DETECTION_ENABLE                            ?= n
 MTK_DSP_MULTI_MIC_ENABLE                                ?= y
 MTK_LOW_LATENCY_VP_WITH_48K_FS                          ?= n
-<<<<<<< HEAD
-MP3_VOICE_PROMPT_AUDIO_CTRL                             ?= y
-=======
 
 ##
 ## AIR_MP3_VOICE_PROMPT_AUDIO_CTRL_ENABLE
@@ -94,30 +82,16 @@ MP3_VOICE_PROMPT_AUDIO_CTRL                             ?= y
 
 AIR_MP3_VOICE_PROMPT_AUDIO_CTRL_ENABLE                  ?= y
 
->>>>>>> db20e11 (second commit)
 AIROHA_WWE_ENABLE                                       ?= n
 AMAZON_AMA_ENABLE                                       ?= n
 GOOGLE_GVA_ENABLE                                       ?= n
 XIAOAI_DEVELOPMENT                                      ?= n
 XIAOAI_TWO_STAGE_OTA                                    ?= n
-<<<<<<< HEAD
-MP3_VOICE_PROMPT_AUDIO_CTRL                             ?= n
-=======
 
->>>>>>> db20e11 (second commit)
 ################################################################################
 # Profile Feature config
 ################################################################################
 PROFILE_AMA_ENABLE                                      ?= n
-<<<<<<< HEAD
-PROFILE_GFP_ENABLE                                      ?= y
-PROFILE_SWIFT_ENABLE                                    ?= n
-PROFILE_HEADSET_ENABLE                                  ?= y
-AMA_IAP2_SUPPORT_ENABLE                                 ?= n
-################################################################################
-# Project Feature config
-################################################################################
-=======
 
 ##
 ## AIR_GPF_ENABLE
@@ -177,45 +151,20 @@ AIR_A2DP_PROFILE_ENABLE                                 ?= y
 AMA_IAP2_SUPPORT_ENABLE                                 ?= n
 AIR_GATT_OVER_BREDR_ENABLE                              ?= n
 
->>>>>>> db20e11 (second commit)
 APP_GAME_MODE                                           ?= y
 A2DP_LOW_LATENCY                                        ?= n
 MODULE_LOG_FEATURE                                      ?= y
 A2DP_PACKET_ASSEMBLE                                    ?= y
 LOG_PRINT_156X                                          ?= n
-<<<<<<< HEAD
-AVRCP_Profile                                           ?= y
-A2DP_Profile                                            ?= y
-SMART_CHG_CSE_DEVELOPMENT                               ?= y
-SMART_CHG_CSE_LIDON_RECONNECT                           ?= y
-SMART_CHG_CSE_AUTO_AIR_PAIRING                          ?= n
-#SMART_CHARGING_RECOVERY_MODE                           ?= y
-MP3_LOCAL_PLAYBACK                                      ?= n
-MP3_LOCAL_PLAYBACK_MMI_CTRL                             ?= n
-CHANNEL_SELECTION_ENABLE                                ?= y
-CAPTOUCH_FUNCTION_ENABLE                                ?= y
-=======
 SMART_CHG_CSE_DEVELOPMENT                               ?= y
 SMART_CHG_CSE_LIDON_RECONNECT                           ?= y
 SMART_CHG_CSE_AUTO_AIR_PAIRING                          ?= n
 CHANNEL_SELECTION_ENABLE                                ?= y
->>>>>>> db20e11 (second commit)
 ANC_FF_MMI_CTRL                                         ?= y
 APP_OPUS_ENCODER                                        ?= n
 AIROHA_BT_SPP_ENABLE                                    ?= n
 AIROHA_BT_HID_ENABLE                                    ?= n
 AIROHA_BT_LE_ENABLE                                     ?= n
-<<<<<<< HEAD
-DO_RHO_IMMEDIATELY                                      ?= n
-CODEC_SWITCH_WORKAROUND_MI9                             ?= n
-SPECIAL_WHITE_LIST_HANDLE                               ?= y
-CODEC_SWITCH_WORKAROUND_SONY_XPERIA                     ?= y
-MCSYNC_SHARE_MODE                                       ?= n
-TAKE_OVER_LINK                                          ?= n
-APP_TILE_ENABLE                                         ?= n
-PRESSURE_SENSOR                                         ?= n
-DISCONNECT_AGENT_RECOVERY                               ?= n
-=======
 SPECIAL_WHITE_LIST_HANDLE                               ?= y
 
 
@@ -308,4 +257,3 @@ AIR_AGENT_RECOVERY_MODE_AFTER_DISCONNECTION_FROM_PHONE_ENABLE    ?= y
 ##
 
 AIR_PEQ_SPEAKER_ENBALE    ?= y
->>>>>>> db20e11 (second commit)

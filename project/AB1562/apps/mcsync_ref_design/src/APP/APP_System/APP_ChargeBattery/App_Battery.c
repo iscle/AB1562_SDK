@@ -499,8 +499,6 @@ void APP_Battery_Init(void)
     /* In 1562 Check charger in in PowerOn */
 }
 
-<<<<<<< HEAD
-=======
 U8 APP_Battery_GetSmartCaseBatLevel(void)
 {
 	return gAppBatInfo.smartCaseBatLevel;
@@ -519,4 +517,3 @@ void APP_Battery_SetSmartCaseBatLevel(U8 batLevel)
 	}
 }
 
->>>>>>> db20e11 (second commit)

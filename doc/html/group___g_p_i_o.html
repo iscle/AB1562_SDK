@@ -126,13 +126,10 @@ Supported features</h1>
 <li><b>Support</b> <b>inversion</b> <b>function</b>. <br />
  Inversion function inverses input data of the GPIO until the function is disabled, it is useful when the chip is input high active while the connected device is output and low active. <br />
  Call <a class="el" href="group___g_p_i_o.html#ga91a0a0c037a08dea664bbf4756df99f7" title="This function enables the input data inversion of the target GPIO, after this function, the input data of the target GPIO will always be inversed until the inverse function is disabled. ">hal_gpio_enable_inversion()</a> to inverse the input data of the pin until the function is disabled by calling <a class="el" href="group___g_p_i_o.html#ga950d3b1160b10134b76c44bbc3645683" title="This function disables the input data inversion of the target GPIO. ">hal_gpio_disable_inversion()</a>. <br />
-<<<<<<< HEAD
-=======
 </li>
 <li><b>Support</b> <b>output</b> <b>clock</b> <b>function</b>. <br />
  There are 6 clock-out ports embedded in all GPIO pins and each of them can be configured with appropriate clock frequency to send outside the chip. <br />
  Call <a class="el" href="group___g_p_i_o.html#gad7b47b13e9584f643d2fb1d2852c95bf" title="This function sets the clock-out source of the target GPIO. The software can configure which clock to...">hal_gpio_set_clockout()</a> to set the output clock source of target pin after configuring the pin to operate in output clock mode. <br />
->>>>>>> db20e11 (second commit)
  </li>
 </ul>
 <h1><a class="anchor" id="HAL_GPIO_Architechture_Chapter"></a>
@@ -220,12 +217,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga1a23d5feecd06dbae55552cda14b9b13"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__hal__gpio__enum.html#ga6da2d541a690db510ae5d61ed0c83b9f">hal_gpio_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#ga1a23d5feecd06dbae55552cda14b9b13">hal_gpio_disable_pull</a> (<a class="el" href="group__hal__gpio__enum.html#ga8793dd0b4f544f610264c026357bf6da">hal_gpio_pin_t</a> gpio_pin)</td></tr>
 <tr class="memdesc:ga1a23d5feecd06dbae55552cda14b9b13"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function disables pull-up or pull-down of the target GPIO. This function operates on the pins with one pull-up and one pull-down resistors.  <a href="#ga1a23d5feecd06dbae55552cda14b9b13">More...</a><br /></td></tr>
 <tr class="separator:ga1a23d5feecd06dbae55552cda14b9b13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<<<<<<< HEAD
-=======
 <tr class="memitem:gad7b47b13e9584f643d2fb1d2852c95bf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__hal__gpio__enum.html#ga6da2d541a690db510ae5d61ed0c83b9f">hal_gpio_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#gad7b47b13e9584f643d2fb1d2852c95bf">hal_gpio_set_clockout</a> (<a class="el" href="group__hal__gpio__enum.html#ga2f13bf3247dc651f4cfb7524cd0d97c6">hal_gpio_clock_t</a> gpio_clock_num, <a class="el" href="group__hal__gpio__enum.html#ga84a5e8429bfb7e9a697e156094d1e638">hal_gpio_clock_mode_t</a> clock_mode)</td></tr>
 <tr class="memdesc:gad7b47b13e9584f643d2fb1d2852c95bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function sets the clock-out source of the target GPIO. The software can configure which clock to send outside the chip. There are 6 clock-out ports embedded in all GPIO pins, and each clock-out can be programmed to output appropriate clock source. This function can only be used after configuring the pin to operate in output clock mode.  <a href="#gad7b47b13e9584f643d2fb1d2852c95bf">More...</a><br /></td></tr>
 <tr class="separator:gad7b47b13e9584f643d2fb1d2852c95bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
->>>>>>> db20e11 (second commit)
 <tr class="memitem:ga4f2b9732372813716c994140f8758580"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__hal__gpio__enum.html#ga6da2d541a690db510ae5d61ed0c83b9f">hal_gpio_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#ga4f2b9732372813716c994140f8758580">hal_gpio_set_driving_current</a> (<a class="el" href="group__hal__gpio__enum.html#ga8793dd0b4f544f610264c026357bf6da">hal_gpio_pin_t</a> gpio_pin, <a class="el" href="group__hal__gpio__enum.html#ga84c2c8e08483edaab619f3479d437b41">hal_gpio_driving_current_t</a> driving)</td></tr>
 <tr class="memdesc:ga4f2b9732372813716c994140f8758580"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function sets the driving current of the target GPIO.  <a href="#ga4f2b9732372813716c994140f8758580">More...</a><br /></td></tr>
 <tr class="separator:ga4f2b9732372813716c994140f8758580"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -699,8 +693,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<<<<<<< HEAD
-=======
 <a id="gad7b47b13e9584f643d2fb1d2852c95bf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gad7b47b13e9584f643d2fb1d2852c95bf">&#9670;&nbsp;</a></span>hal_gpio_set_clockout()</h2>
 
@@ -742,7 +734,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
->>>>>>> db20e11 (second commit)
 <a id="ga290f8e259302f1e6eb6caa5c3aeb8a9e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga290f8e259302f1e6eb6caa5c3aeb8a9e">&#9670;&nbsp;</a></span>hal_gpio_set_direction()</h2>
 
@@ -1022,11 +1013,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-<<<<<<< HEAD
-    <li class="footer">Generated on Fri Dec 25 2020 10:34:48 for AB1561 AB1562 AB1563 API Reference by
-=======
     <li class="footer">Generated on Fri May 14 2021 19:40:52 for AB1561 AB1562 AB1563 API Reference by
->>>>>>> db20e11 (second commit)
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

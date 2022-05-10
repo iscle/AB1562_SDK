@@ -88,12 +88,9 @@ extern void SLA_RamLogging(uint32_t xContext);
 }
 #endif
 
-<<<<<<< HEAD
-=======
 #if defined(MTK_SWLA_ENABLE_O2)
 #define UART_LA_PORT HAL_UART_0
 #endif
->>>>>>> db20e11 (second commit)
 
 #endif /* __SWLA_H__ */
 

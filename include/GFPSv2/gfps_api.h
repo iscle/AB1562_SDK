@@ -38,50 +38,6 @@
 #include "bt.h"
 #include "Gfp_Bt.h"
 
-<<<<<<< HEAD
-#define GFPS_BLE_ADV_DATA_LEN   0x1F
-#define GSPS_BLE_IDLE           0x00
-#define GFPS_BLE_ADV_STOP       0x01
-#define GFPS_BLE_ADVERTISING    0x02
-#define GFPS_BLE_ADV_CHANGING   0x08
-#define GFPS_BLE_DISCONNECTED   0x10
-#define GFPS_BLE_CONNECTED      0x12
-
-typedef struct {
-  U8 len;
-  U8 adv_data[GFPS_BLE_ADV_DATA_LEN];
-} gfps_ble_adv_data_t;
-
-typedef struct _cb_app_func_module_ {
-  U8 (*is_bt_discoverable)();
-  void (*set_bt_discoverable)(U8 action);
-  U8 (*get_bt_connected_cnt)();
-  U8 (*get_bt_maximum_link)();
-} app_cbfunc_module_t;
-
-U8 GFPSv2_update_adv_data(gfps_ble_adv_data_t *p_adv);
-U8 GFPSv2_update_adv_para(BLE_ADV_PARAMS_T *advParams);
-U8 GFPSv2_update_scan_response(U8 *rsp);
-U8 GFPSv2_set_random_addr(U8 *raddr);
-U8 GFPSv2_Enable(U8 enable, app_cbfunc_module_t *module);
-U8 GFPSv2_IsEnable();
-U8 GFPSv2_is_processing();
-void GFPSv2_store_local_passkey(U8 linkIdx, U8 *key);
-void App_GfpsAdv_Disable();
-void App_GfpsAdv_Update( uint8_t advType );
-void App_GfpsAdv_DataParmUpdate();
-void App_GfpsAdv_DataParmUpdate_2();
-void App_Gfps_Spp_Disconnect();
-void App_GfpsAdv_Update_BatteryLevel();
-void App_gfp_set_batt_adv();
-uint8_t App_gfp_parnter_batt( uint8_t *pVal );
-void App_gfp_set_agent_case_LidOn();
-void App_gfp_set_agent_case_LidOff();
-void App_gfp_set_agent_case_Out();
-uint8_t get_random_num();
-
-
-=======
 
 #define GFPS_BLE_ADV_DATA_LEN   0x1F
 
@@ -156,15 +112,10 @@ typedef struct
 
 U8 GFPSv2_is_processing(void);
 void GFPSv2_store_local_passkey(U8 linkIdx, U8 *key);
->>>>>>> db20e11 (second commit)
 U8 Gfp_GetLinkState(GFP_LINK_STRU * pLinkInfo);
 GFP_LINK_STRU * Gfp_GetLinkByBdAddr(BD_ADDR_T *pBdAddr);
 GFP_LINK_STRU * Gfp_GetEmptyLink(void);
 U8 Gfp_GetServiceState(void);
-<<<<<<< HEAD
-U8 App_GfpEnableStat();
-
-=======
 gfp_ret_enum gfp_init(gfp_reg_app_func_struct *app_func);
 BOOL gfp_is_enabled(void);
 void gfp_ble_adv_set_gatt_server_status(BOOL ready);
@@ -197,7 +148,6 @@ BOOL gfp_rho_get_data(U8 *pBuffer);
 BOOL gfp_rho_new_agent_process(BD_ADDR_T *pBdAddr, U8 *pAppData, U16 length);
 BOOL gfp_rho_new_partner_process(BD_ADDR_T *pBdAddr, U8 *pAppData, U16 length);
 void LeGFPSv2_Init(void);
->>>>>>> db20e11 (second commit)
 
 #endif //__AIROHA_GFPS_V2_API_H__
 

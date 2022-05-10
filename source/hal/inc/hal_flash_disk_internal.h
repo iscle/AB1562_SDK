@@ -95,13 +95,10 @@ int32_t eraseRawDiskBlock(NOR_FLASH_DISK_Data *D, uint32_t block_baseaddr);
 /* should be called after hal_flash_init  */
 hal_flash_status_t hal_flash_get_disk_size(uint32_t* size);
 
-<<<<<<< HEAD
-=======
 void Get_JEDID(uint8_t *jed_id);
 
 void Get_UID(uint8_t *uid, uint8_t uid_length);
 
->>>>>>> db20e11 (second commit)
 #ifdef __SECURITY_OTP__
 #ifdef __SECURITY_OTP_WRITE__
 /**

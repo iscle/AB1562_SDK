@@ -43,11 +43,7 @@
 #include "APP_HfpScoHandler.h"
 #include "DrvSmartCase.h"
 #include "App_InEarDetection.h"
-<<<<<<< HEAD
-#ifdef PROFILE_GFP_ENABLE
-=======
 #ifdef AIR_GFP_ENABLE
->>>>>>> db20e11 (second commit)
 #include "App_Gfp.h"
 #endif
 #include "App_Ble.h"
@@ -249,13 +245,10 @@ BOOL APP_ApplyAgentRhoData(BD_ADDR_T *pBdAddr, U8 *pAppData, U16 length)
 		return FALSE;
 	}
 
-<<<<<<< HEAD
-=======
 	#ifdef AIR_TAKE_OVER_LINK_ENABLE
 	//APP_Conn_SetTimer(TIMER_ID_ACL_LINK_TIMER, 30000);
 	#endif
 	
->>>>>>> db20e11 (second commit)
 	DBG_LOG_APP_McsyncRho( "[RHO_APP] New Agent apply OK:%d", 1, msgNum);
 	return TRUE;
 }
@@ -278,18 +271,12 @@ BOOL APP_ApplyPartnerRhoData(BD_ADDR_T *pBdAddr, U8 *pAppData, U16 length)
     APP_AudioDSP_SetBDA(pAgentAddr);
 	APP_HfpSco_DisableLightMonoMode(pAgentAddr);
     APP_Ble_DisableAdv(BLE_ADV_PRIMARY_MASK);
-<<<<<<< HEAD
-
-	#ifdef PROFILE_GFP_ENABLE
-    APP_Gfp_DisableAdv();
-=======
 #ifdef AIR_GFP_ENABLE
     APP_Ble_DisableAdv(BLE_ADV_GFP_MASK);
 #endif
 
 	#ifdef AIR_TAKE_OVER_LINK_ENABLE
 	//APP_Conn_ReleaseTimer(TIMER_ID_ACL_LINK_TIMER);
->>>>>>> db20e11 (second commit)
 	#endif
 
 	APP_MCSYNC_SendSyncSmartChargeCaseStateInfo(DrvCharger_GetSmartCaseState());

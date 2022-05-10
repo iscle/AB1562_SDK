@@ -156,11 +156,7 @@ ALIGN(16) const char gva_database_rw[] =
 /******************************************************************************
  * Public Functions
 *******************************************************************************/
-<<<<<<< HEAD
-#if defined(MTK_3RD_PARTY_NR)
-=======
 #if defined(AIR_TXNR_3RD_PARTY_ENABLE) || defined(AIR_TXNR_INTELLIGO_1MIC_ENABLE)
->>>>>>> db20e11 (second commit)
 int TWO_MIC_WB_Write_FLASH(S16* bufou)
 {
     UNUSED(bufou);
@@ -179,29 +175,17 @@ VOID APP_AudioDsp_FeatureEntry_Init (VOID)
     DSP_SetFeatureEntry(CODEC_ENCODER_OPUS, opus_encoder_init, opus_encoder_process, opus_encoder_get_size, NULL);
     #endif
 
-<<<<<<< HEAD
-    #if defined(MTK_INEAR_ENHANCEMENT_ENABLE)
-=======
     #if defined(AIR_TXNR_1_MIC_INEAR_ENABLE)
->>>>>>> db20e11 (second commit)
     DSP_SetEcNrMode(EC_NR_IN_EAR_MODE);
     DSP_SetFeatureEntry(FUNC_TX_NR, Voice_WB_TX_Inear_Init, Voice_WB_TX_Inear_Prcs, get_aec_nr_memsize, AEC_NR_InEar_AirDump);
     DSP_SetEcNrRefGainEntry(EC_REF_GAIN_READBACK, IE_EC_REF_GAIN_READBACK);
     DSP_SetEcNrRevisionEntry(get_ECNR_SVN);
-<<<<<<< HEAD
-    #elif defined(MTK_DUALMIC_INEAR_ENABLE)
-=======
     #elif defined(AIR_TXNR_2_MIC_INEAR_ENABLE)
->>>>>>> db20e11 (second commit)
     DSP_SetEcNrMode(EC_NR_DUAL_MIC_IN_EAR_MODE);
     DSP_SetFeatureEntry(FUNC_TX_NR, Voice_WB_TX_Inear_Init_V2, Voice_WB_TX_Inear_Prcs_V2, get_aec_nr_memsize, AEC_NR_DualMic_InEar_AirDump);
     DSP_SetEcNrRefGainEntry(EC_REF_GAIN_READBACK, IE_EC_REF_GAIN_READBACK);
     DSP_SetEcNrRevisionEntry(get_ECNR_SVN);
-<<<<<<< HEAD
-    #elif defined(MTK_3RD_PARTY_NR)
-=======
     #elif defined(AIR_TXNR_3RD_PARTY_ENABLE) || defined(AIR_TXNR_INTELLIGO_1MIC_ENABLE)
->>>>>>> db20e11 (second commit)
     DSP_SetEcNrMode(EC_NR_CUSTOMIZED_TX_NR);
     DSP_SetFeatureEntry(FUNC_TX_NR, Voice_EC_Init, Voice_EC_Prcs, get_aec_nr_memsize, Voice_PostEC_Prcs);
     DSP_SetFeatureEntry(FUNC_TX_EQ, Voice_TxEQ_init, Voice_TxEQ_Prcs, get_fir_wbeq_memsize, NULL);

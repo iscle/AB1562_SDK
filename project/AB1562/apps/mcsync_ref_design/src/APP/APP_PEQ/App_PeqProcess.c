@@ -138,10 +138,7 @@ static void app_PeqProc_PeqGroupCalculation(U8 peqComponent)
 
 static void app_PeqProc_SetPeqGroup(U8 groupIndex, U8 peqComponent)
 {
-<<<<<<< HEAD
-=======
 	DBG_LOG_APP_PEQ("[APP_PEQ] app_PeqProc_SetPeqGroup, groupindex = %d, component = %d", 2, groupIndex, peqComponent);
->>>>>>> db20e11 (second commit)
 	gAppPeqCtl.PEQGroup[peqComponent] = groupIndex;
 	APP_LinkKey_SavePeqIndex(peqComponent, groupIndex);
 
@@ -305,11 +302,7 @@ BOOL APP_PeqProc_AssignRhoData(void *pData)
 void APP_Peq_Init(void)//must init after app linkKey APP_LinkKey_Init()
 {
 	APP_PeqNvkey_Init();
-<<<<<<< HEAD
-	APP_PeqProc_SetIndex(PEQ_A2DP, 1);
-=======
 	APP_PeqProc_SetIndex(PEQ_A2DP, APP_LinkKey_LoadPeqIndex(PEQ_A2DP));
->>>>>>> db20e11 (second commit)
 	U8 component;
 	for(component=0; component < PEQ_PATH_NUM; component++)
 	{

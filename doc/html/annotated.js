@@ -27,10 +27,7 @@ var annotated =
     [ "hal_uart_config_t", "structhal__uart__config__t.html", "structhal__uart__config__t" ],
     [ "hal_uart_dma_config_t", "structhal__uart__dma__config__t.html", "structhal__uart__dma__config__t" ],
     [ "hal_wdt_config_t", "structhal__wdt__config__t.html", "structhal__wdt__config__t" ],
-<<<<<<< HEAD
-=======
     [ "pmu_chg_cc_rsel_t", "structpmu__chg__cc__rsel__t.html", "structpmu__chg__cc__rsel__t" ],
->>>>>>> db20e11 (second commit)
     [ "pmu_function_t", "structpmu__function__t.html", "structpmu__function__t" ],
     [ "pmu_pwrkey_config_t", "structpmu__pwrkey__config__t.html", "structpmu__pwrkey__config__t" ],
     [ "rtc_alarm_config_t", "structrtc__alarm__config__t.html", "structrtc__alarm__config__t" ],

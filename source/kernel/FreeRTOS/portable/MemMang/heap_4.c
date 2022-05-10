@@ -352,15 +352,6 @@ uint8_t *puc;
 void *pvPortCalloc( size_t nmemb, size_t size )
 {
     void *pvReturn;
-<<<<<<< HEAD
-#ifdef MTK_HEAP_SIZE_GUARD_ENABLE
-	#if defined(__GNUC__)
-	extern void *__wrap_pvPortMalloc(size_t);
-	pvReturn = (void *)__wrap_pvPortMalloc(nmemb*size);
-	#elif defined(__CC_ARM)
-	pvReturn = pvPortMalloc( nmemb*size );
-	#endif /* __GNUC__ */
-=======
 
     /* unsigned integer wrap around protection */
     #define __LIM ( 1 << ( sizeof( size_t ) * 8 / 2 ) )
@@ -376,7 +367,6 @@ void *pvPortCalloc( size_t nmemb, size_t size )
     #elif defined(__CC_ARM)
     pvReturn = pvPortMalloc( nmemb*size );
     #endif /* __GNUC__ */
->>>>>>> db20e11 (second commit)
 #else
     pvReturn = pvPortMalloc( nmemb*size );
 #endif /* MTK_HEAP_SIZE_GUARD_ENABLE */

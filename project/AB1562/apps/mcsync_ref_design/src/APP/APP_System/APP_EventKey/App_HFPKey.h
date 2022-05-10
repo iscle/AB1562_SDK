@@ -61,11 +61,7 @@ void APP_HFP_Key3WayHoldNAcp(BD_ADDR_T *pBdAddr);
 void APP_HFP_Key3WayHoldNAcp_X(BD_ADDR_T *pBdAddr);
 void APP_HFP_Key3WayAdd(BD_ADDR_T *pBdAddr);
 void APP_HFP_Key3WayCallTransfer(BD_ADDR_T *pBdAddr);
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 void APP_HFP_KeyHSPButtonPressed(BD_ADDR_T *pBdAddr);
 #endif
 void APP_HFP_KeySetNREC(BD_ADDR_T *pBdAddr);

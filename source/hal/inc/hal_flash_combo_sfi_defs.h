@@ -41,11 +41,7 @@
 
 #define COMBO_SFI_VER   1
 
-<<<<<<< HEAD
-#define SFI_COMBO_COUNT    7
-=======
 #define SFI_COMBO_COUNT    8
->>>>>>> db20e11 (second commit)
 
 typedef struct {
 #if defined(__SFI_CLK_78MHZ__)

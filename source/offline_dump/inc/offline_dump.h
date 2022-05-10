@@ -135,13 +135,10 @@ bool offline_dump_region_query_cell_size(offline_dump_region_type_t region_type,
 bool offline_dump_region_query_cell_valid_size(offline_dump_region_type_t region_type, uint32_t *p_valid_size);
 
 bool offline_dump_register_head_callback(offline_dump_region_type_t region_type, offline_callback_t user_callback);
-<<<<<<< HEAD
-=======
 bool offline_dump_register_tail_callback(offline_dump_region_type_t region_type, offline_callback_t user_callback);
 
 void offline_dump_callback_head_handle(offline_dump_region_type_t region_type);
 void offline_dump_callback_tail_handle(offline_dump_region_type_t region_type);
->>>>>>> db20e11 (second commit)
 
 #endif
 

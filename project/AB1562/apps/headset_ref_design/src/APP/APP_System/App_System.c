@@ -78,15 +78,6 @@
 #ifdef AIROHA_BT_SPP_ENABLE
 #include "APP_CustApp.h"
 #endif
-<<<<<<< HEAD
-#ifdef PROFILE_GFP_ENABLE
-#include "App_Gfp.h"
-#include "gfps_api.h"
-#endif
-#ifdef PROFILE_SWIFT_ENABLE
-#include "App_Swift.h"
-#endif
-=======
 #ifdef AIR_GFP_ENABLE
 #include "App_Gfp.h"
 #include "gfps_api.h"
@@ -97,7 +88,6 @@
 #ifdef AIR_GATT_OVER_BREDR_ENABLE
 #include "bt_gatt.h"
 #endif
->>>>>>> db20e11 (second commit)
 
 log_create_module(APP_SYSTEM, PRINT_LEVEL_INFO);
 
@@ -151,17 +141,10 @@ static const HandlerData gSystemKeyHandler = {app_System_KeyHandler};
 static void app_System_RegisterProfiles(void)
 {
 	APP_Conn_Register();
-<<<<<<< HEAD
-	#ifdef A2DP_Profile
-	APP_A2dp_RegisterProfile();
-	#endif
-	#ifdef AVRCP_Profile
-=======
 	#ifdef AIR_A2DP_PROFILE_ENABLE
 	APP_A2dp_RegisterProfile();
 	#endif
 	#ifdef AIR_AVRCP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 	APP_Avrcp_RegisterProfile();
 	#endif
 	#ifdef HFP_Profile
@@ -173,24 +156,17 @@ static void app_System_RegisterProfiles(void)
     #ifdef PROFILE_AMA_ENABLE
     APP_Ama_RegisterProfile();
     #endif
-<<<<<<< HEAD
-    #ifdef PROFILE_GFP_ENABLE
-=======
     #ifdef AIR_GFP_ENABLE
->>>>>>> db20e11 (second commit)
 	APP_Gfp_RegisterProfile();
     #endif
     #ifdef AIROHA_BT_SPP_ENABLE
     APP_CustApp_RegisterProfile();
     #endif
-<<<<<<< HEAD
-=======
 
     #ifdef AIR_GATT_OVER_BREDR_ENABLE
     ATT_Enable_EDRBrearer();
     #endif
 
->>>>>>> db20e11 (second commit)
 	device_id_start_service();
 }
 
@@ -378,8 +354,6 @@ static void app_System_AclClosedIndHandler(BT_ACL_CLOSED_IND_T * ind)
 			{
 				if(!(APP_NO_CONNECTABLE_IN_LINE_IN_FEAT && APP_State_CheckInLineInState()))
 				{
-<<<<<<< HEAD
-=======
                     if (APP_IsKeepDiscoverableAfterDisc() &&
                         1 >= CURRENT_ACTIVE_LINK_CNT &&
                         HCI_ERCODE_CONNECTION_TERMINATED_BY_LOCAL_HOST == ind->reason)
@@ -392,7 +366,6 @@ static void app_System_AclClosedIndHandler(BT_ACL_CLOSED_IND_T * ind)
                         APP_State_DiscoverabilityHandle(CMD_SET_NON_DISCOVERABLE);
                     }
 #endif
->>>>>>> db20e11 (second commit)
 					APP_State_ConnectabilityHandle(CMD_SET_CONNECTABLE);
 				}
 
@@ -409,11 +382,8 @@ static void app_System_AclClosedIndHandler(BT_ACL_CLOSED_IND_T * ind)
 				}
 			}
 
-<<<<<<< HEAD
-=======
             APP_SetKeepDiscoverableAfterDisc(FALSE);
 
->>>>>>> db20e11 (second commit)
 			if(APP_IsLinkActiveDisconnecting(pBdAddr) && ind->reason != HCI_ERCODE_CONNECTION_TIMEOUT)
 			{
 				if(!CURRENT_ACTIVE_LINK_CNT)
@@ -521,11 +491,7 @@ static void app_System_IOCapabilityReqIndHandler(BT_SM_IO_CAPABILITY_REQ_IND_T *
 		{
 			SEND_DEFAULT_IOCAP:
 
-<<<<<<< HEAD
-#ifdef PROFILE_GFP_ENABLE
-=======
 #ifdef AIR_GFP_ENABLE
->>>>>>> db20e11 (second commit)
 			if (GFPSv2_is_processing()) {
 				// GFPSv2 - set IO_CAP_DISPLAY_YES_NO for Google Fast Pair
 				pAddr->ioCapability = IO_CAP_DISPLAY_YES_NO;
@@ -585,11 +551,7 @@ static void app_System_UserConfirmationReqIndHandler(BT_SM_USER_CONFIRMATION_REQ
 {
 	DBG_LOG_APP_SYSTEM( "[APP_SYS] BT_SM_USER_CONFIRMATION_REQ_IND", 0);
 
-<<<<<<< HEAD
-#ifdef PROFILE_GFP_ENABLE
-=======
 #ifdef AIR_GFP_ENABLE
->>>>>>> db20e11 (second commit)
 	if (GFPSv2_is_processing()) {
 		U32 nv = ind->passkey;
 		U8 numeric[3];
@@ -765,22 +727,11 @@ void APP_System_Discoverable(void)
 	APP_ReConn_ClearCtl();
 	APP_State_DiscoverabilityHandle(CMD_SET_NORMAL_DISCOVERABLE);
 
-<<<<<<< HEAD
-#ifdef PROFILE_GFP_ENABLE
-    if ( GFPSv2_IsEnable() )
-    {
-        App_GfpsAdv_Update(1);
-    }
-#endif
-
-#ifdef PROFILE_SWIFT_ENABLE 
-=======
 #ifdef AIR_GFP_ENABLE
     gfp_ble_adv_update(GFP_UPDATE_BLE_ADV_REASON_DISCOVERABLE_ENTER);
 #endif
 
 #ifdef AIR_SWIFT_ENABLE 
->>>>>>> db20e11 (second commit)
     App_SwiftAdv_Update();
 #endif
 

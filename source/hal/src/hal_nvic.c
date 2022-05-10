@@ -206,11 +206,6 @@ ATTR_TEXT_IN_IRAM void isrC_main()
     uint32_t tmpIsrTimeBefore;
     uint32_t tmpIsrTimeAfter;
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> db20e11 (second commit)
     backup    = nvic_irq_execution_number;
     irq_state = xthal_get_interrupt();
     int_en    = xthal_get_intenable();
@@ -240,14 +235,11 @@ ATTR_TEXT_IN_IRAM void isrC_main()
         shift = 1<<i;
         nvic_irq_execution_number = i;
         if ((irq_state&shift)&&(int_en&shift)) {
-<<<<<<< HEAD
-=======
 
         #ifdef MTK_SWLA_ENABLE_O2
             uart_debug_print_byte(UART_LA_PORT,0x14+nvic_irq_execution_number);
         #endif
 
->>>>>>> db20e11 (second commit)
             if (nvic_function_table[i].nvic_callback != NULL) {
                 #ifdef MTK_SWLA_ENABLE
                 if(i != OS_GPT_IRQn)
@@ -289,22 +281,12 @@ ATTR_TEXT_IN_IRAM void isrC_main()
 
     isrTime[int_level - 1] += tmpIsrTimeAfter - tmpIsrTimeBefore;
 
-<<<<<<< HEAD
-    if( isrTime[int_level - 1] > 5000 *1000)
-    {
-        assert(0);
-    }
-
-    nvic_irq_execution_number = backup;
-
-=======
     nvic_irq_execution_number = backup;
 
     #ifdef MTK_SWLA_ENABLE_O2
         uart_debug_print_byte(UART_LA_PORT,'*');
     #endif
 
->>>>>>> db20e11 (second commit)
 }
 
 hal_nvic_status_t hal_nvic_register_isr_handler(hal_nvic_irq_t irq_number, hal_nvic_isr_t callback)

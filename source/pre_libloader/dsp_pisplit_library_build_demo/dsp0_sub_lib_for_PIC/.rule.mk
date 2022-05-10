@@ -7,11 +7,7 @@
 XTENSA_ROOT ?= /mtkeda/xtensa/Xplorer-7.0.7
 XTENSA_VER ?= RG-2017.7-linux
 ifeq ($(shell domainname), mcdswrd)
-<<<<<<< HEAD
-XTENSA_LICENSE_FILE ?= 7400@172.26.66.32
-=======
 XTENSA_LICENSE_FILE ?= 7400@10.19.50.25
->>>>>>> db20e11 (second commit)
 else
 XTENSA_LICENSE_FILE ?= 7400@mtklc17
 endif

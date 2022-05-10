@@ -48,11 +48,7 @@ FEATURE     ?=  .feature.mak
 FILE_XML    ?=  FileManagement.xml
 LDFLAG      :=
 CCFLAG      :=
-<<<<<<< HEAD
-
-=======
 ASFLAG      :=
->>>>>>> db20e11 (second commit)
 
 RAM_BOOT    ?=  n
 
@@ -208,10 +204,7 @@ ASFLAG      +=  -ffunction-sections
 ifeq ($(APP), bootloader)
 ASFLAG      +=  -DBOOTLOADER
 CCFLAG      +=  -D__EXT_BOOTLOADER__
-<<<<<<< HEAD
-=======
 CCFLAG      +=  -D__UBL__
->>>>>>> db20e11 (second commit)
 endif
 
 CCFLAG      +=  -g
@@ -255,11 +248,7 @@ LIBBOARD    :=  handlers-board
 LDFLAG      +=  --gc-sections
 LDFLAG      +=  --size-opt
 LDFLAG      +=  --start-group
-<<<<<<< HEAD
-ifeq ($(MCSYNC_SHARE_MODE),y)
-=======
 ifeq ($(AIR_MCSYNC_SHARE_MODE_ENABLE),y)
->>>>>>> db20e11 (second commit)
 LDFLAG      +=  -L$(LIBMIDDIR) -l$(LIBBTCON_SHARE) $(foreach n,$(LIBMID),-l$(n))
 else
 LDFLAG      +=  -L$(LIBMIDDIR) -l$(LIBBTCON) $(foreach n,$(LIBMID),-l$(n))
@@ -268,16 +257,6 @@ LDFLAG      +=  -L$(LIBSYSDIR) $(foreach n,$(LIBSYS),-l$(n))
 LDFLAG      +=  -L$(LIBPRIDIR)
 LDFLAG      +=  -lswp
 LDFLAG      +=  -lanticopy
-<<<<<<< HEAD
-
-ifeq ($(MTK_INEAR_ENHANCEMENT),y)
-LDFLAG       +=  -lecnr62_inear
-else ifeq ($(MTK_DUALMIC_INEAR),y)
-LDFLAG       +=  -lecnr62_dualmic_inear
-else ifeq ($(MTK_3RD_PARTY_NR),y)
-LDFLAG       +=  -lec_rxnr
-LDFLAG       +=  -lfir_eq
-=======
 LDFLAG      +=  -lsec
 
 ifeq ($(AIR_TXNR_MODE),mode_2)
@@ -291,7 +270,6 @@ else ifeq ($(AIR_TXNR_MODE),mode_4)
 LDFLAG       +=  -lec_rxnr
 LDFLAG       +=  -lfir_eq
 LDFLAG       +=  -ligo_nr_1mic
->>>>>>> db20e11 (second commit)
 else
 LDFLAG       +=  -lecnr30
 endif
@@ -308,10 +286,7 @@ LDFLAG       +=  -lmsbcenc
 LDFLAG       +=  -lcpd30
 LDFLAG       +=  -lpeq
 LDFLAG       +=  -lnewpeq
-<<<<<<< HEAD
-=======
 LDFLAG       +=  -lplc1562
->>>>>>> db20e11 (second commit)
 LDFLAG       +=  -lcvsd_wb_nb_v1_lib
 LDFLAG       +=  -laudio_bist
 LDFLAG       +=  -lsampler_by_2
@@ -319,10 +294,7 @@ LDFLAG       +=  -lagc30
 LDFLAG       +=  -latagc30
 LDFLAG       +=  -lafc30
 LDFLAG       +=  -latnr30
-<<<<<<< HEAD
-=======
 LDFLAG       +=  -lanc_sigpwr
->>>>>>> db20e11 (second commit)
 ifeq ($(AIROHA_WWE_ENABLE),y)
 LDFLAG       +=  -lwwe
 endif
@@ -335,20 +307,9 @@ LDFLAG       +=  -lab1562_google_hotword_dsp_api
 endif
 LDFLAG       +=  -lskew_ctrl
 LDFLAG       +=  -lfft
-<<<<<<< HEAD
-
-#force touch
-LDFLAG       +=  -lforce_det
-
 ifeq ($(MTK_LEAKAGE_DETECTION_ENABLE),y)
 LDFLAG       +=  -lleakage_detection
 endif
-LDFLAG       +=  -lanc_sigpwr
-=======
-ifeq ($(MTK_LEAKAGE_DETECTION_ENABLE),y)
-LDFLAG       +=  -lleakage_detection
-endif
->>>>>>> db20e11 (second commit)
 LDFLAG       +=  -lgsound
 
 ifeq ($(XIAOAI_DEVELOPMENT),y)
@@ -361,11 +322,8 @@ LDFLAG      +=  -L$(LIBSTDDIR) -l$(LIBHAL) -l$(LIBC) -l$(LIBGCC) -l$(LIBBOARD)
 #LDFLAG      +=  --print-gc-sections
 #LDFLAG      +=  --relax
 #LDFLAG      +=  --xt-map
-<<<<<<< HEAD
-=======
 #force touch
 LDFLAG       +=  -lforce_det
->>>>>>> db20e11 (second commit)
 
 ifeq ($(PROJECT), AB1562)
 CCFLAG      +=  -DAB1562=1
@@ -602,8 +560,4 @@ READELF     :=  readelf
 #export CC CCP AS AR LD OBJDUMP OBJCOPY NM READELF
 RM          :=  dtidel
 CP          :=  xcopy /T /Y /I
-<<<<<<< HEAD
 CPY         :=  copy
-=======
-CPY         :=  copy
->>>>>>> db20e11 (second commit)

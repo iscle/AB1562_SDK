@@ -60,12 +60,9 @@
 #include "DeviceID_CustomerSdpHandler.h"
 #include "drv_a2dp.h"
 #include "App_Ble.h"
-<<<<<<< HEAD
-=======
 #ifdef AIR_GATT_OVER_BREDR_ENABLE
 #include "bt_att_rho.h"
 #endif
->>>>>>> db20e11 (second commit)
 
 #ifdef PROFILE_AMA_ENABLE
 #include "BtAma.h"
@@ -73,11 +70,7 @@
 #include "App_Ama.h"
 #endif
 #include "App_Customer.h"
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 #include "App_MCSync_Share.h"
 #endif
 
@@ -90,15 +83,6 @@
 #include "DrvSmartCase.h"
 #endif
 
-<<<<<<< HEAD
-/*
-#ifdef PROFILE_GFP_ENABLE
-#include "App_Gfp.h"
-#include "App_Gfp_RhoHandler.h"
-#endif*/
-
-#ifdef TAKE_OVER_LINK
-=======
 #ifdef AIR_GFP_ENABLE
 #include "gfp_features.h"
 #include "App_Gfp.h"
@@ -113,7 +97,6 @@
 #endif
 
 #ifdef AIR_TAKE_OVER_LINK_ENABLE
->>>>>>> db20e11 (second commit)
 #include "App_State.h"
 #endif
 
@@ -131,12 +114,9 @@
 
 #define SYSTEM_CLOCK_UNIT_US			HALF_SLOT * 4 //us
 
-<<<<<<< HEAD
-=======
 #define STREAM_UNLOCK  0
 #define AGENT_LOCK 1
 #define PARTNER_LOCK 2
->>>>>>> db20e11 (second commit)
 /**************************************************************************************************
 * Enumeration
 **************************************************************************************************/
@@ -153,12 +133,6 @@ enum
 
 	APP_MCSYNC_RHO_ACTION_SNIFF_LOCK,
 	APP_MCSYNC_RHO_ACTION_CONNECTABLE_LOCK,
-<<<<<<< HEAD
-	APP_MCSYNC_RHO_ACTION_DISCONNECT_BLE,
-	APP_MCSYNC_RHO_ACTION_DISCONNECT_SPP,
-	APP_MCSYNC_RHO_ACTION_DISCONNECT_CUSTAPP,
-#ifdef PROFILE_GFP_ENABLE
-=======
 #ifdef AIR_TILE_ADV_ENABLE	
 	APP_MCSYNC_RHO_ACTION_NOTIFY_PARTNER_DISCONNECT_BLE,//add for tile
 #endif
@@ -166,7 +140,6 @@ enum
 	APP_MCSYNC_RHO_ACTION_DISCONNECT_SPP,
 	APP_MCSYNC_RHO_ACTION_DISCONNECT_CUSTAPP,
 #ifdef AIR_GFP_ENABLE
->>>>>>> db20e11 (second commit)
 	APP_MCSYNC_RHO_ACTION_DISCONNECT_GFPSPP,
 #endif
 	APP_MCSYNC_RHO_ACTION_IS_ALLOW,
@@ -199,12 +172,6 @@ enum
 {
 	APP_MCSYNC_RHO_ERRCODE_SNIFF_CFM_FAIL,
 	APP_MCSYNC_RHO_ERRCODE_CONNECTABLE_CFM_FAIL,
-<<<<<<< HEAD
-	APP_MCSYNC_RHO_ERRCODE_BLE_DISCONNECT_CFM_FAIL,
-	APP_MCSYNC_RHO_ERRCODE_SPP_DISCONNECT_CFM_FAIL,
-	APP_MCSYNC_RHO_ERRCODE_CUSTAPP_DISCONNECT_CFM_FAIL,
-	#ifdef PROFILE_GFP_ENABLE
-=======
 #ifdef AIR_TILE_ADV_ENABLE	
 	APP_MCSYNC_RHO_ERRCODE_NOTIFY_PARTNER_BLE_DISCONNECT_CFM_FAIL,//add for tile
 #endif
@@ -212,7 +179,6 @@ enum
 	APP_MCSYNC_RHO_ERRCODE_SPP_DISCONNECT_CFM_FAIL,
 	APP_MCSYNC_RHO_ERRCODE_CUSTAPP_DISCONNECT_CFM_FAIL,
 	#ifdef AIR_GFP_ENABLE
->>>>>>> db20e11 (second commit)
 	APP_MCSYNC_RHO_ERRCODE_GFPSPP_DISCONNECT_CFM_FAIL,
 	#endif
 	APP_MCSYNC_RHO_ERRCODE_IS_ALLOW_FAIL,
@@ -282,11 +248,7 @@ static U8 app_MCSync_Rho_FindModuleIndex(U8 moduleId);
 static BOOL app_MCSync_Rho_ApplyData(U8 newRole, MCSYNC_RHO_PACKET_T *pRhoData, U16 length);
 #endif
 
-<<<<<<< HEAD
-extern void StreamL2capLockSink(BOOL isLock);
-=======
 extern void StreamL2capLockSink(U8 isLock);
->>>>>>> db20e11 (second commit)
 extern void StreamL2capPopQueueToNewAgent(void);
 extern void StreamL2capPopQueueToHci(void);
 
@@ -329,11 +291,7 @@ static U8 app_MCSync_Rho_ConnectableLockHandler(void);
 static U8 app_MCSync_Rho_DisconnectBleHandler(void);
 static U8 app_MCSync_Rho_DisconnectSppHandler(void);
 static U8 app_MCSync_Rho_DisconnectCustAppHandler(void);
-<<<<<<< HEAD
-#ifdef PROFILE_GFP_ENABLE
-=======
 #ifdef AIR_GFP_ENABLE
->>>>>>> db20e11 (second commit)
 static U8 app_MCSync_Rho_DisconnectGfpSppHandler(void);
 #endif
 #ifndef DO_RHO_IMMEDIATELY
@@ -355,10 +313,7 @@ static void app_MCSync_Rho_SetEndClock(void);
 /**************************************************************************************************
 * Variable
 **************************************************************************************************/
-<<<<<<< HEAD
-=======
 extern HandlerData gAppImgCallMediaTimerHandler;
->>>>>>> db20e11 (second commit)
 extern BOOL g_is_fota_ongoing;
 extern APP_POWER_CTL_STRU gAppPowerCtl;
 U8 gRhoMsgPrint = 0;
@@ -377,12 +332,6 @@ static const U8 gAppMCSyncRhoActionFlow[] =
 	//adjustable
 	APP_MCSYNC_RHO_ACTION_SNIFF_LOCK,
 	APP_MCSYNC_RHO_ACTION_CONNECTABLE_LOCK,
-<<<<<<< HEAD
-	APP_MCSYNC_RHO_ACTION_DISCONNECT_BLE,
-	APP_MCSYNC_RHO_ACTION_DISCONNECT_SPP,
-	APP_MCSYNC_RHO_ACTION_DISCONNECT_CUSTAPP,
-#ifdef PROFILE_GFP_ENABLE
-=======
 #ifdef AIR_TILE_ADV_ENABLE	
 	APP_MCSYNC_RHO_ACTION_NOTIFY_PARTNER_DISCONNECT_BLE,//add for tile
 #endif
@@ -390,7 +339,6 @@ static const U8 gAppMCSyncRhoActionFlow[] =
 	APP_MCSYNC_RHO_ACTION_DISCONNECT_SPP,
 	APP_MCSYNC_RHO_ACTION_DISCONNECT_CUSTAPP,
 #ifdef AIR_GFP_ENABLE
->>>>>>> db20e11 (second commit)
 	APP_MCSYNC_RHO_ACTION_DISCONNECT_GFPSPP,
 #endif
 	//fixed
@@ -427,18 +375,12 @@ static const APP_MCSYNC_RHO_MODULE_CTL_STRU gAppMCSyncRhoModuleCtl[AWS_MCE_RHO_M
 	#ifdef PROFILE_AMA_ENABLE
 	{AWS_MCE_RHO_MODULE_IAP2, BtIAP2Lock, BtIAP2Unlock, BtIAP2IsAllow, BtIAP2GetRhoDataLength, BtIAP2GetRhoData, BtIAP2ApplyAgentRhoData, BtIAP2ApplyPartnerRhoData},
 	#endif
-<<<<<<< HEAD
-//#ifdef PROFILE_GFP_ENABLE
-//    { AWS_MCE_RHO_MODULE_GFP, gfp_rho_lock, gfp_rho_unlock, gfp_rho_is_allow, BtGfpGetRhoDataLength, BtGfpGetRhoData, BtGfpApplyAgentRhoData, BtGfpApplyPartnerRhoData },
-//#endif
-=======
 #ifdef AIR_GATT_OVER_BREDR_ENABLE
 	{ AWS_MCE_RHO_MODULE_ATT, BtAttLock, BtAttUnlock, BtAttIsAllow, BtAttGetRhoDataLength, BtAttGetRhoData, BtAttApplyAgentRhoData, BtAttApplyPartnerRhoData },
 #endif	
 #if defined(AIR_GFP_ENABLE) && defined(GFP_MCSYNC_ENABLE)
     {AWS_MCE_RHO_MODULE_GFP, APP_Gfp_RhoLock, APP_Gfp_RhoUnlock, APP_Gfp_RhoIsAllow, APP_Gfp_RhoGetDataLength, APP_Gfp_RhoGetData, APP_Gfp_RhoNewAgentProcess, APP_Gfp_RhoNewPartnerProcess},
 #endif
->>>>>>> db20e11 (second commit)
 };
 
 /**************************************************************************************************
@@ -531,12 +473,6 @@ static void app_MCSync_Rho_FlowErrorHandler(U8 errorCode)
 	{
 		case APP_MCSYNC_RHO_ERRCODE_SNIFF_CFM_FAIL:
 		case APP_MCSYNC_RHO_ERRCODE_CONNECTABLE_CFM_FAIL:
-<<<<<<< HEAD
-		case APP_MCSYNC_RHO_ERRCODE_BLE_DISCONNECT_CFM_FAIL:
-		case APP_MCSYNC_RHO_ERRCODE_SPP_DISCONNECT_CFM_FAIL:
-		case APP_MCSYNC_RHO_ERRCODE_CUSTAPP_DISCONNECT_CFM_FAIL:
-		#ifdef PROFILE_GFP_ENABLE
-=======
 #ifdef AIR_TILE_ADV_ENABLE	
 		case APP_MCSYNC_RHO_ERRCODE_NOTIFY_PARTNER_BLE_DISCONNECT_CFM_FAIL:
 #endif
@@ -544,7 +480,6 @@ static void app_MCSync_Rho_FlowErrorHandler(U8 errorCode)
 		case APP_MCSYNC_RHO_ERRCODE_SPP_DISCONNECT_CFM_FAIL:
 		case APP_MCSYNC_RHO_ERRCODE_CUSTAPP_DISCONNECT_CFM_FAIL:
 		#ifdef AIR_GFP_ENABLE
->>>>>>> db20e11 (second commit)
         case APP_MCSYNC_RHO_ERRCODE_GFPSPP_DISCONNECT_CFM_FAIL:
 		#endif
 		case APP_MCSYNC_RHO_ERRCODE_IS_ALLOW_FAIL:
@@ -570,25 +505,17 @@ static void app_MCSync_Rho_FlowErrorHandler(U8 errorCode)
 	APP_SmtChgCse_SetCheckStateTimer(RHO_END_CHGCASE_CHECK_TIME);
 	app_MCSync_Rho_SetAndSyncRhoState(RHO_IDLE);
 	APP_Ble_EnableAdv(BLE_ADV_PRIMARY_MASK);
-<<<<<<< HEAD
-=======
 	#ifdef AIR_GFP_ENABLE
         APP_Ble_EnableAdv(BLE_ADV_GFP_MASK);
         #endif
->>>>>>> db20e11 (second commit)
 	app_MCSync_Rho_Init();
     
     #ifdef XIAOAI_DEVELOPMENT
     APP_Ble_EnableAdv(BLE_ADV_XIAOAI_MASK);
     #endif
-<<<<<<< HEAD
-	#ifdef PROFILE_GFP_ENABLE
-    APP_Gfp_EnableAdv();
-=======
 
     #ifdef AIR_TILE_ADV_ENABLE
         APP_Tile_Rho_done(FALSE);
->>>>>>> db20e11 (second commit)
     #endif
     StreamL2capPopQueueToHci();
 }
@@ -686,13 +613,6 @@ static void app_MCSync_Rho_Done(void)
 			default:
 				break;
 		}
-<<<<<<< HEAD
-		#ifdef TAKE_OVER_LINK
-		APP_State_ConnectabilityHandle(CMD_SET_CONNECTABLE);
-    	APP_State_DiscoverabilityHandle(CMD_SET_NON_DISCOVERABLE);
-		#endif
-		
-=======
 		#ifdef AIR_TAKE_OVER_LINK_ENABLE
 		APP_State_ConnectabilityHandle(CMD_SET_CONNECTABLE);
     	APP_State_DiscoverabilityHandle(CMD_SET_NON_DISCOVERABLE);
@@ -700,7 +620,6 @@ static void app_MCSync_Rho_Done(void)
 	    #ifdef AIR_TILE_ADV_ENABLE
                 APP_Tile_Rho_done(TRUE);
             #endif
->>>>>>> db20e11 (second commit)
 	}
 	else
 	{
@@ -710,16 +629,6 @@ static void app_MCSync_Rho_Done(void)
 			#ifdef PROFILE_AMA_ENABLE
         	APP_Ble_DisableAdv(BLE_ADV_AMA_MASK);
         	#endif
-<<<<<<< HEAD
-			#ifdef XIAOAI_DEVELOPMENT
-			BtMCSync_SendSyncBatteryLevel(Battery_GetLevelInPercent());
-			APP_MCSYNC_SendSyncSmartChargeCaseStateInfo(DrvCharger_GetSmartCaseState());
-			#endif	
-			#ifdef PROFILE_GFP_ENABLE
-            APP_Gfp_DisableAdv();
-            #endif
-			APP_Customer_Rho_Done();
-=======
 			#if defined(XIAOAI_DEVELOPMENT) || defined(AIR_GFP_ENABLE)
 			BtMCSync_SendSyncBatteryLevel(Battery_GetLevelInPercent());
 			APP_MCSYNC_SendSyncSmartChargeCaseStateInfo(DrvCharger_GetSmartCaseState());
@@ -733,7 +642,6 @@ static void app_MCSync_Rho_Done(void)
 			APP_Customer_Rho_Done();
 			FW_ReleaseTimer((Handler)&gAppImgCallMediaTimerHandler, 0, 0);
             APP_RhoDomn_StartMonitorTimer();
->>>>>>> db20e11 (second commit)
 		}
 	}
 
@@ -812,20 +720,12 @@ static BOOL app_MCSync_Rho_ApplyData(U8 newRole, MCSYNC_RHO_PACKET_T *pRhoData, 
 #if RHO_DEVELOPMENT
 static U8 app_MCSync_Rho_StartCheck(void)
 {
-<<<<<<< HEAD
-	BD_ADDR_T *pBdAddr = APP_GetServiceBdAddr();
-=======
 	BD_ADDR_T *pBdAddr = APP_GetNormalLinkAddr();
->>>>>>> db20e11 (second commit)
 #ifdef XIAOAI_DEVELOPMENT
 	BD_ADDR_T *pXiaoPlayingAddr = drv_xiaoai_get_playing_bda();
 #endif	
 
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 	U8 shareMode = BtMCSync_GetShareMode(); 
 	UNUSED(shareMode);
 #endif
@@ -848,11 +748,7 @@ static U8 app_MCSync_Rho_StartCheck(void)
 		return RHO_CHECK_FAIL;
 	}
 
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 	if(APP_MCSync_Share_IsEnable() || APP_MCSync_Share_GetLinkLoss())
 	{
 		DBG_LOG_APP_McsyncRho("[APP RHO] share mode enabled",0 );
@@ -955,8 +851,6 @@ static void app_MCSync_Rho_NonConnectableCfmHandler(BOOL status)
 }
 #endif
 
-<<<<<<< HEAD
-=======
 #ifdef AIR_TILE_ADV_ENABLE	
 static void app_MCSync_Rho_NotifyPartnerBleDisconnectCfmHandler(U8 status) //add for tile
 {
@@ -977,7 +871,6 @@ static void app_MCSync_Rho_NotifyPartnerBleDisconnectCfmHandler(U8 status) //add
 	}
 }
 #endif
->>>>>>> db20e11 (second commit)
 static void app_MCSync_Rho_BleDisconnectCfmHandler(U8 status) //not used, reserved
 {
 	if(APP_MCSYNC_RHO_ACTION_DISCONNECT_BLE != app_MCSync_Rho_GetCurAction())
@@ -1030,11 +923,7 @@ static void app_MCSync_Rho_CustAppDisconnectCfmHandler(void)
 }
 #endif
 
-<<<<<<< HEAD
-#ifdef PROFILE_GFP_ENABLE
-=======
 #ifdef AIR_GFP_ENABLE
->>>>>>> db20e11 (second commit)
 static void app_MCSync_Rho_GfpSppDisconnectCfmHandler(void)
 {
 	if(APP_MCSYNC_RHO_ACTION_DISCONNECT_GFPSPP != app_MCSync_Rho_GetCurAction())
@@ -1151,14 +1040,10 @@ static U32 app_MCSync_Rho_FlowWaitHandler(Handler handler, U16 id, void *msg, U3
 			break;
 
 		case APP_MCSYNC_RHO_ACTION_IS_ALLOW:
-<<<<<<< HEAD
-			app_MCSync_Rho_FlowProcessHandler(id);
-=======
 			if(id != BT_AWS_MCE_CANCEL_ROLE_HANDOVER_CFM)
 			{
 				app_MCSync_Rho_FlowProcessHandler(id);
 			}
->>>>>>> db20e11 (second commit)
 			break;
 
 		default:
@@ -1201,8 +1086,6 @@ static U8 app_MCSync_Rho_ConnectableLockHandler(void)
 
 	return APP_MCSYNC_RHO_FLOW_WAIT;
 }
-<<<<<<< HEAD
-=======
 #ifdef AIR_TILE_ADV_ENABLE	
 static U8 app_MCSync_Rho_NotifyPartnerDisconnectBleHandler(void)
 {
@@ -1212,7 +1095,6 @@ static U8 app_MCSync_Rho_NotifyPartnerDisconnectBleHandler(void)
 	return APP_MCSYNC_RHO_FLOW_WAIT;
 }
 #endif
->>>>>>> db20e11 (second commit)
 
 static U8 app_MCSync_Rho_DisconnectBleHandler(void)
 {
@@ -1224,17 +1106,12 @@ static U8 app_MCSync_Rho_DisconnectBleHandler(void)
     #endif
 	APP_Ble_DisableAdv(BLE_ADV_PRIMARY_MASK);
 
-<<<<<<< HEAD
-	#ifdef PROFILE_GFP_ENABLE
-    APP_Gfp_DisableAdv();
-=======
 	#ifdef AIR_GFP_ENABLE
     APP_Ble_DisableAdv(BLE_ADV_GFP_MASK);
 	#endif
 
 	#ifdef AIR_TILE_ADV_ENABLE
 	APP_Ble_DisableAdv(BLE_ADV_TILE_MASK);
->>>>>>> db20e11 (second commit)
 	#endif
 
     if(!APP_Ble_Disconnect(NULL))
@@ -1278,11 +1155,7 @@ static U8 app_MCSync_Rho_DisconnectCustAppHandler(void)
 	return APP_MCSYNC_RHO_FLOW_SUCCESS;
 }
 
-<<<<<<< HEAD
-#ifdef PROFILE_GFP_ENABLE
-=======
 #ifdef AIR_GFP_ENABLE
->>>>>>> db20e11 (second commit)
 static U8 app_MCSync_Rho_DisconnectGfpSppHandler(void)
 {
     if(!PM_DisconnectSpecificProfile(&gAppMCSyncRhoCtl.agBdAddr, PROFILE_GFP))
@@ -1322,10 +1195,7 @@ static U8 app_MCSync_Rho_IsAllowHandler(void)
 static U8 app_MCSync_Rho_SendRhoPrepareHandler(void)
 {
 	//send RHO_Prepare command to controller
-<<<<<<< HEAD
-=======
 	app_MCSync_Rho_SetAndSyncRhoState(RHO_CONTROLLER_STARTING);
->>>>>>> db20e11 (second commit)
 	BtAwsMcePrepareRoleHandoverReq(&gAppMCSyncRhoFlowWaitHandle, &gAppMCSyncRhoCtl.agBdAddr.addr, &APP_AgentGetPartnerInfo()->addr);
 
 	FW_SetTimer(&gAppMCSyncRhoFlowMessageHandle, APP_MCSYNC_RHO_ID_CONFIRM_TIMER, NULL, 0, RHO_CONFIRM_TIMEOUT_TIME);
@@ -1436,11 +1306,7 @@ static U8 app_MCSync_Rho_GetDataHandler(void)
 	gAppMCSyncRhoCtl.pTxRhoPacket = pTxRhoPkt;
 	gAppMCSyncRhoCtl.rhoTxPacketLen = totalLen;
 
-<<<<<<< HEAD
-    StreamL2capLockSink(TRUE);
-=======
     StreamL2capLockSink(AGENT_LOCK);
->>>>>>> db20e11 (second commit)
 
 	return APP_MCSYNC_RHO_FLOW_SUCCESS;
 }
@@ -1503,15 +1369,11 @@ static void app_MCSync_Rho_ActionFlowHandler(U8 action)
 			case APP_MCSYNC_RHO_ACTION_CONNECTABLE_LOCK:
 				status = app_MCSync_Rho_ConnectableLockHandler();
 				break;
-<<<<<<< HEAD
-
-=======
 #ifdef AIR_TILE_ADV_ENABLE	
 			case APP_MCSYNC_RHO_ACTION_NOTIFY_PARTNER_DISCONNECT_BLE:
 				status = app_MCSync_Rho_NotifyPartnerDisconnectBleHandler();
 				break;
 #endif
->>>>>>> db20e11 (second commit)
 			case APP_MCSYNC_RHO_ACTION_DISCONNECT_BLE:
 				status = app_MCSync_Rho_DisconnectBleHandler();
 				break;
@@ -1523,11 +1385,7 @@ static void app_MCSync_Rho_ActionFlowHandler(U8 action)
 			case APP_MCSYNC_RHO_ACTION_DISCONNECT_CUSTAPP:
 				status = app_MCSync_Rho_DisconnectCustAppHandler();
 				break;
-<<<<<<< HEAD
-#ifdef PROFILE_GFP_ENABLE
-=======
 #ifdef AIR_GFP_ENABLE
->>>>>>> db20e11 (second commit)
             case APP_MCSYNC_RHO_ACTION_DISCONNECT_GFPSPP:
                 status = app_MCSync_Rho_DisconnectGfpSppHandler();
                 break;
@@ -1672,22 +1530,14 @@ static void app_MCSync_Rho_SetAndSyncRhoState(U8 state)
 	gAppMCSyncRhoCtl.rhoState = state;
 	BtAwsMceSetRhoState(state);
 
-<<<<<<< HEAD
-	if(state == RHO_STARTING)
-=======
 	if(state >= RHO_STARTING)
->>>>>>> db20e11 (second commit)
 	{
 		gRhoMsgPrint = 1;
 	}
 	else if(state == RHO_IDLE)
 	{
 		gRhoMsgPrint = 0;
-<<<<<<< HEAD
-		StreamL2capLockSink(FALSE);
-=======
 		StreamL2capLockSink(STREAM_UNLOCK);
->>>>>>> db20e11 (second commit)
 	}
 
 	#else
@@ -1734,11 +1584,7 @@ BOOL APP_MCSync_Rho_Start(void)
 	U8 status = app_MCSync_Rho_StartCheck();
 
 	if(RHO_CHECK_IDLE == status
-<<<<<<< HEAD
-	#ifdef MCSYNC_SHARE_MODE
-=======
 	#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 		&& MCSYNC_SHARE_MODE_DISABLE == BtMCSync_GetShareMode()
 	#endif
 	)
@@ -1780,19 +1626,13 @@ void APP_MCSync_Rho_CustAppDisconnectNotify(void)
 }
 #endif
 
-<<<<<<< HEAD
-#ifdef PROFILE_GFP_ENABLE
-=======
 #ifdef AIR_GFP_ENABLE
->>>>>>> db20e11 (second commit)
 void APP_MCSync_Rho_GfpSppDisconnectNotify(void)
 {
     app_MCSync_Rho_GfpSppDisconnectCfmHandler();
 }
 #endif
 
-<<<<<<< HEAD
-=======
 #ifdef AIR_TILE_ADV_ENABLE	
 void app_MCSync_Rho_PartnerBleDisconnectNotify(U8 status) //add for tile
 {
@@ -1800,7 +1640,6 @@ void app_MCSync_Rho_PartnerBleDisconnectNotify(U8 status) //add for tile
 }
 #endif
 
->>>>>>> db20e11 (second commit)
 void APP_MCSync_Rho_PacketHandler(MCSYNC_RHO_PACKET_T *pRxPacket, U16 length)
 {
 	#if RHO_DEVELOPMENT
@@ -1811,14 +1650,10 @@ void APP_MCSync_Rho_PacketHandler(MCSYNC_RHO_PACKET_T *pRxPacket, U16 length)
 
 	if(!pAgentBdAddr)
 	{
-<<<<<<< HEAD
-		DBG_LOG_APP_McsyncRho( "[APP RHO] Record Rx RHO packet. Null Agent BdAddr", 0);
-=======
 		DBG_LOG_APP_McsyncRho( "[APP RHO] Record Rx RHO packet. Null Agent BdAddr pRxPacket:0x%x", 1, pRxPacket);
 		if(pRxPacket)
 			FW_FreeMemory(pRxPacket);
 
->>>>>>> db20e11 (second commit)
 		return;
 	}
 
@@ -1829,10 +1664,7 @@ void APP_MCSync_Rho_PacketHandler(MCSYNC_RHO_PACKET_T *pRxPacket, U16 length)
 	FW_SetTimer(&gAppMCSyncRhoFlowMessageHandle, APP_MCSYNC_RHO_ID_CONFIRM_TIMER, NULL, 0, RHO_CONFIRM_TIMEOUT_TIME);
 	FW_SetTimer(&gAppMCSyncRhoPrintRoleHandle, 0, NULL, 0, 5000); //print role every 5 sec
 	APP_MCSync_Rho_SetRhoState(RHO_PARTNER_RECEIVE_PKT);
-<<<<<<< HEAD
-=======
     StreamL2capLockSink(PARTNER_LOCK);
->>>>>>> db20e11 (second commit)
 	#else
 	UNUSED(pRxPacket);
 	UNUSED(length);
@@ -1847,11 +1679,7 @@ void APP_MCSync_Rho_RoleChangeIndHandler(U8 newRole, BOOL status)
 		if(APP_MCSYNC_RHO_ACTION_SEND_RHO_PACKET != app_MCSync_Rho_GetCurAction())
 			return;
 
-<<<<<<< HEAD
-        StreamL2capLockSink(FALSE);
-=======
         StreamL2capLockSink(STREAM_UNLOCK);
->>>>>>> db20e11 (second commit)
 
 		FW_ReleaseTimer(&gAppMCSyncRhoFlowMessageHandle, APP_MCSYNC_RHO_ID_CONFIRM_TIMER, 0);
 
@@ -1915,12 +1743,9 @@ void APP_MCSync_Rho_RoleChangeIndHandler(U8 newRole, BOOL status)
     
 
 	app_MCSync_Rho_CheckActionAfterRho();
-<<<<<<< HEAD
-=======
     #ifdef AIR_GFP_ENABLE
     APP_Gfp_RhoDoneHandle(newRole, status);
     #endif
->>>>>>> db20e11 (second commit)
 
 	#else
 	UNUSED(newRole);
@@ -1948,11 +1773,7 @@ void APP_MCSync_Rho_NonConnectableNotify(void)
 BOOL APP_MCSync_Rho_IsRhoing(void)
 {
 	#if RHO_DEVELOPMENT
-<<<<<<< HEAD
-	return (gAppMCSyncRhoCtl.rhoState == RHO_STARTING) ? TRUE : FALSE;
-=======
 	return (gAppMCSyncRhoCtl.rhoState >= RHO_STARTING) ? TRUE : FALSE;
->>>>>>> db20e11 (second commit)
 	#endif
 
 	return FALSE;
@@ -2020,15 +1841,12 @@ BOOL APP_MCSync_Rho_Stop(void)
 			app_MCSync_Rho_FlowErrorHandler(APP_MCSYNC_RHO_ERRCODE_CONNECTABLE_CFM_FAIL);
 			return TRUE;
 
-<<<<<<< HEAD
-=======
 #ifdef AIR_TILE_ADV_ENABLE	
 		case APP_MCSYNC_RHO_ACTION_NOTIFY_PARTNER_DISCONNECT_BLE:
 			app_MCSync_Rho_FlowErrorHandler(APP_MCSYNC_RHO_ERRCODE_NOTIFY_PARTNER_BLE_DISCONNECT_CFM_FAIL);
 			break;
 #endif
 
->>>>>>> db20e11 (second commit)
 		case APP_MCSYNC_RHO_ACTION_DISCONNECT_BLE:
 			app_MCSync_Rho_FlowErrorHandler(APP_MCSYNC_RHO_ERRCODE_BLE_DISCONNECT_CFM_FAIL);
 			return TRUE;

@@ -62,12 +62,6 @@ typedef struct {
 const GFH_CMEM_ID_INFO_v1 combo_mem_id_list = {
     COMBO_MEM_STRUCT_HEAD
     {
-<<<<<<< HEAD
-        // MTKSIP_2523_SF_32_01
-        CMEM_TYPE_SERIAL_NOR_FLASH,
-        3,  // Valid ID length
-        {0xC2, 0x28, 0x16, 0x00, 0x00, 0x00, 0x00, 0x00}  // Flash ID MX25R3235FWJIH1
-=======
         //SIP XM25QU32C
         CMEM_TYPE_SERIAL_NOR_FLASH,
         3,  // Valid ID length
@@ -78,7 +72,6 @@ const GFH_CMEM_ID_INFO_v1 combo_mem_id_list = {
         CMEM_TYPE_SERIAL_NOR_FLASH,
         3,  // Valid ID length
         {0x20, 0x50, 0x15, 0x00, 0x00, 0x00, 0x00, 0x00}  // Flash ID XM25QU16C
->>>>>>> db20e11 (second commit)
     },
     
     {
@@ -182,8 +175,6 @@ ATTR_TEXT_IN_RAM void NOR_ReadID(const uint16_t CS, uint16_t *flashid)
     return;
 }
 
-<<<<<<< HEAD
-=======
 ATTR_TEXT_IN_RAM void Get_JEDID(uint8_t *jed_id)
 {
     uint32_t savedMask;
@@ -222,7 +213,6 @@ ATTR_TEXT_IN_RAM void Get_UID(uint8_t *uid, uint8_t uid_length)
     
     RestoreIRQMask(savedMask);
 }
->>>>>>> db20e11 (second commit)
 
 
 int32_t CMEM_Index()

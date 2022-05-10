@@ -38,15 +38,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-<<<<<<< HEAD
-"group__hal__aesotf__define.html#ga5553825e436880f2b04dac57e61666f5",
-"group__hal__rtc__enum.html#gafd0d3ebedd556c274a30a8479de1631e",
-"structhal__cache__region__config__t.html"
-=======
 "group__hal__aesotf__define.html#ga47006f843857adb12bedad104a48bdf0",
 "group__hal__nvic__macro.html",
 "index.html"
->>>>>>> db20e11 (second commit)
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -46,11 +46,7 @@
 #include "App_MCSync_RHO.h"
 #include "App_MCSync_State.h"
 #include "App_MCSync_System.h"
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 #include "App_MCSync_Share.h"
 #endif
 
@@ -64,11 +60,7 @@ void APP_AWSMCE_ProcessKeyEvent(BD_ADDR_T *pBdAddr, U16 keyIndex)
 		case AIR_KEY_EVENT_KEY_AIR_ENTER_AIR_PAIRING:
 			APP_AWSMCE_KeyEnterAirPairing();
 			break;
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 		case AWSMCE_KEY_EVENT_KEY_EARBUDS_MODE_AIR_PAIRING_START:
 			APP_AWSMCE_KeyEnterMCSyncSharePairing();
 			break;
@@ -108,11 +100,7 @@ void APP_AWSMCE_KeyEnterAirPairing()
 	APP_MCSYNC_StateStartPairing();
 }
 
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 void APP_AWSMCE_KeyEnterMCSyncSharePairing(void)
 {
 	APP_MCSync_Share_KeySharePairingStart();

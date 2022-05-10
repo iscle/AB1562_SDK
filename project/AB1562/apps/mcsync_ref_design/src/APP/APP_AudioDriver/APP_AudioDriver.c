@@ -84,61 +84,33 @@ static void app_VPRTCtrl_LogPrint(BOOL isStart)
 
 	DBG_LOG_APP_AUDIO_DRIVER("[Media] QcmdType<0x%x>, QcmdId<0x%x>, QcmdSrcIdx<0x%x>", 3, cmdType, id, srcIndex);
 
-<<<<<<< HEAD
-
-	if(id <= MEDIA_EVT_KEY_INTERNAL_TOTAL_NO)//Media evtKey
-	{
-		if(isStart)
-			DBG_LOG_APP_AUDIO_DRIVER("[Media][%s Start]: MediaEvent: %s, %s", 3, APP_AudioTypeLogString[cmdType], APP_MediaEvent1LogString[id], (cmdType == AUDIO_VP) ? APP_RTLogString[srcIndex] : APP_VPLogString[srcIndex]);
-		else
-			DBG_LOG_APP_AUDIO_DRIVER("[Media][%s Stop]:  MediaEvent: %s, %s", 3, APP_AudioTypeLogString[cmdType], APP_MediaEvent1LogString[id], (cmdType == AUDIO_VP) ? APP_RTLogString[srcIndex] : APP_VPLogString[srcIndex]);
-=======
 	if(id <= MEDIA_EVT_KEY_INTERNAL_TOTAL_NO)//Media evtKey
 	{
 		if(isStart)
 			DBG_LOG_APP_AUDIO_DRIVER("[Media][%s Start]: MediaEvent: %s, %s", 3, APP_AudioTypeLogString[cmdType], APP_MediaEvent1LogString[id], (cmdType == AUDIO_VP) ? APP_VPLogString[srcIndex] : APP_RTLogString[srcIndex]);
 		else
 			DBG_LOG_APP_AUDIO_DRIVER("[Media][%s Stop]:  MediaEvent: %s, %s", 3, APP_AudioTypeLogString[cmdType], APP_MediaEvent1LogString[id], (cmdType == AUDIO_VP) ? APP_VPLogString[srcIndex] : APP_RTLogString[srcIndex]);
->>>>>>> db20e11 (second commit)
 	}
 	else if((MEDIA_EVT_BAT_LOW <= id) && (id <= MEDIA_EVT_NUMBER))
 	{
 		if(isStart)
-<<<<<<< HEAD
-			DBG_LOG_APP_AUDIO_DRIVER("[Media][%s Start]: MediaEvent: %s, %s", 3, APP_AudioTypeLogString[cmdType], APP_MediaEvent2LogString[id - MEDIA_EVT_SYSTEM_BASE], (cmdType == AUDIO_VP) ? APP_RTLogString[srcIndex] : APP_VPLogString[srcIndex]);
-		else
-			DBG_LOG_APP_AUDIO_DRIVER("[Media][%s Stop]:  MediaEvent: %s, %s", 3, APP_AudioTypeLogString[cmdType], APP_MediaEvent2LogString[id - MEDIA_EVT_SYSTEM_BASE], (cmdType == AUDIO_VP) ? APP_RTLogString[srcIndex] : APP_VPLogString[srcIndex]);
-=======
 			DBG_LOG_APP_AUDIO_DRIVER("[Media][%s Start]: MediaEvent: %s, %s", 3, APP_AudioTypeLogString[cmdType], APP_MediaEvent2LogString[id - MEDIA_EVT_SYSTEM_BASE], (cmdType == AUDIO_VP) ? APP_VPLogString[srcIndex] : APP_RTLogString[srcIndex]);
 		else
 			DBG_LOG_APP_AUDIO_DRIVER("[Media][%s Stop]:  MediaEvent: %s, %s", 3, APP_AudioTypeLogString[cmdType], APP_MediaEvent2LogString[id - MEDIA_EVT_SYSTEM_BASE], (cmdType == AUDIO_VP) ? APP_VPLogString[srcIndex] : APP_RTLogString[srcIndex]);
->>>>>>> db20e11 (second commit)
 	}
 	else if((MEDIA_EVT_SLC_CONNECTED <= id) && (id < MEDIA_EVT_SHARE_MODE_BASE))
 	{
 		if(isStart)
-<<<<<<< HEAD
-			DBG_LOG_APP_AUDIO_DRIVER("[Media][%s Start]: MediaEvent: %s, %s", 3, APP_AudioTypeLogString[cmdType], APP_MediaEvent3LogString[id - MEDIA_EVT_CONNECTION_BASE], (cmdType == AUDIO_VP) ? APP_RTLogString[srcIndex] : APP_VPLogString[srcIndex]);
-		else
-			DBG_LOG_APP_AUDIO_DRIVER("[Media][%s Stop]:  MediaEvent: %s, %s", 3, APP_AudioTypeLogString[cmdType], APP_MediaEvent3LogString[id - MEDIA_EVT_CONNECTION_BASE], (cmdType == AUDIO_VP) ? APP_RTLogString[srcIndex] : APP_VPLogString[srcIndex]);
-=======
 			DBG_LOG_APP_AUDIO_DRIVER("[Media][%s Start]: MediaEvent: %s, %s", 3, APP_AudioTypeLogString[cmdType], APP_MediaEvent3LogString[id - MEDIA_EVT_CONNECTION_BASE], (cmdType == AUDIO_VP) ? APP_VPLogString[srcIndex] : APP_RTLogString[srcIndex]);
 		else
 			DBG_LOG_APP_AUDIO_DRIVER("[Media][%s Stop]:  MediaEvent: %s, %s", 3, APP_AudioTypeLogString[cmdType], APP_MediaEvent3LogString[id - MEDIA_EVT_CONNECTION_BASE], (cmdType == AUDIO_VP) ? APP_VPLogString[srcIndex] : APP_RTLogString[srcIndex]);
->>>>>>> db20e11 (second commit)
 	}
 	else if((MEDIA_EVT_SHARE_MODE_BASE <= id) && (id < MEDIA_EVT_UART_CMD_RESERVE))
 	{
 		if(isStart)
-<<<<<<< HEAD
-			DBG_LOG_APP_AUDIO_DRIVER("[Media][%s Start]: MediaEvent: %s, %s", 3, APP_AudioTypeLogString[cmdType], APP_MediaEvent4LogString[id - MEDIA_EVT_SHARE_MODE_BASE], (cmdType == AUDIO_VP) ? APP_RTLogString[srcIndex] : APP_VPLogString[srcIndex]);
-		else
-			DBG_LOG_APP_AUDIO_DRIVER("[Media][%s Stop]:  MediaEvent: %s, %s", 3, APP_AudioTypeLogString[cmdType], APP_MediaEvent4LogString[id - MEDIA_EVT_SHARE_MODE_BASE], (cmdType == AUDIO_VP) ? APP_RTLogString[srcIndex] : APP_VPLogString[srcIndex]);
-=======
 			DBG_LOG_APP_AUDIO_DRIVER("[Media][%s Start]: MediaEvent: %s, %s", 3, APP_AudioTypeLogString[cmdType], APP_MediaEvent4LogString[id - MEDIA_EVT_SHARE_MODE_BASE], (cmdType == AUDIO_VP) ? APP_VPLogString[srcIndex] : APP_RTLogString[srcIndex]);
 		else
 			DBG_LOG_APP_AUDIO_DRIVER("[Media][%s Stop]:  MediaEvent: %s, %s", 3, APP_AudioTypeLogString[cmdType], APP_MediaEvent4LogString[id - MEDIA_EVT_SHARE_MODE_BASE], (cmdType == AUDIO_VP) ? APP_VPLogString[srcIndex] : APP_RTLogString[srcIndex]);
->>>>>>> db20e11 (second commit)
 	}
 	else
 	{
@@ -219,12 +191,9 @@ BOOL APP_AudioDriver_SendSubSinkCmd(U8 cmdType, U16 srcIndex, U16 id)
 	if(cmdType != AUDIO_VP && cmdType != AUDIO_RT && cmdType != AUDIO_FAKE_EVT)
 		return FALSE;
 
-<<<<<<< HEAD
-=======
 	DBG_LOG_APP_AUDIO_DRIVER("[Media] SendSubSinkCmd cmdType:%d, srcIndex:%d, id:0x%x, qCmdNum:%d", 4,
 		cmdType, srcIndex, id, gAudioDriver_SubSink_Hdl.qCmdNum);
 
->>>>>>> db20e11 (second commit)
 	if(gAudioDriver_SubSink_Hdl.qCmdNum < DRIVER_SUBSINK_Q_MAX)
 	{
 		gAudioDriver_SubSink_Hdl.qCmd[gAudioDriver_SubSink_Hdl.qCmdNum].cmdType = cmdType;

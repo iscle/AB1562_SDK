@@ -1,9 +1,6 @@
 var NAVTREEINDEX1 =
 {
-<<<<<<< HEAD
-=======
 "group__hal__aesotf__define.html#ga47006f843857adb12bedad104a48bdf0":[1,0,0],
->>>>>>> db20e11 (second commit)
 "group__hal__aesotf__define.html#ga5553825e436880f2b04dac57e61666f5":[1,0,4],
 "group__hal__aesotf__define.html#gab5d758666482072d98dfb7c7fa63ab24":[1,0,2],
 "group__hal__aesotf__enum.html":[1,1],
@@ -109,50 +106,6 @@ var NAVTREEINDEX1 =
 "group__hal__flash__enum.html#ggaf2a5627aefec9ab9c2505ad9c987f2e8a28ffaa37b6d724382da9129c464ed54e":[1,3,8,0,0,1],
 "group__hal__flash__enum.html#ggaf2a5627aefec9ab9c2505ad9c987f2e8af287a9447f68523838d9392aa1db7cc4":[1,3,8,0,0,0],
 "group__hal__gpio__enum.html":[1,3,9,0],
-<<<<<<< HEAD
-"group__hal__gpio__enum.html#ga542728e7f1595592548392d692286b2c":[1,3,9,0,1],
-"group__hal__gpio__enum.html#ga6da2d541a690db510ae5d61ed0c83b9f":[1,3,9,0,4],
-"group__hal__gpio__enum.html#ga7cfd31710ec8f2a5721baae06ba8530d":[1,3,9,0,5],
-"group__hal__gpio__enum.html#ga84c2c8e08483edaab619f3479d437b41":[1,3,9,0,2],
-"group__hal__gpio__enum.html#ga8793dd0b4f544f610264c026357bf6da":[1,3,9,0,3],
-"group__hal__gpio__enum.html#gab38c5c477ed49fa478c0acf134f85efc":[1,3,9,0,0],
-"group__hal__gpio__enum.html#gaf6bcc3b25b0be4bc2e3ce9faf71f949f":[1,3,9,0,6],
-"group__hal__gpio__enum.html#gga542728e7f1595592548392d692286b2ca7a88b05dd09668fcfdea79c535d7af51":[1,3,9,0,1,1],
-"group__hal__gpio__enum.html#gga542728e7f1595592548392d692286b2cadff64b83157372b5d9b6a70d49e2099c":[1,3,9,0,1,0],
-"group__hal__gpio__enum.html#gga6da2d541a690db510ae5d61ed0c83b9fa61bb7c2b300ed55df21343a0ef56e70e":[1,3,9,0,4,2],
-"group__hal__gpio__enum.html#gga6da2d541a690db510ae5d61ed0c83b9faab21cf446b500a7e1b997186d8a5d3f9":[1,3,9,0,4,0],
-"group__hal__gpio__enum.html#gga6da2d541a690db510ae5d61ed0c83b9faf7e4aea22f2f8a9c8c31ed42ba8d5995":[1,3,9,0,4,1],
-"group__hal__gpio__enum.html#gga6da2d541a690db510ae5d61ed0c83b9faf92a6270f2fb035ba8dff48e500db4b9":[1,3,9,0,4,3],
-"group__hal__gpio__enum.html#gga84c2c8e08483edaab619f3479d437b41a00a8bb5402916d29dd9f0327476c40bd":[1,3,9,0,2,3],
-"group__hal__gpio__enum.html#gga84c2c8e08483edaab619f3479d437b41a37ec1a509babd94446217eb718f9996e":[1,3,9,0,2,1],
-"group__hal__gpio__enum.html#gga84c2c8e08483edaab619f3479d437b41aafd0f42f9005e81cc00f506604f237e1":[1,3,9,0,2,0],
-"group__hal__gpio__enum.html#gga84c2c8e08483edaab619f3479d437b41ae9cfbb7c8a368e9423a971f44375fadf":[1,3,9,0,2,2],
-"group__hal__gpio__enum.html#gga8793dd0b4f544f610264c026357bf6daa0c79adf252019c3499b94c4d2d1ae0ff":[1,3,9,0,3,3],
-"group__hal__gpio__enum.html#gga8793dd0b4f544f610264c026357bf6daa0ed33805487ab9c93cd17a83a4b92c54":[1,3,9,0,3,9],
-"group__hal__gpio__enum.html#gga8793dd0b4f544f610264c026357bf6daa19d45bdc6bbb6f3d0bda9c5c317df704":[1,3,9,0,3,14],
-"group__hal__gpio__enum.html#gga8793dd0b4f544f610264c026357bf6daa1c92ff0722303e75408a00289092f522":[1,3,9,0,3,4],
-"group__hal__gpio__enum.html#gga8793dd0b4f544f610264c026357bf6daa1efb7937d8f7bd6720ea93249ea32b6d":[1,3,9,0,3,7],
-"group__hal__gpio__enum.html#gga8793dd0b4f544f610264c026357bf6daa310c12613e6c33bbbcf1322c83e5951c":[1,3,9,0,3,0],
-"group__hal__gpio__enum.html#gga8793dd0b4f544f610264c026357bf6daa37d5ac9237c2aed6669aec309f1e7619":[1,3,9,0,3,1],
-"group__hal__gpio__enum.html#gga8793dd0b4f544f610264c026357bf6daa497b053d686d2f1c04d992000088ccf5":[1,3,9,0,3,17],
-"group__hal__gpio__enum.html#gga8793dd0b4f544f610264c026357bf6daa4d5c148fdbdf5a17db2b5568ffb6dffc":[1,3,9,0,3,11],
-"group__hal__gpio__enum.html#gga8793dd0b4f544f610264c026357bf6daa6977d7208c4b5b8c29e446e4d99ab460":[1,3,9,0,3,12],
-"group__hal__gpio__enum.html#gga8793dd0b4f544f610264c026357bf6daa854432484f2af645f8eb4f75263dbd4c":[1,3,9,0,3,8],
-"group__hal__gpio__enum.html#gga8793dd0b4f544f610264c026357bf6daa89a699be88bd8ed6fe6697b8ef7eeeaf":[1,3,9,0,3,5],
-"group__hal__gpio__enum.html#gga8793dd0b4f544f610264c026357bf6daa95e087fb1f2a3fba2e9cde1616f8b983":[1,3,9,0,3,10],
-"group__hal__gpio__enum.html#gga8793dd0b4f544f610264c026357bf6daab04d28b21a3833f23e0c286ed0f0d451":[1,3,9,0,3,16],
-"group__hal__gpio__enum.html#gga8793dd0b4f544f610264c026357bf6daabdca334ce08bdb586d13d9b029c7c8b1":[1,3,9,0,3,6],
-"group__hal__gpio__enum.html#gga8793dd0b4f544f610264c026357bf6daac65ccdf3549add906aa365166a44f9dd":[1,3,9,0,3,15],
-"group__hal__gpio__enum.html#gga8793dd0b4f544f610264c026357bf6daacc3ad7c78ba676058d4f7b7ea169533b":[1,3,9,0,3,2],
-"group__hal__gpio__enum.html#gga8793dd0b4f544f610264c026357bf6daadc989b68607032c2bada9990ae933810":[1,3,9,0,3,13],
-"group__hal__gpio__enum.html#gga8793dd0b4f544f610264c026357bf6daafc894537837ecd7d70d4c223a74fa4e3":[1,3,9,0,3,18],
-"group__hal__gpio__enum.html#ggab38c5c477ed49fa478c0acf134f85efca1d893fac58a2d9a77ae950a82c1b4dce":[1,3,9,0,0,0],
-"group__hal__gpio__enum.html#ggab38c5c477ed49fa478c0acf134f85efca3197688dd46aa28e778ae6cf33d5f51f":[1,3,9,0,0,1],
-"group__hal__gpio__enum.html#ggaf6bcc3b25b0be4bc2e3ce9faf71f949fa2725f90a5d633d54717ec297160d4dc4":[1,3,9,0,6,2],
-"group__hal__gpio__enum.html#ggaf6bcc3b25b0be4bc2e3ce9faf71f949fa3530d62519d2bd0c2c66faecfa2d28f1":[1,3,9,0,6,0],
-"group__hal__gpio__enum.html#ggaf6bcc3b25b0be4bc2e3ce9faf71f949fa416a765b01d23ce932e119aff02d0472":[1,3,9,0,6,1],
-"group__hal__gpio__enum.html#ggaf6bcc3b25b0be4bc2e3ce9faf71f949faba6f33771b93a3109523469e5c63800b":[1,3,9,0,6,3],
-=======
 "group__hal__gpio__enum.html#ga2f13bf3247dc651f4cfb7524cd0d97c6":[1,3,9,0,1],
 "group__hal__gpio__enum.html#ga542728e7f1595592548392d692286b2c":[1,3,9,0,3],
 "group__hal__gpio__enum.html#ga6da2d541a690db510ae5d61ed0c83b9f":[1,3,9,0,6],
@@ -204,7 +157,6 @@ var NAVTREEINDEX1 =
 "group__hal__gpio__enum.html#ggaf6bcc3b25b0be4bc2e3ce9faf71f949fa3530d62519d2bd0c2c66faecfa2d28f1":[1,3,9,0,8,0],
 "group__hal__gpio__enum.html#ggaf6bcc3b25b0be4bc2e3ce9faf71f949fa416a765b01d23ce932e119aff02d0472":[1,3,9,0,8,1],
 "group__hal__gpio__enum.html#ggaf6bcc3b25b0be4bc2e3ce9faf71f949faba6f33771b93a3109523469e5c63800b":[1,3,9,0,8,3],
->>>>>>> db20e11 (second commit)
 "group__hal__gpt__enum.html":[1,3,10,1],
 "group__hal__gpt__enum.html#ga161427cb9289e252f710b610a8c83b4a":[1,3,10,1,3],
 "group__hal__gpt__enum.html#ga1f46fdbedbb9600a16355d476f65915e":[1,3,10,1,5],
@@ -297,19 +249,5 @@ var NAVTREEINDEX1 =
 "group__hal__nvic__enum.html#ggab348d4200902666c0bfcd9ca075e0d60a2999b44ac78b706a1b0ef30c7eb7835e":[1,3,12,0,0,3],
 "group__hal__nvic__enum.html#ggab348d4200902666c0bfcd9ca075e0d60a9ce5d23c8d7548ceb42acae14a1f2b69":[1,3,12,0,0,0],
 "group__hal__nvic__enum.html#ggab348d4200902666c0bfcd9ca075e0d60abd1f73380e3e80a19ff13486c1b865be":[1,3,12,0,0,4],
-<<<<<<< HEAD
-"group__hal__nvic__enum.html#ggab348d4200902666c0bfcd9ca075e0d60adc9c429569a1549adb6f06ab03a2245e":[1,3,12,0,0,1],
-"group__hal__nvic__macro.html":[1,3,12,2],
-"group__hal__nvic__macro.html#ga1ab52a38d8a882078612c6a0e4727fa5":[1,3,12,2,1],
-"group__hal__nvic__macro.html#ga75a57e3ad952d8143a4e92f750adfc2a":[1,3,12,2,0],
-"group__hal__nvic__typedef.html":[1,3,12,1],
-"group__hal__nvic__typedef.html#gad0c42a5b42564767be2aad2d77412a70":[1,3,12,1,0],
-"group__hal__rtc__define.html":[1,3,2,2],
-"group__hal__rtc__define.html#ga61b2da726446abf88f7b02c7a669b778":[1,3,2,2,0],
-"group__hal__rtc__enum.html":[1,3,2,0],
-"group__hal__rtc__enum.html#ga55c7c479743b9eadd5874f68cc99bfda":[1,3,2,0,0],
-"group__hal__rtc__enum.html#ga937edb89f1f6e28a7ad7c732e2d74a04":[1,3,2,0,2]
-=======
 "group__hal__nvic__enum.html#ggab348d4200902666c0bfcd9ca075e0d60adc9c429569a1549adb6f06ab03a2245e":[1,3,12,0,0,1]
->>>>>>> db20e11 (second commit)
 };

@@ -47,11 +47,8 @@
 #include "hal_uart.h"
 #include "hal_uart_internal.h"
 #include "serial_port_assignment.h"
-<<<<<<< HEAD
-=======
 #include "exception_handler.h"
 #include "offline_dump.h"
->>>>>>> db20e11 (second commit)
 
 #ifdef MTK_NVDM_ENABLE
 #include "nvdm.h"
@@ -74,12 +71,9 @@
 #define PORT_SYSLOG_MODULE_FILTER_STATUS_SIZE (MTK_MAX_CPU_NUMBER * 2 + PORT_SYSLOG_MODULE_FILTER_TOTAL_NUMBER)
 #define PORT_SYSLOG_MAX_MODULE_FILTER_STATUS_SIZE (PORT_SYSLOG_MAX_CPU_NUMBER * 2 + PORT_SYSLOG_MODULE_FILTER_TOTAL_NUMBER)
 
-<<<<<<< HEAD
-=======
 /* max drop log buffer size define */
 #define MAX_DROP_BUFFER_SIZE                    38
 
->>>>>>> db20e11 (second commit)
 /* syslog status define */
 #define SYSLOG_INIT_NONE            0x00
 #define SYSLOG_EARLY_INIT           0x01
@@ -104,8 +98,6 @@
 #define RACE_PROTOCAL_EXCEPTION_MSGID           (0x0F00 | 0x1A)
 #define RACE_PROTOCAL_TLV_LOG                   (0x0F00 | 0x00)
 
-<<<<<<< HEAD
-=======
 #ifndef __EXT_BOOTLOADER__
 log_create_module(SYSLOG, PRINT_LEVEL_INFO);
 #define SYSLOG_MSGID_I(fmt, cnt, arg...)    LOG_MSGID_I(SYSLOG, fmt, cnt, ##arg)
@@ -117,7 +109,6 @@ log_create_module(SYSLOG, PRINT_LEVEL_INFO);
 #define SYSLOG_MSGID_E(fmt, cnt, arg...)
 #endif /* __EXT_BOOTLOADER__ */
 
->>>>>>> db20e11 (second commit)
 __attribute__ ((__section__(".log_filter_end"))) static const char fiter_end_flag[] = "[MODULE_FILTER_END]";
 
 static uint32_t port_syslog_get_current_timestamp(void)
@@ -177,15 +168,9 @@ uint32_t port_syslog_drop_prompt_length(uint32_t drop_log_count)
     }
 
 #ifdef MTK_DEBUG_PLAIN_LOG_ENABLE
-<<<<<<< HEAD
-    return DROP_PROMPT_LOG_FIX_SIZE + drop_bit + 2; /* include the race header */
-#else
-    return 12 + DROP_PROMPT_LOG_FIX_SIZE + drop_bit + 2; /* include the race header */
-=======
     return DROP_PROMPT_LOG_FIX_SIZE + drop_bit + 2; /* string + drop + /r/n */
 #else
     return 12 + DROP_PROMPT_LOG_FIX_SIZE + drop_bit + 2; /* race header + string + drop + /r/n */
->>>>>>> db20e11 (second commit)
 #endif
 }
 
@@ -365,11 +350,8 @@ typedef struct {
     mux_handle_t handle;
     uint32_t init_phase;
     uint32_t lock_buffer;
-<<<<<<< HEAD
-=======
     uint32_t drop_count;
     uint32_t drop_flush_count;
->>>>>>> db20e11 (second commit)
     uint8_t cpu_log_switch[PORT_SYSLOG_MAX_CPU_NUMBER];
     uint8_t cpu_log_print_level[PORT_SYSLOG_MAX_CPU_NUMBER];
     uint8_t cpu_module_filter_status[PORT_SYSLOG_MAX_MODULE_FILTER_STATUS_SIZE]; /* log filter setting read from NVDM to let per-cpu do initialization with it's log filter array. */
@@ -433,10 +415,7 @@ static void port_syslog_build_time_sdk_version_copy(uint32_t cpu_id)
 /* memory malloc and free */
 #ifdef MTK_CPU_NUMBER_0
 
-<<<<<<< HEAD
-=======
 static volatile bool g_primary_cpu_syslog_is_initialized = false;
->>>>>>> db20e11 (second commit)
 static volatile bool g_exception_is_happen = false;
 
 static void *port_syslog_malloc(uint32_t size)
@@ -513,11 +492,7 @@ static void port_syslog_early_init(void)
 {
     hal_uart_config_t uart_config;
 
-<<<<<<< HEAD
-    uart_config.baudrate        = CONFIG_RACE_BAUDRATE;
-=======
     uart_config.baudrate        = CONFIG_SYSLOG_BAUDRATE;
->>>>>>> db20e11 (second commit)
     uart_config.parity          = HAL_UART_PARITY_NONE;
     uart_config.stop_bit        = HAL_UART_STOP_BIT_1;
     uart_config.word_length     = HAL_UART_WORD_LENGTH_8;
@@ -528,10 +503,7 @@ static void port_syslog_early_init(void)
 }
 
 void pc_tool_command_handler(mux_handle_t handle, mux_event_t event,uint32_t data_len,void*user_data);
-<<<<<<< HEAD
-=======
 void pc_tool_assert(uint8_t *data, uint32_t length);
->>>>>>> db20e11 (second commit)
 
 typedef enum {
     RACE_PARSE_STATUS_CHANNEL,
@@ -556,9 +528,6 @@ mux_port_t              g_syslog_port;
 uint32_t                g_syslog_port_index;
 hal_uart_baudrate_t     g_syslog_baudrate;
 print_level_t           g_cpu_level[2];
-<<<<<<< HEAD
-
-=======
 bool    g_offline_log_is_enable;
 
 mux_port_t query_syslog_port(void)
@@ -582,7 +551,6 @@ hal_uart_baudrate_t query_syslog_baudrate(void)
 
     return g_syslog_baudrate;
 }
->>>>>>> db20e11 (second commit)
 
 #ifdef MTK_DEBUG_PLAIN_LOG_ENABLE
 static user_mux_config_t g_syslog_race_user_list[1];
@@ -749,15 +717,12 @@ void log_from_nvkey_init(void)
     uint16_t rc;
     uint8_t  isLogging[5];
 
-<<<<<<< HEAD
-=======
     /* default syslog port config */
     g_syslog_port     = CONFIG_SYSLOG_RUNNING_STAGE_PORT;
     g_syslog_baudrate = CONFIG_SYSLOG_BAUDRATE;
     g_cpu_level[0]    = PRINT_LEVEL_INFO;
     g_cpu_level[1]    = PRINT_LEVEL_INFO;
 
->>>>>>> db20e11 (second commit)
     /* 0xF005 get user's uart configuartion */
     rc = NVKEY_ReadFullKey(NVKEYID_PERIPHERAL_DRV_UART_PARA, &uart_nvkey_config, 2);
     //uart_nvkey_config = BSWAP_16(uart_nvkey_config);
@@ -825,18 +790,12 @@ void log_from_nvkey_init(void)
     }
 
     /* offline dump enable */
-<<<<<<< HEAD
-    // if((syslog_mode & 0x20) != 0) {
-    //     ;
-    // }
-=======
     if((syslog_mode & 0x20) != 0) {
         g_offline_log_is_enable = true;
     } else {
         g_offline_log_is_enable = false;
     }
     SYSLOG_MSGID_I("SYSLOG offline dump enable %d", 1, g_offline_log_is_enable);
->>>>>>> db20e11 (second commit)
 
     /* parse syslog port baudrate */
     if(g_syslog_port_index == 0){
@@ -846,11 +805,7 @@ void log_from_nvkey_init(void)
     }
     g_syslog_baudrate = (hal_uart_baudrate_t)(uart_nvkey_config& 0xFF);/* uart0 low byte*/
 
-<<<<<<< HEAD
-    LOG_MSGID_I(common,"SYSLOG NVKEY:check=0x%02x lvel=0x%02x port=0x%02x mode=0x%02x ",4,check_byte,cpu_level,syslog_port_num,syslog_mode);
-=======
     SYSLOG_MSGID_I("SYSLOG NVKEY:check=0x%02x lvel=0x%02x port=0x%02x mode=0x%02x baudrate=%d",5,check_byte,cpu_level,syslog_port_num,syslog_mode,g_syslog_baudrate);
->>>>>>> db20e11 (second commit)
 }
 
 bool log_port_init(void)
@@ -948,8 +903,6 @@ static void port_syslog_post_init(void)
 
 #endif /* MTK_CPU_NUMBER_0 */
 
-<<<<<<< HEAD
-=======
 static bool print_drop_message(void)
 {
     uint32_t tx_drop_size = 0, tx_free_size = 0;
@@ -972,7 +925,6 @@ static bool print_drop_message(void)
     return true;
 }
 
->>>>>>> db20e11 (second commit)
 static uint32_t port_syslog_send(uint32_t id, bool drop_flag, const uint8_t **p_data, uint32_t *p_len)
 {
     mux_status_t status;
@@ -980,17 +932,11 @@ static uint32_t port_syslog_send(uint32_t id, bool drop_flag, const uint8_t **p_
     uint32_t counter;
     mux_buffer_t mux_buffers[6];
     mux_buffer_t *p_mux_buffer;
-<<<<<<< HEAD
-#ifndef MTK_DEBUG_PLAIN_LOG_ENABLE
-    uint8_t race_header[6];
-#endif
-=======
 
 #ifndef MTK_DEBUG_PLAIN_LOG_ENABLE
     uint8_t race_header[6];
 #endif
 
->>>>>>> db20e11 (second commit)
     total_size = 0;
     counter = 0;
     for (i = 0; p_data[i] != NULL; i++) {
@@ -1037,8 +983,6 @@ static uint32_t port_syslog_send(uint32_t id, bool drop_flag, const uint8_t **p_
     }
 #endif
 
-<<<<<<< HEAD
-=======
     /* print flush drop count*/
     if (g_syslog_share_variable->drop_count != 0) {
         if (print_drop_message() == false) {
@@ -1046,7 +990,6 @@ static uint32_t port_syslog_send(uint32_t id, bool drop_flag, const uint8_t **p_
         }
     }
 
->>>>>>> db20e11 (second commit)
     do {
         status = mux_tx(g_syslog_share_variable->handle, p_mux_buffer, counter, &total_size);
     } while ((drop_flag == false) && (total_size == 0));
@@ -1054,21 +997,13 @@ static uint32_t port_syslog_send(uint32_t id, bool drop_flag, const uint8_t **p_
     if(status == MUX_STATUS_OK) {
         total_size = total_size - mux_buffers[0].buf_size;
     } else {
-<<<<<<< HEAD
-=======
         g_syslog_share_variable->drop_count += 1;
->>>>>>> db20e11 (second commit)
         total_size = 0;
     }
 
     return total_size;
 }
 
-<<<<<<< HEAD
-extern bool kernel_task_send_offline_log_dump_msg(void);
-
-=======
->>>>>>> db20e11 (second commit)
 void log_buffer_lock(void)
 {
     g_syslog_share_variable->lock_buffer = true;
@@ -1081,12 +1016,6 @@ void log_buffer_unlock(void)
 
 bool query_log_buffer_lock_status(void)
 {
-<<<<<<< HEAD
-    if (g_syslog_share_variable->lock_buffer == true) {
-        return true;
-    }
-    return false;
-=======
     return g_syslog_share_variable->lock_buffer;
 }
 
@@ -1109,14 +1038,10 @@ void log_save_flash(void)
     g_syslog_share_variable->drop_flush_count = 0;
 
     offline_dump_callback_tail_handle(OFFLINE_REGION_OFFLINE_LOG);
->>>>>>> db20e11 (second commit)
 }
 
 void log_buffer_flush(void)
 {
-<<<<<<< HEAD
-    uint32_t cpu_irq_mask;
-=======
 #ifdef MTK_OFFLINELOG_ENABLE
     uint32_t cpu_irq_mask;
     /* nvkey feature not enable */
@@ -1125,7 +1050,6 @@ void log_buffer_flush(void)
         return ;
     }
     offline_dump_callback_head_handle(OFFLINE_REGION_OFFLINE_LOG);
->>>>>>> db20e11 (second commit)
     port_syslog_local_cpu_enter_critical(&cpu_irq_mask);
     if (query_log_buffer_lock_status() == true) {
         port_syslog_local_cpu_exit_critical(cpu_irq_mask);
@@ -1133,15 +1057,9 @@ void log_buffer_flush(void)
     }
     log_buffer_lock();
     port_syslog_local_cpu_exit_critical(cpu_irq_mask);
-<<<<<<< HEAD
-    if (kernel_task_send_offline_log_dump_msg() == false) {
-        log_buffer_unlock();
-    }
-=======
 #else
     return ;
 #endif
->>>>>>> db20e11 (second commit)
 }
 
 #define MAX_URGENT_LOG_LENGTH                   256
@@ -1453,8 +1371,6 @@ void log_save_filter(void)
     g_filter_save_is_need = false;
 }
 
-<<<<<<< HEAD
-=======
 void pc_tool_assert(uint8_t *data, uint32_t length)
 {
     typedef struct {
@@ -1478,7 +1394,6 @@ void pc_tool_assert(uint8_t *data, uint32_t length)
     }
 }
 
->>>>>>> db20e11 (second commit)
 void pc_tool_command_handler(mux_handle_t handle, mux_event_t event,uint32_t data_len,void*user_data)
 {
     uint32_t i, filter_number;
@@ -1598,10 +1513,7 @@ void pc_tool_command_handler(mux_handle_t handle, mux_event_t event,uint32_t dat
             log_trigger_save_filter();
             goto error;
         default:
-<<<<<<< HEAD
-=======
             goto error;
->>>>>>> db20e11 (second commit)
             break;
     }
 
@@ -1618,10 +1530,6 @@ static volatile uint32_t g_exception_string_log_count = 0;
 static volatile uint32_t g_exception_binary_log_count = 0;
 void exception_syslog_callback(void)
 {
-<<<<<<< HEAD
-    /* Reset status of syslog to make other CPU's log to be bypass. */
-    g_syslog_share_variable->init_phase = SYSLOG_EXCEPTION_INIT;
-=======
     /* port handle init before log full init done */
     if ((g_syslog_share_variable->init_phase == SYSLOG_EARLY_INIT)
             || (g_syslog_share_variable->init_phase == SYSLOG_INIT_NONE)
@@ -1629,18 +1537,14 @@ void exception_syslog_callback(void)
         syslog_exception_handle = 0x55AAFF00 | CONFIG_SYSLOG_INIT_STAGE_PORT;
     }
 
->>>>>>> db20e11 (second commit)
     g_exception_string_log_count = 0;
     g_exception_binary_log_count = 0;
 
     mux_exception_init(syslog_exception_handle);
 
-<<<<<<< HEAD
-=======
     /* Reset status of syslog to make other CPU's log to be bypass. */
     g_syslog_share_variable->init_phase = SYSLOG_EXCEPTION_INIT;
 
->>>>>>> db20e11 (second commit)
     g_exception_is_happen = true;
 }
 
@@ -1817,10 +1721,6 @@ void log_print_exception_msgid_log(uint8_t cpu_id, const char *message,uint32_t 
     va_end(list);
 }
 
-<<<<<<< HEAD
-static volatile bool g_primary_cpu_syslog_is_initialized = false;
-=======
->>>>>>> db20e11 (second commit)
 
 bool log_uart_init(hal_uart_port_t port, hal_uart_baudrate_t baudrate)
 {
@@ -2034,10 +1934,7 @@ NO_INLINE static bool check_log_control(const void *is_module_control, log_contr
     /* check whether buffer is blocked by dump */
     if (g_syslog_share_variable->init_phase != SYSLOG_INIT_NONE) {
         if (g_syslog_share_variable->lock_buffer == true) {
-<<<<<<< HEAD
-=======
             g_syslog_share_variable->drop_flush_count += 1;
->>>>>>> db20e11 (second commit)
             return false;
         }
     }

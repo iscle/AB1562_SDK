@@ -71,14 +71,9 @@ typedef enum {
     SLEEP_BACKUP_RESTORE_I2C             = 4,
     SLEEP_BACKUP_RESTORE_SPI_MST0        = 5,
     SLEEP_BACKUP_RESTORE_PMU             = 6,
-<<<<<<< HEAD
-    SLEEP_BACKUP_RESTORE_MODULE_MAX      = 7,
-    SLEEP_BACKUP_RESTORE_USER            = 8
-=======
     SLEEP_BACKUP_RESTORE_CLOCK           = 7,
     SLEEP_BACKUP_RESTORE_MODULE_MAX      = 8,
     SLEEP_BACKUP_RESTORE_USER            = 9
->>>>>>> db20e11 (second commit)
 } sleep_management_backup_restore_module_t;
 
 #define SLEEP_BACKUP_RESTORE_USER_CALLBACK_FUNC_MAX 7

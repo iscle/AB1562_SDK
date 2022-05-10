@@ -73,11 +73,7 @@ static void app_HfpSCO_AddSCOAudioLink(BD_ADDR_T *pBdAddr)
 	U8 audioDev;
 
 	audioDev = AUDIO_DEVICE_SCO_IDLE;
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE   
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE   
->>>>>>> db20e11 (second commit)
 	if(APP_Hfp_IsHspConnected(pBdAddr))
 	{
 		audioDev = AUDIO_DEVICE_SCO_HSP;
@@ -97,11 +93,7 @@ static void app_HfpSCO_AddSCOAudioLink(BD_ADDR_T *pBdAddr)
 			APP_HfpSco_SendDSPCmd(pBdAddr);
 		}
 	}
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 	SET_SCO_AUDIO_DEVICE:
 #endif	
 	if(APP_AudioDeviceRegister(pBdAddr, audioDev))
@@ -119,11 +111,7 @@ static void app_HfpSCO_RemoveSCOAudioLink(BD_ADDR_T *pBdAddr)
 	audioDspPara.audioType = AUDIO_SCO;
 	APP_AudioDspStop(&audioDspPara);
 
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 	if(APP_Hfp_IsHspConnected(pBdAddr))
 	{
 		APP_AudioDeviceDeRegister(pBdAddr, AUDIO_DEVICE_SCO_HSP);
@@ -138,11 +126,7 @@ static void app_HfpSCO_RemoveSCOAudioLink(BD_ADDR_T *pBdAddr)
 	//if(APP_HFP_SearchCallStatusInd(pBdAddr, APP_CALL_ACTIVE) >= APP_MAX_ONGOING_CALL_NO || APP_EOF == APP_GetNextNormalLink(pBdAddr))
 	//#endif
 	{
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE	
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE	
->>>>>>> db20e11 (second commit)
 		APP_ResumeOtherAudioDevice(pBdAddr, AUDIO_DEVICE_SCO_HSP);
 #endif
 		APP_ResumeOtherAudioDevice(pBdAddr, AUDIO_DEVICE_SCO);

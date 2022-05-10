@@ -94,11 +94,7 @@
 #ifdef XIAOAI_DEVELOPMENT
 #include "App_XiaoaiAdv.h"
 #endif
-<<<<<<< HEAD
-#ifdef APP_TILE_ENABLE
-=======
 #ifdef AIR_TILE_ADV_ENABLE
->>>>>>> db20e11 (second commit)
 #include "App_Tile.h"
 #endif
 #include "App_VolumeSetting.h"
@@ -117,11 +113,7 @@
 #include "Battery.h"
 #include "ChargerSmartCase.h"
 
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 #include "App_MCSync_Share.h"
 #include "App_VolumeA2dpProcess.h"
 #endif
@@ -131,19 +123,12 @@
 #include "ChargerSmartCase.h"
 #include "ota.h"
 
-<<<<<<< HEAD
-#ifdef PROFILE_GFP_ENABLE
-#include "App_Gfp.h"
-#endif
-
-=======
 #ifdef AIR_GFP_ENABLE
 #include "App_Gfp.h"
 #endif
 
 #include "APP_HfpIncomingCallMediaHandler.h"
 
->>>>>>> db20e11 (second commit)
 log_create_module(APP_MCSYNC, PRINT_LEVEL_INFO);
 
 /**************************************************************************************************
@@ -185,16 +170,6 @@ APP_MCSYNC_STRU gAppMCSyncCtl;
 
 extern APP_PEQ_REALTIME_SYNC_STRU gAppPeqRealTimeSyncCtl;
 extern MEDIA_EVT_CTL_STRU gMediaCtl;
-<<<<<<< HEAD
-#ifdef PROFILE_GFP_ENABLE
-extern void GFPSv2_mcsync_accountkey(uint8_t *pData, uint16_t length);
-extern uint8_t App_gfp_get_agent_charge();
-extern uint8_t App_Gfps_Partner_Check_Enable();
-#endif
-#ifdef MCSYNC_SHARE_MODE
-extern HandlerData gAppMCSyncStateTimerHandle ;
-#endif
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
 extern HandlerData gAppMCSyncStateTimerHandle ;
 #endif
@@ -202,7 +177,6 @@ extern APP_VPRT_INFO_STRU gVpRtInfo;
 extern HandlerData gAppImgCallMediaTimerHandler;
 extern APP_HFP_IMG_MEDIA_STRU gAppHfpImgMediaCtl;
 
->>>>>>> db20e11 (second commit)
 /**************************************************************************************************
 * Static function
 **************************************************************************************************/
@@ -218,11 +192,7 @@ static U32 app_AwsMce_TimerHandler(Handler handler, U16 id, void *msg, U32 handl
 			if(APP_ChgBat_IsFeatureSupported(APP_POWER_OFF_WHEN_CHARGING_IN_INTR) || APP_SmtChgCse_IsConnToAGNeeded())
 			{
 				if(0 == APP_GetAGNum()
-<<<<<<< HEAD
-					#ifndef TAKE_OVER_LINK
-=======
 					#ifndef AIR_TAKE_OVER_LINK_ENABLE
->>>>>>> db20e11 (second commit)
 					&& APP_GetACLLinkCount() < APP_Conn_GetSupportDeviceNo()
 					#endif
 					)
@@ -247,21 +217,6 @@ static U32 app_AwsMce_TimerHandler(Handler handler, U16 id, void *msg, U32 handl
 				APP_MCSync_Rho_Start();
 			}
 			break;
-<<<<<<< HEAD
-
-        #ifdef PROFILE_GFP_ENABLE
-        case APP_MCS_TIMER_SYNC_BATT:
-            {
-                U8 buf[2];
-                buf[0] = Battery_GetLevelInPercent();
-                buf[1] = App_gfp_get_agent_charge();
-                APP_MCSYNC_SendSyncGeneralData( &buf[0], 2 );
-                APP_AWSMCE_SetTimer(APP_MCS_TIMER_SYNC_BATT, 60000);
-            }
-            break;
-        #endif
-=======
->>>>>>> db20e11 (second commit)
 	}
 
 	return 0;
@@ -269,23 +224,6 @@ static U32 app_AwsMce_TimerHandler(Handler handler, U16 id, void *msg, U32 handl
 
 static void app_AwsMce_StatusChangeIndHandler(AWSMCE_STATUS_CHANGE_IND_T *ind)
 {
-<<<<<<< HEAD
-	#ifdef TAKE_OVER_LINK
-	MCSYNC_LINK_STRU *pHighPrioLink = BtMCSync_GetHighPrioLink();
-	MCSYNC_LINK_STRU *pLowPrioLink = BtMCSync_GetHighPrioLink();
-	#endif
-	
-#ifdef MCSYNC_SHARE_MODE
-	ind->role = APP_MCSync_Share_FollowerFilter(&ind->bdAddr, ind->role);
-	APP_MCSync_Share_StatusChangeHandler(&ind->bdAddr, ind->role);
-#endif
-
-	DBG_LOG_APP_MCSYNC( "[APP_MCSync]Status Change, role:0x%x", 1, ind->role);
-	switch(ind->role)
-	{
-		case ROLE_SLAVE_AGENT_WITH_PARTNER:
-			#ifdef MCSYNC_SHARE_MODE
-=======
 	#ifdef AIR_TAKE_OVER_LINK_ENABLE
 	MCSYNC_LINK_STRU *pHighPrioLink = BtMCSync_GetHighPrioLink();
 	MCSYNC_LINK_STRU *pLowPrioLink = BtMCSync_GetLowPrioLink();
@@ -302,37 +240,10 @@ static void app_AwsMce_StatusChangeIndHandler(AWSMCE_STATUS_CHANGE_IND_T *ind)
 	{
 		case ROLE_SLAVE_AGENT_WITH_PARTNER:
 			#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 			if(APP_MCSync_Share_FollowerEventHandler(APP_SHARE_FOLLOWER_EVENT_MCSYNC_WITH_PARTNER, &ind->bdAddr, NULL))
 			{
 				break;
 			}
-<<<<<<< HEAD
-            APP_MCSync_Share_AgentEventHandler(APP_SHARE_AGENT_EVENT_PARTNER_CONNECTED_CFM);
-			#endif
-
-			#if 0
-			DBG_LOG_APP_MCSYNC( "[APP_MCSync]status change, check disc vp timer:%d, ag num:%d", 2,
-				APP_Conn_CheckTimer(TIMER_ID_DISCONNECTED_VP), APP_GetAGNum());
-
-			if(APP_Conn_CheckTimer(TIMER_ID_DISCONNECTED_VP) && BtAwsMce_IsSpecialLink(&ind->bdAddr) /*&&
-				!APP_GetAGNum()*/) //special link
-			{
-				APP_Conn_ReleaseTimer(TIMER_ID_DISCONNECTED_VP);
-				APP_Media_PushMediaEvent(MEDIA_EVT_SLC_DISCONNECTED);
-			}
-			#ifdef TAKE_OVER_LINK
-			else if(APP_Conn_CheckTimer(TIMER_ID_DISCONNECTED_VP))
-			{
-				if((pHighPrioLink && FW_Memcmp(&pHighPrioLink->bdAddr, &ind->bdAddr, sizeof(BD_ADDR_T)))
-					|| (pLowPrioLink && FW_Memcmp(&pLowPrioLink->bdAddr, &ind->bdAddr, sizeof(BD_ADDR_T))))
-				{
-					APP_Conn_ReleaseTimer(TIMER_ID_DISCONNECTED_VP);
-				}
-			}
-			#endif
-			#endif
-=======
 
             //APP_MCSync_Share_AgentEventHandler(APP_SHARE_AGENT_EVENT_PARTNER_CONNECTED_CFM);
 			#endif
@@ -373,7 +284,6 @@ static void app_AwsMce_StatusChangeIndHandler(AWSMCE_STATUS_CHANGE_IND_T *ind)
                 }
                 #endif
             }
->>>>>>> db20e11 (second commit)
 
 			if(APP_SmtChgCse_MCSyncConnCfmCheck())
 			{
@@ -384,12 +294,6 @@ static void app_AwsMce_StatusChangeIndHandler(AWSMCE_STATUS_CHANGE_IND_T *ind)
 				drv_a2dp_update_audio_channel(AUDIO_CH_MONO);
 				APP_Mcsync_ClearNotReconnMask(MCS_RECONN_MASK_PARTNER_DISC);
 				APP_Mcsync_ReconnectNotify(MCS_RECONN_DEVICE_PARTNER);
-<<<<<<< HEAD
-				APP_AWSMCE_SetTimer(APP_MCS_TIMER_ID_CHECK_AUTO_DISCOVERABLE_WHEN_PARTNER_CONNECTED, 10);
-				#ifdef SMART_CHG_CSE_AUTO_AIR_PAIRING
-				APP_AWSMCE_ReleaseTimer(APP_MCS_TIMER_AIR_PAIRING);
-				#endif
-=======
 #ifdef AIR_GFP_ENABLE
                 /* When GFP is enabled, do not enter pairing mode when partner is connected and SP is not. Otherwise,
                             * gfp end to end test will fail when test the subsequence pairing because it enters discoverable mode
@@ -415,41 +319,30 @@ static void app_AwsMce_StatusChangeIndHandler(AWSMCE_STATUS_CHANGE_IND_T *ind)
 					APP_MCSYNC_SendSyncTakeOverStateInfo();
 				}
 				#endif
->>>>>>> db20e11 (second commit)
 			}
 			#ifdef XIAOAI_DEVELOPMENT
 			APP_XiaoaiResetAdv();
 			#endif
-<<<<<<< HEAD
-=======
             #ifdef AIR_GFP_ENABLE
             APP_Gfp_AwsConnectedHandle();
             #endif
->>>>>>> db20e11 (second commit)
 			break;
 
 		case ROLE_AGENT:
 
-<<<<<<< HEAD
-			#ifdef TAKE_OVER_LINK
-=======
 			#ifdef AIR_TAKE_OVER_LINK_ENABLE
->>>>>>> db20e11 (second commit)
 
 			if(PM_GetConnectedProfileCount((BD_ADDR_T *)&ind->bdAddr, TRUE))
 			{
 				if(BtMCSync_GetMcsyncTakeOverConnState() == MCSYNC_TAKE_OVER_CONNECTION_DISCONNECTED_LOW_PRIO_LINK_AWS_STATE)
 				{
 					APP_Conn_ReleaseProfileLinkAndDetach((BD_ADDR_T *)&ind->bdAddr);
-<<<<<<< HEAD
-=======
 
 					if(FW_CmpBdAddr(&gAppHfpImgMediaCtl.bdAddr, (BD_ADDR_T *)&ind->bdAddr) && FW_CheckTimer((Handler)&gAppImgCallMediaTimerHandler, 0, 0))
 					{
 						FW_ReleaseTimer((Handler)&gAppImgCallMediaTimerHandler, 0, 0);
 					}
 
->>>>>>> db20e11 (second commit)
 					BtMCSync_SetMcsyncTakeOverConnState(MCSYNC_TAKE_OVER_CONNECTION_DISCONNECTING_LOW_PRIO_LINK_PROFILE_STATE);
 				}
 			}
@@ -473,13 +366,6 @@ static void app_AwsMce_StatusChangeIndHandler(AWSMCE_STATUS_CHANGE_IND_T *ind)
 			APP_Customer_SetCloseAdvTimer();
 			APP_Customer_McsynDisconnect();
 			break;
-<<<<<<< HEAD
-		
-		case ROLE_SLAVE_CONNECTABLE_AGENT:
-			
-			#ifdef TAKE_OVER_LINK
-			DBG_LOG_APP_MCSYNC( "[APP_MCSync][Take Over] take over state:%d", 1, BtMCSync_GetMcsyncTakeOverConnState());
-=======
 
 		case ROLE_SLAVE_CONNECTABLE_AGENT:
 
@@ -487,17 +373,12 @@ static void app_AwsMce_StatusChangeIndHandler(AWSMCE_STATUS_CHANGE_IND_T *ind)
 			DBG_LOG_APP_MCSYNC( "[APP_MCSync][Take Over] take over state:%d, ag num:%d", 2,
 				BtMCSync_GetMcsyncTakeOverConnState(), APP_GetAGNum());
 
->>>>>>> db20e11 (second commit)
 			if(BtMCSync_GetMcsyncTakeOverConnState() == MCSYNC_TAKE_OVER_CONNECTION_ADD_HIGH_PRIO_LINK_TO_SERVICE_STATE)
 			{
 				if(pHighPrioLink)
 				{
 					APP_SetAppLinkBdAddr(&pHighPrioLink->bdAddr);
 					APP_AddServiceBdAddr(&pHighPrioLink->bdAddr);
-<<<<<<< HEAD
-				}
-				BtMCSync_SetMcsyncTakeOverConnState(MCSYNC_TAKE_OVER_CONNECTION_IDLE_STATE);
-=======
 
 					if(APP_CheckRedialBdaddrisZero())
 					{
@@ -516,7 +397,6 @@ static void app_AwsMce_StatusChangeIndHandler(AWSMCE_STATUS_CHANGE_IND_T *ind)
 					BtMCSync_SetMcsyncTakeOverConnState(MCSYNC_TAKE_OVER_CONNECTION_IDLE_STATE);
 				}
 
->>>>>>> db20e11 (second commit)
 			}
 			#endif
 			break;
@@ -543,8 +423,6 @@ static void app_AwsMce_AgentA2dpEvtIndHandler(AWSMCE_AGENT_A2DP_EVT_IND_T *ind)
     DBG_LOG_APP_MCSYNC( "[APP_MCSync][Partner] : Sync A2DP, state(%d), streaming(%d), Addr(0x%x%x)", 4, ind->a2dpInfo.state, APP_AudioDspIsStreaming(&ind->bdAddr, AUDIO_A2DP),
 																		 FW_bdaddr_to_2U32(pBdAddr, TRUE), FW_bdaddr_to_2U32(pBdAddr, FALSE));
 
-<<<<<<< HEAD
-=======
     if(ind->a2dpInfo.airohaA2dpConfig.isGameMode & 0x04) //Check ap mode flag before check gamemode
     {
         drv_a2dp_set_ap_mode(TRUE);
@@ -554,7 +432,6 @@ static void app_AwsMce_AgentA2dpEvtIndHandler(AWSMCE_AGENT_A2DP_EVT_IND_T *ind)
     	drv_a2dp_set_ap_mode(FALSE);
     }
 
->>>>>>> db20e11 (second commit)
 	if(ind->a2dpInfo.airohaA2dpConfig.isGameMode & 0x01)
 	{
 		APP_A2dp_GameModeOn();
@@ -573,10 +450,7 @@ static void app_AwsMce_AgentA2dpEvtIndHandler(AWSMCE_AGENT_A2DP_EVT_IND_T *ind)
         drv_a2dp_set_low_latency_mode(pBdAddr, FALSE);
     }
 #endif
-<<<<<<< HEAD
-=======
 
->>>>>>> db20e11 (second commit)
 	if(codecType == SBC_SNK_SEID)
 	{
         DBG_LOG_APP_MCSYNC( "[APP_MCSync][Partner] : Sync A2DP, SBC sampleRate:%x", 1, ind->a2dpInfo.a2dpCodecConfig.codecSetting.sbc.content1);
@@ -615,11 +489,7 @@ static void app_AwsMce_AgentA2dpEvtIndHandler(AWSMCE_AGENT_A2DP_EVT_IND_T *ind)
 			audioDspStartPara.a2dpPara.sampleRateIndex = sampleRateIndex;
 			if(APP_AudioDspPlay(&audioDspStartPara))
 			{
-<<<<<<< HEAD
-#ifdef APP_TILE_ENABLE
-=======
 #ifdef AIR_TILE_ADV_ENABLE
->>>>>>> db20e11 (second commit)
                 APP_Tile_NotifyPartnerA2dpState(TRUE);
 #endif
 			}
@@ -636,11 +506,7 @@ static void app_AwsMce_AgentA2dpEvtIndHandler(AWSMCE_AGENT_A2DP_EVT_IND_T *ind)
 		FW_Memcpy(&audioDspStopPara.bdAddr, pBdAddr, sizeof(BD_ADDR_T));
 		audioDspStopPara.audioType = AUDIO_A2DP;
 		APP_AudioDspStop(&audioDspStopPara);
-<<<<<<< HEAD
-#ifdef APP_TILE_ENABLE
-=======
 #ifdef AIR_TILE_ADV_ENABLE
->>>>>>> db20e11 (second commit)
         APP_Tile_NotifyPartnerA2dpState(FALSE);
 #endif
 	}
@@ -669,11 +535,7 @@ static void app_AwsMce_AgentScoEvtIndHandler(AWSMCE_AGENT_SCO_EVT_IND_T *ind)
             audioDspPara.codec = APP_GetScoCodec(&ind->bdAddr);
             if (APP_AudioDspPlay(&audioDspPara))
             {
-<<<<<<< HEAD
-#ifdef APP_TILE_ENABLE
-=======
 #ifdef AIR_TILE_ADV_ENABLE
->>>>>>> db20e11 (second commit)
                 APP_Tile_NotifyPartnerCallState(TRUE);
 #endif
             }
@@ -685,11 +547,7 @@ static void app_AwsMce_AgentScoEvtIndHandler(AWSMCE_AGENT_SCO_EVT_IND_T *ind)
 	}
     else if (ind->scoInfo.scoState == SCO_STATE_DISC)
     {
-<<<<<<< HEAD
-#ifdef APP_TILE_ENABLE
-=======
 #ifdef AIR_TILE_ADV_ENABLE
->>>>>>> db20e11 (second commit)
         APP_Tile_NotifyPartnerCallState(FALSE);
 #endif
     }
@@ -702,11 +560,7 @@ static void app_AwsMce_ConnectCfmHandler(AWSMCE_CONNECT_CFM_T *cfm)
 	if(cfm->status != BT_STATUS_BUSY)
 		APP_ReConn_DeleteProfileMask(&cfm->bdAddr, PROFILE_MCSYNC, cfm->status);
 
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 	if(APP_MCSync_Share_FollowerEventHandler(APP_SHARE_FOLLOWER_EVENT_MCSYNC_CONNECT_CFM, &cfm->bdAddr, (U8 *)cfm))
 	{
 		return;
@@ -716,21 +570,6 @@ static void app_AwsMce_ConnectCfmHandler(AWSMCE_CONNECT_CFM_T *cfm)
 	{
 		if(BtAwsMce_IsDefaultRolePartner())
 		{
-<<<<<<< HEAD
-			#ifdef XIAOAI_DEVELOPMENT
-			BtMCSync_SendSyncBatteryLevel(Battery_GetLevelInPercent());
-			APP_MCSYNC_SendSyncSmartChargeCaseStateInfo(DrvCharger_GetSmartCaseState());
-			#endif
-			if(APP_SmtChgCse_MCSyncConnCfmCheck())
-			{
-				APP_MCSYNC_SendSyncBdAddrInfo();
-	            #ifdef PROFILE_GFP_ENABLE
-	            if ( App_Gfps_Partner_Check_Enable() )
-	            {
-	        		APP_AWSMCE_SetTimer(APP_MCS_TIMER_SYNC_BATT, 100);
-	            }
-	            #endif
-=======
 			#if defined(XIAOAI_DEVELOPMENT) || defined(AIR_GFP_ENABLE)
 			BtMCSync_SendSyncBatteryLevel(Battery_GetLevelInPercent());
 			APP_MCSYNC_SendSyncSmartChargeCaseStateInfo(DrvCharger_GetSmartCaseState());
@@ -745,7 +584,6 @@ static void app_AwsMce_ConnectCfmHandler(AWSMCE_CONNECT_CFM_T *cfm)
 			if(APP_SmtChgCse_MCSyncConnCfmCheck())
 			{
 				APP_MCSYNC_SendSyncBdAddrInfo();
->>>>>>> db20e11 (second commit)
 
 				APP_Customer_SendSyncGeneralData();
 				APP_MCSYNC_SendSyncSmartChargeCaseStateInfo(DrvCharger_GetSmartCaseState());
@@ -771,11 +609,7 @@ static void app_AwsMce_ConnectCfmHandler(AWSMCE_CONNECT_CFM_T *cfm)
 			}
 			else
 			{
-<<<<<<< HEAD
-				APP_ReConn_PourQueue();
-=======
 				APP_ReConn_PourQueue(0);
->>>>>>> db20e11 (second commit)
 			}
 		}
 	}
@@ -785,11 +619,7 @@ static void app_AwsMce_DisconnectIndHandler(AWSMCE_DISCONNECT_IND_T *ind)
 {
 	UNUSED(ind);
 
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 	if(APP_MCSync_Share_FollowerEventHandler(APP_SHARE_FOLLOWER_EVENT_MCSYNC_DISCONNECT_IND, &ind->bdAddr, NULL))
 	{
 		return;
@@ -797,17 +627,11 @@ static void app_AwsMce_DisconnectIndHandler(AWSMCE_DISCONNECT_IND_T *ind)
 #endif
 	if(BtAwsMce_IsDefaultRolePartner())
 	{
-<<<<<<< HEAD
-		if(APP_GetAGNum() > 0)
-		{
-			APP_SetAGNum(APP_GetAGNum()-1);
-=======
         DBG_LOG_APP_MCSYNC( "[APP_MCSync][Partner] DisconnectInd, AGNum:%d", 1, APP_GetAGNum());
 		if(APP_GetAGNum() > 0)
 		{
             APP_SetAGNum(APP_GetAGNum()-1);
             APP_Conn_SetTimer(TIMER_ID_DISCONNECTED_VP, 3500);
->>>>>>> db20e11 (second commit)
 		}
 		else
 		{
@@ -823,11 +647,7 @@ static void app_AwsMce_DisconnectIndHandler(AWSMCE_DISCONNECT_IND_T *ind)
         }
 
 		drv_a2dp_update_audio_channel(AUDIO_CH_STEREO);
-<<<<<<< HEAD
-		#ifdef MCSYNC_SHARE_MODE
-=======
 		#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 		APP_MCSync_Share_PartnerEventHandler(APP_SHARE_PARTNER_EVENT_MCSYNC_DISCONNECT_IND, NULL);
 		#endif
 	}
@@ -874,20 +694,12 @@ static void app_AwsMce_SyncPartnerKeyCodeIndHandler(AWSMCE_SYNC_KEYCODE_IND_T *i
 	APP_EvtKey_KeyEventHandler(APP_GetServiceBdAddr(), ind->keyCode);
 }
 
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 APP_MCSYNC_VPRT_LOG_RECORD_STRU gVpRtLog;
 #endif
 static U32 app_AwsMce_SyncAgentVpRtIndHandler(AWSMCE_SYNC_VPRT_IND_T *ind)
 {
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 	U8 shareMode = BtMCSync_GetShareMode();
 
 	if(gVpRtLog.picoClock != ind->currentPicoClock
@@ -925,11 +737,7 @@ static U32 app_AwsMce_SyncAgentVpRtIndHandler(AWSMCE_SYNC_VPRT_IND_T *ind)
 		}
 		else
 		{
-<<<<<<< HEAD
-			#ifdef MCSYNC_SHARE_MODE
-=======
 			#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 			gVpRtLog.picoClock = 0;
 			gVpRtLog.index = 0;
 			#endif
@@ -940,12 +748,6 @@ static U32 app_AwsMce_SyncAgentVpRtIndHandler(AWSMCE_SYNC_VPRT_IND_T *ind)
 	}
 	else
 	{
-<<<<<<< HEAD
-		if(ind->rtIndex != 0xFF || ind->vpIndex != 0xFF || ind->eventIndex == MEDIA_EVT_PLAYING_BEEP_SYNC)
-			APP_VpRt_SyncTimerSlaveSetting(ind->rtIndex, ind->vpIndex, ind->eventIndex, ind->overwriteTime, ind->currentPicoClock);
-
-		#ifdef MCSYNC_SHARE_MODE
-=======
 		if(ind->eventIndex == MEDIA_EVT_SLC_DISCONNECTED)
 		{
 			DBG_LOG_APP_MCSYNC("[APP_MCSync][Partner] DISCONNECTED VP Exist:%d", 1, APP_Conn_CheckTimer(TIMER_ID_DISCONNECTED_VP));
@@ -972,7 +774,6 @@ static U32 app_AwsMce_SyncAgentVpRtIndHandler(AWSMCE_SYNC_VPRT_IND_T *ind)
 			APP_VpRt_SyncTimerSlaveSetting(ind->rtIndex, ind->vpIndex, ind->eventIndex, ind->overwriteTime, ind->currentPicoClock);
 
 		#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 		gVpRtLog.picoClock = 0;
 		gVpRtLog.index = 0;
 		#endif
@@ -1006,10 +807,7 @@ static void app_AwsMce_RhoPacketIndHandler(AWSMCE_RHO_PACKET_IND_T *ind)
 {
 	if(!APP_PowerOff_IsPowerOn())
 	{
-<<<<<<< HEAD
-=======
 		DBG_LOG_APP_MCSYNC("[APP_MCSYNC] RhoPacketIndHandler Poweroff", 0);
->>>>>>> db20e11 (second commit)
 		return;
 	}
 
@@ -1030,11 +828,7 @@ static void app_AwsMce_PartnerDiscHandler(void)
 {
 	U8 connState = PM_GetAgLinkState();
 
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 	U8 shareMode = BtMCSync_GetShareMode();
 	BOOL isPowerOn = APP_PowerOff_IsPowerOn();
 
@@ -1098,17 +892,6 @@ static BOOL app_AwsMce_IsSystemKeyNeedSync(U16 keyEventCode)
         case KEY_DISCOVERABLE:
         	return TRUE;
 
-<<<<<<< HEAD
-		#ifdef MCSYNC_SHARE_MODE
-		case KEY_SHARE_PAIRING_START:
-		case KEY_SHARE_PAIRING_STOP:
-		case KEY_AGENT_STARTS_SHARE_MODE:
-		case KEY_AGENT_STOPS_SHARE_MODE:
-		case KEY_FOLLOWER_STARTS_SHARE_MODE:
-		case KEY_AGENT_TOGGLE_SHARE_MODE:
-		case KEY_FOLLOWER_TOGGLE_SHARE_MODE:
-        case KEY_FOLLOWER_STOPS_SHARE_MODE:
-=======
 		#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
 		case KEY_SHARE_PAIRING_START:
 		case KEY_SHARE_PAIRING_STOP:
@@ -1118,7 +901,6 @@ static BOOL app_AwsMce_IsSystemKeyNeedSync(U16 keyEventCode)
 		case KEY_FOLLOWER_SHARE_MODE_STOP:
 		case KEY_MASTER_SHARE_MODE_TOGGLE:
 		case KEY_FOLLOWER_SHARE_MODE_TOGGLE:
->>>>>>> db20e11 (second commit)
             return APP_MCSync_Share_IsKeyNeedSync(keyEventCode);
 		#endif
 
@@ -1157,11 +939,7 @@ static void app_AwsMce_AwsIdleTimerCtlIndHandler(AWSMCE_AWS_IDLE_TIMER_CTL_IND_T
         DBG_LOG_APP_MCSYNC( "[APP_MCSync][Agent] AWS Idle Timer Ctl (%d)", 1, ind->cmd);
 
         if(ind->cmd == MCSYNC_AWS_IDLE_TIMER_SET
-<<<<<<< HEAD
-		#ifdef MCSYNC_SHARE_MODE
-=======
 		#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 			&& MCSYNC_SHARE_MODE_FOLLOWER_ENABLE != BtMCSync_GetShareMode()
 		#endif
 		)
@@ -1193,13 +971,8 @@ static void app_Mcsync_RoleModeChangeCfmHandler(MCSYNC_ROLEMODECHANGE_CFM_T *cfm
             #ifdef XIAOAI_DEVELOPMENT
             APP_XiaoaiResetAdv();
             #endif
-<<<<<<< HEAD
-			#ifdef PROFILE_GFP_ENABLE
-            APP_Gfp_EnableAdv();
-=======
 			#ifdef AIR_GFP_ENABLE
             APP_Ble_EnableAdv(BLE_ADV_GFP_MASK);
->>>>>>> db20e11 (second commit)
 			#endif
 
 			if(APP_InEarDetection_IsEnable())
@@ -1217,13 +990,8 @@ static void app_Mcsync_RoleModeChangeCfmHandler(MCSYNC_ROLEMODECHANGE_CFM_T *cfm
             #ifdef XIAOAI_DEVELOPMENT
             APP_Ble_DisableAdv(BLE_ADV_XIAOAI_MASK);
             #endif
-<<<<<<< HEAD
-			#ifdef PROFILE_GFP_ENABLE
-            APP_Gfp_DisableAdv();
-=======
 			#ifdef AIR_GFP_ENABLE
             APP_Ble_DisableAdv(BLE_ADV_GFP_MASK);
->>>>>>> db20e11 (second commit)
             #endif
         }
 
@@ -1254,11 +1022,7 @@ static void app_AwsMce_SyncPowerOffHandler(AWSMCE_SYNC_POWEROFF_IND_T *ind)
 	DBG_LOG_APP_MCSYNC( "[APP_MCSync] Sync Power Off Handler: %d %d %d", 3,
 		BtAwsMce_GetDefaultRole(), ind->isFollowerIFPKT, ind->isOnlyForFollower);
 
-<<<<<<< HEAD
-	#ifdef MCSYNC_SHARE_MODE
-=======
 	#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 	DBG_LOG_APP_MCSYNC( "[APP_MCSync] Sync Power Off Handler, share mode:%d", 1, BtMCSync_GetShareMode());
 
 	if(ind->isFollowerIFPKT)
@@ -1300,11 +1064,7 @@ static void app_Mcsync_SetCurrentRoleCfmHandler(MCSYNC_SET_CURRENT_ROLE_CFM_T *c
 #endif
 }
 
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 static void app_Mcsync_SyncShareModeInfoHandler(MCSYNC_SYNC_SHARE_MODE_INFO_IND_T *ind)
 {
 	APP_MCSync_Share_PartnerEventHandler(APP_SHARE_PARTNER_EVENT_SYNC_INFO, (U8 *)ind);
@@ -1398,11 +1158,7 @@ static U32 app_AwsMce_IndHandler(Handler handler, U16 id, void *msg, U32 handler
 	UNUSED(handler);
 	UNUSED(handler_id);
 	U32 value = 0;
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 	if(!APP_MCSync_Share_IsGetIFPacketAllowed(id))
 	{
 		return 0;
@@ -1494,12 +1250,9 @@ static U32 app_AwsMce_IndHandler(Handler handler, U16 id, void *msg, U32 handler
 
 		case MCSYNC_ROLEMODECHANGE_CFM:
 			app_Mcsync_RoleModeChangeCfmHandler((MCSYNC_ROLEMODECHANGE_CFM_T *)msg);
-<<<<<<< HEAD
-=======
 #ifdef AIR_TILE_ADV_ENABLE
             APP_Tile_NotifyMcsyncRoleModeChange(((MCSYNC_ROLEMODECHANGE_CFM_T *)msg)->status);
 #endif
->>>>>>> db20e11 (second commit)
 			break;
 
 		case MCSYNC_SETAIRPAIRING_CFM:
@@ -1518,21 +1271,13 @@ static U32 app_AwsMce_IndHandler(Handler handler, U16 id, void *msg, U32 handler
             app_Mcsync_SetCurrentRoleCfmHandler((MCSYNC_SET_CURRENT_ROLE_CFM_T *)msg);
             break;
 
-<<<<<<< HEAD
-#ifdef APP_TILE_ENABLE
-=======
 #ifdef AIR_TILE_ADV_ENABLE
->>>>>>> db20e11 (second commit)
         case AWSMCE_SYNC_STATE_CHANGED_IND:
             APP_Tile_NotifyMcsyncState(((AWSMCE_SYNC_STATE_CHANGED_IND_T *)msg)->newState);
             break;
 #endif
 
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 		case MCSYNC_SYNC_SHARE_MODE_INFO_IND:
 			app_Mcsync_SyncShareModeInfoHandler((MCSYNC_SYNC_SHARE_MODE_INFO_IND_T *)msg);
 			break;
@@ -1702,12 +1447,8 @@ BOOL APP_AWSMCE_KeyEvent(U8 keyIndex, U8 keyAction)
 					case KEY_NONDISCOVERABLE:
 					case KEY_AIROTHRU:
 					case KEY_PEQ_GROUP_CHANGE:
-<<<<<<< HEAD
-					case KEY_FOLLOWER_STOPS_SHARE_MODE:
-=======
 					case KEY_FOLLOWER_SHARE_MODE_STOP:
 					case KEY_AVRCP_PLAY:
->>>>>>> db20e11 (second commit)
 						APP_NVKEY_KeyParseEventPrintLog(keyIndex, keyAction, state);
 
 						if(MCSYNC_LINK_CONNECTED != BtAwsMce_GetMcsyncState())
@@ -1820,11 +1561,7 @@ BOOL APP_AWSMCE_FillRhoData(void *pData)
 	FW_Memcpy(&pDataToFill->deviceAddr, &gAppMCSyncCtl.inquiryPara.deviceAddr, sizeof(BD_ADDR_T));
 	pDataToFill->isFoundRssi = gAppMCSyncCtl.inquiryPara.isFoundRssi;
 
-<<<<<<< HEAD
-	#ifdef MCSYNC_SHARE_MODE
-=======
 	#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 	pDataToFill->isShareMode = APP_MCSync_Share_IsEnable();
 	#else
 	pDataToFill->isShareMode = FALSE;
@@ -1847,11 +1584,7 @@ BOOL APP_AWSMCE_AssignRhoData(void *pData)
 	FW_Memcpy(&gAppMCSyncCtl.inquiryPara.deviceAddr, &pDataToGet->deviceAddr, sizeof(BD_ADDR_T));
 	gAppMCSyncCtl.inquiryPara.isFoundRssi = pDataToGet->isFoundRssi;
 
-<<<<<<< HEAD
-    #ifdef MCSYNC_SHARE_MODE
-=======
     #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
     APP_MCSync_Share_RhoAssign(pDataToGet->isShareMode);
     #endif
 
@@ -1909,13 +1642,8 @@ BOOL APP_AWSMCE_DecideRole(U8* pTargetBdAddr)
 		#ifdef XIAOAI_DEVELOPMENT
 		APP_Ble_EnableAdv(BLE_ADV_XIAOAI_MASK);
 		#endif
-<<<<<<< HEAD
-		#ifdef PROFILE_GFP_ENABLE
-        APP_Gfp_EnableAdv();
-=======
 		#ifdef AIR_GFP_ENABLE
         APP_Ble_EnableAdv(BLE_ADV_GFP_MASK);
->>>>>>> db20e11 (second commit)
         #endif
 	}
 	else
@@ -1931,13 +1659,8 @@ BOOL APP_AWSMCE_DecideRole(U8* pTargetBdAddr)
 		#ifdef XIAOAI_DEVELOPMENT
 		APP_Ble_DisableAdv(BLE_ADV_XIAOAI_MASK);
 		#endif
-<<<<<<< HEAD
-		#ifdef PROFILE_GFP_ENABLE
-        APP_Gfp_DisableAdv();
-=======
 		#ifdef AIR_GFP_ENABLE
         APP_Ble_DisableAdv(BLE_ADV_GFP_MASK);
->>>>>>> db20e11 (second commit)
         #endif
 	}
 
@@ -2024,27 +1747,6 @@ void APP_MCSync_SyncAgentVPIsEnableIndHandler(BOOL isEnable)
 
 void APP_MCSync_SyncAgentANCPassThruIndHandler(U8 userRegister, U8 enable, U8 flash_no, U8 type, S16 runtime_gain)
 {
-<<<<<<< HEAD
-	AUDIO_DSP_START_PARA_STUR audioDspStartPara;
-	AUDIO_DSP_STOP_PARA_STUR audioDspStopPara;
-    DBG_LOG_APP_MCSYNC( "[APP_MCSync][Partner] : Sync ANCPassThru, userRegister(%d) enable(%d) flash_no(%d) type(%d) gain(%d)", 5, userRegister, enable, flash_no, type, runtime_gain);
-
-	AudioDsp_SetANCPassThruRegister(userRegister);
-	drv_anc_set_para(flash_no, type, runtime_gain);
-
-	if(enable)
-	{
-		FW_Memset(&audioDspStartPara, 0, sizeof(AUDIO_DSP_START_PARA_STUR));
-		audioDspStartPara.audioType = AUDIO_ANC;
-		APP_AudioDspPlay(&audioDspStartPara);
-	}
-	else
-	{
-		FW_Memset(&audioDspStopPara, 0, sizeof(AUDIO_DSP_STOP_PARA_STUR));
-		audioDspStopPara.audioType = AUDIO_ANC;
-		APP_AudioDspStop(&audioDspStopPara);
-	}
-=======
 	APP_ANCPASSTHRU_PARA_STRU para;
 
     DBG_LOG_APP_MCSYNC("[APP_MCSync][Partner]:Sync ANCPassThru, userRegister(%d) enable(%d) flash_no(%d) type(%d) gain(%d)", 5, userRegister, enable, flash_no, type, runtime_gain);
@@ -2066,16 +1768,10 @@ void APP_MCSync_SyncAgentANCPassThruIndHandler(U8 userRegister, U8 enable, U8 fl
 
 	AudioDsp_ANCPassThruHandler(para);
     APP_PeqManage_LoadPeqGroup(PEQ_A2DP);
->>>>>>> db20e11 (second commit)
 }
 
 void APP_MCSync_SyncLEDIndHandler(U8 patternIndex, U8* patternType, U8 overwriteTime, BOOL isOverwrite, U32 clockToStart, U8 action)
 {
-<<<<<<< HEAD
-    DBG_LOG_APP_MCSYNC( "[APP_MCSync][Partner] : Sync LED, patternIndex(%d), patternType(%d), loopTimes(%d)", 3, patternIndex, patternType[0], action);
-    DBG_LOG_APP_MCSYNC( "[APP_MCSync][Partner] : Sync LED, overwrtieTime(%d), isOverwrite(%d), clock(%d)", 3, overwriteTime, isOverwrite, clockToStart);
-=======
->>>>>>> db20e11 (second commit)
 
 	if(BtAwsMce_IsDefaultRoleAgent() && action == MCSYNC_LED_PARTNER_ASK_RESUME_BG)
 	{
@@ -2104,12 +1800,6 @@ void APP_MCSync_SyncSmartChargeCaseStateIndHandler(U8 smartChargeCaseState)
         {
             APP_SmtChgCse_SetCheckStateTimer(1000);
         }
-<<<<<<< HEAD
-#endif        
-	}
-	if(BtAwsMce_IsDefaultRoleAgent())
-		ChargerSmartCase_SetPartnerCaseState(smartChargeCaseState);
-=======
 #endif
 	}
 	if(BtAwsMce_IsDefaultRoleAgent())
@@ -2117,7 +1807,6 @@ void APP_MCSync_SyncSmartChargeCaseStateIndHandler(U8 smartChargeCaseState)
 #ifdef AIR_GFP_ENABLE
     APP_Gfp_McsyncPartnerSmartChargeCaseStateIndHandle();
 #endif
->>>>>>> db20e11 (second commit)
 }
 
 void APP_MCSync_SyncPartnerKeyIndHandler(U16 keyEventCode, U32 supportedState)
@@ -2157,10 +1846,6 @@ void APP_MCSync_SyncPartnerKeyIndHandler(U16 keyEventCode, U32 supportedState)
 }
 void APP_MCSync_SyncRhoParaInfoIndHandler(U16 batPercent, S8 rssi)
 {
-<<<<<<< HEAD
-    DBG_LOG_APP_MCSYNC( "[APP_MCSync][Agent] : Sync RHO Para, batPercent(%d), rssi(%d)", 2, batPercent, rssi);
-=======
->>>>>>> db20e11 (second commit)
 
     APP_RhoDomn_SetPartnerRssiPara(rssi);
     APP_RhoDomn_SetPartnerBatPara(batPercent);
@@ -2190,11 +1875,7 @@ void APP_MCSync_InEarDetectionStatusIndHandler(U8 status)
 
 void APP_MCSync_SyncPowerOffIndHandler(U8 reason, BOOL isFollowerIFPKT, BOOL isOnlyForFollower)
 {
-<<<<<<< HEAD
-	#ifdef MCSYNC_SHARE_MODE
-=======
 	#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 	DBG_LOG_APP_MCSYNC( "[APP_MCSync] Sync Power Off Handler, share mode:%d", 1, BtMCSync_GetShareMode());
 
 	if(isFollowerIFPKT)
@@ -2251,17 +1932,6 @@ void APP_MCSync_SyncKeyCodeInfoIndHandler(U16 keyCode)
     APP_EvtKey_KeyEventHandler(APP_GetServiceBdAddr(), keyCode);
 }
 
-<<<<<<< HEAD
-void APP_MCSync_SyncGFPInfoIndHandler(void *pData, U32 length)
-{
-    #if defined(PROFILE_GFP_ENABLE)
-    GFPSv2_mcsync_accountkey(pData, length);
-    #else
-    UNUSED(pData);
-    UNUSED(length);
-    #endif
-}
-=======
 #ifdef AIR_TILE_ADV_ENABLE
 void APP_MCSync_SyncTileInfoIndHandler(U8 opcode, U8 streamState)
 {
@@ -2282,7 +1952,6 @@ void APP_MCSync_SyncTileInfoIndHandler(U8 opcode, U8 streamState)
 	}
 }
 #endif
->>>>>>> db20e11 (second commit)
 
 /**************************************************************************************************
 * Public function (MCSync Init)

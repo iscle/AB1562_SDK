@@ -34,11 +34,7 @@
  
 #include "bt.h"
 
-<<<<<<< HEAD
-#ifdef APP_TILE_ENABLE
-=======
 #ifdef AIR_TILE_ADV_ENABLE
->>>>>>> db20e11 (second commit)
 #include "BtMCSync.h"
 #include "APP_AirApp.h"
 #include "App_Media.h"
@@ -46,11 +42,8 @@
 #include "App_Avrcp.h"
 #include "App_A2dp.h"
 #include "AudioDSP_Registration.h"
-<<<<<<< HEAD
-=======
 #include "App_Tile.h"
 #include "App_RhoHandler.h"
->>>>>>> db20e11 (second commit)
 
 log_create_module(APP_TILE, PRINT_LEVEL_INFO);
 /**************************************************************************************************
@@ -276,12 +269,8 @@ static void app_TileSetAdvParam(BOOL isConnectable)
 
 static bool app_TileIsPartnerStreamingMode(void)
 {
-<<<<<<< HEAD
-    DBG_LOG_APP_TILE("[APP_TILE] isPartner:%d mcsycstate:%d callIsExist:%d a2dpIsPlay:%d", 4, BtAwsMce_IsDefaultRolePartner(), gAppTileCtl.mcsyncState, gAppTileCtl.callIsExist, gAppTileCtl.a2dpIsPlay);
-=======
     DBG_LOG_APP_TILE("[APP_TILE] isPartner:%d mcsycstate:%d callIsExist:%d a2dpIsPlay:%d", 4, BtAwsMce_IsDefaultRolePartner(),
 		gAppTileCtl.mcsyncState, gAppTileCtl.callIsExist, gAppTileCtl.a2dpIsPlay);
->>>>>>> db20e11 (second commit)
     if (BtAwsMce_IsDefaultRolePartner() && gAppTileCtl.mcsyncState && 
         (gAppTileCtl.callIsExist || gAppTileCtl.a2dpIsPlay))
     {
@@ -491,8 +480,6 @@ void APP_Tile_NotifyPartnerA2dpState(BOOL isPlay)
     }
 }
 
-<<<<<<< HEAD
-=======
 /**************************************************************************************************
 * Public API (RHO)
 **************************************************************************************************/
@@ -580,6 +567,5 @@ void APP_Tile_Rho_done(BOOL isSuccess)
     DBG_LOG_APP_TILE("[APP_TILE] APP_Tile_Rho_done, restart adv, adv type is %d", 1, gAppTileCtl.bleState);
 }
 
->>>>>>> db20e11 (second commit)
 #endif
 

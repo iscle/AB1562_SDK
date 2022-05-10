@@ -48,13 +48,10 @@
 #include "mux.h"
 #endif
 
-<<<<<<< HEAD
-=======
 #ifndef log_hal_error
 #define log_hal_error(fmt, ...)
 #endif
 
->>>>>>> db20e11 (second commit)
 #define UNUSED(p) ((void)(p))
 
 #ifdef __cplusplus
@@ -84,11 +81,7 @@ static const uint32_t g_uart_baudrate_map[] = {110, 300, 1200, 2400, 4800, 9600,
 static uart_callback_t g_uart_callback[HAL_UART_MAX];
 static uart_dma_callback_data_t g_uart_dma_callback_data[HAL_UART_MAX * 2];
 static hal_uart_dma_config_t g_uart_dma_config[HAL_UART_MAX];
-<<<<<<< HEAD
-
-=======
 bool one_wire_disable_rx_irq_flag = false;
->>>>>>> db20e11 (second commit)
 
 VDMA_REGISTER_T *const g_vdma_regbase[HAL_UART_MAX][2] = {{VDMA_RG_UART0_TX_BASE, VDMA_RG_UART0_RX_BASE},{VDMA_RG_UART1_TX_BASE, VDMA_RG_UART1_RX_BASE}};
 const hal_clock_cg_id g_uart_port_to_pdn[] = {HAL_CLOCK_CG_UART0, HAL_CLOCK_CG_UART1};
@@ -124,10 +117,7 @@ static bool uart_config_is_valid(const hal_uart_config_t *config)
  * this function is called with is_timeout=true.
  * then call suer's callback to notice that data can be fetched from receive buffer.
  */
-<<<<<<< HEAD
-=======
 static uint32_t rx_irq_count   =0;
->>>>>>> db20e11 (second commit)
 
 void uart_receive_handler(hal_uart_port_t uart_port, bool is_timeout)
 {
@@ -144,8 +134,6 @@ void uart_receive_handler(hal_uart_port_t uart_port, bool is_timeout)
         return;
     }
 
-<<<<<<< HEAD
-=======
     if(uart_port == HAL_UART_0){
             rx_irq_count++;
             if ((rx_irq_count % 500) == 0){
@@ -153,7 +141,6 @@ void uart_receive_handler(hal_uart_port_t uart_port, bool is_timeout)
             }
     }
 
->>>>>>> db20e11 (second commit)
     uartx = g_uart_regbase[uart_port];
     channel = uart_port_to_dma_channel(uart_port, 1);
 
@@ -292,10 +279,7 @@ void uart_error_handler(hal_uart_port_t uart_port)
     UART_REGISTER_T *uartx;
     hal_uart_callback_t callback;
     void *arg;
-<<<<<<< HEAD
-=======
     log_hal_error("uart_error_handler port = %d\r\n",uart_port);
->>>>>>> db20e11 (second commit)
 
     uartx = g_uart_regbase[uart_port];
 
@@ -906,8 +890,6 @@ static void uart_start_dma_transmission(hal_uart_port_t uart_port)
 
     uart_mask_send_interrupt(uartx);
     uart_unmask_receive_interrupt(uartx);
-<<<<<<< HEAD
-=======
 
 #if 0
     /*for 1-wire uart
@@ -918,7 +900,6 @@ static void uart_start_dma_transmission(hal_uart_port_t uart_port)
         *(volatile uint32_t*)0xA307000C = 0x200;
     }
 #endif
->>>>>>> db20e11 (second commit)
 #ifdef HAL_SLEEP_MANAGER_ENABLED
     g_uart_frist_send_complete_interrupt[uart_port] = true;
 #endif
@@ -1595,76 +1576,6 @@ bool uart_query_tx_empty(hal_uart_port_t uart_port)
     }
 }
 
-<<<<<<< HEAD
-#if 0 /* debug dump RG */
-void uart_debug_dump_rg(hal_uart_port_t uart_port)
-{
-        /* dump uart register*/
-
-        UART_REGISTER_T    *uartx = g_uart_regbase[uart_port];
-        #ifndef LOGING_CANNOT_USE
-        printf("uart%d [00]>:  xxxxxxxx  xxxxxxxx  %08x  xxxxxxxx\r\n",uart_port,uartx->DLM_DLL);
-        printf("uart%d [10]>:  xxxxxxxx  %08x  %08x  %08x\r\n",uart_port,uartx->FCR_UNION.FCR, uartx->EFR_UNION.EFR, uartx->LCR_UNION.LCR);
-        printf("uart%d [20]>:  %08x  %08x  %08x  %08x\r\n",uart_port,uartx->MCR_UNION.MCR, uartx->XON_XOFF_UNION.XON_XOFF,uartx->LSR,uartx->SCR);
-        printf("uart%d [30]>:  %08x  %08x  %08x  %08x\r\n",uart_port,uartx->AUTOBAUD_CON_UNION.AUTOBAUD_CON, uartx->HIGHSPEED, uartx->SAMPLE_REG_UNION.SAMPLE_REG, uartx->AUTOBAUD_REG_UNION.AUTOBAUD_REG);
-        printf("uart%d [40]>:  %08x  %08x  %08x  %08x\r\n",uart_port,uartx->RATEFIX_UNION.RATEFIX, uartx->GUARD, uartx->ESCAPE_REG_UNION.ESCAPE_REG,uartx->SLEEP_REG);
-        printf("uart%d [50]>:  %08x  %08x  %08x  %08x\r\n",uart_port,uartx->DMA_CON_UNION.DMA_CON, uartx->RXTRIG, uartx->FRACDIV,uartx->RX_TO_CON_UNION.RX_TO_CON);
-        printf("uart%d [60]>:  %08x  \r\n",uart_port,uartx->RX_TOC_DEST);
-        #else
-        debug_printf("uart%d [00]>:  xxxxxxxx  xxxxxxxx  %08x  xxxxxxxx\r\n",uart_port,uartx->DLM_DLL);
-        debug_printf("uart%d [10]>:  xxxxxxxx  %08x  %08x  %08x\r\n",uart_port,uartx->FCR_UNION.FCR, uartx->EFR_UNION.EFR, uartx->LCR_UNION.LCR);
-        debug_printf("uart%d [20]>:  %08x  %08x  %08x  %08x\r\n",uart_port,uartx->MCR_UNION.MCR, uartx->XON_XOFF_UNION.XON_XOFF,uartx->LSR,uartx->SCR);
-        debug_printf("uart%d [30]>:  %08x  %08x  %08x  %08x\r\n",uart_port,uartx->AUTOBAUD_CON_UNION.AUTOBAUD_CON, uartx->HIGHSPEED, uartx->SAMPLE_REG_UNION.SAMPLE_REG, uartx->AUTOBAUD_REG_UNION.AUTOBAUD_REG);
-        debug_printf("uart%d [40]>:  %08x  %08x  %08x  %08x\r\n",uart_port,uartx->RATEFIX_UNION.RATEFIX, uartx->GUARD, uartx->ESCAPE_REG_UNION.ESCAPE_REG,uartx->SLEEP_REG);
-        debug_printf("uart%d [50]>:  %08x  %08x  %08x  %08x\r\n",uart_port,uartx->DMA_CON_UNION.DMA_CON, uartx->RXTRIG, uartx->FRACDIV,uartx->RX_TO_CON_UNION.RX_TO_CON);
-        debug_printf("uart%d [60]>:  %08x  \r\n",uart_port,uartx->RX_TOC_DEST);
-        #endif
-        /*dump DMA register*/
-        /*DMA mode enable*/
-        uint32_t i;
-        if( uartx->DMA_CON_UNION.DMA_CON & 0xFFFFFFFF ) {
-
-            for ( i = 0; i < 2; i++) {
-                VDMA_REGISTER_T *dmax = g_vdma_regbase[uart_port][i];
-                #ifndef LOGING_CANNOT_USE
-                printf("vdma%d [10]>:  %08x  %08x  %08x  %08x\r\n",i,dmax->VDMA_COUNT,  dmax->VDMA_CON_UNION.VDMA_CON, dmax->VDMA_START, dmax->VDMA_INTSTA);
-                printf("vdma%d [20]>:  %08x  %08x  %08x  %08x\r\n",i,dmax->VDMA_ACKINT, dmax->DUMMY1_OFFSET, dmax->VDMA_LIMITER, dmax->VDMA_PGMADDR);
-                printf("vdma%d [30]>:  %08x  %08x  %08x  %08x\r\n",i,dmax->VDMA_WRPTR,dmax->VDMA_RDPTR, dmax->VDMA_FFCNT, dmax->VDMA_FFSTA);
-                printf("vdma%d [40]>:  %08x  %08x  xxxxxxxx  xxxxxxxx\r\n",i,dmax->VDMA_ALTLEN, dmax->VDMA_FFSIZE);
-                printf("vdma%d [60]>:  %08x  %08x  %08x  %08x\r\n",i,dmax->VDMA_SW_MV_BYTE, dmax->VDMA_BNDRY_ADDR, dmax->VDMA_BYTE_TO_BNDRY, dmax->VDMA_BYTE_AVAIL);
-                #else
-                debug_printf("vdma%d [10]>:  %08x  %08x  %08x  %08x\r\n",i,dmax->VDMA_COUNT,  dmax->VDMA_CON_UNION.VDMA_CON, dmax->VDMA_START, dmax->VDMA_INTSTA);
-                debug_printf("vdma%d [20]>:  %08x  %08x  %08x  %08x\r\n",i,dmax->VDMA_ACKINT, dmax->DUMMY1_OFFSET, dmax->VDMA_LIMITER, dmax->VDMA_PGMADDR);
-                debug_printf("vdma%d [30]>:  %08x  %08x  %08x  %08x\r\n",i,dmax->VDMA_WRPTR,dmax->VDMA_RDPTR, dmax->VDMA_FFCNT, dmax->VDMA_FFSTA);
-                debug_printf("vdma%d [40]>:  %08x  %08x  xxxxxxxx  xxxxxxxx\r\n",i,dmax->VDMA_ALTLEN, dmax->VDMA_FFSIZE);
-                debug_printf("vdma%d [60]>:  %08x  %08x  %08x  %08x\r\n",i,dmax->VDMA_SW_MV_BYTE, dmax->VDMA_BNDRY_ADDR, dmax->VDMA_BYTE_TO_BNDRY, dmax->VDMA_BYTE_AVAIL);
-                #endif
-            }
-
-        } else{
-
-            #ifndef LOGING_CANNOT_USE
-            printf("UART %d is not DMA mode\r\n",uart_port);
-            #else
-            debug_printf("UART %d is not DMA mode\r\n",uart_port);
-            #endif
-        }
-
-        if( uart_port == g_uart_port_for_logging){
-        /*print share buffer*/
-
-            #ifndef LOGING_CANNOT_USE
-            printf("========logging port is uart %d=======\r\n",uart_port);
-            #else
-            debug_printf("========logging port is uart %d=======\r\n",uart_port);
-            #endif
-        }
-
-}
-#endif /* debug dump RG */
-
-=======
->>>>>>> db20e11 (second commit)
 #ifdef __cplusplus
 }
 #endif

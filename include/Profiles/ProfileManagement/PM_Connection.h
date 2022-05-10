@@ -85,16 +85,11 @@ BOOL PM_Conn_CheckTimer(PM_INFO_STRU *pLinkInfo, U16 id);
 void PM_ConnectionConflictStateMachine(BD_ADDR_T *pBdAddr, PM_CONN_CONFLICT_EVENT evt);
 void PM_Conn_ConflictClearStateInfo(void);
 void PM_DeviceConnectedInd(BD_ADDR_T *pBdAddr);
-<<<<<<< HEAD
-U8 pm_connection_get_block_role_slave(void);
-void pm_connection_set_block_role_slave(bool is_block);
-=======
 
 U8 PM_Conn_GetBlockRoleSlave(void);
 void PM_Conn_SetBlockRoleSlave(bool is_block);
 BOOL PM_IsProfileInfoLoaded(BD_ADDR_T * pBdAddr, PROFILE_INFO *  pProfileInfo);
 
 
->>>>>>> db20e11 (second commit)
 
 #endif //_PM_CONNECTION_H_

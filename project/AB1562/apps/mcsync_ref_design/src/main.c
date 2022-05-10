@@ -60,10 +60,7 @@
 #include "system.h"
 #include "multi_pool_heap.h"
 #include "hal_core_status.h"
-<<<<<<< HEAD
-=======
 #include "hal.h"
->>>>>>> db20e11 (second commit)
 
 #ifdef MTK_SYSTEM_HANG_TRACER_ENABLE
 #include "systemhang_tracer.h"
@@ -91,13 +88,6 @@ void vApplicationMallocFailedHook(void *pucPoolBuffer)
 }
 #endif
 
-<<<<<<< HEAD
-#if( configUSE_IDLE_HOOK == 1 )
-void vApplicationIdleHook(void)
-{
-#ifdef MTK_SYSTEM_HANG_TRACER_ENABLE
-    systemhang_set_safe_duration(SYSTEMHANG_USER_CONFIG_COUNT_TOTAL - 1, 60*20);
-=======
 extern void log_save_flash(void);
 #if( configUSE_IDLE_HOOK == 1 )
 void vApplicationIdleHook(void)
@@ -107,7 +97,6 @@ void vApplicationIdleHook(void)
 
 #ifdef MTK_SYSTEM_HANG_TRACER_ENABLE
     systemhang_set_safe_duration(SYSTEMHANG_USER_CONFIG_COUNT_TOTAL - 1, 60*5);
->>>>>>> db20e11 (second commit)
 
 #if (configUSE_TICKLESS_IDLE == 0)
     /* If tickless mode is not enabled, sometimes the idle task will run more than 1 min */
@@ -115,8 +104,6 @@ void vApplicationIdleHook(void)
     systemhang_wdt_feed_in_task_switch();
 #endif /* configUSE_TICKLESS_IDLE != 2 */
 #endif /* MTK_SYSTEM_HANG_TRACER_ENABLE */
-<<<<<<< HEAD
-=======
 
     /* offline log flush handle */
     log_save_flash();
@@ -131,7 +118,6 @@ void vApplicationIdleHook(void)
             last_count = current_count;
         }
     }
->>>>>>> db20e11 (second commit)
 }
 #endif
 

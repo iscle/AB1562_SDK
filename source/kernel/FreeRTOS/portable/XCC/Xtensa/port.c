@@ -180,18 +180,11 @@ void vPortCurrentTaskStackOverflowCheck(void)
 	#error please enable HAL_DWT_MODULE_ENABLED in project inc/hal_feature_config.h for task stack overflow check.
 #endif /* HAL_DWT_MODULE_ENABLED */
 #endif /* (configCHECK_FOR_STACK_OVERFLOW > 0) */
-<<<<<<< HEAD
-
-EXTERN U32 lastClk;
-BaseType_t xPortStartScheduler( void )
-{
-=======
 uint32_t os_profiling_gpt_handle = 0;
 EXTERN U32 lastClk;
 BaseType_t xPortStartScheduler( void )
 {
 	hal_gpt_status_t gpt_ret1, gpt_ret2;
->>>>>>> db20e11 (second commit)
 	// Interrupts are disabled at this point and stack contains PS with enabled interrupts when task context is restored
 
 	#if XCHAL_CP_NUM > 0
@@ -230,9 +223,6 @@ BaseType_t xPortStartScheduler( void )
 #endif /* HAL_DWT_MODULE_ENABLED */
 #endif
 
-<<<<<<< HEAD
-    /* start timer */
-=======
     /* register and start os profiling timer, the interval is 1s */
 	extern VOID osDumpTaskCounter(VOID);
 	gpt_ret1 = hal_gpt_sw_get_timer(&os_profiling_gpt_handle);
@@ -241,7 +231,6 @@ BaseType_t xPortStartScheduler( void )
 		LOG_MSGID_E(common, "os profiling timer is not started:%d, %d", 2, gpt_ret1, gpt_ret2);
 	}
 
->>>>>>> db20e11 (second commit)
 #if 0
     extern VOID OS_timer0_us(U32 us);
     extern VOID OS_timer1_us(U32 us);
@@ -250,10 +239,7 @@ BaseType_t xPortStartScheduler( void )
     OS_timer1_us(1000000);
     lastClk = DRV_TIMER_COUNTER();
 #endif
-<<<<<<< HEAD
-=======
 
->>>>>>> db20e11 (second commit)
 	// Cannot be directly called from C; never returns
 	port_xSchedulerRunning = 1;
 

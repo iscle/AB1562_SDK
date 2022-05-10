@@ -43,10 +43,7 @@ void APP_RhoDomn_SetPartnerBatPara(U16 batPercent);
 HandlerData *APP_RhoDomn_GetHandle(void);
 void APP_RhoDomn_MonitorTimerHandler(void);
 void APP_RhoDomn_CancelMonitorTimer(void);
-<<<<<<< HEAD
-=======
 void APP_RhoDomn_StartMonitorTimer(void);
 
->>>>>>> db20e11 (second commit)
 
 #endif //_APP_RHODOMINATOR_H_

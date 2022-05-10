@@ -175,10 +175,6 @@ U8 DRV_CHARGER_InternalChargerConstCurrent1(U8 disCount);
 U8 DRV_CHARGER_InternalChargerConstCurrent2(U8 disCount);
 
 EXTERN U16 drv_auxadc_get_value(pmu_adc_channel_t ch);
-<<<<<<< HEAD
-EXTERN VOID drv_charger_pfm_config(U8 op);
-=======
 EXTERN VOID pmu_charger_pfm_config(U8 op);
->>>>>>> db20e11 (second commit)
 
 #endif /* _DRV_CHARGER_H_ */

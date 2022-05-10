@@ -2331,12 +2331,6 @@ void vTaskInternalSetTimeOutState( TimeOut_t * const pxTimeOut ) PRIVILEGED_FUNC
 
 #if ( configGENERATE_RUN_TIME_STATS == 1 )
 /*
-<<<<<<< HEAD
- * Clear runtime counter for peroid cpu usage measure.
- */
-void vTaskClearTaskRunTimeCounter( void ) PRIVILEGED_FUNCTION;
-void vTaskClearTaskRunTimeCounter_airoha( TaskHandle_t taskHandle );
-=======
  * Get runtime counter for peroid cpu usage measure.
  */
 uint32_t xTaskGetTaskRunTimeCounter( TaskHandle_t taskHandle ) PRIVILEGED_FUNCTION;
@@ -2344,7 +2338,6 @@ uint32_t xTaskGetTaskRunTimeCounter( TaskHandle_t taskHandle ) PRIVILEGED_FUNCTI
  * Clear runtime counter for peroid cpu usage measure.
  */
 void vTaskClearTaskRunTimeCounter( TaskHandle_t taskHandle ) PRIVILEGED_FUNCTION;
->>>>>>> db20e11 (second commit)
 #endif /* configGENERATE_RUN_TIME_STATS */
 
 /*

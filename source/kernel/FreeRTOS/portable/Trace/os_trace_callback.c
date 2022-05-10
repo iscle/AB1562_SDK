@@ -49,15 +49,12 @@ void vTraceTaskSwitchIn(uint32_t pRio)
     xTaskName = (uint32_t)(pxTaskName[0] | (pxTaskName[1] << 8) | (pxTaskName[2] << 16) | (pxTaskName[3] << 24));
 
     SLA_RamLogging(xTaskName);
-<<<<<<< HEAD
-=======
 
     #if defined(MTK_SWLA_ENABLE_O2)
         uart_debug_print_byte(UART_LA_PORT,pxTaskName[0]);
         uart_debug_print_byte(UART_LA_PORT,pxTaskName[1]);
         uart_debug_print_byte(UART_LA_PORT,pxTaskName[2]);
     #endif
->>>>>>> db20e11 (second commit)
 }
 #else
 void vTraceTaskSwitchIn(uint32_t pRio)
@@ -66,8 +63,6 @@ void vTraceTaskSwitchIn(uint32_t pRio)
     printf("switch to %s\n", pcTaskGetTaskName(xTaskGetCurrentTaskHandle()));
 #endif
     (void)pRio;
-<<<<<<< HEAD
-=======
 
 #if defined(MTK_SWLA_ENABLE_O2)
     uint8_t *pxTaskName;
@@ -84,6 +79,5 @@ void vTraceTaskSwitchIn(uint32_t pRio)
     uart_debug_print_byte(UART_LA_PORT,pxTaskName[1]);
     uart_debug_print_byte(UART_LA_PORT,pxTaskName[2]);
 #endif
->>>>>>> db20e11 (second commit)
 }
 #endif /* MTK_SWLA_ENABLE */

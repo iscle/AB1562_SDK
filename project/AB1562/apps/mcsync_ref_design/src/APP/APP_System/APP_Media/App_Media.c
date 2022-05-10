@@ -51,10 +51,7 @@
 
 static void app_Media_ClearMediaEvtQ(U16 EvtIndex);
 static U32 app_Media_MsgHandler(Handler handler, U16 id, void *payload, U32 id_ext);
-<<<<<<< HEAD
-=======
 static BOOL app_Media_CheckNeedToSyncVpRt(U16 evtOpCode);
->>>>>>> db20e11 (second commit)
 
 /****************************************************************************************************
 Variables
@@ -288,8 +285,6 @@ static BOOL app_Media_VpRtSyncStopHandler(U16 eventIndex)
 	return APP_VpRt_SyncStopHandler(eventIndex);
 }
 
-<<<<<<< HEAD
-=======
 static BOOL app_Media_CheckNeedToSyncVpRt(U16 evtOpCode)
 {
 	BOOL value = FALSE;
@@ -332,35 +327,12 @@ static BOOL app_Media_CheckNeedToSyncVpRt(U16 evtOpCode)
 	return value;
 }
 
->>>>>>> db20e11 (second commit)
 static void app_Media_SendMediaCmd(U16 evtCount)
 {
 	//#if !BRINGUP_1562
 	//#if !FPGA
 	BD_ADDR_T* pBdServiceAddr = APP_GetServiceBdAddr();
 	U8 mmiState = APP_State_GetTopState(pBdServiceAddr);
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-	U8 shareMode = BtMCSync_GetShareMode();
-#endif
-
-	DBG_LOG_APP_SYSTEM( "[Media]: mediaQ0:%d, LED: %d, VP: %s, RT: %s", 4, gMediaCtl.mediaQ[0], (MEDIA_EVT_DATA(evtCount)->ledFGIndex & EVENT_LED_FG_TIMEOUT_MASK), APP_VPLogString[MEDIA_EVT_DATA(evtCount)->vpIndex], APP_RTLogString[MEDIA_EVT_DATA(evtCount)->rtIndex]);
-
-	if((mmiState != APP_OFF && mmiState != APP_DETACHING_LINK) || app_Media_CheckValidPowerOffMediaEvt(MEDIA_EVT_DATA(evtCount)->evtOpCode))
-	{
-		if(MEDIA_EVT_DATA(evtCount)->ledFGIndex != LED_INVALID)
-			APP_LED_SetFgParameter(gMediaCtl.mediaQ[0], (MEDIA_EVT_DATA(evtCount)->ledFGIndex & EVENT_LED_FG_TIMEOUT_MASK), MEDIA_EVT_DATA(evtCount)->overwriteTime & EVENT_LED_FG_TIMEOUT_MASK, (MEDIA_EVT_DATA(evtCount)->ledFGIndex & VOICE_PROMPT_BEFORE_RINGTONE_BIT) ? TRUE : FALSE);
-
-		APP_VpRt_StopSystemVpUnderHFPState(MEDIA_EVT_DATA(evtCount)->evtOpCode);
-
-		APP_VpRt_SetMediaEventInfo(MEDIA_EVT_DATA(evtCount)->evtOpCode, MEDIA_EVT_DATA(evtCount)->vpIndex, MEDIA_EVT_DATA(evtCount)->rtIndex, MEDIA_EVT_DATA(evtCount)->overwriteTime);
-
-		if(PM_IsProfileConnected(pBdServiceAddr, PROFILE_MCSYNC) && APP_Media_IsMediaEventAllowSync(MEDIA_EVT_DATA(evtCount)->evtOpCode)
-		#ifdef MCSYNC_SHARE_MODE
-			&& shareMode != MCSYNC_SHARE_MODE_FOLLOWER_ENABLE
-		#endif
-		)
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
 	U8 shareMode = BtMCSync_GetShareMode();
 #endif
@@ -407,7 +379,6 @@ static void app_Media_SendMediaCmd(U16 evtCount)
 		#endif
 
 		if(app_Media_CheckNeedToSyncVpRt(evtOpCode))
->>>>>>> db20e11 (second commit)
 		{
 			//DBG_LOG_APP_SYSTEM( "[Media] Media Need to Sync, event:0x%x", 1, MEDIA_EVT_DATA(evtCount)->evtOpCode);
 			APP_VpRt_UnSniffSendIFPacket();
@@ -416,26 +387,15 @@ static void app_Media_SendMediaCmd(U16 evtCount)
 		else
 		{
 			//DBG_LOG_APP_SYSTEM( "[Media] Media Not Need to Sync, event:%d", 1, MEDIA_EVT_DATA(evtCount)->evtOpCode);
-<<<<<<< HEAD
-			if((MEDIA_EVT_DATA(evtCount)->vpIndex != 0xFF) || (MEDIA_EVT_DATA(evtCount)->rtIndex != 0xFF))
-			{
-				if(!app_Media_IsMediaEventPlayUnderHFPState(MEDIA_EVT_DATA(evtCount)->evtOpCode)
-				#ifdef MCSYNC_SHARE_MODE
-=======
 			if((vpIndex != 0xFF) || (rtIndex != 0xFF))
 			{
 				if(!app_Media_IsMediaEventPlayUnderHFPState(evtOpCode)
 				#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 					&& shareMode != MCSYNC_SHARE_MODE_FOLLOWER_ENABLE
 				#endif
 				)
 				{
 					U8 state = (BtAwsMce_GetDefaultRole() == ROLE_PARTNER) ? APP_GetAgentState() : mmiState;
-<<<<<<< HEAD
-
-=======
->>>>>>> db20e11 (second commit)
 					if(state == APP_HFP_INCOMMING)
 					{
 						if(BtAwsMce_IsDefaultRoleAgent())
@@ -443,28 +403,11 @@ static void app_Media_SendMediaCmd(U16 evtCount)
 						else if(BtAwsMce_GetDefaultRole() == ROLE_PARTNER)
 							DBG_LOG_APP_SYSTEM( "[Media] Partner media event in HFP state, event:%x", 1, MEDIA_EVT_DATA(evtCount)->evtOpCode);
 
-<<<<<<< HEAD
-						APP_Media_SendFakeMediaCmd(MEDIA_EVT_DATA(evtCount)->evtOpCode);
-=======
 						APP_Media_SendFakeMediaCmd(evtOpCode);
->>>>>>> db20e11 (second commit)
 						return;
 					}
 				}
 
-<<<<<<< HEAD
-				APP_VpRt_OSDPCTimer((MEDIA_EVT_DATA(evtCount)->evtOpCode == MEDIA_EVT_PLAYING_BEEP_SYNC) ? AWSMCE_VPRT_BEEP_TIMER : AWSMCE_VPRT_PLAYING_TIMER, APP_VP_RT_DIRECTLY_PLAY_TIME);
-
-				if((MEDIA_EVT_DATA(evtCount)->overwriteTime & VOICE_PROMPT_BEFORE_RINGTONE_BIT))
-				{
-					APP_AudioDriver_SendSubSinkCmd(AUDIO_VP, MEDIA_EVT_DATA(evtCount)->vpIndex, MEDIA_EVT_DATA(evtCount)->evtOpCode);
-					APP_AudioDriver_SendSubSinkCmd(AUDIO_RT, MEDIA_EVT_DATA(evtCount)->rtIndex, MEDIA_EVT_DATA(evtCount)->evtOpCode);
-				}
-				else
-				{
-					APP_AudioDriver_SendSubSinkCmd(AUDIO_RT, MEDIA_EVT_DATA(evtCount)->rtIndex, MEDIA_EVT_DATA(evtCount)->evtOpCode);
-					APP_AudioDriver_SendSubSinkCmd(AUDIO_VP, MEDIA_EVT_DATA(evtCount)->vpIndex, MEDIA_EVT_DATA(evtCount)->evtOpCode);
-=======
 				APP_VpRt_OSDPCTimer(evtOpCode == MEDIA_EVT_PLAYING_BEEP_SYNC ? AWSMCE_VPRT_BEEP_TIMER : AWSMCE_VPRT_PLAYING_TIMER, APP_VP_RT_DIRECTLY_PLAY_TIME);
 
 				if((overwriteTime & VOICE_PROMPT_BEFORE_RINGTONE_BIT))
@@ -476,7 +419,6 @@ static void app_Media_SendMediaCmd(U16 evtCount)
 				{
 					APP_AudioDriver_SendSubSinkCmd(AUDIO_RT, rtIndex, evtOpCode);
 					APP_AudioDriver_SendSubSinkCmd(AUDIO_VP, vpIndex, evtOpCode);
->>>>>>> db20e11 (second commit)
 				}
 			}
 		}
@@ -484,11 +426,7 @@ static void app_Media_SendMediaCmd(U16 evtCount)
 	//#endif
 	//#endif
 
-<<<<<<< HEAD
-	APP_Media_SendFakeMediaCmd(MEDIA_EVT_DATA(evtCount)->evtOpCode);
-=======
 	APP_Media_SendFakeMediaCmd(evtOpCode);
->>>>>>> db20e11 (second commit)
 }
 
 static void app_Media_SendEvtToMsgHdl(U16 msgOpCode)
@@ -516,30 +454,7 @@ static void app_Media_ClearMediaEvtQ(U16 EvtIndex)
 
 static void app_Media_CantFindNvKeyLogPrint(U16 id)
 {
-<<<<<<< HEAD
-	if(id <= MEDIA_EVT_KEY_INTERNAL_TOTAL_NO)//Media evtKey
-	{
-		DBG_LOG_APP_SYSTEM( "[Media] Cant Find NVKey:%s", 1, APP_MediaEvent1LogString[id]);
-	}
-	else if((MEDIA_EVT_BAT_LOW <= id) && (id <= MEDIA_EVT_CALLER_ID))
-	{
-		DBG_LOG_APP_SYSTEM( "[Media] Cant Find NVKey:%s", 1, APP_MediaEvent2LogString[id-MEDIA_EVT_BAT_LOW]);
-	}
-	else if((MEDIA_EVT_SLC_CONNECTED <= id) && (id < MEDIA_EVT_SHARE_MODE_BASE))
-	{
-		DBG_LOG_APP_SYSTEM( "[Media] Cant Find NVKey:%s", 1, APP_MediaEvent3LogString[id-MEDIA_EVT_SLC_CONNECTED]);
-	}
-	else if((MEDIA_EVT_SHARE_MODE_BASE <= id) && (id < MEDIA_EVT_UART_CMD_RESERVE))
-	{
-		DBG_LOG_APP_SYSTEM( "[Media] Cant Find NVKey:%s", 1, APP_MediaEvent4LogString[id-MEDIA_EVT_SHARE_MODE_BASE]);
-	}
-	else
-	{
-		DBG_LOG_APP_SYSTEM( "[Media] Cant Find NVKey else :%x", 1, id);
-	}
-=======
 	DBG_LOG_APP_SYSTEM( "[Media] Cant Find NVKey id :0x%x", 1, id);
->>>>>>> db20e11 (second commit)
 }
 
 static U32 app_Media_MsgHandler(Handler handler, U16 id, void *payload, U32 id_ext)
@@ -549,10 +464,6 @@ static U32 app_Media_MsgHandler(Handler handler, U16 id, void *payload, U32 id_e
 	UNUSED(payload);
 	UNUSED(id_ext);
     //logPrint(LOG_OS, PRINT_LEVEL_INFO, "[HALT DBG:7 %d]", 1, id);
-<<<<<<< HEAD
-
-=======
->>>>>>> db20e11 (second commit)
 	switch(id)
 	{
 		case MEDIA_STATE_END:
@@ -606,63 +517,14 @@ static U32 app_Media_MsgHandler(Handler handler, U16 id, void *payload, U32 id_e
 
 static void app_Media_PushMediaEventLogPrint(U16 id)
 {
-<<<<<<< HEAD
-	if(id <= MEDIA_EVT_KEY_INTERNAL_TOTAL_NO)//Media evtKey
-	{
-		DBG_LOG_APP_SYSTEM( "[Media]: PushMediaEvent(0x%x) %s, Qnum: %d", 3, id, APP_MediaEvent1LogString[id], gMediaCtl.mediaQNum);
-	}
-	else if((MEDIA_EVT_BAT_LOW <= id) && (id <= MEDIA_EVT_CALLER_ID))
-	{
-		DBG_LOG_APP_SYSTEM( "[Media]: PushMediaEvent(0x%x) %s, Qnum: %d", 3, id, APP_MediaEvent2LogString[id-MEDIA_EVT_BAT_LOW], gMediaCtl.mediaQNum);
-	}
-	else if((MEDIA_EVT_SLC_CONNECTED <= id) && (id < MEDIA_EVT_SHARE_MODE_BASE))
-	{
-		DBG_LOG_APP_SYSTEM( "[Media]: PushMediaEvent(0x%x) %s, Qnum: %d", 3, id, APP_MediaEvent3LogString[id-MEDIA_EVT_SLC_CONNECTED], gMediaCtl.mediaQNum);
-	}
-	else if((MEDIA_EVT_SHARE_MODE_BASE <= id) && (id < MEDIA_EVT_UART_CMD_RESERVE))
-	{
-		DBG_LOG_APP_SYSTEM( "[Media]: PushMediaEvent(0x%x) %s, Qnum: %d", 3, id, APP_MediaEvent4LogString[id-MEDIA_EVT_SHARE_MODE_BASE], gMediaCtl.mediaQNum);
-	}
-	else
-	{
-		DBG_LOG_APP_SYSTEM( "[Media]: PushMediaEvent else %x, Qnum: %d", 2, id, gMediaCtl.mediaQNum);
-	}
-=======
 	DBG_LOG_APP_SYSTEM( "[Media]: PushMediaEvent id: 0x%x, Qnum: %d", 2, id, gMediaCtl.mediaQNum);
->>>>>>> db20e11 (second commit)
 }
 
 static void app_Media_StopMediaEventLogPrint(U16 id)
 {
-<<<<<<< HEAD
-	if(id <= MEDIA_EVT_KEY_INTERNAL_TOTAL_NO)//Media evtKey
-	{
-		DBG_LOG_APP_SYSTEM( "[Media]: Stop MediaEvent %s, Qnum: %d", 2, APP_MediaEvent1LogString[id], gMediaCtl.mediaQNum);
-	}
-	else if((MEDIA_EVT_BAT_LOW <= id) && (id <= MEDIA_EVT_CALLER_ID))
-	{
-		DBG_LOG_APP_SYSTEM( "[Media]: Stop MediaEvent %s, Qnum: %d", 2, APP_MediaEvent2LogString[id-MEDIA_EVT_BAT_LOW], gMediaCtl.mediaQNum);
-	}
-	else if((MEDIA_EVT_SLC_CONNECTED <= id) && (id < MEDIA_EVT_SHARE_MODE_BASE))
-	{
-		DBG_LOG_APP_SYSTEM( "[Media]: Stop MediaEvent %s, Qnum: %d", 2, APP_MediaEvent3LogString[id-MEDIA_EVT_SLC_CONNECTED], gMediaCtl.mediaQNum);
-	}
-	else if((MEDIA_EVT_SHARE_MODE_BASE <= id) && (id < MEDIA_EVT_UART_CMD_RESERVE))
-	{
-		DBG_LOG_APP_SYSTEM( "[Media]: Stop MediaEvent %s, Qnum: %d", 2, APP_MediaEvent4LogString[id-MEDIA_EVT_SHARE_MODE_BASE], gMediaCtl.mediaQNum);
-	}
-	else
-	{
-		DBG_LOG_APP_SYSTEM( "[Media]: Stop MediaEvent else %x, Qnum: %d", 2, id, gMediaCtl.mediaQNum);
-	}
-}
-
-
-=======
 	DBG_LOG_APP_SYSTEM( "[Media]: Stop MediaEvent id: 0x%x, Qnum: %d", 2, id, gMediaCtl.mediaQNum);
 }
 
->>>>>>> db20e11 (second commit)
 //#if !BRINGUP_1562
 //#if !FPGA
 static BOOL app_Media_IsMediaEventPlayUnderHFPState(U16 eventCode)
@@ -707,8 +569,6 @@ static BOOL app_Media_IsMediaEventPlayUnderHFPState(U16 eventCode)
 //#endif
 //#endif
 
-<<<<<<< HEAD
-=======
 static BOOL app_Media_IsAllowPushMediaEvent(U16 mediaEventId)
 {
 	if(APP_State_IsAnyLinkInSpecifiedState(APP_HFP_INCOMMING))
@@ -737,15 +597,12 @@ static BOOL app_Media_IsAllowPushMediaEvent(U16 mediaEventId)
 	return TRUE;
 }
 
->>>>>>> db20e11 (second commit)
 BOOL APP_Media_PushMediaEvent(U16 mediaEventId)
 {
 	if(!gMediaCtl.isDataOk)
 	{
 		return TRUE;
 	}
-<<<<<<< HEAD
-=======
 
 	if(!app_Media_IsAllowPushMediaEvent(mediaEventId))
 	{
@@ -753,7 +610,6 @@ BOOL APP_Media_PushMediaEvent(U16 mediaEventId)
 		return FALSE;
 	}
 
->>>>>>> db20e11 (second commit)
 	if(gMediaCtl.mediaQNum < MEDIA_EVT_Q_NUM)
 	{
 		app_Media_PushMediaEventLogPrint(mediaEventId);
@@ -913,13 +769,6 @@ BOOL APP_Media_IsMediaEventAllowSync(U16 eventCode)
 		case MEDIA_EVT_POWER_OFF_IN_SHUTDOWN_LOW_BAT:
 		case MEDIA_EVT_SPECIAL_CONNECTED:
 		case MEDIA_EVT_SPECIAL_DISCONNECTED:
-<<<<<<< HEAD
-		case MEDIA_EVT_SLC_CONNECTED:
-		case MEDIA_EVT_2_SLC_CONNECTED:
-		case MEDIA_EVT_3_SLC_CONNECTED:
-		case MEDIA_EVT_4_SLC_CONNECTED:
-		case MEDIA_EVT_SLC_DISCONNECTED:
-=======
 		case MEDIA_EVT_2_SLC_CONNECTED:
 		case MEDIA_EVT_3_SLC_CONNECTED:
 		case MEDIA_EVT_4_SLC_CONNECTED:
@@ -929,7 +778,6 @@ BOOL APP_Media_IsMediaEventAllowSync(U16 eventCode)
 		
 		case MEDIA_EVT_SLC_DISCONNECTED:
 		*/
->>>>>>> db20e11 (second commit)
 		case MEDIA_EVT_BAT_LOW:
 		case MEDIA_EVT_BAT_FULL:
 		case MEDIA_EVT_BAT_CHGCPL:
@@ -960,8 +808,6 @@ BOOL APP_Media_IsMediaEventAllowSync(U16 eventCode)
 	return result;
 }
 
-<<<<<<< HEAD
-=======
 BOOL APP_Media_CheckIsConnEvent(U16 evtOpCode)
 {
 	BOOL value = FALSE;
@@ -979,4 +825,3 @@ BOOL APP_Media_CheckIsConnEvent(U16 evtOpCode)
 }
 
 
->>>>>>> db20e11 (second commit)

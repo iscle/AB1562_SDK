@@ -44,10 +44,7 @@
 #include "App_MCSync_Message.h"
 #include "App_MCSync_RHO.h"
 #include "App_RhoHandler.h"
-<<<<<<< HEAD
-=======
 #include "chargercase_common.h"
->>>>>>> db20e11 (second commit)
 
 /**************************************************************************************************
 * Define
@@ -251,15 +248,11 @@ static void app_RhoDomn_MonitorHandler(void)
 
 	if(app_RhoDomn_IsRhoNeeded(trigPriority, trigStatus))
 	{
-<<<<<<< HEAD
-		APP_MCSync_Rho_Start();
-=======
         DBG_LOG_APP_McsyncRho( "[APP MCSync] RHO Dominator Partner Chg State: %d", 1, APP_GetPartnerSmartChargeCaseState());
         if (APP_GetPartnerSmartChargeCaseState() == STATE_OUT_OF_CASE)
         {
         	APP_MCSync_Rho_Start();
         }
->>>>>>> db20e11 (second commit)
 	}
 }
 
@@ -338,8 +331,6 @@ void APP_RhoDomn_CancelMonitorTimer(void)
 {
 	FW_ReleaseTimer((Handler)&gAppRhoDomnHandle, RHO_DOMN_MONITOR_TIMER_ID, 0);
 }
-<<<<<<< HEAD
-=======
 
 void APP_RhoDomn_StartMonitorTimer(void)
 {
@@ -347,4 +338,3 @@ void APP_RhoDomn_StartMonitorTimer(void)
     FW_SetTimer((Handler)&gAppRhoDomnHandle, RHO_DOMN_MONITOR_TIMER_ID, NULL, 0, APP_MCSyncNvkey_GetRhoTimer(RHO_TIMER_ID_MONITOR_PARA)*ONE_SEC);
 }
 
->>>>>>> db20e11 (second commit)

@@ -86,11 +86,7 @@
 #include "App_MCSync.h"
 #include "App_VpRtControl.h"
 #include "App_MCSync_RHO.h"
-<<<<<<< HEAD
-#ifdef PROFILE_GFP_ENABLE
-=======
 #ifdef AIR_GFP_ENABLE
->>>>>>> db20e11 (second commit)
 #include "App_Gfp.h"
 #include "gfps_api.h"
 #endif
@@ -103,32 +99,21 @@
 #include "APP_CustApp.h"
 #endif
 
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-#include "App_MCSync_Share.h"
-#endif
-
-#ifdef PROFILE_SWIFT_ENABLE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
 #include "App_MCSync_Share.h"
 #endif
 
 #ifdef AIR_SWIFT_ENABLE
->>>>>>> db20e11 (second commit)
 #include "App_Swift.h"
 #endif
 #include "bt_gap.h"
 #include "AudioDSP_StreamManager.h"
 #include "AudioDSP_Vp.h"
-<<<<<<< HEAD
-=======
 #ifdef AIR_GATT_OVER_BREDR_ENABLE
 #include "bt_gatt.h"
 #endif
 
 #include "fatal_code_bt.h"
->>>>>>> db20e11 (second commit)
 
 log_create_module(APP_SYSTEM, PRINT_LEVEL_INFO);
 
@@ -152,10 +137,7 @@ typedef struct
 	U8 singleHSModeState;
 	#endif
 	APP_ROLE_MODE_STRU roleMode;
-<<<<<<< HEAD
-=======
 	U8 is_linkloss;
->>>>>>> db20e11 (second commit)
 }APP_SYSTEM_STRU;
 
 extern void APP_Conn_ReleaseQosTimer(APP_INFO_STRU * pLinkInfo);
@@ -184,11 +166,7 @@ static void app_System_SetSniffSubratingCfmHandler(BT_SET_SNIFF_SUBRATING_CFM_T 
 static void app_System_SetModeCfmHandler(BT_SET_MODE_CFM_T * cfm);
 static void app_System_ModeChangeIndHandler(BT_MODE_CHANGE_IND_T * ind);
 static void app_System_DeletReconnectListBdaHandler(BT_REC_CLEAR_RECLIST_BDA_T * ind);
-<<<<<<< HEAD
-#ifdef TAKE_OVER_LINK
-=======
 #ifdef AIR_TAKE_OVER_LINK_ENABLE
->>>>>>> db20e11 (second commit)
 static BOOL app_System_CheckIsAllowToTakeOverConnection(BD_ADDR_T *pBdAddr);
 static void app_System_ConnectResponseIndHandler(BT_CONNECT_REQUEST_IND_T *ind);
 #endif
@@ -201,10 +179,7 @@ APP_SYSTEM_STRU gAppSystemCtl;
 
 static const HandlerData gAppSystemHandle = { app_SystemHandler };
 static const HandlerData gSystemKeyHandler = {app_System_KeyHandler};
-<<<<<<< HEAD
-=======
 extern BOOL g_is_fota_ongoing;
->>>>>>> db20e11 (second commit)
 
 /**************************************************************************************************
 * Static Functions (Init Handler)
@@ -212,17 +187,10 @@ extern BOOL g_is_fota_ongoing;
 static void app_System_RegisterProfiles(void)
 {
 	APP_Conn_Register();
-<<<<<<< HEAD
-	#ifdef A2DP_Profile
-	APP_A2dp_RegisterProfile();
-	#endif
-	#ifdef AVRCP_Profile
-=======
 	#ifdef AIR_A2DP_PROFILE_ENABLE
 	APP_A2dp_RegisterProfile();
 	#endif
 	#ifdef AIR_AVRCP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 	APP_Avrcp_RegisterProfile();
 	#endif
 	#ifdef HFP_Profile
@@ -237,11 +205,7 @@ static void app_System_RegisterProfiles(void)
 	#ifdef PROFILE_AMA_ENABLE
     APP_Ama_RegisterProfile();
     #endif
-<<<<<<< HEAD
-	#ifdef  PROFILE_GFP_ENABLE
-=======
 	#ifdef AIR_GFP_ENABLE
->>>>>>> db20e11 (second commit)
 	APP_Gfp_RegisterProfile();
 	#endif
 
@@ -253,13 +217,10 @@ static void app_System_RegisterProfiles(void)
     APP_CustApp_RegisterProfile();
     #endif
 
-<<<<<<< HEAD
-=======
     #ifdef AIR_GATT_OVER_BREDR_ENABLE
     ATT_Enable_EDRBrearer();
     #endif
 
->>>>>>> db20e11 (second commit)
 	device_id_start_service();
 }
 
@@ -390,20 +351,12 @@ static void app_System_WriteEIRDataCfmHandler(BT_WRITE_EIR_DATA_CFM_T * cfm)
 
 static void app_System_AclOpenedIndHandler(BT_ACL_OPENED_IND_T * ind)
 {
-<<<<<<< HEAD
-	U8 linKeyIndex;
-=======
->>>>>>> db20e11 (second commit)
 	DBG_LOG_APP_SYSTEM( "[APP_SYS] BT_ACL_OPENED_IND %d: 0x%x%x", 3, ind->status, FW_bdaddr_to_2U32((BD_ADDR_T *)ind->bdaddr, TRUE), FW_bdaddr_to_2U32((BD_ADDR_T *)ind->bdaddr, FALSE));
 
 
 	if(ind->status == HCI_ERCODE_SUCCESS)
 	{
-<<<<<<< HEAD
-		#ifdef MCSYNC_SHARE_MODE
-=======
 		#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 		if(APP_MCSync_Share_FollowerEventHandler(APP_SHARE_FOLLOWER_EVENT_ACL_OPEN, (BD_ADDR_T *)&ind->bdaddr, NULL))
 		{
 			return;
@@ -421,10 +374,6 @@ static void app_System_AclOpenedIndHandler(BT_ACL_OPENED_IND_T * ind)
 			return;
 		}
 
-<<<<<<< HEAD
-		linKeyIndex = APP_LinkKey_SearchLinkKeyIndex((BD_ADDR_T *)&ind->bdaddr, TRUE);
-=======
->>>>>>> db20e11 (second commit)
 		if(APP_SetAppLinkBdAddr((BD_ADDR_T *)&ind->bdaddr))
 		{
 			APP_INFO_STRU *pLinkInfo = APP_GetAppLinkByBdAddr((BD_ADDR_T *)&ind->bdaddr);
@@ -441,17 +390,6 @@ static void app_System_AclOpenedIndHandler(BT_ACL_OPENED_IND_T * ind)
 				APP_Pairing_ConnectableStateChangeWhenConnected();
 			}
 
-<<<<<<< HEAD
-
-
-			if(0 == linKeyIndex) //IOT S10 & S9workaround
-			{
-                PM_ConnectionConflictStateMachine((BD_ADDR_T *)&ind->bdaddr, PM_CONN_CONFLICT_ACL_OPEN_EVT);
-			}
-
-			if(BtAwsMce_IsDefaultRoleAgent() && !FW_CmpBdAddr((BD_ADDR_T *)&ind->bdaddr, BtAwsMce_ReadLocalBdAddr()))
-				APP_Mcsync_ClearNotReconnMask(MCS_RECONN_MASK_AG_DISC);
-=======
             #ifdef AIR_TAKE_OVER_LINK_ENABLE
 
 			DBG_LOG_APP_SYSTEM( "[APP_SYS]acl take over:%d %d %d", 3,
@@ -497,7 +435,6 @@ static void app_System_AclOpenedIndHandler(BT_ACL_OPENED_IND_T * ind)
             }
 
             pLinkInfo->linkPara.miscMask &= ~APP_ACTIVE_DISCONNECT;
->>>>>>> db20e11 (second commit)
 		}
 		//To speed up connection & disconnection process, we should avoid
 		//sending Sniff_Req to remote AG if ACL is ready but SLC is not.
@@ -521,22 +458,11 @@ static void app_System_AclClosedIndHandler(BT_ACL_CLOSED_IND_T * ind)
 	BD_ADDR_T *pBdAddr = (BD_ADDR_T *)&ind->bdaddr;
 	APP_INFO_STRU *pLinkInfo = APP_GetAppLinkByBdAddr(pBdAddr);
 
-<<<<<<< HEAD
-	#ifdef TAKE_OVER_LINK
-=======
 	#ifdef AIR_TAKE_OVER_LINK_ENABLE
->>>>>>> db20e11 (second commit)
 	U8 state;
 	BD_ADDR_T *pAgentBdAddr;
 	#endif
 
-<<<<<<< HEAD
-	DBG_LOG_APP_SYSTEM( "[APP_SYS] BT_ACL_CLOSED_IND %d: 0x%x%x", 3, ind->reason, FW_bdaddr_to_2U32((BD_ADDR_T *)ind->bdaddr, TRUE), FW_bdaddr_to_2U32((BD_ADDR_T *)ind->bdaddr, FALSE));
-
-	APP_ReConn_DeleteListByBdAddr(pBdAddr);
-
-#ifdef MCSYNC_SHARE_MODE
-=======
 	DBG_LOG_APP_SYSTEM( "[APP_SYS] BT_ACL_CLOSED_IND %d: 0x%x%x, isPowerOn:%d, isActiveDisc:%d", 5,
 		ind->reason, FW_bdaddr_to_2U32((BD_ADDR_T *)ind->bdaddr, TRUE), FW_bdaddr_to_2U32((BD_ADDR_T *)ind->bdaddr, FALSE),
 		APP_PowerOff_IsPowerOn(), APP_IsLinkActiveDisconnecting(pBdAddr));
@@ -544,7 +470,6 @@ static void app_System_AclClosedIndHandler(BT_ACL_CLOSED_IND_T * ind)
 	APP_ReConn_DeleteListByBdAddr(pBdAddr);
 
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 	if(APP_MCSync_Share_FollowerEventHandler(APP_SHARE_FOLLOWER_EVENT_ACL_CLOSE, pBdAddr, NULL) || BtMCSync_IsShareModeBdAddr(pBdAddr))
 	{
 		return;
@@ -554,23 +479,6 @@ static void app_System_AclClosedIndHandler(BT_ACL_CLOSED_IND_T * ind)
 	APP_Xiaoai_ACLCloseIndHandler((BD_ADDR_T *)&ind->bdaddr);
 #endif
 
-<<<<<<< HEAD
-	#ifdef TAKE_OVER_LINK
-	state = BtMCSync_GetMcsyncTakeOverConnState();
-
-	DBG_LOG_APP_SYSTEM( "[APP_SYS] Take over connection state:%d", 1, state);
-	if(BtAwsMce_IsDefaultRoleAgent() && (state == MCSYNC_TAKE_OVER_CONNECTION_DISCONNECTING_LOW_PRIO_LINK_ACL_STATE ||
-		state == MCSYNC_TAKE_OVER_CONNECTION_DISCONNECTING_LOW_PRIO_LINK_PROFILE_STATE))
-	{
-			BtMCSync_ClearLinkInfo((BD_ADDR_T *)&ind->bdaddr);	
-			
-		if((pAgentBdAddr = BtMCSync_ReadAgentBdAddr()))
-		{
-			DBG_LOG_APP_SYSTEM("[APP_SYS] Take over connection BDA:0x%x%x", 2, 
-				FW_bdaddr_to_2U32(pAgentBdAddr, TRUE), 
-				FW_bdaddr_to_2U32(pAgentBdAddr, FALSE));
-			
-=======
 	#ifdef AIR_TAKE_OVER_LINK_ENABLE
 	state = BtMCSync_GetMcsyncTakeOverConnState();
 
@@ -587,7 +495,6 @@ static void app_System_AclClosedIndHandler(BT_ACL_CLOSED_IND_T * ind)
 				FW_bdaddr_to_2U32(pAgentBdAddr, TRUE),
 				FW_bdaddr_to_2U32(pAgentBdAddr, FALSE));
 
->>>>>>> db20e11 (second commit)
 			if(PM_IsProfileConnected(pAgentBdAddr, PROFILE_MCSYNC)
 				|| PM_IsProfileIdLoaded(pAgentBdAddr, PROFILE_MCSYNC))
 			{
@@ -605,12 +512,6 @@ static void app_System_AclClosedIndHandler(BT_ACL_CLOSED_IND_T * ind)
 	}
 	#endif
 
-<<<<<<< HEAD
-	switch(ind->reason)
-	{
-		case HCI_ERCODE_CONNECTION_TIMEOUT:
-			#ifdef MCSYNC_SHARE_MODE
-=======
 	ERR_LOG_APP_SYSTEM("Err: 0x%x,0x%x,0x%x\n", 3, FATAL_ERROR_BT_DISCONNECTION, ind->reason, BtAwsMce_IsDefaultRoleAgent());
     LOG_FLUSH();
 
@@ -618,34 +519,22 @@ static void app_System_AclClosedIndHandler(BT_ACL_CLOSED_IND_T * ind)
 	{
 		case HCI_ERCODE_CONNECTION_TIMEOUT:
 			#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 			if(BtMCSync_GetShareMode()== MCSYNC_SHARE_MODE_NORMAL_ENABLE)
 			{
 				APP_MCSync_Share_SetLinkLoss(TRUE);
 			}
 			#endif
-<<<<<<< HEAD
-		case HCI_ERCODE_LMP_RESPONSE_TIMEOUT:
-			pLinkInfo->linkPara.miscMask = APP_LINK_LOSS;
-=======
 			/*fallthrough*/
 		case HCI_ERCODE_LMP_RESPONSE_TIMEOUT:
             if(pLinkInfo)
 			    pLinkInfo->linkPara.miscMask = APP_LINK_LOSS;
 
->>>>>>> db20e11 (second commit)
 			if(APP_AUTO_RECONN_AFTER_LINK_LOSS_FEAT)
 			{
 				APP_Reconn_SetLinkLossBdAddr(pBdAddr);
 				APP_Mcsync_SetLinkLossBdAddr(pBdAddr);
 				APP_Reconn_SetDelayTimer(RECONNECT_LINK_LOSS, App_ReConnNvkey_GetReconnectLinkLossTimer() * HALF_SEC);
 			}
-<<<<<<< HEAD
-			break;
-		case HCI_ERCODE_PIN_OR_KEY_MISSING:
-			APP_ReConn_DeleteListByBdAddr(pBdAddr);
-			APP_LinkKey_DeleteLinkHistory(pBdAddr);
-=======
 
 			break;
 
@@ -653,7 +542,6 @@ static void app_System_AclClosedIndHandler(BT_ACL_CLOSED_IND_T * ind)
 			APP_ReConn_DeleteListByBdAddr(pBdAddr);
 			APP_LinkKey_DeleteLinkHistory(pBdAddr);
 
->>>>>>> db20e11 (second commit)
 			if(APP_AirApp_FOTA_Reconnect())
 			{
 				APP_AirApp_FOTA_DisableReconnect();
@@ -664,20 +552,11 @@ static void app_System_AclClosedIndHandler(BT_ACL_CLOSED_IND_T * ind)
 			{
 				APP_Mcsync_SetNotReconnMask(MCS_RECONN_MASK_AG_DISC);
 			}
-<<<<<<< HEAD
-			
-=======
 
->>>>>>> db20e11 (second commit)
 			APP_Conn_SetTimer(TIMER_ID_PIN_OR_KEY_MISSING_AWS_CHECK, 4 * ONE_SEC);
 
 			break;
 
-<<<<<<< HEAD
-        case HCI_ERCODE_REMOTE_USER_TERMINATED_CONNECTION:
-            #ifdef MCSYNC_SHARE_MODE
-            if(BtMCSync_GetShareMode()== MCSYNC_SHARE_MODE_NORMAL_ENABLE)
-=======
 		case HCI_ERCODE_CONNECTION_TERMINATED_BY_LOCAL_HOST: //instead of APP_IsLinkActiveDisconnecting()
 			if(BtAwsMce_IsDefaultRoleAgent() && !FW_CmpBdAddr(pBdAddr, BtAwsMce_ReadLocalBdAddr()) && APP_IsLinkActiveDisconnecting(pBdAddr)) //APP active disconnect
 			{
@@ -693,7 +572,6 @@ static void app_System_AclClosedIndHandler(BT_ACL_CLOSED_IND_T * ind)
         case HCI_ERCODE_REMOTE_USER_TERMINATED_CONNECTION:
             #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
             if(BtMCSync_GetShareMode() == MCSYNC_SHARE_MODE_NORMAL_ENABLE)
->>>>>>> db20e11 (second commit)
             {
                 APP_MCSync_Share_SetLinkLoss(TRUE);
                 break;
@@ -702,11 +580,7 @@ static void app_System_AclClosedIndHandler(BT_ACL_CLOSED_IND_T * ind)
             /*fallthrough*/
 		default:
 			if(BtAwsMce_IsDefaultRoleAgent() && !FW_CmpBdAddr(pBdAddr, BtAwsMce_ReadLocalBdAddr()) && APP_PowerOff_IsPowerOn() &&
-<<<<<<< HEAD
-			   pLinkInfo && !APP_IsLinkActiveDisconnecting(pBdAddr))
-=======
 			   pLinkInfo)
->>>>>>> db20e11 (second commit)
 			{
 				APP_Mcsync_SetNotReconnMask(MCS_RECONN_MASK_AG_DISC);
 			}
@@ -715,18 +589,12 @@ static void app_System_AclClosedIndHandler(BT_ACL_CLOSED_IND_T * ind)
 
 	if(pLinkInfo != (APP_INFO_STRU *)NULL)
 	{
-<<<<<<< HEAD
-        PM_ConnectionConflictStateMachine(pBdAddr, PM_CONN_CONFLICT_ACL_CLOSE_EVT);
-
-		APP_SetACLState(pLinkInfo, ACL_STATE_OFF);
-=======
 	    if (APP_PowerOff_IsPowerOn())
             PM_ConnectionConflictStateMachine(pBdAddr, PM_CONN_CONFLICT_ACL_CLOSE_EVT);
 
 		APP_SetACLState(pLinkInfo, ACL_STATE_OFF);
 
 		APP_A2dp_StopDSP(pBdAddr);
->>>>>>> db20e11 (second commit)
 		if(APP_PowerOff_IsPowerOn() && APP_SmtChgCse_IsOutOfChargerCase() &&
 			(BtAwsMce_IsDefaultRoleAgent() && !FW_CmpBdAddr(pBdAddr, BtAwsMce_ReadLocalBdAddr())) ) // Not Power off
 		{
@@ -734,8 +602,6 @@ static void app_System_AclClosedIndHandler(BT_ACL_CLOSED_IND_T * ind)
 			{
 				if(!(APP_NO_CONNECTABLE_IN_LINE_IN_FEAT && APP_State_CheckInLineInState()))
 				{
-<<<<<<< HEAD
-=======
                     if (APP_IsKeepDiscoverableAfterDisc() &&
                         0 == APP_GetAGNum() &&
                         HCI_ERCODE_CONNECTION_TERMINATED_BY_LOCAL_HOST == ind->reason)
@@ -748,7 +614,6 @@ static void app_System_AclClosedIndHandler(BT_ACL_CLOSED_IND_T * ind)
                         APP_State_DiscoverabilityHandle(CMD_SET_NON_DISCOVERABLE);
                     }
 					#endif
->>>>>>> db20e11 (second commit)
 					APP_State_ConnectabilityHandle(CMD_SET_CONNECTABLE);
 				}
 
@@ -765,11 +630,8 @@ static void app_System_AclClosedIndHandler(BT_ACL_CLOSED_IND_T * ind)
 				}
 			}
 
-<<<<<<< HEAD
-=======
             APP_SetKeepDiscoverableAfterDisc(FALSE);
 
->>>>>>> db20e11 (second commit)
 			if(APP_IsLinkActiveDisconnecting(pBdAddr) && ind->reason != HCI_ERCODE_CONNECTION_TIMEOUT)
 			{
 				if(!CURRENT_ACTIVE_LINK_CNT)
@@ -793,31 +655,15 @@ static void app_System_AclClosedIndHandler(BT_ACL_CLOSED_IND_T * ind)
 				}
 			}
 		}
-<<<<<<< HEAD
-		APP_LinkKey_SaveHistoryWhenDisconnect(pBdAddr);
-		APP_HfpSco_DisconnectHandleByBdAddress(pBdAddr);
-=======
 
 		APP_LinkKey_SaveHistoryWhenDisconnect(pBdAddr);
 		APP_HfpSco_DisconnectHandleByBdAddress(pBdAddr);
         pLinkInfo->linkPara.miscMask &= ~APP_ACTIVE_DISCONNECT;
->>>>>>> db20e11 (second commit)
 		APP_ClearAppLinkBdAddr(pBdAddr);
 		BtMCSync_ResetSlaveRetryCount();
 
         APP_Conn_ReleaseQosTimer(pLinkInfo);
 
-<<<<<<< HEAD
-		#ifdef TAKE_OVER_LINK
-		state = BtMCSync_GetMcsyncTakeOverConnState();
-		DBG_LOG_APP_SYSTEM( "[APP_SYS] ACL Close, Take over state:%d, ag num:%d, is agent:%d, acl link timer:%d", 4, 
-			state, APP_GetAGNum(), BtAwsMce_IsDefaultRoleAgent(), APP_Conn_CheckTimer(TIMER_ID_ACL_LINK_TIMER));
-		
-		if(!APP_GetAGNum() && BtAwsMce_IsDefaultRoleAgent() && APP_Conn_CheckTimer(TIMER_ID_ACL_LINK_TIMER) &&
-			state == MCSYNC_TAKE_OVER_CONNECTION_IDLE_STATE)
-		{
-			APP_Conn_ReleaseTimer(TIMER_ID_ACL_LINK_TIMER);
-=======
 		#ifdef AIR_TAKE_OVER_LINK_ENABLE
 		state = BtMCSync_GetMcsyncTakeOverConnState();
 		DBG_LOG_APP_SYSTEM( "[APP_SYS] ACL Close, Take over state:%d, ag num:%d, is agent:%d, acl link timer:%d", 4,
@@ -845,7 +691,6 @@ static void app_System_AclClosedIndHandler(BT_ACL_CLOSED_IND_T * ind)
 				default:
 					break;
 			}
->>>>>>> db20e11 (second commit)
 		}
 		#endif
 
@@ -855,12 +700,8 @@ static void app_System_AclClosedIndHandler(BT_ACL_CLOSED_IND_T * ind)
 		}
 	}
 
-<<<<<<< HEAD
-    DBG_LOG_APP_SYSTEM( "[APP_SYS] BT_ACL_CLOSED_IND: %d,%d,%d,%d", 4, APP_State_CheckNestStateByLink(APP_EOF, APP_AWS_PAIRING), BtMCSync_IsFeatureSupport(AWSMCE_AUTO_RECONNECT_AFTER_DISCONNECT_FEAT), APP_System_IsSingleHSMode(), APP_AWSMCE_GetReasonForDisconnect());
-=======
     DBG_LOG_APP_SYSTEM( "[APP_SYS] BT_ACL_CLOSED_IND: inAirPairing:%d, autoReconn:%d, singleHS:%d, disconnectReason:%d", 4, APP_State_CheckNestStateByLink(APP_EOF, APP_AWS_PAIRING), BtMCSync_IsFeatureSupport(AWSMCE_AUTO_RECONNECT_AFTER_DISCONNECT_FEAT), APP_System_IsSingleHSMode(), APP_AWSMCE_GetReasonForDisconnect());
 
->>>>>>> db20e11 (second commit)
 	if(!APP_State_CheckNestStateByLink(APP_EOF, APP_AWS_PAIRING) &&
 		BtMCSync_IsFeatureSupport(AWSMCE_AUTO_RECONNECT_AFTER_DISCONNECT_FEAT)
 		#if SINGLE_HEADSET_MODE_ENABLE
@@ -870,14 +711,6 @@ static void app_System_AclClosedIndHandler(BT_ACL_CLOSED_IND_T * ind)
 	{
         if(BtAwsMce_IsDefaultRolePartner())
         {
-<<<<<<< HEAD
-            APP_ReConn_Reconnect(RECONNECT_AWSMCE);
-            #ifdef MCSYNC_SHARE_MODE
-            APP_MCSync_Share_PartnerEventHandler(APP_SHARE_PARTNER_EVENT_ACL_CLOSE, NULL);
-            #endif
-        }
-#ifdef DISCONNECT_AGENT_RECOVERY
-=======
         	APP_HFP_StopIncomingVPRing((BD_ADDR_T*)NULL);
             APP_ReConn_Reconnect(RECONNECT_AWSMCE);
 
@@ -886,16 +719,11 @@ static void app_System_AclClosedIndHandler(BT_ACL_CLOSED_IND_T * ind)
             #endif
         }
 		#ifdef AIR_AGENT_RECOVERY_MODE_AFTER_DISCONNECTION_FROM_PHONE_ENABLE
->>>>>>> db20e11 (second commit)
         else
         {
             APP_Conn_SetTimer(TIMER_ID_POWER_OFF_AWS_CHECK, 3370/* randon time */); /* [OMER003-111]trigger reconnection coz partner might not be connect after phone disconnects agent */
         }
-<<<<<<< HEAD
-#endif
-=======
 		#endif
->>>>>>> db20e11 (second commit)
 	}
 	else if(APP_AWSMCE_GetReasonForDisconnect() == SET_ROLE_SLAVE_FAIL)
 	{
@@ -903,11 +731,7 @@ static void app_System_AclClosedIndHandler(BT_ACL_CLOSED_IND_T * ind)
 		APP_ReConn_Reconnect(RECONNECT_PWR_ON);
 	}
 
-<<<<<<< HEAD
-	APP_ReConn_PourQueue();
-=======
 	APP_ReConn_PourQueue(600);
->>>>>>> db20e11 (second commit)
 }
 
 static void app_System_IOCapabilityReqIndHandler(BT_SM_IO_CAPABILITY_REQ_IND_T * ind)
@@ -959,11 +783,7 @@ static void app_System_IOCapabilityReqIndHandler(BT_SM_IO_CAPABILITY_REQ_IND_T *
 		{
 			SEND_DEFAULT_IOCAP:
 
-<<<<<<< HEAD
-#ifdef PROFILE_GFP_ENABLE
-=======
 #ifdef AIR_GFP_ENABLE
->>>>>>> db20e11 (second commit)
 			if (GFPSv2_is_processing()) {
 				// GFPSv2 - set IO_CAP_DISPLAY_YES_NO for Google Fast Pair
 				pAddr->ioCapability = IO_CAP_DISPLAY_YES_NO;
@@ -1023,11 +843,7 @@ static void app_System_UserConfirmationReqIndHandler(BT_SM_USER_CONFIRMATION_REQ
 {
 	DBG_LOG_APP_SYSTEM( "[APP_SYS] BT_SM_USER_CONFIRMATION_REQ_IND", 0);
 
-<<<<<<< HEAD
-#ifdef PROFILE_GFP_ENABLE
-=======
 #ifdef AIR_GFP_ENABLE
->>>>>>> db20e11 (second commit)
 	if (GFPSv2_is_processing()) {
 		U32 nv = ind->passkey;
 		U8 numeric[3];
@@ -1099,24 +915,6 @@ static void app_System_DeletReconnectListBdaHandler(BT_REC_CLEAR_RECLIST_BDA_T *
 	APP_ReConn_DeleteListByBdAddr((BD_ADDR_T *)&ind->bdaddr[0]);
 }
 
-<<<<<<< HEAD
-#ifdef TAKE_OVER_LINK
-static BOOL app_System_CheckIsAllowToTakeOverConnection(BD_ADDR_T *pBdAddr)
-{
-	BD_ADDR_T *pServiceBDA = APP_GetServiceBdAddr();
-
-	UNUSED(pBdAddr);
-	if(pServiceBDA != NULL)
-	{
-		DBG_LOG_APP_SYSTEM( "[APP_SYS] CheckIsAllowToTakeOver service BDA:0x%x%x", 
-			2, FW_bdaddr_to_2U32(pServiceBDA, TRUE), FW_bdaddr_to_2U32(pServiceBDA, FALSE));
-
-		DBG_LOG_APP_SYSTEM( "[APP_SYS] CheckIsAllowToTakeOver streaming data:%d %d %d, AG num:%d, timer exist:%d", 
-			5, APP_AudioDspIsStreaming(pServiceBDA, AUDIO_A2DP), APP_AudioDspIsStreaming(pServiceBDA, AUDIO_SCO),
-			APP_AudioDspIsStreaming(pServiceBDA, AUDIO_AMA), APP_GetAGNum(), APP_Conn_CheckTimer(TIMER_ID_ACL_LINK_TIMER));	
-	}
-	 
-=======
 #ifdef AIR_TAKE_OVER_LINK_ENABLE
 static BOOL app_System_CheckIsAllowToTakeOverConnection(BD_ADDR_T *pBdAddr)
 {
@@ -1144,7 +942,6 @@ static BOOL app_System_CheckIsAllowToTakeOverConnection(BD_ADDR_T *pBdAddr)
 		return FALSE;
 	}
 
->>>>>>> db20e11 (second commit)
 	if(APP_Conn_CheckTimer(TIMER_ID_ACL_LINK_TIMER))
 	{
 		return FALSE;
@@ -1169,22 +966,6 @@ static BOOL app_System_CheckIsAllowToTakeOverConnection(BD_ADDR_T *pBdAddr)
 			{
 				APP_Conn_SetTimer(TIMER_ID_ACL_LINK_TIMER, 30000);
 			}
-<<<<<<< HEAD
-			
-			return TRUE;
-		}
-
-		if(APP_AudioDspIsStreaming(pServiceBDA, AUDIO_A2DP)
-			|| APP_AudioDspIsStreaming(pServiceBDA, AUDIO_SCO)
-			|| APP_AudioDspIsStreaming(pServiceBDA, AUDIO_AMA))
-		{
-			return FALSE;	
-		}
-	}
-	
-	APP_Conn_SetTimer(TIMER_ID_ACL_LINK_TIMER, 30000);
-	
-=======
 
 			return TRUE;
 		}
@@ -1212,7 +993,6 @@ static BOOL app_System_CheckIsAllowToTakeOverConnection(BD_ADDR_T *pBdAddr)
 
 	APP_Conn_SetTimer(TIMER_ID_ACL_LINK_TIMER, 30000);
 
->>>>>>> db20e11 (second commit)
 	return TRUE;
 }
 
@@ -1227,11 +1007,7 @@ static void app_System_ConnectResponseIndHandler(BT_CONNECT_REQUEST_IND_T *ind)
 		else
 			value = FALSE;
 
-<<<<<<< HEAD
-		BtConnectResponse((Handler)&gAppSystemHandle, (U8*)&(((BT_CONNECT_REQUEST_IND_T *)ind)->bd_addr[0]), 
-=======
 		BtConnectResponse((Handler)&gAppSystemHandle, (U8*)&(((BT_CONNECT_REQUEST_IND_T *)ind)->bd_addr[0]),
->>>>>>> db20e11 (second commit)
 			value, (U8*)&(((BT_CONNECT_REQUEST_IND_T *)ind)->cod[0]));
 	}
 }
@@ -1313,21 +1089,13 @@ static U32 app_SystemHandler(Handler handler, U16 id, void *msg, U32 handler_id)
 		case BT_ACL_DETACH_CFM:
 			break;
 
-<<<<<<< HEAD
-		#ifdef TAKE_OVER_LINK
-=======
 		#ifdef AIR_TAKE_OVER_LINK_ENABLE
->>>>>>> db20e11 (second commit)
 		case BT_CONNECT_REQUEST_IND:
 			DBG_LOG_APP_SYSTEM( "[APP_SYS] BT_CONNECT_REQUEST_IND", 0);
 			app_System_ConnectResponseIndHandler((BT_CONNECT_REQUEST_IND_T*)msg);
 			break;
 		#endif
-<<<<<<< HEAD
-		
-=======
 
->>>>>>> db20e11 (second commit)
 		default:
 			DBG_LOG_APP_SYSTEM( "[APP_SYS] Rx Unknown Message:%x", 1, id);
 			break;
@@ -1429,10 +1197,7 @@ void APP_System_SingleHSModeSetRoleInd(BOOL isSuccessful)
 			{
 				//change role failed, leave
 				DBG_LOG_APP_SYSTEM( "[APP_SYS][SingleHS] set role failed", 0);
-<<<<<<< HEAD
-=======
 				app_System_SetSingleHSModeState(APP_NORMAL_HEADSET_MODE);
->>>>>>> db20e11 (second commit)
 			}
 
 			APP_System_ExitSingleHSMode(FALSE);
@@ -1449,16 +1214,9 @@ void APP_System_EnterSingleHSMode(void)
 {
 	U8 state = app_System_GetSingleHSModeState();
 
-<<<<<<< HEAD
-	DBG_LOG_APP_SYSTEM( "[APP_SYS][SingleHS] SingleHS Mode. state:%d", 1,
-				state);
-
-	if(state != APP_NORMAL_HEADSET_MODE)
-=======
 	DBG_LOG_APP_SYSTEM( "[APP_SYS][SingleHS] SingleHS Mode. state:%d", 1, state);
 
 	if(state == APP_SIGNLE_HEADSET_MODE || state == APP_SINGLE_CONVERTING_MODE)
->>>>>>> db20e11 (second commit)
 		return;
 
 	if(APP_System_SetRoleMode(APP_ROLE_MODE_SINGLE_HEADSET, ROLE_AGENT))
@@ -1481,11 +1239,7 @@ void APP_System_ExitSingleHSMode(U8 isNeedBackRole)
 
 	DBG_LOG_APP_SYSTEM( "[APP_SYS][SingleHS] Exit Single Headset Mode. state:%d, isNeedBackRole:%d, NvKeyRole:0x%x", 3, state, isNeedBackRole, NvKeyRole);
 
-<<<<<<< HEAD
-	if(state != APP_SIGNLE_HEADSET_MODE)
-=======
 	if(state == APP_NORMAL_HEADSET_MODE || state == APP_SINGLE_LEAVING_MODE)
->>>>>>> db20e11 (second commit)
 		return;
 
 	BtAwsMce_SetSingleHSMode(FALSE);
@@ -1555,30 +1309,21 @@ void APP_System_SendRoleModeCmd(U8 role)
 {
 	if(role == ROLE_AGENT)
 	{
-<<<<<<< HEAD
-		BtMCSync_AgentMode();
-=======
 		if(BtMCSync_AgentMode())
 		{
 			APP_Ble_Disconnect(NULL);
 		}
 
->>>>>>> db20e11 (second commit)
 		gAppSystemCtl.roleMode.state = APP_ROLE_MODE_STATE_CHANGING_TO_AGENT;
 	}
 	else if(role == ROLE_PARTNER)
 	{
 		if(BtMCSync_PartnerMode())
         {
-<<<<<<< HEAD
-            APP_State_ConnectabilityHandle(CMD_SET_NON_CONNECTABLE);
-        }
-=======
 			APP_Ble_Disconnect(NULL);
             APP_State_ConnectabilityHandle(CMD_SET_NON_CONNECTABLE);
         }
 
->>>>>>> db20e11 (second commit)
 		gAppSystemCtl.roleMode.state = APP_ROLE_MODE_STATE_CHANGING_TO_PARTNER;
 	}
 	else
@@ -1728,30 +1473,11 @@ void APP_System_Discoverable(void)
 		}
 	}
 
-<<<<<<< HEAD
-#ifdef PROFILE_GFP_ENABLE
-    if ( GFPSv2_IsEnable() )
-    {
-        App_GfpsAdv_Update(1);
-    }
-#endif
-
-#ifdef PROFILE_SWIFT_ENABLE
-=======
 #ifdef AIR_SWIFT_ENABLE
->>>>>>> db20e11 (second commit)
       App_SwiftAdv_Update();
 #endif
 
 	APP_State_DiscoverabilityHandle(CMD_SET_NORMAL_DISCOVERABLE);
-<<<<<<< HEAD
-}
-
-#ifdef TAKE_OVER_LINK
-void APP_System_DetachAclLink(BD_ADDR_T *pBdAddr)
-{
-	BtDetchAclLink((Handler)&gAppSystemHandle, (U8*)pBdAddr);		
-=======
 
 #ifdef AIR_GFP_ENABLE
     gfp_ble_adv_update(GFP_UPDATE_BLE_ADV_REASON_DISCOVERABLE_ENTER);
@@ -1762,7 +1488,6 @@ void APP_System_DetachAclLink(BD_ADDR_T *pBdAddr)
 void APP_System_DetachAclLink(BD_ADDR_T *pBdAddr)
 {
 	BtDetchAclLink((Handler)&gAppSystemHandle, (U8*)pBdAddr);
->>>>>>> db20e11 (second commit)
 }
 #endif
 
@@ -1779,16 +1504,9 @@ void APP_System_Init(void)
 	System_TimerNvkeyInit();
 	System_DefaultSystemValueInit();
 	app_System_NvkeyInit();
-<<<<<<< HEAD
-	#ifdef TAKE_OVER_LINK
-=======
 	#ifdef AIR_TAKE_OVER_LINK_ENABLE
->>>>>>> db20e11 (second commit)
 	BtSetConnectResponeHandler((Handler)&gAppSystemHandle);
 	#endif
 }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> db20e11 (second commit)

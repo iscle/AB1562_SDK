@@ -115,8 +115,6 @@ var searchData=
   ['hal_5fgpio_5f7',['HAL_GPIO_7',['../group__hal__gpio__enum.html#gga8793dd0b4f544f610264c026357bf6daa1efb7937d8f7bd6720ea93249ea32b6d',1,'hal_platform.h']]],
   ['hal_5fgpio_5f8',['HAL_GPIO_8',['../group__hal__gpio__enum.html#gga8793dd0b4f544f610264c026357bf6daa854432484f2af645f8eb4f75263dbd4c',1,'hal_platform.h']]],
   ['hal_5fgpio_5f9',['HAL_GPIO_9',['../group__hal__gpio__enum.html#gga8793dd0b4f544f610264c026357bf6daa0ed33805487ab9c93cd17a83a4b92c54',1,'hal_platform.h']]],
-<<<<<<< HEAD
-=======
   ['hal_5fgpio_5fclock_5f0',['HAL_GPIO_CLOCK_0',['../group__hal__gpio__enum.html#gga2f13bf3247dc651f4cfb7524cd0d97c6a4072a43878c07f517382faca91e23719',1,'hal_platform.h']]],
   ['hal_5fgpio_5fclock_5f1',['HAL_GPIO_CLOCK_1',['../group__hal__gpio__enum.html#gga2f13bf3247dc651f4cfb7524cd0d97c6aa69b28652cc45d3f19a511a945c87881',1,'hal_platform.h']]],
   ['hal_5fgpio_5fclock_5f2',['HAL_GPIO_CLOCK_2',['../group__hal__gpio__enum.html#gga2f13bf3247dc651f4cfb7524cd0d97c6a87a39002c45db6849f9ebaed1d7788a9',1,'hal_platform.h']]],
@@ -124,7 +122,6 @@ var searchData=
   ['hal_5fgpio_5fclock_5fmode_5f26m',['HAL_GPIO_CLOCK_MODE_26M',['../group__hal__gpio__enum.html#gga84a5e8429bfb7e9a697e156094d1e638acd9e7bc0a2511723e796b998b73d2f77',1,'hal_platform.h']]],
   ['hal_5fgpio_5fclock_5fmode_5f32k',['HAL_GPIO_CLOCK_MODE_32K',['../group__hal__gpio__enum.html#gga84a5e8429bfb7e9a697e156094d1e638a26e1ac8fd0039c4e8d0b1ee894c0efdf',1,'hal_platform.h']]],
   ['hal_5fgpio_5fclock_5fmode_5fmax',['HAL_GPIO_CLOCK_MODE_MAX',['../group__hal__gpio__enum.html#gga84a5e8429bfb7e9a697e156094d1e638a266d04e134d65b308504917d9623ea6e',1,'hal_platform.h']]],
->>>>>>> db20e11 (second commit)
   ['hal_5fgpio_5fdata_5fhigh',['HAL_GPIO_DATA_HIGH',['../group__hal__gpio__enum.html#ggab38c5c477ed49fa478c0acf134f85efca3197688dd46aa28e778ae6cf33d5f51f',1,'hal_gpio.h']]],
   ['hal_5fgpio_5fdata_5flow',['HAL_GPIO_DATA_LOW',['../group__hal__gpio__enum.html#ggab38c5c477ed49fa478c0acf134f85efca1d893fac58a2d9a77ae950a82c1b4dce',1,'hal_gpio.h']]],
   ['hal_5fgpio_5fdirection_5finput',['HAL_GPIO_DIRECTION_INPUT',['../group__hal__gpio__enum.html#gga542728e7f1595592548392d692286b2cadff64b83157372b5d9b6a70d49e2099c',1,'hal_gpio.h']]],

@@ -128,11 +128,7 @@ static void app_MCSync_UpdateRemoteLinkKey(U8 linkKeyNum, APP_MCS_LINKKEY_STRU *
 			pBdAddr = (BD_ADDR_T *)pCurrLinkInfo->gapLinkInfo.bdaddr.addr;
 			keyIdx = APP_LinkKey_SearchLinkKeyIndex(pBdAddr, TRUE);
 
-<<<<<<< HEAD
-			if(keyIdx == INDEX_EOF)
-=======
 			if(keyIdx == INDEX_EOF && !APP_IsActiveLink(pBdAddr))
->>>>>>> db20e11 (second commit)
 			{
 
 				DBG_LOG_APP_Connection( "[APPMcsLinkKey] Agent Add LinkKey. BdAddr:0x%x%x, a2dpVol:%d, scoVol:%d, scoMic:%d", 5,
@@ -360,14 +356,11 @@ void APP_Mcsync_SyncLinkKey(void)
 	}
 }
 
-<<<<<<< HEAD
-=======
 void APP_Mcsync_GetLocalLinkKey(void)
 {
     app_Mcsync_GetLocalLinkKey();
 }
 
->>>>>>> db20e11 (second commit)
 void APP_Mcsync_SyncLinkKeyInd(U32 length, U8 *pData)
 {
 	APP_MCS_LINKKEY_STRU *pLinkKey;

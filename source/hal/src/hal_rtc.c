@@ -153,17 +153,10 @@ static void rtc_eint_irq_callback(void * user_data)
 {
     uint32_t value;
     uint32_t tick0,tick1,tick2;
-<<<<<<< HEAD
-
-
-    (void)user_data;
-    rtc_private_parameter_t *config = HAL_RTC_PRIVATE_DATA_ADDR;
-=======
     rtc_private_parameter_t *config = HAL_RTC_PRIVATE_DATA_ADDR;
 
     (void)user_data;
     hal_eint_mask(HAL_EINT_RTC);
->>>>>>> db20e11 (second commit)
 
     hal_gpt_get_free_run_count(HAL_GPT_CLOCK_SOURCE_1M, &tick0);
 
@@ -179,10 +172,6 @@ static void rtc_eint_irq_callback(void * user_data)
 
     /*process alarm event*/
     if ((value & RTC_IRQ_STA_ALARM_MASK) != 0) {
-<<<<<<< HEAD
-        //log_rtc_info("rtc alarm triggered!!\r\n", 0);
-=======
->>>>>>> db20e11 (second commit)
         hal_rtc_disable_alarm();
         if (config->alarm_callback != NULL) {
             config->alarm_callback(config->alarm_userdata);
@@ -190,49 +179,29 @@ static void rtc_eint_irq_callback(void * user_data)
     }
     /*process tick event*/
     if ((value & RTC_IRQ_STA_TICK_MASK) != 0) {
-<<<<<<< HEAD
-        //log_rtc_info("rtc tick triggered!!\r\n", 0);
-=======
->>>>>>> db20e11 (second commit)
         if (config->tick_callback != NULL) {
             config->tick_callback(config->tick_userdata);
         }
     }
     /*process eint event*/
     if ((value & RTC_IRQ_STA_EINT0_MASK) != 0) {
-<<<<<<< HEAD
-        //log_rtc_info("rtc eint0 triggered!!\r\n", 0);
-=======
->>>>>>> db20e11 (second commit)
         if (config->eint_callback[0] != NULL) {
             config->eint_callback[0](0, config->tick_userdata);
         }
     }
     if ((value & RTC_IRQ_STA_EINT1_MASK) != 0) {
-<<<<<<< HEAD
-        //log_rtc_info("rtc eint1 triggered!!\r\n", 0);
-=======
->>>>>>> db20e11 (second commit)
         if (config->eint_callback[1] != NULL) {
             config->eint_callback[1](1, config->tick_userdata);
         }
     }
     if ((value & RTC_IRQ_STA_EINT2_MASK) != 0) {
-<<<<<<< HEAD
-        //log_rtc_info("rtc eint2 triggered!!\r\n", 0);
-=======
->>>>>>> db20e11 (second commit)
         if (config->eint_callback[2] != NULL) {
             config->eint_callback[2](2, config->tick_userdata);
         }
     }
     hal_gpt_get_free_run_count(HAL_GPT_CLOCK_SOURCE_1M, &tick2);
-<<<<<<< HEAD
-    log_rtc_info("[hal][rtc] irq sta %x exe time:0=%x 1=%x 2=%x\r\n", 4, value, tick0, tick1, tick2);
-=======
     hal_eint_unmask(HAL_EINT_RTC);
     log_rtc_info("[hal][rtc] irq consume times(stat = %x, gap1 = %dus, gap2 = %dus)\r\n", 3, value, (tick1 - tick0), (tick2- tick1));
->>>>>>> db20e11 (second commit)
 }
 
 #else
@@ -384,11 +353,8 @@ void    bl_rtc_func_init()
 #ifdef RTC_BOOTLOADER_INIT_ENABLED
     uint16_t    temp    = 0;
     uint16_t    irq_sta = 0;
-<<<<<<< HEAD
-=======
 
     rtc_internal_enable_setting();
->>>>>>> db20e11 (second commit)
     rtc_internal_set_setting_cg_by_user(false, true);
     rtc_internal_clear_pwr_status();
     rtc_internal_unlock_protect();
@@ -437,53 +403,33 @@ hal_rtc_status_t hal_rtc_init(void)
 {
     rtc_private_parameter_t *config = HAL_RTC_PRIVATE_DATA_ADDR;
     uint32_t                 temp   = 0;
-<<<<<<< HEAD
-=======
 
->>>>>>> db20e11 (second commit)
     log_rtc_info("#################  rtc initialize started #################", 0);
     memset(config, 0, sizeof(rtc_private_parameter_t));
     rtc_check_chip_config(config);
 
     /*normal initial flow*/
-<<<<<<< HEAD
-    rtc_internal_set_setting_cg_by_user(false, true);;
-=======
     rtc_internal_enable_setting();
->>>>>>> db20e11 (second commit)
     rtc_internal_clear_pwr_status();
     rtc_internal_unlock_protect();
     rtc_internal_reload();
 
     if(rtc_internal_get_spar_rg() & RTC_SPAR_REG_BROM_SKIP_MASK){
-<<<<<<< HEAD
-        config->flag_rtc_mode = true;
-=======
         config->op_state |= RTC_STATE_RTC_MODE_FLG; /* system back from sw rtc mode */
->>>>>>> db20e11 (second commit)
     }
 #ifdef RTC_BOOTLOADER_INIT_ENABLED
     temp = rtc_internal_get_spar_rg();
     config->irq_status = (temp>>RTC_SPAR_REG_RESRV_OFFSET);
     if(config->irq_status & RTC_SPAR_REG_PWR_FLG_MASK){
-<<<<<<< HEAD
-        config->flag_power_st = true;
-=======
         config->op_state |= RTC_STATE_POWER_LOST_FLG;
         config->op_state |= RTC_STATE_INIT_BY_BL_FLG;
->>>>>>> db20e11 (second commit)
     }
 #else
     config->irq_status = rtc_internal_irq_status();
 #endif
     if (rtc_internal_powerkey_is_valid() == false) {
         rtc_internal_set_power_key();
-<<<<<<< HEAD
-        config->flag_power_st = true;
-        config->hw_init_st    = 1; //rtc not init by bl
-=======
         config->op_state = RTC_STATE_POWER_LOST_FLG;
->>>>>>> db20e11 (second commit)
     }
     temp = (config->irq_status<<RTC_SPAR_REG_RESRV_OFFSET);
     rtc_internal_set_spar_rg(temp);
@@ -497,19 +443,6 @@ hal_rtc_status_t hal_rtc_init(void)
 #endif
 #endif
     /*get power on reason*/
-<<<<<<< HEAD
-    if(config->flag_power_st){ /*Judge pwrkey match or not? */
-        log_rtc_warn("rtc 1st power on\r\n", 0);
-        rtc_internal_dump(NULL);
-        if(config->hw_init_st & 0x1) {
-            rtc_internal_init_register();
-            log_rtc_warn("rtc set default by main\r\n", 0);
-        }else {
-            log_rtc_warn("rtc set default by bootloader\r\n", 0);
-        }
-    } else {
-        if( rtc_internal_is_powered_by_rtc() == true && config->flag_rtc_mode == true) {
-=======
     if (config->op_state & RTC_STATE_POWER_LOST_FLG){
         log_rtc_warn("rtc 1st power on\r\n", 0);
         rtc_internal_dump(NULL);
@@ -522,22 +455,12 @@ hal_rtc_status_t hal_rtc_init(void)
     } else {
         if (rtc_internal_is_powered_by_rtc() == true) {
             config->op_state |= RTC_STATE_RTC_WAKE_FLG;
->>>>>>> db20e11 (second commit)
             rtc_internal_print_power_reason(config->irq_status);
             log_rtc_warn("system is back from rtc mode", 0);
         } else {
             log_rtc_warn("rtc back from power exception", 0);
         }
     }
-<<<<<<< HEAD
-    /*switch clock source*/
-#ifdef RTC_USING_EOSC_FOR_NORMAL_MODE
-    log_rtc_warn("rtc use iner eosc-32k", 0);
-    config->cali_eosc = rtc_internal_get_eosc32_calibration(); /*calc & set eosc cali*/
-    rtc_internal_set_eosc32_calibration(config->cali_eosc);
-    config->cali_time  = rtc_internal_calc_time_calibration(RTC_OSC32K_EOSC_MODE); /*cali time*/
-    rtc_internal_set_time_calibration(RTC_TIME_CALI_K_EOSC, config->cali_time);   /*set time cali*/
-=======
 
     /*switch clock source*/
     config->cali_eosc = rtc_internal_get_eosc32_calibration(); /*calc & set eosc cali*/
@@ -546,27 +469,17 @@ hal_rtc_status_t hal_rtc_init(void)
     rtc_internal_set_time_calibration(RTC_TIME_CALI_K_EOSC, config->cali_time);
 #ifdef RTC_USING_EOSC_FOR_NORMAL_MODE
     log_rtc_warn("rtc use iner eosc-32k", 0);
->>>>>>> db20e11 (second commit)
     rtc_internal_set_osc32_mode(RTC_OSC32K_EOSC_MODE);                /*switch to EOSC*/
 #else
     if(config->used_xosc) {
         log_rtc_warn("rtc use ext xosc-32k", 0);
-<<<<<<< HEAD
-        config->cali_time  = rtc_internal_calc_time_calibration(RTC_OSC32K_XOSC_MODE);
-=======
->>>>>>> db20e11 (second commit)
         rtc_internal_set_eosc32_calibration(0x8);
         rtc_internal_set_osc32_mode(RTC_OSC32K_XOSC_MODE);          /*switch to XOSC*/
         rtc_internal_set_time_calibration(RTC_TIME_CALI_NORMAL, 0); /*set time cali*/
     } else {
         log_rtc_warn("rtc use iner dcxo-32k", 0);
-<<<<<<< HEAD
-        config->cali_eosc = rtc_internal_get_eosc32_calibration(); /*calc & set eosc cali*/
-        rtc_internal_set_osc32_mode(RTC_OSC32K_DCXO_MODE);               /*switch to DCXO*/
-=======
         rtc_internal_set_osc32_mode(RTC_OSC32K_DCXO_MODE);          /*switch to DCXO*/
         rtc_internal_set_time_calibration(RTC_TIME_CALI_K_EOSC, 0); /*set time cali*/
->>>>>>> db20e11 (second commit)
     }
 #endif
     rtc_internal_set_ldo_lowpower(false);
@@ -577,11 +490,7 @@ hal_rtc_status_t hal_rtc_init(void)
     rtc_internal_clear_wakeup_status();
     rtc_init_irq_setting(); /*init rtc interrupt*/
     rtc_internal_dump(NULL);
-<<<<<<< HEAD
-    rtc_internal_set_setting_cg_by_user(false, false);
-=======
 
->>>>>>> db20e11 (second commit)
     /* output initial done log */
     log_rtc_info("RTC_CLK(%d),EOSC(%d),XOSC(%d), DCXO(%d)",  4,  (int)rtc_internal_measure_frequency(RTC_OSC32K_FCLK_MODE), (int) rtc_internal_measure_frequency(RTC_OSC32K_EOSC_MODE), (int)rtc_internal_measure_frequency(RTC_OSC32K_XOSC_MODE), (int)rtc_internal_measure_frequency(RTC_OSC32K_DCXO_MODE));
     log_rtc_info("################# rtc initialized done #################", 0);
@@ -605,8 +514,6 @@ hal_rtc_status_t hal_rtc_deinit(void)
     return HAL_RTC_STATUS_OK;
 }
 
-<<<<<<< HEAD
-=======
 /********************************************************************
 Function:
         hal_rtc_switch_32k_source
@@ -648,7 +555,6 @@ hal_rtc_status_t hal_rtc_switch_32k_source(hal_rtc_osc32k_mode_t mode)
 
 
 
->>>>>>> db20e11 (second commit)
 
 /********************************************************************
 Function:
@@ -724,8 +630,6 @@ bool    hal_rtc_is_back_from_rtcmode()
     return (temp & RTC_SPAR_REG_PWR_FLG_MASK)?false:true;
 }
 
-<<<<<<< HEAD
-=======
 hal_rtc_power_reason_t hal_rtc_get_power_on_reason()
 {
     int     temp = 0;
@@ -746,7 +650,6 @@ hal_rtc_power_reason_t hal_rtc_get_power_on_reason()
 }
 
 
->>>>>>> db20e11 (second commit)
 
 
 /********************************************************************

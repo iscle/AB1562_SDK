@@ -1,7 +1,5 @@
 var group__hal__gpio__enum =
 [
-<<<<<<< HEAD
-=======
     [ "hal_gpio_clock_mode_t", "group__hal__gpio__enum.html#ga84a5e8429bfb7e9a697e156094d1e638", [
       [ "HAL_GPIO_CLOCK_MODE_32K", "group__hal__gpio__enum.html#gga84a5e8429bfb7e9a697e156094d1e638a26e1ac8fd0039c4e8d0b1ee894c0efdf", null ],
       [ "HAL_GPIO_CLOCK_MODE_26M", "group__hal__gpio__enum.html#gga84a5e8429bfb7e9a697e156094d1e638acd9e7bc0a2511723e796b998b73d2f77", null ],
@@ -13,7 +11,6 @@ var group__hal__gpio__enum =
       [ "HAL_GPIO_CLOCK_2", "group__hal__gpio__enum.html#gga2f13bf3247dc651f4cfb7524cd0d97c6a87a39002c45db6849f9ebaed1d7788a9", null ],
       [ "HAL_GPIO_CLOCK_MAX", "group__hal__gpio__enum.html#gga2f13bf3247dc651f4cfb7524cd0d97c6a66fb864538c6beb276dcac0e6a6c212e", null ]
     ] ],
->>>>>>> db20e11 (second commit)
     [ "hal_gpio_data_t", "group__hal__gpio__enum.html#gab38c5c477ed49fa478c0acf134f85efc", [
       [ "HAL_GPIO_DATA_LOW", "group__hal__gpio__enum.html#ggab38c5c477ed49fa478c0acf134f85efca1d893fac58a2d9a77ae950a82c1b4dce", null ],
       [ "HAL_GPIO_DATA_HIGH", "group__hal__gpio__enum.html#ggab38c5c477ed49fa478c0acf134f85efca3197688dd46aa28e778ae6cf33d5f51f", null ]

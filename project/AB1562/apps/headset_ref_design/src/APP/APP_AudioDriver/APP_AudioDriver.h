@@ -67,10 +67,7 @@ U8 APP_AudioDriver_GetSubSinkQNum(void);
 void APP_AudioDriver_Init(Handler msgHdl, U16 msgID);
 
 void APP_AudioDriver_ClearSubSinkCmd(U16 id);
-<<<<<<< HEAD
-=======
 void APP_AudioDriver_ClearAllSubSinkCmd(void);
->>>>>>> db20e11 (second commit)
 void APP_AudioDriver_SpecificEventVPStopCmd(U16 id); //MMI_DRV_SpecificEventVPStopCmd
 void APP_AudioDriver_SpecificEventRTStopCmd(U16 id); //MMI_DRV_SpecificEventRingtoneStopCmd
 void APP_AudioDriver_SendVoicepromptStopCmd(void);

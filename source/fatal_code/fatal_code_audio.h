@@ -67,13 +67,9 @@ typedef enum{
     AUDIO_SILENCE_SOURCE_R_IS_MUTE,            /**< 0x6: audio silence due to source R channel from audio gateway is mute pattern. */
     AUDIO_SILENCE_MUTE_PATTERN,                /**< 0x7: audio silence due to mute pattern is inserted due to lack of packets. */
     AUDIO_SILENCE_UNKNOWN_PAYLOAD,             /**< 0x8: audio silence may due to unknown payload. */
-<<<<<<< HEAD
-    AUDIO_SILENCE_MAX,                         /**< 0x9: audio silence sub error code end. */
-=======
     AUDIO_SILENCE_DROP_PKT_BY_CONTROLLER,      /**< 0x9: audio silence may due to heap size not enough controller drop bt pkt. */
     AUDIO_SILENCE_SOURCE_IS_MUTE,              /**< 0xA: audio silence due to source is muted by application layer. */
     AUDIO_SILENCE_MAX,                         /**< 0xB: audio silence sub error code end. */
->>>>>>> db20e11 (second commit)
 }audio_silence_sub_err_code_type_t;
 
 /** @brief

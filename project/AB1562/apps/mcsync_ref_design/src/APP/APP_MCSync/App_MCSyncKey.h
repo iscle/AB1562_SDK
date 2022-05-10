@@ -43,11 +43,7 @@
 **************************************************************************************************/
 void APP_AWSMCE_ProcessKeyEvent(BD_ADDR_T *pBdAddr, U16 keyIndex);
 void APP_AWSMCE_KeyEnterAirPairing(void);
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 void APP_AWSMCE_KeyEnterMCSyncSharePairing(void);
 void APP_AWSMCE_KeyExitMCSyncSharePairing(void);
 #endif

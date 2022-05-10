@@ -91,10 +91,7 @@ enum
 	PROFILE_BISTO_CTRL = 0x37,
 	PROFILE_BISTO_AUDIO = 0x38,
 	PROFILE_GFP = 0x39,
-<<<<<<< HEAD
-=======
 	PROFILE_ATT_EDR = 0x3A,
->>>>>>> db20e11 (second commit)
 };
 
 

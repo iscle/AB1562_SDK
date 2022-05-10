@@ -50,11 +50,7 @@
 #include "BtMCSync.h"
 #include "drv_a2dp.h"
 #include "App_RhoHandler.h"
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 #include "App_MCSync_Share.h"
 #endif
 
@@ -84,11 +80,7 @@ static void app_mcsync_SystemSendInquiryUnderAirPairingState(void);
 * Variable
 **************************************************************************************************/
 HandlerData gAppMCSyncSystemHandle = { app_mcsync_SystemAirPairingHandler };
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 extern HandlerData gAppMCSyncStateTimerHandle;
 #endif
 
@@ -157,21 +149,13 @@ static void app_mcsync_SystemInquiryCancelCfmHandler(BT_INQUIRY_CANCEL_CFM_T * c
 
 static void app_mcsync_SystemWriteInquiryModeCfmHandler(BT_WRITE_INQUIRY_MODE_CFM_T * cfm)
 {
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 	DBG_LOG_APP_MCSYNC( "[APP_MCSync] Write Inquiry mode confirm: status:%d, isAir:%d, isShare:%d", 3, cfm->hci_status, BtAwsMce_IsInAirPairing(), BtMCSync_IsInMCSyncSharePairing());
 #else
 	DBG_LOG_APP_MCSYNC( "[APP_MCSync] Write Inquiry mode confirm: status:%d", 1, cfm->hci_status);
 #endif
 	if(APP_State_CheckNestStateByLink(APP_EOF, APP_AWS_PAIRING)
-<<<<<<< HEAD
-	#ifdef MCSYNC_SHARE_MODE
-=======
 	#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 		&& BtAwsMce_IsInAirPairing()
 	#endif
 	)
@@ -185,11 +169,7 @@ static void app_mcsync_SystemWriteInquiryModeCfmHandler(BT_WRITE_INQUIRY_MODE_CF
 			APP_MCSYNC_SystemAirPairingEnd();
 		}
 	}
-<<<<<<< HEAD
-	#ifdef MCSYNC_SHARE_MODE
-=======
 	#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 	else if(BtMCSync_IsInMCSyncSharePairing())
 	{
         APP_MCSync_Share_WriteInquiryModeCfmHandler(cfm->hci_status);
@@ -200,22 +180,14 @@ static void app_mcsync_SystemWriteInquiryModeCfmHandler(BT_WRITE_INQUIRY_MODE_CF
 static void app_mcsync_SystemInquiryParaIndHandler(BT_INQUIRY_RESULT_IND_T * ind)
 {
 	if(APP_State_CheckNestStateByLink(APP_EOF, APP_AWS_PAIRING)
-<<<<<<< HEAD
-	#ifdef MCSYNC_SHARE_MODE
-=======
 	#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 		&& BtAwsMce_IsInAirPairing()
 	#endif
 	)
 	{
 		APP_MCSYNC_StateGetAirPairingInquiryResultWithRSSI(ind->rssi, (BD_ADDR_T*)&ind->bd_addr[0]);
 	}
-<<<<<<< HEAD
-	#ifdef MCSYNC_SHARE_MODE
-=======
 	#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 	else if(BtMCSync_IsInMCSyncSharePairing())
 	{
         APP_MCSync_Share_InquiryParaIndHandler(ind->rssi, (BD_ADDR_T*)&ind->bd_addr[0]);
@@ -233,11 +205,7 @@ static void app_mcsync_SystemInquiryStopIndHandler(BT_INQUIRY_STOP_IND_T * ind)
 static void app_mcsync_SystemWriteCurentIACCfmHandler(BT_WRITE_INQUIRY_ACCESS_CODE_CFM_T * cfm)
 {
 	if(APP_State_CheckNestStateByLink(APP_EOF, APP_AWS_PAIRING)
-<<<<<<< HEAD
-	#ifdef MCSYNC_SHARE_MODE
-=======
 	#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 		&& BtAwsMce_IsInAirPairing()
 	#endif	
 	)
@@ -251,11 +219,7 @@ static void app_mcsync_SystemWriteCurentIACCfmHandler(BT_WRITE_INQUIRY_ACCESS_CO
 			APP_MCSYNC_SystemAirPairingEnd();
 		}
 	}
-<<<<<<< HEAD
-	#ifdef MCSYNC_SHARE_MODE
-=======
 	#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 	else if(BtMCSync_IsInMCSyncSharePairing())
 	{
         APP_MCSync_Share_WriteCurentIACCfmHandler(cfm->hci_status);

@@ -45,11 +45,8 @@
 static mux_irq_handler_t g_mux_irq_handler;
 #define UART_PORT_INDEX_TO_MUX_PORT(port_index) (port_index+MUX_UART_0)
 
-<<<<<<< HEAD
-=======
 extern hal_uart_baudrate_t query_syslog_baudrate(void);
 
->>>>>>> db20e11 (second commit)
 static void mux_uart_callback(hal_uart_callback_event_t event, void *user_data)
 {
     uint8_t port_index = (uint32_t)user_data;
@@ -133,19 +130,11 @@ void port_mux_uart_exception_init(uint8_t port_index)
     hal_uart_config_t uart_config;
 
     hal_uart_deinit(port_index);
-<<<<<<< HEAD
-    //TODO: finally all project need use CONFIG_RACE_BAUDRATE.
-#ifdef MTK_DEBUG_PLAIN_LOG_ENABLE
-    uart_config.baudrate = CONFIG_SYSLOG_BAUDRATE;
-#else
-    uart_config.baudrate = CONFIG_RACE_BAUDRATE;
-=======
 
 #ifdef MTK_DEBUG_PLAIN_LOG_ENABLE
     uart_config.baudrate = CONFIG_SYSLOG_BAUDRATE;
 #else
     uart_config.baudrate = query_syslog_baudrate();
->>>>>>> db20e11 (second commit)
 #endif
     uart_config.parity = HAL_UART_PARITY_NONE;
     uart_config.stop_bit = HAL_UART_STOP_BIT_1;

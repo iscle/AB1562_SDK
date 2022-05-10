@@ -32,12 +32,7 @@
  * AIROHA FOR SUCH AIROHA SOFTWARE AT ISSUE.
  */
 
-<<<<<<< HEAD
-#if defined(MTK_CPU_NUMBER_0) && defined(MTK_MINIDUMP_ENABLE)
-
-=======
 #if defined(MTK_OFFLINELOG_ENABLE) || defined(MTK_MINIDUMP_ENABLE)
->>>>>>> db20e11 (second commit)
 #include <string.h>
 #include "offline_dump.h"
 #include "syslog_debug.h"
@@ -46,13 +41,10 @@
 
 #define ABANDON_LEN 256
 
-<<<<<<< HEAD
-=======
 /* offline log variable */
 extern bool g_offline_log_is_enable;
 extern bool g_offline_log_is_busy;
 
->>>>>>> db20e11 (second commit)
 typedef struct {
     uint32_t dump_buffer_addr;      /* Start address of dump buffer, view with CPU 0, other CPU should do remap */
     uint32_t dump_buffer_size;      /* Size of dump buffer */
@@ -70,17 +62,12 @@ bool syslog_ram_flash_init(offline_dump_region_type_t region_type)
     memset((uint8_t *)g_offline_dump_share_variable, 0, sizeof(offline_dump_share_variable_t));
     memset((uint8_t *)&log_port_config, 0, sizeof(mux_port_config_t));
 
-<<<<<<< HEAD
-    if(mux_query_user_port_setting("SYSLOG", (mux_port_config_t *)&log_port_config) != MUX_STATUS_OK) {
-        return false; /* some error */
-=======
     if (region_type >= OFFLINE_REGION_MAX) {
         return false; /* region error */
     }
 
     if(mux_query_user_port_setting("SYSLOG", (mux_port_config_t *)&log_port_config) != MUX_STATUS_OK) {
         return false; /* query setting error */
->>>>>>> db20e11 (second commit)
     }
 
     if((uint32_t *)&log_port_config.tx_buf_addr == NULL || (log_port_config.tx_buf_size == 0)) {
@@ -91,11 +78,7 @@ bool syslog_ram_flash_init(offline_dump_region_type_t region_type)
         return false;
     }
 
-<<<<<<< HEAD
-    if(log_port_config.tx_buf_size > cell_size) {
-=======
     if ((log_port_config.tx_buf_size > cell_size) || (cell_size == 0)) {
->>>>>>> db20e11 (second commit)
         return false; /* buffer size is too large */
     }
 
@@ -103,67 +86,20 @@ bool syslog_ram_flash_init(offline_dump_region_type_t region_type)
     g_offline_dump_share_variable->dump_buffer_addr = log_port_config.tx_buf_addr;
     g_offline_dump_share_variable->dump_buffer_size = log_port_config.tx_buf_size;
     g_offline_dump_share_variable->dump_buffer_pos  = log_port_config.sw_wptr;
-<<<<<<< HEAD
-    /* set sw_wrpt */
-=======
 
     /* update sw_wrpt */
->>>>>>> db20e11 (second commit)
     if((g_offline_dump_share_variable->dump_buffer_pos + ABANDON_LEN) >= g_offline_dump_share_variable->dump_buffer_size){
         g_offline_dump_share_variable->dump_buffer_pos = ABANDON_LEN -(g_offline_dump_share_variable->dump_buffer_size - g_offline_dump_share_variable->dump_buffer_pos);
     }else{
         g_offline_dump_share_variable->dump_buffer_pos += ABANDON_LEN;
     }
-<<<<<<< HEAD
-    /* keep 8k dump */
-=======
 
     /* Reserve for the header */
->>>>>>> db20e11 (second commit)
     g_offline_dump_share_variable->dump_buffer_size = g_offline_dump_share_variable->dump_buffer_size - ABANDON_LEN;
 
     return true;
 }
 
-<<<<<<< HEAD
-void internal_crush_log_offline_dump_region_write(void)
-{
-    uint32_t left_dump_size, curr_dump_size, curr_flash_addr, curr_dump_pos;
-    uint32_t cell_valid_size;
-    /* total dump 8k */
-    left_dump_size = g_offline_dump_share_variable->dump_buffer_size;
-    /* lastest sw_wptr */
-    curr_dump_pos = g_offline_dump_share_variable->dump_buffer_pos;
-    /* query offline dump cell size */
-    if (offline_dump_region_query_cell_valid_size(OFFLINE_REGION_EXCEPTION_LOG, &cell_valid_size) == false) {
-        return ;
-    }
-    /* cell_valid_size = 8k - header */
-    while (left_dump_size) {
-        if (left_dump_size > cell_valid_size) {
-            curr_dump_size = cell_valid_size;
-        } else {
-            curr_dump_size = left_dump_size; //always run this
-        }
-        left_dump_size -= curr_dump_size;
-        /* get flash write pointer ==> alloc 8k - header region */
-        offline_dump_region_alloc(OFFLINE_REGION_EXCEPTION_LOG, &curr_flash_addr);
-
-        if (curr_dump_pos < ABANDON_LEN) {
-            /* wptr head */
-            offline_dump_region_write(OFFLINE_REGION_EXCEPTION_LOG, curr_flash_addr,
-                                        (uint8_t *)(g_offline_dump_share_variable->dump_buffer_addr + curr_dump_pos),
-                                        g_offline_dump_share_variable->dump_buffer_size);
-        } else {
-            /* wptr head */
-            offline_dump_region_write(OFFLINE_REGION_EXCEPTION_LOG, curr_flash_addr,
-                                        (uint8_t *)(g_offline_dump_share_variable->dump_buffer_addr + curr_dump_pos),
-                                        g_offline_dump_share_variable->dump_buffer_size + ABANDON_LEN - curr_dump_pos);
-            /* wptr back && update write pointer */
-            curr_flash_addr += (g_offline_dump_share_variable->dump_buffer_size + ABANDON_LEN - curr_dump_pos);
-
-            offline_dump_region_write(OFFLINE_REGION_EXCEPTION_LOG, curr_flash_addr,
-=======
 void internal_offline_dump_region_write(offline_dump_region_type_t region_type)
 {
     uint32_t left_dump_size, curr_dump_size, curr_flash_addr, curr_dump_pos;
@@ -200,69 +136,12 @@ void internal_offline_dump_region_write(offline_dump_region_type_t region_type)
             curr_flash_addr += (g_offline_dump_share_variable->dump_buffer_size + ABANDON_LEN - curr_dump_pos);
 
             offline_dump_region_write(region_type, curr_flash_addr,
->>>>>>> db20e11 (second commit)
                                         (uint8_t *)(g_offline_dump_share_variable->dump_buffer_addr),
                                         curr_dump_pos - ABANDON_LEN);
         }
 
-<<<<<<< HEAD
-        offline_dump_region_write_end(OFFLINE_REGION_EXCEPTION_LOG, curr_dump_size);
-    }
-
-    /* reset the dump buffer pointer */
-    g_offline_dump_share_variable->dump_buffer_pos = 0;
-}
-
-void internal_offline_log_dump_region_write(void)
-{
-    uint32_t left_dump_size, curr_dump_size, curr_flash_addr, curr_dump_pos;
-    uint32_t cell_valid_size;
-    /* total dump 8k */
-    left_dump_size = g_offline_dump_share_variable->dump_buffer_size;
-    /* lastest sw_wptr */
-    curr_dump_pos = g_offline_dump_share_variable->dump_buffer_pos;
-    /* query offline dump cell size */
-    if (offline_dump_region_query_cell_valid_size(OFFLINE_REGION_OFFLINE_LOG, &cell_valid_size) == false) {
-        return ;
-    }
-    /* OFFLINE_REGION_SYSLOG_CELL_VALID_SIZE = 8k - header */
-    while (left_dump_size) {
-        if (left_dump_size > cell_valid_size) {
-            curr_dump_size = cell_valid_size;
-        } else {
-            curr_dump_size = left_dump_size; //always run this
-        }
-        left_dump_size -= curr_dump_size;
-        /* get flash write pointer ==> alloc 8k - header region */
-        offline_dump_region_alloc(OFFLINE_REGION_OFFLINE_LOG, &curr_flash_addr);
-
-        if (curr_dump_pos < ABANDON_LEN) {
-            /* wptr head */
-            offline_dump_region_write(OFFLINE_REGION_OFFLINE_LOG, curr_flash_addr,
-                                        (uint8_t *)(g_offline_dump_share_variable->dump_buffer_addr + curr_dump_pos),
-                                        g_offline_dump_share_variable->dump_buffer_size);
-        } else {
-            /* wptr head */
-            offline_dump_region_write(OFFLINE_REGION_OFFLINE_LOG, curr_flash_addr,
-                                        (uint8_t *)(g_offline_dump_share_variable->dump_buffer_addr + curr_dump_pos),
-                                        g_offline_dump_share_variable->dump_buffer_size + ABANDON_LEN - curr_dump_pos);
-            /* wptr back && update write pointer */
-            curr_flash_addr += (g_offline_dump_share_variable->dump_buffer_size + ABANDON_LEN - curr_dump_pos);
-
-            offline_dump_region_write(OFFLINE_REGION_OFFLINE_LOG, curr_flash_addr,
-                                        (uint8_t *)(g_offline_dump_share_variable->dump_buffer_addr),
-                                        curr_dump_pos - ABANDON_LEN);
-        }
-
-        offline_dump_region_write_end(OFFLINE_REGION_OFFLINE_LOG, curr_dump_size);
-    }
-
-    /* reset the dump buffer pointer */
-    g_offline_dump_share_variable->dump_buffer_pos = 0;
-=======
         offline_dump_region_write_end(region_type, curr_dump_size);
     }
->>>>>>> db20e11 (second commit)
 }
 
 void exception_syslog_offline_dump_callback(void)
@@ -272,11 +151,7 @@ void exception_syslog_offline_dump_callback(void)
     init_status = syslog_ram_flash_init(OFFLINE_REGION_EXCEPTION_LOG);
 
     if(init_status == true) {
-<<<<<<< HEAD
-        internal_crush_log_offline_dump_region_write();
-=======
         internal_offline_dump_region_write(OFFLINE_REGION_EXCEPTION_LOG);
->>>>>>> db20e11 (second commit)
     }
 }
 
@@ -284,12 +159,6 @@ void offline_log_dump_handler(void)
 {
     bool init_status = false;
 
-<<<<<<< HEAD
-    init_status = syslog_ram_flash_init(OFFLINE_REGION_OFFLINE_LOG);
-
-    if(init_status == true) {
-        internal_offline_log_dump_region_write();
-=======
     if(g_offline_log_is_enable == false) {
         return ;
     }
@@ -298,7 +167,6 @@ void offline_log_dump_handler(void)
 
     if(init_status == true) {
         internal_offline_dump_region_write(OFFLINE_REGION_OFFLINE_LOG);
->>>>>>> db20e11 (second commit)
     }
 }
 
@@ -314,11 +182,7 @@ void offline_log_dump_handler(void)
     return ;
 }
 
-<<<<<<< HEAD
-#endif /* defined(MTK_CPU_NUMBER_0) && defined(MTK_MINIDUMP_ENABLE) */
-=======
 #endif /* defined(MTK_OFFLINELOG_ENABLE) || defined(MTK_MINIDUMP_ENABLE) */
->>>>>>> db20e11 (second commit)
 
 
 

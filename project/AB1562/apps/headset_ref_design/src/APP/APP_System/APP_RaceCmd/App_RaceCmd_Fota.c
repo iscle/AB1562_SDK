@@ -77,12 +77,9 @@ static void app_RaceCmd_FotaStopInd(void)
 	BD_ADDR_T *pBdAddr = APP_GetServiceBdAddr();
 	
 	DBG_LOG_APP_RACE_FOTA("[APP] FOTA stop Ind:%d", 1, APP_AirApp_FOTA_Reconnect());
-<<<<<<< HEAD
-=======
 
     if (APP_AudioIsDspSuspend())
 		APP_AudioDSPRealtimeResume();
->>>>>>> db20e11 (second commit)
     
     if(pBdAddr)
         PM_Sniff_Enable(pBdAddr, PM_SNIFF_OTA);

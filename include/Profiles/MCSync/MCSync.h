@@ -83,10 +83,7 @@ enum
 	MCSYNC_LINK_DISCONNECTING,
 };
 
-<<<<<<< HEAD
-=======
 #ifdef AIR_TAKE_OVER_LINK_ENABLE
->>>>>>> db20e11 (second commit)
 enum
 {
 	MCSYNC_TAKE_OVER_CONNECTION_IDLE_STATE,
@@ -96,14 +93,10 @@ enum
 	MCSYNC_TAKE_OVER_CONNECTION_DISCONNECTING_LOW_PRIO_LINK_PROFILE_STATE,
 	MCSYNC_TAKE_OVER_CONNECTION_DISCONNECTED_LOW_PRIO_COMPLETE_STATE_AND_CONNECT_HIGH_PRIO_AWS, //5
 	MCSYNC_TAKE_OVER_CONNECTION_SWITCH_SPECIAL_TO_HIGH_PRIO_LINK_STATE,
-<<<<<<< HEAD
-};
-=======
 	MCSYNC_TAKE_OVER_CONNECTION_ADD_HIGH_PRIO_LINK_TO_SERVICE_STATE,
 	MCSYNC_TAKE_OVER_CONNECTION_TAKE_OVER_COMPLETE_STATE,
 };
 #endif
->>>>>>> db20e11 (second commit)
 
 enum
 {
@@ -129,13 +122,10 @@ enum
 	MCSYNC_SHARE_PAIRING_STATE_START,
 };
 
-<<<<<<< HEAD
-=======
 enum
 {
 	MCSYNC_PARTNER_SET_TAKE_OVER_STATE,
 };
->>>>>>> db20e11 (second commit)
 /*************************************************************************************************
 * Public function
 **************************************************************************************************/
@@ -159,11 +149,8 @@ void 		MCSYNC_PushPicoBtClockEvent(U8 event);
 U8 			MCSYNC_PopPicoBtClockEvent(void);
 void		MCSYNC_SetMpTestMode(BOOL isMpTestMode);
 BOOL		MCSYNC_IsMpTestMode(void);
-<<<<<<< HEAD
-=======
 BOOL MCSYNC_IsDiscoverableEnabled(void);
 void MCSYNC_SetDiscoverableEnable(BOOL isEnable);
->>>>>>> db20e11 (second commit)
 #if SINGLE_HEADSET_MODE_ENABLE
 U8			MCSYNC_GetSingleHSModeState(void);
 BOOL		MCSYNC_IsSingleHSMode(void);
@@ -174,11 +161,7 @@ U8			MCSYNC_GetAirPairingState(void);
 void		MCSYNC_SetAirPairingState(U8 state);
 void		MCSYNC_SetMcsyncState(U8 state);
 U8			MCSYNC_GetMcsyncState(void);
-<<<<<<< HEAD
-#ifdef TAKE_OVER_LINK
-=======
 #ifdef AIR_TAKE_OVER_LINK_ENABLE
->>>>>>> db20e11 (second commit)
 void 		MCSYNC_SetMcsyncTakeOverConnState(U8 state);
 U8 			MCSYNC_GetMcsyncTakeOverConnState(void);
 #endif
@@ -194,12 +177,9 @@ U8		MCSYNC_GetRoleModeChangeState(void);
 void mcsync_set_dsp_sync_timer(U32 clockToStart, U8 *pData, U32 length);
 void mcsync_dsp_init(void);
 
-<<<<<<< HEAD
-=======
 U16 MCSYNC_CheckTimer(U16 timerId);
 void MCSYNC_ReleaseTimer(U16 timerId);
 void MCSYNC_SetTimer(U16 timerId, U32 timeout);
 
 
->>>>>>> db20e11 (second commit)
 #endif //_MCSYNC_H_

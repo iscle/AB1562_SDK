@@ -104,11 +104,7 @@
 #if( LABTEST)
 #define configTOTAL_HEAP_SIZE			( ( size_t ) (200 * 1024) )
 #else
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 #define configTOTAL_HEAP_SIZE			( ( size_t ) (110 * 1024) )
 #else
 #define configTOTAL_HEAP_SIZE			( ( size_t ) (108 * 1024) )
@@ -189,11 +185,8 @@ extern void port_sleepMode(int xExpectedIdleTime);
 #define portCONFIGURE_TIMER_FOR_RUN_TIME_STATS()
 #endif
 
-<<<<<<< HEAD
-=======
 #define OS_PROFILING_GPT_PERIOD_MS (1 * 1000) //1s
 
->>>>>>> db20e11 (second commit)
 #define INCLUDE_xTaskGetIdleTaskHandle 1
 #define INCLUDE_xTimerGetTimerDaemonTaskHandle 1
 #define INCLUDE_xTaskGetCurrentTaskHandle 1

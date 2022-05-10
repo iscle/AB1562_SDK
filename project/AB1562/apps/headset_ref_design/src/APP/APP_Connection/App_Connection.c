@@ -223,23 +223,15 @@ static void app_Conn_DisconnectCfmHandler(PM_DISCONNECT_CFM_T *cfm)
 		FW_ReleaseTimer((Handler)&gAppConnectionTimerHandle, TIMER_ID_ACTIVE_DISCONNECT_OTHER_PROFILES, 0);
 	}
 	
-<<<<<<< HEAD
-#ifdef PROFILE_AMA_ENABLE
-    if (!PM_IsProfileConnected(pBdAddr, PROFILE_A2DP) && !PM_IsProfileConnected(pBdAddr, PROFILE_HANDSFREE) && !PM_IsProfileConnected(pBdAddr, PROFILE_AVRCP))
-    {
-=======
 #if defined(PROFILE_AMA_ENABLE) || defined(AIR_GFP_ENABLE)
     if (!PM_IsProfileConnected(pBdAddr, PROFILE_A2DP) && !PM_IsProfileConnected(pBdAddr, PROFILE_HANDSFREE) && !PM_IsProfileConnected(pBdAddr, PROFILE_AVRCP))
     {
 #ifdef PROFILE_AMA_ENABLE
->>>>>>> db20e11 (second commit)
         if (PM_IsProfileConnected(pBdAddr, PROFILE_AMA))
         {
             APP_Ama_Disconnect(pBdAddr);
             PM_DisconnectSpecificProfile(pBdAddr, PROFILE_AMA);
         }
-<<<<<<< HEAD
-=======
 #endif
 
 #ifdef AIR_GFP_ENABLE
@@ -248,7 +240,6 @@ static void app_Conn_DisconnectCfmHandler(PM_DISCONNECT_CFM_T *cfm)
             PM_DisconnectSpecificProfile(pBdAddr, PROFILE_GFP);
         }
 #endif
->>>>>>> db20e11 (second commit)
     }
 #endif
 
@@ -379,11 +370,7 @@ void APP_RemoveServiceBdAddr(BD_ADDR_T *pBdAddr)
 		switch(APP_GetCurrentAudioDevice())
 		{
 			case AUDIO_DEVICE_SCO:
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE                
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE                
->>>>>>> db20e11 (second commit)
 			case AUDIO_DEVICE_SCO_HSP:
 #endif                
 			case AUDIO_DEVICE_SCO_IDLE:

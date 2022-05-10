@@ -86,10 +86,7 @@ void vApplicationMallocFailedHook(void *pucPoolBuffer)
 }
 #endif
 
-<<<<<<< HEAD
-=======
 extern void log_save_flash(void);
->>>>>>> db20e11 (second commit)
 #if( configUSE_IDLE_HOOK == 1 )
 void vApplicationIdleHook(void)
 {
@@ -102,12 +99,9 @@ void vApplicationIdleHook(void)
     systemhang_wdt_feed_in_task_switch();
 #endif /* configUSE_TICKLESS_IDLE != 2 */
 #endif /* MTK_SYSTEM_HANG_TRACER_ENABLE */
-<<<<<<< HEAD
-=======
 
     /* offline log flush handle */
     log_save_flash();
->>>>>>> db20e11 (second commit)
 }
 #endif
 

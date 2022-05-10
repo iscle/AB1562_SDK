@@ -37,10 +37,6 @@
 #include "Peq_NvkeyHandler.h"
 #include "Peq_Nvkey.h"
 #include "App_PeqMount.h"
-<<<<<<< HEAD
-
-=======
->>>>>>> db20e11 (second commit)
 /**************************************************************************************************
 * Define
 **************************************************************************************************/
@@ -271,10 +267,6 @@ U16 APP_PeqNvkey_GetNvkeyId(U8 peqComponent, U8 groupIndex, U8 phaseIndex, U8 nv
 	{
 		return 0xFFFF;
 	}
-<<<<<<< HEAD
-
-=======
->>>>>>> db20e11 (second commit)
 	return app_PeqNvkey_GetAudioPathNvkeyId(app_PeqNvkey_GetAudioPathIndex(peqComponent, nvkeyMode), groupIndex, phaseIndex, nvkeyMode);
 }
 

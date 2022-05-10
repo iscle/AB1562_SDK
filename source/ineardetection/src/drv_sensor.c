@@ -31,11 +31,7 @@
  * OR REFUND ANY SOFTWARE LICENSE FEES OR SERVICE CHARGE PAID BY RECEIVER TO
  * AIROHA FOR SUCH AIROHA SOFTWARE AT ISSUE.
  */
-<<<<<<< HEAD
- 
-=======
 
->>>>>>> db20e11 (second commit)
 #include "message.h"
 
 /**/
@@ -45,11 +41,7 @@
 
 void drv_pesensor_init()
 {
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> db20e11 (second commit)
 }
 
 void drv_touch_init()
@@ -58,21 +50,9 @@ void drv_touch_init()
     {
          //printf("#### Touch Init");
         hal_captouch_init();
-<<<<<<< HEAD
-        hal_captouch_channel_enable(captouch_get_channelearin());
-    } 
-    else
-    {
-        //hal_captouch_channel_enable(captouch_get_channelearin());
-    }
-
-}
- 
-=======
     }
 }
 
->>>>>>> db20e11 (second commit)
 void sensor_handler_init(Handler app)
 {
 	MSG_MessageSensorHandler(app);

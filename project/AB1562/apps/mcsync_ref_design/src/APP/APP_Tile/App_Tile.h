@@ -39,9 +39,6 @@ void APP_Tile_Init(void);
 void APP_Tile_NotifyMcsyncState(U8 newState);
 void APP_Tile_NotifyPartnerCallState(BOOL isExist);
 void APP_Tile_NotifyPartnerA2dpState(BOOL isPlay);
-<<<<<<< HEAD
-
-=======
 void APP_Tile_Set_Partner_StreamState(U8 state);
 U8 APP_Tile_Get_Partner_StreamState(void);
 void APP_Tile_Rho_done(BOOL isSuccess);
@@ -59,6 +56,5 @@ BOOL APP_Tile_FillRhoData(void *pData);
 *                   Length of data should not be over sizeof(APP_RHO_TILE_STRU)
 **************************************************************************************************/
 BOOL APP_Tile_AssignRhoData(void *pData);
->>>>>>> db20e11 (second commit)
 #endif
 

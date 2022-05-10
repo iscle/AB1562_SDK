@@ -320,8 +320,6 @@ static void app_Media_ClearMediaEvtQ(U16 EvtIndex)
 	}
 }
 
-<<<<<<< HEAD
-=======
 static void app_Media_ClearAllMediaEvtQ(void)
 {
 	U8 qCount, tarCount;
@@ -335,7 +333,6 @@ static void app_Media_ClearAllMediaEvtQ(void)
 	gMediaCtl.mediaState = MEDIA_STATE_END;
 }
 
->>>>>>> db20e11 (second commit)
 static void app_Media_CantFindNvKeyLogPrint(U16 id)
 {
 	if(id <= MEDIA_EVT_KEY_INTERNAL_TOTAL_NO)//Media evtKey
@@ -425,8 +422,6 @@ static void app_Media_PushMediaEventLogPrint(U16 id)
 	}
 }
 
-<<<<<<< HEAD
-=======
 static BOOL app_Media_IsAllowPushMediaEvent(U16 mediaEventId)
 {
 	if(APP_State_IsAnyLinkInSpecifiedState(APP_HFP_INCOMMING))
@@ -455,15 +450,12 @@ static BOOL app_Media_IsAllowPushMediaEvent(U16 mediaEventId)
 	return TRUE;
 }
 
->>>>>>> db20e11 (second commit)
 BOOL APP_Media_PushMediaEvent(U16 mediaEventId)
 {
 	if(!gMediaCtl.isDataOk)
 	{
 		return TRUE;
 	}
-<<<<<<< HEAD
-=======
 
 	if(!app_Media_IsAllowPushMediaEvent(mediaEventId))
 	{
@@ -471,7 +463,6 @@ BOOL APP_Media_PushMediaEvent(U16 mediaEventId)
 		return FALSE;
 	}
 
->>>>>>> db20e11 (second commit)
 	if(gMediaCtl.mediaQNum < MEDIA_EVT_Q_NUM)
 	{
 		app_Media_PushMediaEventLogPrint(mediaEventId);
@@ -483,10 +474,7 @@ BOOL APP_Media_PushMediaEvent(U16 mediaEventId)
 		}
 		return TRUE;
 	}
-<<<<<<< HEAD
-=======
 
->>>>>>> db20e11 (second commit)
 	return FALSE;
 }
 
@@ -524,15 +512,12 @@ void APP_Media_StopMediaEvt(U16 EvtIndex)
 	app_Media_ClearMediaEvtQ(EvtIndex);
 }
 
-<<<<<<< HEAD
-=======
 void APP_Media_ClearAllMediaEvt(void)
 {
 	APP_AudioDriver_ClearAllSubSinkCmd();
 	app_Media_ClearAllMediaEvtQ();
 }
 
->>>>>>> db20e11 (second commit)
 void APP_Media_Init(void)
 {
 	if(app_Meida_ReadMediaData() && app_Meida_ReadMediaLockTbl() && app_Media_ReadMediaFilterData())

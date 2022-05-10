@@ -69,38 +69,22 @@ var NAVTREEINDEX0 =
 "group___g_p_i_o.html#ga04b49a4a65f23aed647166741f90386b":[1,3,9,10],
 "group___g_p_i_o.html#ga19985c2e5d4b22d47d08103be800331d":[1,3,9,12],
 "group___g_p_i_o.html#ga1a23d5feecd06dbae55552cda14b9b13":[1,3,9,6],
-<<<<<<< HEAD
-"group___g_p_i_o.html#ga290f8e259302f1e6eb6caa5c3aeb8a9e":[1,3,9,15],
-"group___g_p_i_o.html#ga29169c4f1126b5aa55a6139dd9cdb79e":[1,3,9,17],
-"group___g_p_i_o.html#ga4bda9625fbc0a2e14d4ab50b8a4d7853":[1,3,9,21],
-"group___g_p_i_o.html#ga4f2b9732372813716c994140f8758580":[1,3,9,16],
-"group___g_p_i_o.html#ga54dd22211d970fb607bf172a71dca723":[1,3,9,22],
-=======
 "group___g_p_i_o.html#ga290f8e259302f1e6eb6caa5c3aeb8a9e":[1,3,9,16],
 "group___g_p_i_o.html#ga29169c4f1126b5aa55a6139dd9cdb79e":[1,3,9,18],
 "group___g_p_i_o.html#ga4bda9625fbc0a2e14d4ab50b8a4d7853":[1,3,9,22],
 "group___g_p_i_o.html#ga4f2b9732372813716c994140f8758580":[1,3,9,17],
 "group___g_p_i_o.html#ga54dd22211d970fb607bf172a71dca723":[1,3,9,23],
->>>>>>> db20e11 (second commit)
 "group___g_p_i_o.html#ga76829c574ef1efa8f524de68d6dc5625":[1,3,9,2],
 "group___g_p_i_o.html#ga7e97d3aaafde013d4cbc54c397f69d8e":[1,3,9,1],
 "group___g_p_i_o.html#ga7f2cd07a574e8fa703f82c39d2176acc":[1,3,9,4],
 "group___g_p_i_o.html#ga91a0a0c037a08dea664bbf4756df99f7":[1,3,9,7],
 "group___g_p_i_o.html#ga950d3b1160b10134b76c44bbc3645683":[1,3,9,5],
-<<<<<<< HEAD
-"group___g_p_i_o.html#gaa8cfd8842e2beb500403260d0a208d91":[1,3,9,18],
-"group___g_p_i_o.html#gab4e93d7da8f559517eadc937303b7eff":[1,3,9,9],
-"group___g_p_i_o.html#gab7ec7b671834789867616958d8640faa":[1,3,9,19],
-"group___g_p_i_o.html#gae8b415ffb56eeccc17e30459986a1bbd":[1,3,9,11],
-"group___g_p_i_o.html#gaebc8649f4c1e0bf0b463922c5b134d79":[1,3,9,20],
-=======
 "group___g_p_i_o.html#gaa8cfd8842e2beb500403260d0a208d91":[1,3,9,19],
 "group___g_p_i_o.html#gab4e93d7da8f559517eadc937303b7eff":[1,3,9,9],
 "group___g_p_i_o.html#gab7ec7b671834789867616958d8640faa":[1,3,9,20],
 "group___g_p_i_o.html#gad7b47b13e9584f643d2fb1d2852c95bf":[1,3,9,15],
 "group___g_p_i_o.html#gae8b415ffb56eeccc17e30459986a1bbd":[1,3,9,11],
 "group___g_p_i_o.html#gaebc8649f4c1e0bf0b463922c5b134d79":[1,3,9,21],
->>>>>>> db20e11 (second commit)
 "group___g_p_i_o.html#gaf52a393d0790ccb2228661756eafe619":[1,3,9,8],
 "group___g_p_i_o.html#gafad3b85f8569d715f4772fd045192490":[1,3,9,14],
 "group___g_p_i_o.html#gafc092ca55bf3e9f1b7b15e5344773eea":[1,3,9,13],
@@ -265,10 +249,5 @@ var NAVTREEINDEX0 =
 "group__hal__aes__struct.html":[1,2],
 "group__hal__aesotf__define.html":[1,0],
 "group__hal__aesotf__define.html#ga07199247cfef1af9c894147a7ff80020":[1,0,1],
-<<<<<<< HEAD
-"group__hal__aesotf__define.html#ga1ef9c837f1d06601960f337a3ece483f":[1,0,3],
-"group__hal__aesotf__define.html#ga47006f843857adb12bedad104a48bdf0":[1,0,0]
-=======
 "group__hal__aesotf__define.html#ga1ef9c837f1d06601960f337a3ece483f":[1,0,3]
->>>>>>> db20e11 (second commit)
 };

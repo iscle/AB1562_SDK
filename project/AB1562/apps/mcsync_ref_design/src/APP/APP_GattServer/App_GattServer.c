@@ -33,10 +33,7 @@
  */
 
 #include "bt.h"
-<<<<<<< HEAD
-=======
 #include "PM_Nvkey.h"
->>>>>>> db20e11 (second commit)
 
 #define APP_GATT_LINK_STATE_NONE        0
 #define APP_GATT_LINK_STATE_CONNECTED   1
@@ -281,17 +278,10 @@ static void app_GattServer_AttrInit(void)
     U8 advSize;
     U8 nameLen;
     
-<<<<<<< HEAD
-    advSize = NVKEY_GetPayloadLength(NVKEYID_BT_BLE_BLE_ADV_DATA);
-    ptr = (U8*)NVKEY_GetPayloadFlashAddress(NVKEYID_BT_BLE_BLE_ADV_DATA);
-    pAdv = (APP_GATT_SERVER_ADV_T *)ptr;
-
-=======
     advSize = PM_Nvkey_GetBleAdvDataLength();
     ptr = PM_Nvkey_GetBleAdvData();
     pAdv = (APP_GATT_SERVER_ADV_T *)ptr;
     
->>>>>>> db20e11 (second commit)
     while (pAdv && (advSize > pAdv->len))
     {
         if (APP_GATT_DATA_TYPE_DEVICE_NAME == pAdv->dataType)

@@ -35,11 +35,7 @@
 #ifndef __VERNO_H__
 #define __VERNO_H__
 
-<<<<<<< HEAD
-#define SDK_VERSION_NUMBER "V1.4.0"
-=======
 #define SDK_VERSION_NUMBER "V1.5.0"
->>>>>>> db20e11 (second commit)
 #define SDK_PACKAGE_NAME   "AB1562_SDK"
 
 #define MTK_FW_VERSION     (SDK_PACKAGE_NAME "_" SDK_VERSION_NUMBER)

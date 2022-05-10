@@ -56,11 +56,7 @@ enum
 BOOL APP_a2dp_is_connected(BD_ADDR_T *pBdAddr);
 BOOL APP_a2dp_is_in_streaming(BD_ADDR_T *pBdAddr);
 void APP_A2dp_ClearResumeState(BD_ADDR_T *pBdAddr);
-<<<<<<< HEAD
-#ifdef AVRCP_Profile
-=======
 #ifdef AIR_AVRCP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 void APP_A2dp_MonitorPlayStatus(BD_ADDR_T *pBdAddr, U8 isSuccessful);
 void APP_A2dp_CheckPlayStatusConsistency(BD_ADDR_T *pBdAddr, U8 playStatus, U8 needDelay);
 void APP_A2dp_PlayStatusChanged(BD_ADDR_T *pBdAddr, U8 playStatus);

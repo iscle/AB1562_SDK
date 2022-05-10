@@ -122,8 +122,6 @@ const GFH_CMEM_NOR_INFO_v1 combo_mem_sw_list = {
         }  // BankInfo End
     },
     {
-<<<<<<< HEAD
-=======
         // XM25QU16C
         CMEM_FDM_NOR_DEFAULT,
         64,      // Page Buffer Program Size
@@ -152,7 +150,6 @@ const GFH_CMEM_NOR_INFO_v1 combo_mem_sw_list = {
         }  // BankInfo End
     },
     {
->>>>>>> db20e11 (second commit)
         // MTKSIP_2523_SF_32_02
         CMEM_FDM_NOR_DEFAULT,
         64,      // Page Buffer Program Size

@@ -156,11 +156,7 @@ static void app_LineIn_KeyPowerOn(BD_ADDR_T *pBdAddr)
 		}
 		if (APP_ENTER_LINEIN_SEND_AVRCP_PAUSE_FEAT)
 		{
-<<<<<<< HEAD
-			#ifdef AVRCP_Profile
-=======
 			#ifdef AIR_AVRCP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 			if (APP_AvrcpIsMusicPlaying(pBdAddr) && APP_a2dp_is_in_streaming(pBdAddr))
 			{
 				APP_AvrcpDecideOperation(pBdAddr, AVC_OPERATION_KEY_PAUSE);
@@ -379,11 +375,7 @@ void APP_LineIn_EncodedDataHandler(void)
 
 	while(ptr1 = (U8 XDATA_PTR)OSMQ_MCU_DSP_Get(OSMQ_DSP_LineIn_Encoded_Payload_ptr))
 	{
-<<<<<<< HEAD
-	#ifdef A2DP_Profile
-=======
 	#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 		if(MMI_LineIn_IsDSPOpen())
 		{
 			if(!MMI_A2DP_EncodedDataHandler(ptr1))

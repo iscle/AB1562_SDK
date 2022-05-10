@@ -36,11 +36,7 @@
 #ifndef _APP_PRESSURE_SENSOR_H_
 #define _APP_PRESSURE_SENSOR_H_
 
-<<<<<<< HEAD
-#ifdef PRESSURE_SENSOR
-=======
 #ifdef AIR_CAPTOUCH_PRESSURE_SENSOR_ENABLE
->>>>>>> db20e11 (second commit)
 /**************************************************************************************************
 * Structure Functions
 **************************************************************************************************/

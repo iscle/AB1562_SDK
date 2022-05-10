@@ -81,12 +81,6 @@
 #include "App_MCSync_Message.h"
 #include "App_Customer.h"
 
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-#include "App_MCSync_Share.h"
-#endif
-
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
 #include "App_MCSync_Share.h"
 #endif
@@ -94,7 +88,6 @@
 #ifdef AIR_GFP_ENABLE
 #include "App_Gfp.h"
 #endif
->>>>>>> db20e11 (second commit)
 /**************************************************************************************************
 * Prototype
 **************************************************************************************************/
@@ -173,11 +166,7 @@ static void app_SystemKey_VadOff(BD_ADDR_T * pBdAddr);
 static void app_SystemKey_GameModeOn(BD_ADDR_T * pBdAddr);
 static void app_SystemKey_GameModeOff(BD_ADDR_T * pBdAddr);
 static void app_SystemKey_GameModeToggle(BD_ADDR_T * pBdAddr);
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 static void app_SystemKey_AgentStartsShareMode(BD_ADDR_T * pBdAddr);
 static void app_SystemKey_AgentStopsShareMode(BD_ADDR_T * pBdAddr);
 static void app_SystemKey_FollowerStartsShareMode(BD_ADDR_T * pBdAddr);
@@ -315,22 +304,6 @@ static APP_KEY_EVT_STRU const gSystemKeyEvtHandler[SYSTEM_KEY_EVENT_NO] =  //MMI
 	{app_SystemKey_GameModeOn},					//SYSTEM_KEY_EVENT_KEY_GAME_MODE_ON
 	{app_SystemKey_GameModeOff},				//SYSTEM_KEY_EVENT_KEY_GAME_MODE_OFF
 	{app_SystemKey_GameModeToggle},				//SYSTEM_KEY_EVENT_KEY_GAME_MODE_TOGGLE
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-	{app_SystemKey_AgentStartsShareMode},		//SYSTEM_KEY_EVENT_KEY_AGENT_STARTS_SHARE_MODE
-	{app_SystemKey_AgentStopsShareMode},			//SYSTEM_KEY_EVENT_KEY_AGENT_STOPS_SHARE_MODE
-	{app_SystemKey_FollowerStartsShareMode},		//SYSTEM_KEY_EVENT_KEY_FOLLOWER_STARTS_SHARE_MODE
-	{app_SystemKey_FollowerStopsShareMode},		//SYSTEM_KEY_EVENT_KEY_FOLLOWER_STOPS_SHARE_MODE
-	{app_SystemKey_AgentToggleShareMode},		//SYSTEM_KEY_EVENT_KEY_AGENT_TOGGLE_SHARE_MODE
-	{app_SystemKey_FollowerToggleshareMode},		//SYSTEM_KEY_EVENT_KEY_FOLLOWER_TOGGLE_SHARE_MODE
-#else
-	{NULL},										//SYSTEM_KEY_EVENT_KEY_AGENT_STARTS_SHARE_MODE
-	{NULL},										//SYSTEM_KEY_EVENT_KEY_AGENT_STOPS_SHARE_MODE
-	{NULL},										//SYSTEM_KEY_EVENT_KEY_FOLLOWER_STARTS_SHARE_MODE
-	{NULL},										//SYSTEM_KEY_EVENT_KEY_FOLLOWER_STOPS_SHARE_MODE
-	{NULL},										//SYSTEM_KEY_EVENT_KEY_AGENT_TOGGLE_SHARE_MODE
-	{NULL},										//SYSTEM_KEY_EVENT_KEY_FOLLOWER_TOGGLE_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
 	{app_SystemKey_AgentStartsShareMode},		//SYSTEM_KEY_EVENT_KEY_MASTER_SHARE_MODE_START
 	{app_SystemKey_AgentStopsShareMode},		//SYSTEM_KEY_EVENT_KEY_MASTER_SHARE_MODE_STOP
@@ -345,7 +318,6 @@ static APP_KEY_EVT_STRU const gSystemKeyEvtHandler[SYSTEM_KEY_EVENT_NO] =  //MMI
 	{NULL},										//SYSTEM_KEY_EVENT_KEY_FOLLOWER_SHARE_MODE_STOP
 	{NULL},										//SYSTEM_KEY_EVENT_KEY_MASTER_SHARE_MODE_TOGGLE
 	{NULL},										//SYSTEM_KEY_EVENT_KEY_FOLLOWER_SHARE_MODE_TOGGLE
->>>>>>> db20e11 (second commit)
 #endif
 	{app_SystemKey_MicToSpk3MicMainEnable},		//SYSTEM_KEY_EVENT_KEY_MIC_TO_SPK_3MIC_MAIN_MIC_ENABLE
 	{app_SystemKey_MicToSpk3MicRef1Enable},		//SYSTEM_KEY_EVENT_KEY_MIC_TO_SPK_3MIC_REF1_MIC_ENABLE
@@ -473,14 +445,11 @@ static void app_SystemKey_ReconnectUserInit(BD_ADDR_T *pBdAddr)
 static void app_SystemKey_Discoverable(BD_ADDR_T *pBdAddr)
 {
 	UNUSED(pBdAddr);
-<<<<<<< HEAD
-=======
     if (APP_GetAGNum() > 0)
     {
         /* Pressed when there is at least one SP connected. */
         APP_SetKeepDiscoverableAfterDisc(TRUE);
     }
->>>>>>> db20e11 (second commit)
 	APP_System_Discoverable();
 }
 
@@ -500,11 +469,8 @@ static void app_SystemKey_ConnectedToDiscoverable(BD_ADDR_T *pBdAddr)
 
 	APP_ReConn_ClearCtl();
 	APP_Conn_ReleaseMultiLink();
-<<<<<<< HEAD
-=======
 	APP_Mcsync_SetNotReconnMask(MCS_RECONN_MASK_AG_DISC);
 
->>>>>>> db20e11 (second commit)
 	if(!CURRENT_ACTIVE_LINK_CNT)
 	{
 		APP_Pairing_EnterDiscoverable();
@@ -512,12 +478,9 @@ static void app_SystemKey_ConnectedToDiscoverable(BD_ADDR_T *pBdAddr)
 	else
 	{
 		APP_SetEnterDiscoverableAfterDisc(TRUE);
-<<<<<<< HEAD
-=======
         if(pBdAddr) {
             BtSetAclDetachTimeout(&pBdAddr->addr[0], 0);
         }
->>>>>>> db20e11 (second commit)
 	}
 }
 
@@ -605,11 +568,7 @@ static void app_SystemKey_VolOrientationInvert(BD_ADDR_T *pBdAddr)
 
 static void app_SystemKey_ToggleLED(BD_ADDR_T *pBdAddr)
 {
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> db20e11 (second commit)
 	//UNUSED(pBdAddr);
 	//MMI_LED_KeyOnOffHandler(TOGGLE_LED);
 	app_Customer_AirohaKey(pBdAddr);
@@ -668,11 +627,7 @@ static void app_SystemKey_PowerOff(BD_ADDR_T *pBdAddr)
 {
 	UNUSED(pBdAddr);
 
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> db20e11 (second commit)
 	APP_PowerOff_Loader(POWEROFF_REASON_KEY);
 	#ifdef OLED_ENABLE
 //	OLED_DisplayOff();
@@ -688,18 +643,11 @@ static void app_SystemKey_Reset(BD_ADDR_T *pBdAddr)
 
 static void app_SystemKey_ResetPairedDevices(BD_ADDR_T *pBdAddr)
 {
-<<<<<<< HEAD
-	UNUSED(pBdAddr);
-	APP_Customer_SetCloseAdv();
-	APP_ReConn_ClearCtl();
-	APP_Conn_ReleaseMultiLink();
-=======
 	APP_Customer_SetCloseAdv();
 	APP_ReConn_ClearCtl();
 	APP_Conn_ReleaseMultiLink();
     //0ms means that it will disc acl directly after disc all profiles.
     BtSetAclDetachTimeout(&pBdAddr->addr[0], 0);
->>>>>>> db20e11 (second commit)
 
 	if(LINK_DISCONNECTED == APP_Conn_GetAgLinkState())
 		APP_LinkKey_ClearAllHistory();
@@ -711,13 +659,7 @@ static void app_SystemKey_ResetPairedDevices(BD_ADDR_T *pBdAddr)
 
 static void app_SystemKey_ResetToFactory(BD_ADDR_T *pBdAddr)
 {
-<<<<<<< HEAD
-	UNUSED(pBdAddr);
-
-	app_SystemKey_ResetPairedDevices(NULL);
-=======
 	app_SystemKey_ResetPairedDevices(pBdAddr);
->>>>>>> db20e11 (second commit)
 	APP_VpSetLanguageToDefault();
 	APP_System_SetToDefaultNvkey();
 	APP_System_SetSystemFactoryValue();
@@ -745,12 +687,9 @@ static void app_SystemKey_ResetToFactory(BD_ADDR_T *pBdAddr)
 	#ifdef PROFILE_AMA_ENABLE
 	AMA_Target_FactoryReset();
 	#endif
-<<<<<<< HEAD
-=======
     #ifdef AIR_GFP_ENABLE
     APP_Gfp_ResetToFactory();
     #endif
->>>>>>> db20e11 (second commit)
 	APP_Customer_setKeyResetToFactoryStatus(TRUE);
 	APP_Customer_AfterCleanLinkkeyAutoEnterDeepSlee();
 }
@@ -923,11 +862,7 @@ static void app_SystemKey_SCOSwitch(BD_ADDR_T *pBdAddr)
 		//APP_SetSwitchingSCO(TRUE);
 		//APP_HfpSco_SendDSPCmd(pOtherBdAddr);
 		APP_ResumeOtherAudioDevice(pBdAddr, AUDIO_DEVICE_SCO_IDLE);
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE        
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 		APP_ResumeOtherAudioDevice(pBdAddr, AUDIO_DEVICE_SCO_HSP);
 #endif
 		APP_ResumeOtherAudioDevice(pBdAddr, AUDIO_DEVICE_SCO);
@@ -1172,11 +1107,7 @@ static void app_SystemKey_GameModeToggle(BD_ADDR_T * pBdAddr)
     APP_A2dp_GameModeToggle();
 }
 
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 static void app_SystemKey_AgentStartsShareMode(BD_ADDR_T * pBdAddr)
 {
 	UNUSED(pBdAddr);
@@ -1184,11 +1115,7 @@ static void app_SystemKey_AgentStartsShareMode(BD_ADDR_T * pBdAddr)
 }
 
 static void app_SystemKey_AgentStopsShareMode(BD_ADDR_T * pBdAddr)
-<<<<<<< HEAD
-{	
-=======
 {
->>>>>>> db20e11 (second commit)
 	UNUSED(pBdAddr);
 	APP_MCSync_Share_KeyAgentStop();
 }
@@ -1215,19 +1142,11 @@ static void app_SystemKey_AgentToggleShareMode(BD_ADDR_T * pBdAddr)
 		case MCSYNC_SHARE_MODE_DISABLE:
 			APP_MCSync_Share_KeyAgentStart();
 			break;
-<<<<<<< HEAD
-			
-		case MCSYNC_SHARE_MODE_NORMAL_ENABLE:
-			APP_MCSync_Share_KeyAgentStop();
-			break;
-		
-=======
 
 		case MCSYNC_SHARE_MODE_NORMAL_ENABLE:
 			APP_MCSync_Share_KeyAgentStop();
 			break;
 
->>>>>>> db20e11 (second commit)
 		default:
 			break;
 	}
@@ -1237,29 +1156,17 @@ static void app_SystemKey_FollowerToggleshareMode(BD_ADDR_T * pBdAddr)
 {
 	UNUSED(pBdAddr);
 	U8 shareMode = BtMCSync_GetShareMode();
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> db20e11 (second commit)
 	switch(shareMode)
 	{
 		case MCSYNC_SHARE_MODE_DISABLE:
 			APP_MCSync_Share_KeyFollowerStart();
 			break;
-<<<<<<< HEAD
-			
-		case MCSYNC_SHARE_MODE_FOLLOWER_ENABLE:
-			APP_MCSync_Share_KeyFollowerStop();
-			break;
-		
-=======
 
 		case MCSYNC_SHARE_MODE_FOLLOWER_ENABLE:
 			APP_MCSync_Share_KeyFollowerStop();
 			break;
 
->>>>>>> db20e11 (second commit)
 		default:
 			break;
 	}
@@ -1343,11 +1250,7 @@ static U16 app_SystemKey_CheckKeyVoiceUpDown(U16 keyEventCode)
 	{
 		keyEventCode = KEY_INVALID;
 	}
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> db20e11 (second commit)
     if(APP_AudioDspIsStreaming(NULL, AUDIO_RT) && MEDIA_EVT_PLAYING_BEEP_SYNC == APP_AudioDriver_GetPlayingID())
     {
         keyEventCode = KEY_INVALID;

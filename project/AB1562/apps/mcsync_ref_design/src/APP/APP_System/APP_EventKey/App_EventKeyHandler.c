@@ -78,11 +78,7 @@
 #include "App_XiaoaiKey.h"
 #endif
 
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 #include "App_MCSync_Share.h"
 #endif
 
@@ -121,11 +117,7 @@ void APP_EvtKey_KeyHandler(U16 keyEventCode)
 		return;
 	}
 
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 	if(!APP_MCSync_Share_IsKeyEventAllowed(keyEventCode))
 	{
 		return;
@@ -209,11 +201,7 @@ void APP_EvtKey_KeyEventHandler(BD_ADDR_T *pBdAddr, U16 keyEventCode)
 			#endif
 			break;
 		case AVRCP_KEY_EVENT:
-<<<<<<< HEAD
-			#ifdef AVRCP_Profile
-=======
 			#ifdef AIR_AVRCP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 			APP_AVRCP_ProcessKeyEvent(pBdAddr, keyEventIndex);
 			#endif
 			break;

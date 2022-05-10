@@ -91,13 +91,10 @@ U8* PM_NvKey_GetUserDeviceNameAddr();
 U8 *PM_Nvkey_GetDeviceName();
 U16 PM_Nvkey_GetDeviceNameLength();
 
-<<<<<<< HEAD
-=======
 U16 PM_NvKey_GetDefaultBleAdvDataLength(void);
 U8 *PM_NvKey_GetDefaultBleAdvDataAddr(void);
 BOOL PM_NvKey_IsUserDefineBleAdvDataExist(void);
 U8 *PM_Nvkey_GetBleAdvData(void);
 U16 PM_Nvkey_GetBleAdvDataLength(void);
 
->>>>>>> db20e11 (second commit)
 #endif //__PM_NVKEY_H__

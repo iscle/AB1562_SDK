@@ -303,10 +303,7 @@ void AWSMCE_KeyEnableDiscoverable(void);
 void AWSMCE_AgentDisconnAwsLink(BD_ADDR_T *pBdAddr);
 BOOL MSCYNC_RoleModeChangeHandler(U8 action, U8 status);
 void MCSYNC_ResetSlaveRetryCount(void);
-<<<<<<< HEAD
-=======
 BOOL MCSYNC_IsAgentAbleToDisconnAwsLink(void);
->>>>>>> db20e11 (second commit)
 
 
 #endif

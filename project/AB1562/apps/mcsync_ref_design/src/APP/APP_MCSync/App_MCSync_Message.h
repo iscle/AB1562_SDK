@@ -54,13 +54,9 @@ void APP_MCSYNC_SendSyncVPLangIndex(U8 index);
 void APP_MCSYNC_SendSyncCallIdInfo(U8 *pCallerId, U8 length);
 void APP_MCSYNC_SendPEQRealTimeInfo(U8 *pData, U16 dataLength, U32 clockToStart);
 void APP_MCSYNC_SendSyncPowerOff(U8 reason, BOOL isFollowerIFPKT, BOOL isOnlyForFollower);
-<<<<<<< HEAD
-void APP_MCSYNC_SendSyncGFPInfo(U8 *pData, U32 length);
-=======
 #ifdef AIR_TILE_ADV_ENABLE
 void APP_MCSYNC_SendSyncTileInfo(BOOL isAgent);
 #endif
->>>>>>> db20e11 (second commit)
 void APP_MCSYNC_SendSyncFCDReset(U8 reason);
 void APP_MCSYNC_SendSyncSpeakerMute(BOOL isMute);
 
@@ -84,14 +80,9 @@ void APP_MCSYNC_SendLinkList(U8 * pData, U32 length);
 void APP_MCSYNC_SendSyncClearLinkKey(void);
 void APP_MCSYNC_SendSyncGeneralData(U8 *pData, U32 length);
 void APP_MCSYNC_SendSyncFollowerDisc(U8 isFollowerIFPkt, U8 isOnlyForFollower);
-<<<<<<< HEAD
-
-#ifdef MCSYNC_SHARE_MODE
-=======
 void APP_MCSYNC_SendNoticeMasterPartnerToShareMode(U8 enterShareMode);
 
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 void APP_MCSYNC_SendSyncShareModeInfo(U8 state, U8 shareMode);
 /*Share Mode*/
 /* Follower to Agent */
@@ -104,12 +95,9 @@ void APP_MCSYNC_SendSyncOtherAgentBDA(BD_ADDR_T *pBdAddr);
 void APP_MCSYNC_SendExitRequest(void);
 #endif
 
-<<<<<<< HEAD
-=======
 #ifdef AIR_TAKE_OVER_LINK_ENABLE
 void APP_MCSYNC_SendSyncTakeOverStateInfo(void);
 #endif
->>>>>>> db20e11 (second commit)
 
 
 #endif //_APP_AWSMCE_MESSAGE_

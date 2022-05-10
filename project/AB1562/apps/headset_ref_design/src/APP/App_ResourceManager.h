@@ -79,12 +79,9 @@
 #define APP_SetEnterDiscoverableAfterDisc(a)		(gAppCtl.enterDiscoverableAfterDisc = (a))
 #define APP_IsEnterDiscoverableAfterDisc()			(gAppCtl.enterDiscoverableAfterDisc)
 
-<<<<<<< HEAD
-=======
 #define APP_SetKeepDiscoverableAfterDisc(a)		    (gAppCtl.keepDiscoverableAfterDisc = (a))
 #define APP_IsKeepDiscoverableAfterDisc()			(gAppCtl.keepDiscoverableAfterDisc)
 
->>>>>>> db20e11 (second commit)
 #define APP_SetKeyInvalidPwOnLowBat(a)				(gAppCtl.driverCtl.keyInvalidInPwrOnLowBat = (a))
 #define APP_IsKeyInvalidPwOnLowBat()				(gAppCtl.driverCtl.keyInvalidInPwrOnLowBat)
 
@@ -352,12 +349,9 @@ typedef struct
 	BD_ADDR_T imgCallBdAddr;
 	U8 dspAncAtState;
 	U8 airoThruSoundLevel;
-<<<<<<< HEAD
-=======
 
         U8 keepDiscoverableAfterDisc:1;
 	U8 reserve:7;
->>>>>>> db20e11 (second commit)
 	/*
 #ifdef TRSPX_App
 	U32 passkey[MAX_MULTI_POINT_NO];

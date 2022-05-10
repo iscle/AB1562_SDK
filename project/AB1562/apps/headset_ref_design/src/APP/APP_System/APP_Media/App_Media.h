@@ -256,10 +256,7 @@ BOOL APP_Media_SendFakeMediaCmd(U16 mediaEventId); //MMI_DRV_SendFakeMediaCmd
 BOOL APP_Media_IsSubSinkQBufFull(void);
 BOOL APP_Media_IsMediaEvtLock(U16 evtCode);
 void APP_Media_StopMediaEvt(U16 EvtIndex);
-<<<<<<< HEAD
-=======
 void APP_Media_ClearAllMediaEvt(void);
->>>>>>> db20e11 (second commit)
 void APP_Media_Init(void);
 
 void APP_Media_PowerOffHandle(BOOL isReset);

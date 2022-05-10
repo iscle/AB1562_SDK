@@ -47,13 +47,10 @@
 #include "App_Oppo.h"
 #endif
 
-<<<<<<< HEAD
-=======
 #ifdef AIR_TILE_ADV_ENABLE
 #include "App_Tile.h"
 #endif
 
->>>>>>> db20e11 (second commit)
 /**************************************************************************************************
 * Definition
 **************************************************************************************************/
@@ -276,12 +273,9 @@ typedef struct
 #ifdef OPPO_DEVELOPMENT
     APP_RHO_OPPO_STRU appOppo;
 #endif
-<<<<<<< HEAD
-=======
 #ifdef AIR_TILE_ADV_ENABLE
 	APP_RHO_TILE_STRU appTile;
 #endif
->>>>>>> db20e11 (second commit)
 }PACKED APP_RHO_DATA_STRU;
 
 /**************************************************************************************************

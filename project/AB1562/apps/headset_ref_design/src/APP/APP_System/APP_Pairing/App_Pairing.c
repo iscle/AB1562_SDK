@@ -105,11 +105,7 @@ static void app_pairing_write_scan_enable_cfm_handler(BT_WRITE_SCAN_ENABLE_CFM_T
                 state = APP_State_GetTopState(APP_EOF);
 
                 DBG_LOG_APP_SYSTEM( "[APP_Pairing] Scan enable, Inquiry disable, state:%d", 1, state);
-<<<<<<< HEAD
-                if(APP_FAKEOFF == state || APP_OFF == state)
-=======
                 if(APP_FAKEOFF == state || APP_OFF == state || APP_DETACHING_LINK == state)
->>>>>>> db20e11 (second commit)
                 {
                     APP_Pairing_ConnectableHandler(NON_CONNECTABLE_MODE);
                 }

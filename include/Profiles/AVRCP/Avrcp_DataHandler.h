@@ -283,16 +283,10 @@ typedef struct {
 } PACKED AVRCP_GET_ELEMENT_ATTRIBUTES_CMD;
 
 typedef struct {
-<<<<<<< HEAD
-    U32 AttributeID;
-    U16 CharacterSetID;
-    U16 AttributeValueLength;
-=======
     //U32 AttributeID;
     //U16 CharacterSetID;
     //U16 AttributeValueLength;
     U8 AttNum;
->>>>>>> db20e11 (second commit)
     U8 AttributeValue[1];
 } PACKED AVRCP_ELEMENT_ATTRIBUTE;
 
@@ -302,13 +296,8 @@ typedef struct {
     U8 packetType : 2;
     U8 reserved : 6;
     U16 ParameterLength;
-<<<<<<< HEAD
-    U8 NumAttributes;
-    AVRCP_ELEMENT_ATTRIBUTE	Attribute[1];
-=======
     //U8 NumAttributes;
     U8	Attribute[1];
->>>>>>> db20e11 (second commit)
 } PACKED AVRCP_GET_ELEMENT_ATTRIBUTES_RSP;
 
 typedef struct {

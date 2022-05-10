@@ -323,34 +323,23 @@ static void app_VpRt_PreparePlay(void)
 	else
 	{
 		APP_VolManage_SyncBeep();
-<<<<<<< HEAD
-=======
 		APP_Media_SendFakeMediaCmd(gVpRtInfo.eventIndex);
->>>>>>> db20e11 (second commit)
 	}
 }
 
 static void app_VpRt_SyncHandler(void)
 {
 	BD_ADDR_T *pBdServiceAddr = APP_GetServiceBdAddr();
-<<<<<<< HEAD
-
-	app_VpRt_PreparePlay();
-
-=======
 	app_VpRt_PreparePlay();
 
 	DBG_LOG_APP_VpRtControl( "[VPRT] sync handler, media event:0x%x, service BDA:0x%x%x, link connected:%d ", 4,
 		gVpRtInfo.eventIndex, FW_bdaddr_to_2U32(pBdServiceAddr, TRUE), FW_bdaddr_to_2U32(pBdServiceAddr, FALSE),
 		PM_IsProfileConnected(pBdServiceAddr, PROFILE_MCSYNC));
 
->>>>>>> db20e11 (second commit)
 	if(PM_IsProfileConnected(pBdServiceAddr, PROFILE_MCSYNC) && APP_Media_IsMediaEventAllowSync(gVpRtInfo.eventIndex))
 	{
 		FW_MessageSendEx((Handler)&gAppVpRtTimerHandle, AWSMCE_VPRT_SET_SYNC_TIMER_MASTER, NULL, 0);
 	}
-<<<<<<< HEAD
-=======
 	else if(BtMCSync_ReadAgentBdAddr() != NULL && APP_Media_CheckIsConnEvent(gVpRtInfo.eventIndex))
 	{
 		DBG_LOG_APP_VpRtControl( "[VPRT]sync handler, special connected:%d", 1, PM_IsProfileConnected(BtMCSync_ReadAgentBdAddr(), PROFILE_MCSYNC));
@@ -363,7 +352,6 @@ static void app_VpRt_SyncHandler(void)
 			APP_VpRt_OSDPCTimer((gVpRtInfo.eventIndex == MEDIA_EVT_PLAYING_BEEP_SYNC) ? AWSMCE_VPRT_BEEP_TIMER : AWSMCE_VPRT_PLAYING_TIMER, APP_VP_RT_DIRECTLY_PLAY_TIME);
 		}
 	}
->>>>>>> db20e11 (second commit)
 	else
 	{
 		APP_VpRt_OSDPCTimer((gVpRtInfo.eventIndex == MEDIA_EVT_PLAYING_BEEP_SYNC) ? AWSMCE_VPRT_BEEP_TIMER : AWSMCE_VPRT_PLAYING_TIMER, APP_VP_RT_DIRECTLY_PLAY_TIME);
@@ -399,10 +387,7 @@ void APP_VpRt_SetSyncTimerMaster(U16 rtIndex, U16 vpIndex, U16 eventIndex, U8 ov
 	U32 timeToWait = (app_VpRt_checkVpSyncType(eventIndex) == VPRT_BEEP_SYNC) ? BEEP_PLAY_SYNC_TIME : VPRT_PLAY_SYNC_TIME;
 	U32 timeToOpenHw = DSP_CTRL_GetAfeDelayTimeMs(TRUE); //get the rest of time before HW opened
 	U32 clockToStart;
-<<<<<<< HEAD
-=======
 	BD_ADDR_T *pBdServiceAddr = APP_GetServiceBdAddr();
->>>>>>> db20e11 (second commit)
 
 	timeToWait = (timeToWait < timeToOpenHw) ? timeToOpenHw : timeToWait;
 	clockToStart = currentPicoClock + (timeToWait * 1000) / HALF_SLOT;
@@ -411,10 +396,6 @@ void APP_VpRt_SetSyncTimerMaster(U16 rtIndex, U16 vpIndex, U16 eventIndex, U8 ov
 		currentPicoClock, timeToWait, clockToStart, eventIndex, APP_VPLogString[vpIndex], APP_RTLogString[rtIndex]);
 
 	if(rtIndex != 0xFF || vpIndex != 0xFF || app_VpRt_checkVpSyncType(eventIndex) == VPRT_BEEP_SYNC)
-<<<<<<< HEAD
-		APP_VpRt_OSDPCTimer((app_VpRt_checkVpSyncType(eventIndex) == VPRT_BEEP_SYNC) ? AWSMCE_VPRT_BEEP_TIMER : AWSMCE_VPRT_PLAYING_TIMER, timeToWait);
-
-=======
 	{
 		if((pBdServiceAddr && PM_IsProfileConnected(pBdServiceAddr, PROFILE_MCSYNC)) ||
 			(BtMCSync_ReadAgentBdAddr() && PM_IsProfileConnected(BtMCSync_ReadAgentBdAddr(), PROFILE_MCSYNC)))
@@ -426,7 +407,6 @@ void APP_VpRt_SetSyncTimerMaster(U16 rtIndex, U16 vpIndex, U16 eventIndex, U8 ov
 			APP_VpRt_OSDPCTimer((app_VpRt_checkVpSyncType(eventIndex) == VPRT_BEEP_SYNC) ? AWSMCE_VPRT_BEEP_TIMER : AWSMCE_VPRT_PLAYING_TIMER, timeToWait);
 		}
 	}
->>>>>>> db20e11 (second commit)
 	APP_MCSYNC_SendSyncVpRtInfo(rtIndex, vpIndex, eventIndex, clockToStart, overwriteTime);
 
 	app_ClockToStart_Set(clockToStart);
@@ -437,12 +417,8 @@ void APP_VpRt_SetSyncTimerSlave(U16 rtIndex, U16 vpIndex, U16 eventIndex, U8 ove
 	U32 timeToWait, timeToOpenHw, clockToStart;
 	U32 currentPicoClock = BtAwsMce_GetCurrentBtClock();
 	U32 timeTH = (eventIndex == MEDIA_EVT_PLAYING_BEEP_SYNC) ? BEEP_PLAY_SYNC_TIME : VPRT_PLAY_SYNC_TIME;
-<<<<<<< HEAD
-
-=======
 	BD_ADDR_T *pBdServiceAddr = APP_GetServiceBdAddr();
 	
->>>>>>> db20e11 (second commit)
 	UNUSED(overwriteTime);
 
 	app_ClockToStart_Set(masterPicoClock);
@@ -453,14 +429,11 @@ void APP_VpRt_SetSyncTimerSlave(U16 rtIndex, U16 vpIndex, U16 eventIndex, U8 ove
 
 	if(timeToWait > timeTH || (rtIndex == 0xFF && vpIndex == 0xFF && app_VpRt_checkVpSyncType(eventIndex) != VPRT_BEEP_SYNC)) //overtime, masterPicoClock(clock to start).
 	{
-<<<<<<< HEAD
-=======
 		if(APP_Media_CheckIsConnEvent(eventIndex))
 		{
 			Sink_SubAudio_Start();
 		}
 
->>>>>>> db20e11 (second commit)
 		APP_AudioDriver_ClearSubSinkCmd(eventIndex);
 		APP_Media_SendFakeMediaCmd(eventIndex);
 		return;
@@ -475,9 +448,6 @@ void APP_VpRt_SetSyncTimerSlave(U16 rtIndex, U16 vpIndex, U16 eventIndex, U8 ove
 		APP_MCSYNC_SendSyncVpRtPlayLater(eventIndex, clockToStart);
 	}
 
-<<<<<<< HEAD
-	APP_VpRt_OSDPCTimer( (app_VpRt_checkVpSyncType(eventIndex) == VPRT_BEEP_SYNC) ? AWSMCE_VPRT_BEEP_TIMER : AWSMCE_VPRT_PLAYING_TIMER, timeToWait);
-=======
 	if((pBdServiceAddr && PM_IsProfileConnected(pBdServiceAddr, PROFILE_MCSYNC)) ||
 		(BtMCSync_ReadAgentBdAddr() && PM_IsProfileConnected(BtMCSync_ReadAgentBdAddr(), PROFILE_MCSYNC)))
 	{
@@ -487,7 +457,6 @@ void APP_VpRt_SetSyncTimerSlave(U16 rtIndex, U16 vpIndex, U16 eventIndex, U8 ove
 	{
 		APP_VpRt_OSDPCTimer((app_VpRt_checkVpSyncType(eventIndex) == VPRT_BEEP_SYNC) ? AWSMCE_VPRT_BEEP_TIMER : AWSMCE_VPRT_PLAYING_TIMER, timeToWait);
 	}
->>>>>>> db20e11 (second commit)
 }
 
 void APP_VpRt_SyncTimerSlaveSetting(U16 rtIndex, U16 vpIndex, U16 eventIndex, U8 overwriteTime, U32 masterPicoClock)
@@ -568,11 +537,6 @@ void APP_VpRt_SyncPlayLaterHandler(U16 eventIndex, U32 clockToStart)
 	}
 }
 
-<<<<<<< HEAD
-void APP_VpRt_OSDPCTimer(U16 id, U32 delayMs)
-{
-	DBG_LOG_APP_VpRtControl( "[VPRT] Set OS DPC Timer, id:%d, CurrClk:%d, delay(ms):%d", 3, id, BtAwsMce_GetCurrentBtClock(), delayMs);
-=======
 void APP_VpRt_T0Timer(U16 id, U32 clockToStart, U32 delayMs)
 {
 	BD_ADDR_T *pBdAddr = NULL;
@@ -624,7 +588,6 @@ void APP_VpRt_T0Timer(U16 id, U32 clockToStart, U32 delayMs)
 void APP_VpRt_OSDPCTimer(U16 id, U32 delayMs)
 {
 	DBG_LOG_APP_VpRtControl( "[VPRT] Set DPC Timer, id:%d, CurrClk:%d, delay(ms):%d", 3, id, BtAwsMce_GetCurrentBtClock(), delayMs);
->>>>>>> db20e11 (second commit)
 
 	if(id == AWSMCE_VPRT_PLAYING_TIMER)
 		FW_SetDPCTimer(&gAppVpRtPlayDpcBlock, app_VpRt_PlayingVpRtDPCCallback, delayMs);
@@ -645,13 +608,10 @@ void APP_VpRt_UnSniffSendIFPacket(void)
 	BD_ADDR_T *pBdAddr = APP_GetServiceBdAddr();
 
 	App_SniffDisable(pBdAddr, APP_UNSNIFF_VPRT_SYNC);
-<<<<<<< HEAD
-=======
 
 	DBG_LOG_APP_VpRtControl( "[VPRT] UnSniffSendIFPacket, BDA:0x%x%x, active link:%d", 3,
 		FW_bdaddr_to_2U32(pBdAddr, TRUE), FW_bdaddr_to_2U32(pBdAddr, FALSE), PM_IsInActiveOrEmptyLink(pBdAddr));
 
->>>>>>> db20e11 (second commit)
 	if(PM_IsInActiveOrEmptyLink(pBdAddr))
 	{
 		app_VpRt_SyncHandler();

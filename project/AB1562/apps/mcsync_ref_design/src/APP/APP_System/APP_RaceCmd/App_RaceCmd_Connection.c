@@ -70,11 +70,7 @@ static void app_race_cmd_app_connection_enable_pts_test(MSG_ID_RACE_TO_APP_CONNE
                 BtAwsMce_DisconnectAwsLink();
         }
 
-<<<<<<< HEAD
-        pm_connection_set_block_role_slave(true);
-=======
         PM_Conn_SetBlockRoleSlave(true);
->>>>>>> db20e11 (second commit)
     }
 }
 

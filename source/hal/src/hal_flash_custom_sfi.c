@@ -74,49 +74,29 @@ const CMEMEntrySFIList combo_mem_hw_list = {   // (to be renamed by SFI owner)
     {
 
         {
-<<<<<<< HEAD
-            // MTKSIP_2523_SF_32_01
-=======
             // SIP XM25QU32C
->>>>>>> db20e11 (second commit)
             {
                 // HW config 78Mhz Start
                 0x00010000,  // SFI_MAC_CTL
                 0xEB0B5770,  // SFI_DIRECT_CTL
-<<<<<<< HEAD
-                0x52F80000,     //  SFI_MISC_CTL
-                0x00000001,     //  SFI_MISC_CTL2
-                0x0,     // 1st SFI_DLY_CTL_2
-                0x18000018,         // 1st SFI_DLY_CTL_3
-=======
                 0x52F80310,     //  SFI_MISC_CTL
                 0x00000000,     //  SFI_MISC_CTL2
                 0x0,     // 1st SFI_DLY_CTL_2
                 0x06000006,         // 1st SFI_DLY_CTL_3
->>>>>>> db20e11 (second commit)
                 0x00040004,           // DRIVING
                 0,                  // Reserved
                 0,  // 2nd SFI_DLY_CTL_4
                 0  // 2nd SFI_DLY_CTL_5
             },  // HW config End
             {
-<<<<<<< HEAD
-                SPI, 1, 0x06, SPI, 2, 0x01, 0x42, SPI,
-                2, 0x05, 0x01, SPI, 2, 0xC0, 0x02, SF_UNDEF,
-=======
                 SPI, 1, 0x50, SPI, 3, 0x01, 0x02, 0x02,
                 SF_UNDEF,
->>>>>>> db20e11 (second commit)
                 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0
             },
             {
                 // HW config 26Mhz Start
                 0x00010000,  // SFI_MAC_CTL
-<<<<<<< HEAD
-                0xEB0B5770,  // SFI_DIRECT_CTL
-                0x52F80000,     //  SFI_MISC_CTL
-=======
                 0x0C0B7771,  // SFI_DIRECT_CTL
                 0x52F80310,     //  SFI_MISC_CTL
                 0x00000001,     //  SFI_MISC_CTL2
@@ -152,7 +132,6 @@ const CMEMEntrySFIList combo_mem_hw_list = {   // (to be renamed by SFI owner)
                 0x00010000,  // SFI_MAC_CTL
                 0x0C0B7771,  // SFI_DIRECT_CTL
                 0x52F80310,     //  SFI_MISC_CTL
->>>>>>> db20e11 (second commit)
                 0x00000001,     //  SFI_MISC_CTL2
                 0x0,     // 1st SFI_DLY_CTL_2
                 0x0,         // 1st SFI_DLY_CTL_3

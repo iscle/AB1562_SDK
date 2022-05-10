@@ -129,11 +129,7 @@ void APP_VolManage_SpkVolumeUpDownHandler(BD_ADDR_T *pBdAddr, U16 keyCode, BOOL 
 	BOOL isVolumeUp;
 
 	#if !defined(HFP_Profile)
-<<<<<<< HEAD
-	#ifndef A2DP_Profile
-=======
 	#ifndef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 	UNUSED(pBdAddr);
 	#endif
 	#endif
@@ -143,11 +139,7 @@ void APP_VolManage_SpkVolumeUpDownHandler(BD_ADDR_T *pBdAddr, U16 keyCode, BOOL 
 	switch(APP_GetCurrentAudioDevice())
 	{
 		case AUDIO_DEVICE_SCO:
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE            
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE            
->>>>>>> db20e11 (second commit)
 		case AUDIO_DEVICE_SCO_HSP:
 #endif            
 		case AUDIO_DEVICE_SCO_IDLE:
@@ -182,11 +174,7 @@ void APP_VolManage_SpkVolumeUpDownHandler(BD_ADDR_T *pBdAddr, U16 keyCode, BOOL 
 		case AUDIO_DEVICE_MUSIC:
 		case AUDIO_DEVICE_MUSIC_CALL_NOTIFY:
 		case AUDIO_DEVICE_AVRCP_PLAY:
-<<<<<<< HEAD
-			#ifdef A2DP_Profile
-=======
 			#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 			if(isFollowerCmd)
 			{
 				pBdAddr = APP_GetNextNormalLink(pBdAddr);
@@ -260,11 +248,7 @@ void APP_VolManage_MicVolumeUpDownHandler(BD_ADDR_T *pBdAddr, U16 keyCode)
 	BOOL isVolumeUp;
 	isVolumeUp = (keyCode == KEY_MICUP) ? TRUE : FALSE;
 
-<<<<<<< HEAD
-	#ifdef A2DP_Profile
-=======
 	#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 //	if(MUSIC_EXISTS(pBdAddr))
 //	{
 //		MMI_DRV_MicVolA2DPHandler(pBdAddr, isVolumeUp);

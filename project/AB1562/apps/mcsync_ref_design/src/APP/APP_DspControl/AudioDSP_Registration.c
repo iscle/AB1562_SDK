@@ -146,11 +146,7 @@ BOOL APP_IsSCOGroupAudioDeviceRegistered(BD_ADDR_T *pBdAddr)
 {
 	if(APP_IsAudioDeviceRegistered(pBdAddr, AUDIO_DEVICE_SCO))
 		return TRUE;
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 	if(APP_IsAudioDeviceRegistered(pBdAddr, AUDIO_DEVICE_SCO_HSP))
 		return TRUE;
 #endif
@@ -255,11 +251,7 @@ static BOOL app_SetAudioDeviceToAnotherLink(BD_ADDR_T *pBdAddr, U8 audioDev)
 /******************************************************************************
  * Static Functions
 *******************************************************************************/
-<<<<<<< HEAD
-#ifdef A2DP_Profile
-=======
 #ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 #ifdef SUPPORT_MULTI_POINT
 static void app_AudioRegSendAnotherLinkPauseMusic(BD_ADDR_T *pBdAddr)
 {
@@ -358,11 +350,7 @@ static BOOL app_SetAudioDeviceMusicResume(BD_ADDR_T *pBdAddr, U8 audioDev)
 			return TRUE;
 	}
 
-<<<<<<< HEAD
-	#ifdef A2DP_Profile
-=======
 	#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 	if(APP_a2dp_is_in_streaming(pBdAddr))
 	{
 	}
@@ -409,11 +397,7 @@ static void app_AudioRegPauseCurrentMusic(BOOL isPause)
 
 	if(isPause && (currentActiveDev == AUDIO_DEVICE_MUSIC || currentActiveDev == AUDIO_DEVICE_AVRCP_PLAY))
 	{
-<<<<<<< HEAD
-		#ifdef A2DP_Profile
-=======
 		#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 		DBG_LOG_APP_DSP_CONTROL( "[Audio Reg]Pause Current Music:0x%x%x", 2, FW_bdaddr_to_2U32(pCurrentActiveLink, TRUE), FW_bdaddr_to_2U32(pCurrentActiveLink, FALSE));
 		APP_A2dp_SendPauseMusic(pCurrentActiveLink, FALSE);
 		#endif
@@ -429,20 +413,12 @@ static BOOL app_WhetherSetMusicAudioDev()
 	}
 	else if(APP_A2dp_NVKeyIsFeatureOn(APP_MUSIC_LAST_IN_FIRST_PLAYED_AND_PAUSE_OTHERS_FEAT))
 	{
-<<<<<<< HEAD
-		#ifdef A2DP_Profile
-=======
 		#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 		app_AudioRegPauseCurrentMusic(TRUE);
 		#endif
 		return TRUE;
 	}
-<<<<<<< HEAD
-	#ifdef AVRCP_Profile
-=======
 	#ifdef AIR_AVRCP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 	else if(APP_A2dp_NVKeyIsFeatureOn(APP_A2DP_MEMPUT_WHEN_OTHER_IN_MUSIC_FEAT))
 	{
 		//Mantis 10306 cover some phone can't change AVRCP Play status
@@ -568,11 +544,7 @@ static U32 app_AudioResumeHandler(Handler handler, U16 id, void *msg, U32 ext_id
 				case AUDIO_DEVICE_MUSIC:
 				case AUDIO_DEVICE_MUSIC_CALL_NOTIFY:
 				case AUDIO_DEVICE_AVRCP_PLAY:
-<<<<<<< HEAD
-					#ifdef A2DP_Profile
-=======
 					#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 					if(a2dp_is_resume(pCurrentActiveLink))
 					{
 						APP_A2dp_SendResume(pCurrentActiveLink);
@@ -590,11 +562,7 @@ static U32 app_AudioResumeHandler(Handler handler, U16 id, void *msg, U32 ext_id
 					break;
 
 				case AUDIO_DEVICE_SCO:
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE                    
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE                    
->>>>>>> db20e11 (second commit)
 				case AUDIO_DEVICE_SCO_HSP:
 #endif                    
 				case AUDIO_DEVICE_SCO_IDLE:
@@ -671,11 +639,7 @@ BOOL APP_AudioDeviceRegister(BD_ADDR_T *pBdAddr, U8 audioDev)
 		switch(currentActiveDev)
 		{
 			case AUDIO_DEVICE_SCO_IDLE:
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE                
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE                
->>>>>>> db20e11 (second commit)
 			case AUDIO_DEVICE_SCO_HSP:
 #endif                
 			case AUDIO_DEVICE_SCO:
@@ -698,11 +662,7 @@ BOOL APP_AudioDeviceRegister(BD_ADDR_T *pBdAddr, U8 audioDev)
 						if(!FW_CmpBdAddr(pCurrentActiveLink, pBdAddr))
 						{
 							APP_A2dpDspStop(pCurrentActiveLink);
-<<<<<<< HEAD
-							#ifdef A2DP_Profile
-=======
 							#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 							if(!APP_A2dp_NVKeyIsFeatureOn(APP_A2DP_MEMPUT_WHEN_CALLACTIVE_FEAT) && APP_IsActiveLink(pBdAddr))
 							{
 								#ifdef SUPPORT_MULTI_POINT
@@ -741,11 +701,7 @@ BOOL APP_AudioDeviceRegister(BD_ADDR_T *pBdAddr, U8 audioDev)
 					#endif //MP3_LOCAL_PLAYBACK_MMI_CTRL
 
 					case AUDIO_DEVICE_SCO:
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE                        
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE                        
->>>>>>> db20e11 (second commit)
 					case AUDIO_DEVICE_SCO_HSP:
 #endif                        
 					case AUDIO_DEVICE_SCO_IDLE:
@@ -820,11 +776,7 @@ BOOL APP_AudioDeviceRegister(BD_ADDR_T *pBdAddr, U8 audioDev)
 				break;
 
 			case AUDIO_DEVICE_SCO:
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE                
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE                
->>>>>>> db20e11 (second commit)
 			case AUDIO_DEVICE_SCO_HSP:
 #endif                
 				if(!FW_CmpBdAddr(pCurrentActiveLink, pBdAddr))
@@ -937,11 +889,7 @@ void APP_ResumeOtherAudioDevice(BD_ADDR_T *pBdAddrIn, U8 audioDev)
 			switch(checkDev)
 			{
 				case AUDIO_DEVICE_SCO:
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE                   
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE                   
->>>>>>> db20e11 (second commit)
 				case AUDIO_DEVICE_SCO_HSP:
 #endif                    
 				case AUDIO_DEVICE_SCO_IDLE:
@@ -1009,11 +957,7 @@ void APP_ResumeOtherAudioDevice(BD_ADDR_T *pBdAddrIn, U8 audioDev)
 	switch(audioDev)
 	{
 		case AUDIO_DEVICE_SCO:
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE            
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE            
->>>>>>> db20e11 (second commit)
         case AUDIO_DEVICE_SCO_HSP:
 #endif            
 			if(FW_CmpBdAddr(pCurrentActiveLink, pBdAddr) && (currentActiveDev == AUDIO_DEVICE_CALL_STATE))
@@ -1091,11 +1035,7 @@ BOOL APP_IsDSPInSCO(BD_ADDR_T *pBdAddr)
 	{
 		case AUDIO_DEVICE_SCO:
 		case AUDIO_DEVICE_SCO_IDLE:
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE            
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE            
->>>>>>> db20e11 (second commit)
 		case AUDIO_DEVICE_SCO_HSP:
 #endif            
 			if(FW_CmpBdAddr(APP_GetCurrentAudioBdAddr(), pBdAddr))
@@ -1124,10 +1064,7 @@ BOOL APP_IsLinkInHighAudioPriority(BD_ADDR_T *pBdAddr)
 
 	UNUSED(pBdAddr);
 
-<<<<<<< HEAD
-=======
 	 DBG_LOG_APP_DSP_CONTROL( "[Audio Reg] IsLinkInHighAudioPriority, curr audio device:%d", 1, currAudioDevice);
->>>>>>> db20e11 (second commit)
 	if(currAudioDevice == AUDIO_DEVICE_NONE)
 		return TRUE;
 
@@ -1170,11 +1107,7 @@ void APP_AudioDeviceStopActiveDevice(void)
 
 		case AUDIO_DEVICE_SCO:
 		case AUDIO_DEVICE_SCO_IDLE:
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE            
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE            
->>>>>>> db20e11 (second commit)
 		case AUDIO_DEVICE_SCO_HSP:
 #endif            
 		case AUDIO_DEVICE_KEY_AT_CMD:
@@ -1217,11 +1150,7 @@ U8 APP_IsActiveAudioDevInCall(void)
 	switch(APP_GetCurrentAudioDevice())
 	{
 		case AUDIO_DEVICE_SCO:
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE            
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE            
->>>>>>> db20e11 (second commit)
 		case AUDIO_DEVICE_SCO_HSP:
 #endif            
 		case AUDIO_DEVICE_SCO_IDLE:

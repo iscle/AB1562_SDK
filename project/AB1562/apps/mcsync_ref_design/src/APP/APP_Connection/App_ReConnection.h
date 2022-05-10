@@ -135,12 +135,8 @@ void APP_Reconn_ReconnectResume(void);
 U8 APP_Reconn_GetReconnectType(void);
 BOOL APP_Reconn_IsReconnecting(void);
 U8 APP_ReConn_QueueNum(void);
-<<<<<<< HEAD
-void APP_ReConn_PourQueue(void);
-=======
 U8 APP_ReConn_QueueTypeNum(U8 type);
 void APP_ReConn_PourQueue(U32 dalay);
->>>>>>> db20e11 (second commit)
 void APP_Reconn_SetCheckReconnect(U8 type, BD_ADDR_T *pBdAddr);
 void APP_Reconn_CheckReconnect(void);
 void APP_ReConn_PutQueue(U8 type);

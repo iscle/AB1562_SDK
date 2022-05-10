@@ -81,17 +81,10 @@
 #include "App_VpRtControl.h"
 #include "App_Battery.h"
 #include "App_Mcsync_Reconnection.h"
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-#include "App_MCSync_Share.h"
-#endif
-#ifdef APP_TILE_ENABLE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
 #include "App_MCSync_Share.h"
 #endif
 #ifdef AIR_TILE_ADV_ENABLE
->>>>>>> db20e11 (second commit)
 #include "App_Tile.h"
 #endif
 #include "App_PressureSensor.h"
@@ -148,19 +141,11 @@ void APP_Init(void)
 	APP_NTC_Init();
 	#endif
 
-<<<<<<< HEAD
-	#ifdef PRESSURE_SENSOR
-	APP_Pressure_Sensor_Init();
-	#endif
-	
-	#ifdef MCSYNC_SHARE_MODE
-=======
 	#ifdef AIR_CAPTOUCH_PRESSURE_SENSOR_ENABLE
 	APP_Pressure_Sensor_Init();
 	#endif
 	
 	#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 	APP_MCSync_Share_Init();
 	#endif
 
@@ -172,11 +157,7 @@ void APP_Init(void)
     APP_CustApp_LE_Init();
     #endif
 
-<<<<<<< HEAD
-    #ifdef APP_TILE_ENABLE
-=======
     #ifdef AIR_TILE_ADV_ENABLE
->>>>>>> db20e11 (second commit)
     APP_Tile_Init();
     #endif
 

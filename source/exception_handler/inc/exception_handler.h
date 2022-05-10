@@ -136,12 +136,9 @@ typedef struct
 {
     uint32_t address;
     uint32_t size;
-<<<<<<< HEAD
-=======
 #ifdef MTK_MINIDUMP_ENHANCE_ENABLE	
 	char name[8];
 #endif
->>>>>>> db20e11 (second commit)
 } exception_minidump_region_t;
 
 typedef struct
@@ -160,15 +157,11 @@ typedef struct
     assert_expr_t assert_info;
     exception_minidump_overflow_t overflow_info;
     uint32_t context_size;
-<<<<<<< HEAD
-    exception_minidump_region_t regions[8];
-=======
 #ifdef MTK_MINIDUMP_ENHANCE_ENABLE   
     exception_minidump_region_t regions[20];
 #else	
     exception_minidump_region_t regions[8];
 #endif
->>>>>>> db20e11 (second commit)
     uint32_t data_checksum;
 } exception_minidump_header_t;
 #endif /* EXCEPTION_MEMDUMP_MODE */

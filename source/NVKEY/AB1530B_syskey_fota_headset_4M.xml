@@ -242,26 +242,13 @@
 <Value>0x0000000000000000</Value>
 </NVKey>
 
-<<<<<<< HEAD
-
-
-<!--
-    BLE adv data (not enable now)
--->
-
-=======
 <!--
     BLE_ADV_DATA
 -->
->>>>>>> db20e11 (second commit)
 <NVKey KeyID="0x3900">
 <Value>0x02011A0A09414231353632424C45030312180319C0030512FFFFFFFF</Value>
 </NVKey>
 
-<<<<<<< HEAD
-
-=======
->>>>>>> db20e11 (second commit)
 <!--
     BLE Device Name
 -->

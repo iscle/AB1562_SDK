@@ -46,11 +46,7 @@ extern "C" {
 GPIO_BASE_REGISTER_T *gpio_base = (GPIO_BASE_REGISTER_T *)(GPIO_BASE);
 GPIO_CFG0_REGISTER_T *gpio_cfg = (GPIO_CFG0_REGISTER_T *)(IO_CFG_0_BASE);
 
-<<<<<<< HEAD
-TOP_MISC_CFG_T *clk_out_contorl = TOP_MISC_CFG;
-=======
 GPIO_CLKO_CFG_T *clk_out_contorl = GPIO_CLKO_CFG;
->>>>>>> db20e11 (second commit)
 
 extern const hal_gpio_cfg_reg_t gpio_cfg_table[];
 
@@ -343,25 +339,11 @@ hal_gpio_status_t hal_gpio_set_clockout(hal_gpio_clock_t gpio_clock_num, hal_gpi
         return HAL_GPIO_STATUS_INVALID_PARAMETER;
     }
 
-<<<<<<< HEAD
-    if (gpio_clock_num < HAL_GPIO_CLOCK_4) {
-        temp = clk_out_contorl->GPIO_CLKO_CTRL_A;
-        temp &= ~(0xf << gpio_clock_num);
-        temp |= clock_mode << gpio_clock_num;
-        clk_out_contorl->GPIO_CLKO_CTRL_A = temp;
-    } else {
-        temp = clk_out_contorl->GPIO_CLKO_CTRL_B;
-        temp &= ~(0xf << (gpio_clock_num - 4));
-        temp |= clock_mode << gpio_clock_num;
-        clk_out_contorl->GPIO_CLKO_CTRL_B = temp;
-    }
-=======
     temp = clk_out_contorl->GPIO_CLKO_CTRL_A;
     temp &= ~(0xf << gpio_clock_num);
     temp |= clock_mode << gpio_clock_num;
     clk_out_contorl->GPIO_CLKO_CTRL_A = temp;
 
->>>>>>> db20e11 (second commit)
 
     return HAL_GPIO_STATUS_OK;
 }

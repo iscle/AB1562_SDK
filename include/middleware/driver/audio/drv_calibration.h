@@ -52,14 +52,9 @@ BOOL drv_calibration_stop(BOOL is_suspend);
 BOOL drv_calibration_is_playing(void);
 BOOL drv_calibration_set_detect_channel(U32 set_chaneel);
 BOOL drv_calibration_set_output_mute(BOOL is_mute);
-<<<<<<< HEAD
-BOOL drv_calibration_set_mode(U32 set_chaneel);
-S32 drv_calibration_get_result(void);
-=======
 BOOL drv_calibration_set_output_frequency(U32 output_frequency, S16 output_volume);
 BOOL drv_calibration_set_mode(U32 set_chaneel);
 S32 drv_calibration_get_result(void);
 S16 drv_calibration_set_low_pass_filter(S16 lpf_frequency);
->>>>>>> db20e11 (second commit)
 
 #endif //_DRV_CALIBRATION_

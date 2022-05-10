@@ -42,10 +42,7 @@
 #include "hal_gpt.h"
 #include "nvkey.h"
 #include "nvkey_list.h"
-<<<<<<< HEAD
-=======
 #include "hal_core_status.h"
->>>>>>> db20e11 (second commit)
 
 #ifdef HAL_WDT_MODULE_ENABLED
 #include "hal_wdt.h"
@@ -346,9 +343,6 @@ void exception_enable_wdt_interrupt(void)
 /******************************************************************************/
 __attribute__((optimize ("-O0"))) void platform_assert(const char *expr, const char *file, int line)
 {
-<<<<<<< HEAD
-    static uint32_t primask_backup_assert = 0;
-=======
 
     static uint32_t primask_backup_assert = 0;
   
@@ -357,7 +351,6 @@ __attribute__((optimize ("-O0"))) void platform_assert(const char *expr, const c
         exception_printf("please don't call assert when cpu is in exception status!!! lr = 0x%x\r\n",(uint32_t)__builtin_return_address(0));
         return;
     }
->>>>>>> db20e11 (second commit)
 
     primask_backup_assert = XTOS_SET_INTLEVEL(4);
 
@@ -379,9 +372,6 @@ __attribute__((optimize ("-O0"))) void platform_assert(const char *expr, const c
 __attribute__((optimize ("-O0"))) void light_assert(const char *expr, const char *file, int line)
 {
     static uint32_t primask_backup_assert = 0;
-<<<<<<< HEAD
-
-=======
   
     /* it will return directly if it is in exception status */
     if (hal_core_status_read(HAL_CORE_DSP) == HAL_CORE_EXCEPTION){
@@ -389,7 +379,6 @@ __attribute__((optimize ("-O0"))) void light_assert(const char *expr, const char
         return;
     }
   
->>>>>>> db20e11 (second commit)
     primask_backup_assert = XTOS_SET_INTLEVEL(4);
 
 #ifdef MTK_BOOTREASON_CHECK_ENABLE
@@ -458,19 +447,6 @@ U16 exception_dump_config_init(void)
     /* get user's exception dump configuartion */
     nvkey_status = NVKEY_ReadFullKey(NVKEYID_SYSETM_EXCEPTION_DUMP_CONFIG, (void *)&exception_dump_mode.exception_mode, size);
 
-<<<<<<< HEAD
-	#if (EXCEPTION_MEMDUMP_MODE & EXCEPTION_MEMDUMP_MINIDUMP)
-    /* check if minidump is enable */
-    if(exception_dump_mode.exception_mode & EXCEPTION_MEMDUMP_MINIDUMP)
-    {
-        /* offline dump init */
-        offline_dump_region_init();
-    }
-    #endif /* EXCEPTION_MEMDUMP_MODE */
-
-	
-=======
->>>>>>> db20e11 (second commit)
 	printf("exception_nodump:%d\r\n",exception_dump_mode.exception_mode_t.exception_nodump);
 	printf("exception_fulldump_text:%d\r\n", exception_dump_mode.exception_mode_t.exception_fulldump_text);
 	printf("exception_fulldump_binary:%d\r\n", exception_dump_mode.exception_mode_t.exception_fulldump_binary);
@@ -942,11 +918,8 @@ ATTR_TEXT_IN_IRAM void exception_init(void)
         const uint32_t xExceptionRec = (uint32_t)(ucExceptionRec[0] | (ucExceptionRec[1] << 8) | (ucExceptionRec[2] << 16) | (ucExceptionRec[3] << 24));
         SLA_RamLogging(xExceptionRec);
     }
-<<<<<<< HEAD
-=======
     extern void SLA_MemoryCallbackInit(void);
     SLA_MemoryCallbackInit();
->>>>>>> db20e11 (second commit)
 #endif /* MTK_SWLA_ENABLE */
 #endif /* EXCEPTION_MEMDUMP_MODE */
 
@@ -1439,50 +1412,6 @@ static void exception_dump_region_data_binary(const memory_region_type *static_r
 #if (EXCEPTION_MEMDUMP_MODE & EXCEPTION_MEMDUMP_MINIDUMP)
 static void exception_dump_region_data_minidump(const memory_region_type *static_regions, exception_user_regions_t *user_regions)
 {
-<<<<<<< HEAD
-    uint32_t current_addr = 0;
-    bool ret = false;
-    uint32_t sp = 0;
-
-    /* get current stack - 16 */
-    sp = *(uint32_t *)((uint32_t)(&exception_context) + exception_context.windowbase * 4 * 4 + 4) - 16;
-
-    /* static regions */
-    if(minidump_base_address != 0)
-    {
-        /* dump current stacks */
-        current_addr = minidump_base_address + MINIDUMP_HEADER_LENGTH + MINIDUMP_CONTEXT_LENGTH;
-        ret = exception_minidump_check_address(sp);
-        if(ret == EXCEPTION_STATUS_OK)
-        {
-            /* feed wdt to keep time for output data */
-            exception_feed_wdt();
-            /* output data */
-            ret = offline_dump_region_write(OFFLINE_REGION_MINI_DUMP,
-                                            current_addr,
-                                            (uint8_t *)(sp),
-                                            MINIDUMP_CURRENTSTACK_LENGTH);
-            if(ret != true)
-            {
-                minidump_base_address = 0;
-                return;
-            }
-            minidump_header.regions[0].address = sp;
-            minidump_header.regions[0].size = MINIDUMP_CURRENTSTACK_LENGTH ;
-        }
-        /* Current stack is not a valid value, so jump this region and set its begin address as 0xffffffff - MINIDUMP_CURRENTSTACK_LENGTH */
-        else
-        {
-            minidump_header.regions[0].address = 0xffffffff - MINIDUMP_CURRENTSTACK_LENGTH;
-            minidump_header.regions[0].size = MINIDUMP_CURRENTSTACK_LENGTH ;
-        }
-    }
-
-    /* Just to avoid compiler warnings. */
-    ( void ) static_regions;
-    ( void ) user_regions;
-}
-=======
 #ifdef MTK_MINIDUMP_ENHANCE_ENABLE
     uint32_t current_addr = 0;
     uint32_t region_size = 0;
@@ -1730,7 +1659,6 @@ static void exception_dump_region_data_minidump(const memory_region_type *static
 #endif
 }
 
->>>>>>> db20e11 (second commit)
 #endif /* EXCEPTION_MEMDUMP_MODE */
 
 static void exception_dump_memory(void)
@@ -1792,31 +1720,6 @@ void exception_dump_preprocess(uint32_t fault_type)
 #if (EXCEPTION_MEMDUMP_MODE & EXCEPTION_MEMDUMP_TEXT) || (EXCEPTION_MEMDUMP_MODE & EXCEPTION_MEMDUMP_BINARY)
     if((exception_dump_mode.exception_mode & EXCEPTION_MEMDUMP_TEXT) || (exception_dump_mode.exception_mode & EXCEPTION_MEMDUMP_BINARY))
     {
-<<<<<<< HEAD
-        /* feed wdt to keep time for preprocess */
-        exception_feed_wdt();
-
-        /* Genie start message */
-        exception_printf("<<<<<<<< LOG START LOG START LOG START LOG START LOG START <<<<<<<<\r\n");
-
-        exception_printf("\r\nDSP0 Fault Dump:\r\n");
-        exception_print_assert_info();
-        /* NMI interrupt */
-        if(exception_context.epsnmi != 0x0)
-        {
-            exception_printf("\r\nIn NMI Fault Handler\r\n");
-        }
-        /* Debug exception */
-        if(exception_context.debugcause != 0x0)
-        {
-            exception_printf("\r\nIn Debug Monitor Fault Handler\r\n");
-        }
-        exception_printf("Exception Count = 0x%08x\r\n", (unsigned int)exception_info.count);
-        exception_printf("Exception Time = 0x%08x\r\n", (unsigned int)exception_info.timestamp);
-        exception_printf("Exception Reason = 0x%08x\r\n", fault_type);
-    }
-#endif /* EXCEPTION_MEMDUMP_MODE */
-=======
         /* Genie start message */
         exception_printf("<<<<<<<< LOG START LOG START LOG START LOG START LOG START <<<<<<<<\r\n");
 	}
@@ -1841,7 +1744,6 @@ void exception_dump_preprocess(uint32_t fault_type)
 	exception_printf("Exception Time = 0x%08x\r\n", (unsigned int)exception_info.timestamp);
 	exception_printf("Exception Reason = 0x%08x\r\n", fault_type);
 
->>>>>>> db20e11 (second commit)
 
 #if (EXCEPTION_MEMDUMP_MODE & EXCEPTION_MEMDUMP_MINIDUMP)
     if(exception_dump_mode.exception_mode & EXCEPTION_MEMDUMP_MINIDUMP)
@@ -1899,24 +1801,6 @@ void exception_dump_preprocess(uint32_t fault_type)
 
 void exception_dump_postprocess(void)
 {
-<<<<<<< HEAD
-	int i = 0;
-
-#if (EXCEPTION_MEMDUMP_MODE & EXCEPTION_MEMDUMP_TEXT) || (EXCEPTION_MEMDUMP_MODE & EXCEPTION_MEMDUMP_BINARY)
-		if((exception_dump_mode.exception_mode & EXCEPTION_MEMDUMP_TEXT) || (exception_dump_mode.exception_mode & EXCEPTION_MEMDUMP_BINARY))
-		{
-			for (i = 0; i < exception_config.items; i++)
-			{
-				if (exception_config.configs[i].init_cb)
-				{
-					/* feed wdt to keep time for init callback */
-					exception_feed_wdt();
-					/* run init callback */
-					exception_config.configs[i].init_cb();
-				}
-			}
-		}
-=======
     int i = 0;
 
 #if (EXCEPTION_MEMDUMP_MODE & EXCEPTION_MEMDUMP_TEXT) || (EXCEPTION_MEMDUMP_MODE & EXCEPTION_MEMDUMP_BINARY)
@@ -1941,7 +1825,6 @@ void exception_dump_postprocess(void)
             }
         }
     }
->>>>>>> db20e11 (second commit)
 #endif /* EXCEPTION_MEMDUMP_MODE */
 
 

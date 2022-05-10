@@ -48,26 +48,16 @@ static U32 app_racecmd_hostaudio_handler(Handler app, U16 id, void *msg, U32 id_
     switch(id)
     {
         case MODULE_PEQ_GROUP_INDEX:
-<<<<<<< HEAD
-            APP_PeqProc_SetIndex(PEQ_A2DP, cmd->peq.peq_group_index);
-=======
             APP_PeqNvkey_Init();
             APP_PeqProc_SetIndex(PEQ_A2DP, cmd->peq.peq_group_index);
             APP_PeqProc_Load(PEQ_A2DP);
->>>>>>> db20e11 (second commit)
             break;
         case MODULE_LINE_IN_PEQ_GROUP_INDEX:
             APP_PeqProc_SetIndex(PEQ_LINE_IN, cmd->peq.peq_group_index);
             break;
-<<<<<<< HEAD
-            
-        case MODULE_VP_ON_OFF:
-            if(cmd->vp_on_off.vp_status == VP_ON)   
-=======
 
         case MODULE_VP_ON_OFF:
             if(cmd->vp_on_off.vp_status == VP_ON)
->>>>>>> db20e11 (second commit)
             {
                 APP_VpEnableVoicePrompt();
             }
@@ -86,19 +76,11 @@ static U32 app_racecmd_hostaudio_handler(Handler app, U16 id, void *msg, U32 id_
         case MODULE_VP_SET:
             APP_VpSetLanguage(cmd->vp_lang.lang_id);
             break;
-<<<<<<< HEAD
-            
-        case MODULE_ECNR:
-            drv_sco_set_ecnr_off((cmd->is_ecnr_on) ? TRUE : FALSE);
-            break;
-            
-=======
 
         case MODULE_ECNR:
             drv_sco_set_ecnr_off((cmd->is_ecnr_on) ? TRUE : FALSE);
             break;
 
->>>>>>> db20e11 (second commit)
         case MODULE_MIC_SWAP:
             drv_sco_mic_switch((cmd->is_main_mic) ? 0 : 1);
             break;

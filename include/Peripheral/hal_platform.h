@@ -77,11 +77,7 @@ extern "C" {
 #ifdef HAL_GPIO_MODULE_ENABLED
 #define HAL_GPIO_FEATURE_INVERSE              /* Input status of the pin can be set to the reverse state. For more details, please refer to hal_gpio.h. */
 //#define HAL_GPIO_FEATURE_PUPD               /* Pull state of the pin can be configured with different resistors through different combinations of GPIO_PUPD_x,GPIO_RESEN0_x and GPIO_RESEN1_x. For more details, please refer to hal_gpio.h. */
-<<<<<<< HEAD
-//#define HAL_GPIO_FEATURE_CLOCKOUT           /* The pin can be configured as an output clock. For more details, please refer to hal_gpio.h. */
-=======
 #define HAL_GPIO_FEATURE_CLOCKOUT           /* The pin can be configured as an output clock. For more details, please refer to hal_gpio.h. */
->>>>>>> db20e11 (second commit)
 #define HAL_GPIO_FEATURE_HIGH_Z             /* The pin can be configured to provide high impedance state to prevent possible electric leakage. For more details, please refer to hal_gpio.h. */
 #define HAL_GPIO_FEATURE_SET_DRIVING        /* The pin can be configured to enhance driving. For more details, please refer to hal_gpio.h. */
 #define HAL_GPIO_FEATURE_SET_SCHMITT        /* The pin can be configured to enhance schmitt trigger hysteresis. */
@@ -117,8 +113,6 @@ extern "C" {
 #define HAL_RTC_FEATURE_GPIO_EINT               /* Supports RTC GPIO and EINT configuration. */
 #define HAL_RTC_FEATURE_CAPTOUCH                /* Supports CAPTOUCH configuration. */
 #define HAL_RTC_FEATURE_EINT                    /* Supports EINT configuration. */
-<<<<<<< HEAD
-=======
 
 typedef enum {
     HAL_RTC_OSC32K_EOSC_MODE = 0,
@@ -127,7 +121,6 @@ typedef enum {
 }hal_rtc_osc32k_mode_t;
 
 
->>>>>>> db20e11 (second commit)
 #endif
 
 #ifdef HAL_PWM_MODULE_ENABLED
@@ -459,26 +452,14 @@ typedef enum {
     HAL_GPIO_CLOCK_0   = 0,              /**< define GPIO output clock 0 */
     HAL_GPIO_CLOCK_1   = 1,              /**< define GPIO output clock 1 */
     HAL_GPIO_CLOCK_2   = 2,              /**< define GPIO output clock 2 */
-<<<<<<< HEAD
-    HAL_GPIO_CLOCK_3   = 3,              /**< define GPIO output clock 3 */
-    HAL_GPIO_CLOCK_4   = 4,              /**< define GPIO output clock 4 */
-=======
->>>>>>> db20e11 (second commit)
     HAL_GPIO_CLOCK_MAX                   /**< define GPIO output clock max number(invalid) */
 } hal_gpio_clock_t;
 
 
 /** @brief This enum defines output clock mode of GPIO */
 typedef enum {
-<<<<<<< HEAD
-    HAL_GPIO_CLOCK_MODE_32K = 0,        /**< define GPIO output clock mode as 32KHz */
-    HAL_GPIO_CLOCK_MODE_24M = 2,        /**< define GPIO output clock mode as 24MHz */
-    HAL_GPIO_CLOCK_MODE_48M = 3,        /**< define GPIO output clock mode as 48MHz */
-    HAL_GPIO_CLOCK_MODE_40K = 5,        /**< define GPIO output clock mode as 40MHz */
-=======
     HAL_GPIO_CLOCK_MODE_32K = 1,        /**< define GPIO output clock mode as 32KHz */
     HAL_GPIO_CLOCK_MODE_26M = 5,        /**< define GPIO output clock mode as 26MHz */
->>>>>>> db20e11 (second commit)
     HAL_GPIO_CLOCK_MODE_MAX             /**< define GPIO output clock mode of max number(invalid) */
 } hal_gpio_clock_mode_t;
 /**

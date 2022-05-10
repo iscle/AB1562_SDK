@@ -110,9 +110,5 @@ BOOL PM_IsInActive(BD_ADDR_T *pBdAddr);
 BOOL PM_IsSniffingOrUnsniffingState(BD_ADDR_T *pBdAddr);
 BOOL PM_Sniff_CheckTimer(PM_SNIFF_INFO_STRU *pLinkInfo, U16 id);
 void PM_Sniff_SetTimer(PM_SNIFF_INFO_STRU *pLinkInfo, U16 id);
-<<<<<<< HEAD
-
-=======
 void PM_Sniff_SetLinkPolicyDisableAllMode(BD_ADDR_T *pBdAddr);
->>>>>>> db20e11 (second commit)
 #endif

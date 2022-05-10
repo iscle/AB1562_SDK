@@ -40,11 +40,6 @@ _stack_start = ORIGIN(DRAM);
 _swla_size = 0;
 
 /* offline dump region size */
-<<<<<<< HEAD
-_exceptionlog_size  = 0x2000;   /*total  8K, cell size 8KB(log buffer size), total 1 cells*/
-_minidump_size      = 0x2000;   /*total  8K, cell size 8KB(mini dump size),  total 1 cells*/
-_offlinelog_size    = 0x8000;   /*total  32K, cell size 8KB(log buffer size), total 4 cells*/
-=======
 _exceptionlog_size  = 0x4000;     /*total 16K,   cell size 8KB(log buffer size),  total 2 cells*/
 _minidump_size      = 0x114000;   /*total 1104K, cell size 552KB(mini dump size), total 2 cells*/
 _offlinelog_size    = 0x2000;    /*total 144K,  cell size 8KB(log buffer size),  total 1 cells*/
@@ -53,7 +48,6 @@ _offlinelog_size    = 0x2000;    /*total 144K,  cell size 8KB(log buffer size), 
 _exceptionlog_cell_size  = 0x2000;         /*cell size 8KB*/
 _minidump_cell_size      = 0x8a000;        /*cell size 552KB*/
 _offlinelog_cell_size    = 0x2000;         /*cell size 8KB*/
->>>>>>> db20e11 (second commit)
 
 /* Linker symbol provided for C/Assembly Code */
 _iram_start     = ORIGIN(IRAM);
@@ -67,11 +61,8 @@ _vsysram_length = LENGTH(VSYSRAM_DSP0);
 
 flashAddr       = 0x08000000;
 remapAddr       = 0x20000000;
-<<<<<<< HEAD
-=======
 _FOTA_start_    = ORIGIN(SRAM_FLASH_FOTA);
 
->>>>>>> db20e11 (second commit)
 INCLUDE "../release.lcf"
 
 SECTIONS {
@@ -215,11 +206,7 @@ SECTIONS {
           LONG(0x00000000);  /* BinaryMaxLengthHigh */
           LONG(_exceptionlog_size);   /* BinaryMaxLengthLow */
           LONG(0x00000000);  /* ExecutionAddress */
-<<<<<<< HEAD
-          LONG(0x00002000);  /* OfflineCellSize  */
-=======
           LONG(_exceptionlog_cell_size);  /* OfflineCellSize  */
->>>>>>> db20e11 (second commit)
           LONG(0x00000000);  /* ReservedItem3 */
           LONG(0x00000000);  /* ReservedItem2 */
           LONG(0x00000000);  /* ReservedItem1 */
@@ -233,11 +220,7 @@ SECTIONS {
           LONG(0x00000000);  /* BinaryMaxLengthHigh */
           LONG(_minidump_size);   /* BinaryMaxLengthLow */
           LONG(0x00000000);  /* ExecutionAddress */
-<<<<<<< HEAD
-          LONG(0x00002000);  /* OfflineCellSize  */
-=======
           LONG(_minidump_cell_size);  /* OfflineCellSize  */
->>>>>>> db20e11 (second commit)
           LONG(0x00000000);  /* ReservedItem3 */
           LONG(0x00000000);  /* ReservedItem2 */
           LONG(0x00000000);  /* ReservedItem1 */
@@ -251,11 +234,7 @@ SECTIONS {
           LONG(0x00000000);  /* BinaryMaxLengthHigh */
           LONG(_offlinelog_size);   /* BinaryMaxLengthLow */
           LONG(0x00000000);  /* ExecutionAddress */
-<<<<<<< HEAD
-          LONG(0x00002000);  /* OfflineCellSize  */
-=======
           LONG(_offlinelog_cell_size);  /* OfflineCellSize  */
->>>>>>> db20e11 (second commit)
           LONG(0x00000000);  /* ReservedItem3 */
           LONG(0x00000000);  /* ReservedItem2 */
           LONG(0x00000000);  /* ReservedItem1 */
@@ -580,11 +559,7 @@ SECTIONS {
           . = ABSOLUTE(.) + _exceptionlog_size;
           _exceptionlog_end_ =  ABSOLUTE(.);
           . = ALIGN(0x1000);
-<<<<<<< HEAD
-      } > SRAM_FLASH_FS
-=======
       } > SRAM_FLASH_FOTA
->>>>>>> db20e11 (second commit)
 
       .AB1562_minidump : ALIGN(0x1000)
       {
@@ -592,11 +567,7 @@ SECTIONS {
           . = ABSOLUTE(.) + _minidump_size;
           _minidump_end_ =  ABSOLUTE(.);
           . = ALIGN(0x1000);
-<<<<<<< HEAD
-      } > SRAM_FLASH_FS
-=======
       } > SRAM_FLASH_FOTA
->>>>>>> db20e11 (second commit)
 
       .AB1562_offlinelogdump : ALIGN(0x1000)
       {
@@ -613,14 +584,6 @@ SECTIONS {
           _wwe_end_ =  ABSOLUTE(.);
       } > SRAM_FLASH_FS
 
-<<<<<<< HEAD
-      .AB1562_FOTA : ALIGN(0x1000)
-      {
-          _FOTA_start_ =  ABSOLUTE(.);
-      } > SRAM_FLASH_FOTA
-
-=======
->>>>>>> db20e11 (second commit)
        /* @@@log string@@@ */
        .log_str :
        {

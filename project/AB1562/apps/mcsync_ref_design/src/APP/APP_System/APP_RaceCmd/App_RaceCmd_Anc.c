@@ -196,20 +196,14 @@ typedef struct
 {
     APP_RACE_ANC_PASSTHRU_HEADER header;
     BOOL enable;
-<<<<<<< HEAD
-=======
     U8 low_pass_filter;
->>>>>>> db20e11 (second commit)
 }PACKED APP_RACE_CMD_ANC_PASSTHRU_ENABLE_CALIBRATION;
 
 typedef struct
 {
     APP_RACE_ANC_PASSTHRU_HEADER header;
     BOOL enable;
-<<<<<<< HEAD
-=======
     U8 low_pass_filter;
->>>>>>> db20e11 (second commit)
 }PACKED APP_RACE_RSP_ANC_PASSTHRU_ENABLE_CALIBRATION;
 
 typedef struct
@@ -227,8 +221,6 @@ typedef struct
 typedef struct
 {
     APP_RACE_ANC_PASSTHRU_HEADER header;
-<<<<<<< HEAD
-=======
     U32 output_frequency;
     S16 output_volume;
 }PACKED APP_RACE_CMD_ANC_PASSTHRU_SET_TONE;
@@ -243,7 +235,6 @@ typedef struct
 typedef struct
 {
     APP_RACE_ANC_PASSTHRU_HEADER header;
->>>>>>> db20e11 (second commit)
     U8 mode;
     U16 signal_power;
     U16 thd;
@@ -273,10 +264,7 @@ typedef union APP_RACE_ANC_PASSTHRU
     APP_RACE_CMD_ANC_PASSTHRU_ENABLE_CALIBRATION enableCalCmd;
     APP_RACE_CMD_ANC_PASSTHRU_SET_CALIBRATION setCalCmd;
     APP_RACE_CMD_ANC_PASSTHRU_GET_CALIBRATION_RESULT getCalResCmd;
-<<<<<<< HEAD
-=======
     APP_RACE_CMD_ANC_PASSTHRU_SET_TONE  setCalToneCmd;
->>>>>>> db20e11 (second commit)
 
     APP_RACE_RSP_ANC_PASSTHRU_ON onRsp;
     APP_RACE_RSP_ANC_PASSTHRU_OFF offRsp;
@@ -291,10 +279,7 @@ typedef union APP_RACE_ANC_PASSTHRU
     APP_RACE_RSP_ANC_PASSTHRU_ENABLE_CALIBRATION enableCalRsp;
     APP_RACE_RSP_ANC_PASSTHRU_SET_CALIBRATION setCalRsp;
     APP_RACE_RSP_ANC_PASSTHRU_GET_CALIBRATION_RESULT getCalResRsp;
-<<<<<<< HEAD
-=======
     APP_RACE_RSP_ANC_PASSTHRU_SET_TONE setCalToneRsp;
->>>>>>> db20e11 (second commit)
 }PACKED APP_RACE_ANC_PASSTHRU;
 
 
@@ -316,10 +301,7 @@ enum
     REALTIME_ANCPASSTHRU_ENABLE_CALIBRATION = 24,
     REALTIME_ANCPASSTHRU_SET_CALIBRATION_CONTROL = 25,
     REALTIME_ANCPASSTHRU_GET_CALIBRATION_RESULT = 26,
-<<<<<<< HEAD
-=======
     REALTIME_ANCPASSTHRU_SET_OUTPUT_TONE = 27,
->>>>>>> db20e11 (second commit)
 };
 
 
@@ -356,10 +338,7 @@ static void app_RaceCmd_Anc_OnHandler(APP_RACE_ANC_PASSTHRU *pData)
     APP_ANCPASSTHRU_PARA_STRU para;
     U8 ancType;
 
-<<<<<<< HEAD
-=======
     memset(&para, 0, sizeof(APP_ANCPASSTHRU_PARA_STRU));
->>>>>>> db20e11 (second commit)
     if(!gANCPassThruRealTimeCtl.isInit)
     {
         audio_anc_passthru_register_callback(app_RaceCmd_Anc_OnCallback, ANC_CONTROL_EVENT_ON|ANC_CONTROL_EVENT_OFF, CB_LEVEL_ALL);
@@ -394,11 +373,7 @@ static void app_RaceCmd_Anc_OnHandler(APP_RACE_ANC_PASSTHRU *pData)
 static void app_RaceCmd_Anc_OffHandler(APP_RACE_ANC_PASSTHRU *pData)
 {
     APP_ANCPASSTHRU_PARA_STRU para;
-<<<<<<< HEAD
-    
-=======
     memset(&para, 0, sizeof(APP_ANCPASSTHRU_PARA_STRU));
->>>>>>> db20e11 (second commit)
     if(!gANCPassThruRealTimeCtl.isInit)
     {
         audio_anc_passthru_register_callback(app_RaceCmd_Anc_OnCallback, ANC_CONTROL_EVENT_ON|ANC_CONTROL_EVENT_OFF, CB_LEVEL_ALL);
@@ -425,13 +400,6 @@ static void app_RaceCmd_Anc_OffHandler(APP_RACE_ANC_PASSTHRU *pData)
     }
 }
 
-<<<<<<< HEAD
-static void app_RaceCmd_Anc_SetVolHandler(APP_RACE_ANC_PASSTHRU *pData)
-{
-    APP_RACE_ANC_PASSTHRU rsp;
-
-    rsp.gainRsp.header.status = audio_anc_passthru_set_dg_all_gain(pData->gainCmd.gainFFl, pData->gainCmd.gainFBl, pData->gainCmd.gainSPKl, pData->gainCmd.gainSPKr);
-=======
 static void app_RaceCmd_Anc_SetVolHandler(APP_RACE_ANC_PASSTHRU *pData, U16 length)
 {
     APP_RACE_ANC_PASSTHRU rsp;
@@ -443,47 +411,26 @@ static void app_RaceCmd_Anc_SetVolHandler(APP_RACE_ANC_PASSTHRU *pData, U16 leng
         rsp.gainRsp.gainSPKr = 0;
     }
     rsp.gainRsp.header.status = audio_anc_passthru_set_dg_all_gain(pData->gainCmd.gainFFl, pData->gainCmd.gainFBl, rsp.gainRsp.gainSPKl, rsp.gainRsp.gainSPKr);
->>>>>>> db20e11 (second commit)
     rsp.gainRsp.header.ancId = REALTIME_ANCPASSTHRU_SET_VOL;
     rsp.gainRsp.gainFFl = pData->gainCmd.gainFFl;
     rsp.gainRsp.gainFBl = pData->gainCmd.gainFBl;
     rsp.gainRsp.gainFFr = pData->gainCmd.gainFFr;
     rsp.gainRsp.gainFBr = pData->gainCmd.gainFBr;
-<<<<<<< HEAD
-    rsp.gainRsp.gainSPKl = pData->gainCmd.gainSPKl;
-    rsp.gainRsp.gainSPKr = pData->gainCmd.gainSPKr;
-    RACE_Cmd_RealTime_ANC_Resp(gANCPassThruRealTimeCtl.channelId, (U8 *)&rsp, sizeof(APP_RACE_RSP_ANC_PASSTHRU_SET_VOL));
-}
-
-static void app_RaceCmd_Anc_ReadNVDMHandler(APP_RACE_ANC_PASSTHRU *pData)
-=======
     RACE_Cmd_RealTime_ANC_Resp(gANCPassThruRealTimeCtl.channelId, (U8 *)&rsp, length);
 }
 
 static void app_RaceCmd_Anc_ReadNVDMHandler(APP_RACE_ANC_PASSTHRU *pData, U16 length)
->>>>>>> db20e11 (second commit)
 {
     APP_RACE_ANC_PASSTHRU rsp;
     memset(&rsp, 0, sizeof(APP_RACE_ANC_PASSTHRU));
     UNUSED(pData);
-<<<<<<< HEAD
-=======
     UNUSED(length);
->>>>>>> db20e11 (second commit)
     rsp.readNVDMRsp.header.status = audio_anc_passthru_read_dg_gain(&rsp.readNVDMRsp.gainFFl, &rsp.readNVDMRsp.gainFBl);
     rsp.readNVDMRsp.header.status |= audio_anc_passthru_read_dg_speaker_gain(&rsp.readNVDMRsp.gainSPKl, &rsp.readNVDMRsp.gainSPKr);
     rsp.readNVDMRsp.header.ancId = REALTIME_ANCPASSTHRU_READ_NVDM;
     RACE_Cmd_RealTime_ANC_Resp(gANCPassThruRealTimeCtl.channelId, (U8 *)&rsp, sizeof(APP_RACE_RSP_ANC_PASSTHRU_READ_NVDM));
 }
 
-<<<<<<< HEAD
-static void app_RaceCmd_Anc_WriteNVDMHandler(APP_RACE_ANC_PASSTHRU *pData)
-{
-    APP_RACE_ANC_PASSTHRU rsp;
-
-    rsp.writeNVDMRsp.header.status = audio_anc_passthru_write_dg_gain(pData->writeNVDMCmd.gainFFl, pData->writeNVDMCmd.gainFBl);
-    rsp.writeNVDMRsp.header.status |= audio_anc_passthru_write_dg_speaker_gain(pData->writeNVDMCmd.gainSPKl, pData->writeNVDMCmd.gainSPKr);
-=======
 static void app_RaceCmd_Anc_WriteNVDMHandler(APP_RACE_ANC_PASSTHRU *pData, U16 length)
 {
     APP_RACE_ANC_PASSTHRU rsp;
@@ -496,21 +443,13 @@ static void app_RaceCmd_Anc_WriteNVDMHandler(APP_RACE_ANC_PASSTHRU *pData, U16 l
     }
     rsp.writeNVDMRsp.header.status = audio_anc_passthru_write_dg_gain(pData->writeNVDMCmd.gainFFl, pData->writeNVDMCmd.gainFBl);
     rsp.writeNVDMRsp.header.status |= audio_anc_passthru_write_dg_speaker_gain(rsp.writeNVDMRsp.gainSPKl, rsp.writeNVDMRsp.gainSPKr);
->>>>>>> db20e11 (second commit)
     rsp.writeNVDMRsp.header.ancId = REALTIME_ANCPASSTHRU_WRITE_NVDM;
     rsp.writeNVDMRsp.gainFFl = pData->writeNVDMCmd.gainFFl;
     rsp.writeNVDMRsp.gainFBl = pData->writeNVDMCmd.gainFBl;
     rsp.writeNVDMRsp.gainFFr = pData->writeNVDMCmd.gainFFr;
     rsp.writeNVDMRsp.gainFBr = pData->writeNVDMCmd.gainFBr;
-<<<<<<< HEAD
-    rsp.writeNVDMRsp.gainSPKl = pData->writeNVDMCmd.gainSPKl;
-    rsp.writeNVDMRsp.gainSPKr = pData->writeNVDMCmd.gainSPKr;
-
-    RACE_Cmd_RealTime_ANC_Resp(gANCPassThruRealTimeCtl.channelId, (U8 *)&rsp, sizeof(APP_RACE_RSP_ANC_PASSTHRU_WRITE_NVDM));
-=======
 
     RACE_Cmd_RealTime_ANC_Resp(gANCPassThruRealTimeCtl.channelId, (U8 *)&rsp, length);
->>>>>>> db20e11 (second commit)
 }
 
 static void app_RaceCmd_Anc_SetRealtimeVolHandler(APP_RACE_ANC_PASSTHRU *pData)
@@ -518,12 +457,8 @@ static void app_RaceCmd_Anc_SetRealtimeVolHandler(APP_RACE_ANC_PASSTHRU *pData)
     APP_RACE_ANC_PASSTHRU rsp;
     APP_ANCPASSTHRU_PARA_STRU para;
     S16 runtime_gain = pData->runtimeGainCmd.gain;
-<<<<<<< HEAD
-    
-=======
 
     memset(&para, 0, sizeof(APP_ANCPASSTHRU_PARA_STRU));
->>>>>>> db20e11 (second commit)
     para.action = ACTION_SET_VOL;
     para.sync = pData->runtimeGainCmd.syncMode;
     para.runtime_gain = runtime_gain;
@@ -562,11 +497,8 @@ static void app_RaceCmd_Anc_UpdateCoefHandler(APP_RACE_ANC_PASSTHRU *pData, U16 
 
 static void app_RaceCmd_Anc_EnterMpModeHandler(APP_RACE_ANC_PASSTHRU *pData)
 {
-<<<<<<< HEAD
-=======
 	DSP_GC_MuteAudioSink(FALSE);
 
->>>>>>> db20e11 (second commit)
     APP_RACE_ANC_PASSTHRU rsp;
     APP_ANCPassThru_SetMpMode(TRUE);
     rsp.enterMpRsp.header.status = 0;
@@ -591,10 +523,7 @@ static void app_RaceCmd_Anc_EnableCalibration(APP_RACE_ANC_PASSTHRU *pData)
     BOOL control_status;
 #ifdef AUDIO_CALIBRATION_ENABLE
     if(pData->enableCalCmd.enable) {
-<<<<<<< HEAD
-=======
         drv_calibration_set_low_pass_filter(pData->enableCalCmd.low_pass_filter);
->>>>>>> db20e11 (second commit)
         control_status = drv_calibration_start();
     } else {
         control_status = drv_calibration_stop(false);
@@ -605,10 +534,7 @@ static void app_RaceCmd_Anc_EnableCalibration(APP_RACE_ANC_PASSTHRU *pData)
     rsp.enableCalRsp.header.status = (control_status) ? false : true;
     rsp.enableCalRsp.header.ancId = REALTIME_ANCPASSTHRU_ENABLE_CALIBRATION;
     rsp.enableCalRsp.enable = pData->enableCalCmd.enable;
-<<<<<<< HEAD
-=======
     rsp.enableCalRsp.low_pass_filter = pData->enableCalCmd.low_pass_filter;
->>>>>>> db20e11 (second commit)
     RACE_Cmd_RealTime_ANC_Resp(gANCPassThruRealTimeCtl.channelId, (U8 *)&rsp, sizeof(APP_RACE_RSP_ANC_PASSTHRU_ENABLE_CALIBRATION));
 }
 
@@ -640,10 +566,6 @@ static void app_RaceCmd_Anc_GetCalibrationResult(APP_RACE_ANC_PASSTHRU *pData)
     rsp.getCalResRsp.signal_power = (S16)result;
     rsp.getCalResRsp.thd = 0;
     RACE_Cmd_RealTime_ANC_Resp(gANCPassThruRealTimeCtl.channelId, (U8 *)&rsp, sizeof(APP_RACE_RSP_ANC_PASSTHRU_GET_CALIBRATION_RESULT));
-<<<<<<< HEAD
-}
-
-=======
     DBG_LOG_APP_SYSTEM("[APP RaceCmd ANC] app_RaceCmd_Anc_GetCalibrationResult %d", 1, result);
 }
 
@@ -660,7 +582,6 @@ static void app_RaceCmd_Anc_SetCalibrationOutputTone(APP_RACE_ANC_PASSTHRU *pDat
     rsp.setCalToneRsp.output_volume = pData->setCalToneCmd.output_volume;
     RACE_Cmd_RealTime_ANC_Resp(gANCPassThruRealTimeCtl.channelId, (U8 *)&rsp, sizeof(APP_RACE_RSP_ANC_PASSTHRU_SET_TONE));
 }
->>>>>>> db20e11 (second commit)
 
 static void app_RaceCmd_Anc_ErrorHandler(APP_RACE_ANC_PASSTHRU *pData)
 {
@@ -693,17 +614,6 @@ static void app_RaceCmd_Anc_Handler(U8 channelId, U16 length, U8* pMsg)
 			break;
 
 		case REALTIME_ANCPASSTHRU_SET_VOL:
-<<<<<<< HEAD
-            app_RaceCmd_Anc_SetVolHandler(pData);
-			break;
-
-		case REALTIME_ANCPASSTHRU_READ_NVDM:
-            app_RaceCmd_Anc_ReadNVDMHandler(pData);
-			break;
-
-		case REALTIME_ANCPASSTHRU_WRITE_NVDM:
-            app_RaceCmd_Anc_WriteNVDMHandler(pData);
-=======
             app_RaceCmd_Anc_SetVolHandler(pData, length);
 			break;
 
@@ -713,7 +623,6 @@ static void app_RaceCmd_Anc_Handler(U8 channelId, U16 length, U8* pMsg)
 
 		case REALTIME_ANCPASSTHRU_WRITE_NVDM:
             app_RaceCmd_Anc_WriteNVDMHandler(pData, length);
->>>>>>> db20e11 (second commit)
 			break;
 
 		case REALTIME_ANCPASSTHRU_SET_RUNTIME_VOL:
@@ -744,12 +653,9 @@ static void app_RaceCmd_Anc_Handler(U8 channelId, U16 length, U8* pMsg)
         case REALTIME_ANCPASSTHRU_GET_CALIBRATION_RESULT:
             app_RaceCmd_Anc_GetCalibrationResult(pData);
             break;
-<<<<<<< HEAD
-=======
         case REALTIME_ANCPASSTHRU_SET_OUTPUT_TONE:
             app_RaceCmd_Anc_SetCalibrationOutputTone(pData);
             break;
->>>>>>> db20e11 (second commit)
 		default:
             app_RaceCmd_Anc_ErrorHandler(pData);
             break;

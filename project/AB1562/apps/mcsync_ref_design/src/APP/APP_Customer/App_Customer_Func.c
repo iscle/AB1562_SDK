@@ -67,21 +67,12 @@
 #include "AudioDSP_AncPassThru.h"
 #include "DSP_ANC_Control.h"
 #include "InEarDetection_NvkeyHandler.h"
-<<<<<<< HEAD
-#include "gfps_api.h"
-#ifdef PROFILE_SWIFT_ENABLE
-=======
 #ifdef AIR_SWIFT_ENABLE
->>>>>>> db20e11 (second commit)
 #include "App_Swift.h"
 #endif
 /**************************************************************************************************
 * Variable
 **************************************************************************************************/
-<<<<<<< HEAD
-static U8 byLidOnCnt = 0;
-=======
->>>>>>> db20e11 (second commit)
 
 /**************************************************************************************************
 * Static Function (Handler)
@@ -151,15 +142,7 @@ void APP_Customer_SendSyncGeneralData(void)
 
 U8 APP_Customer_Sync_Parnter_Data(U8 *pValue)
 {
-<<<<<<< HEAD
-#ifdef PROFILE_GFP_ENABLE
-    App_gfp_parnter_batt( pValue );
-#else
 	UNUSED(pValue);
-#endif
-=======
-	UNUSED(pValue);
->>>>>>> db20e11 (second commit)
     return TRUE;
 }
 
@@ -177,40 +160,14 @@ U32 APP_Customer_LidOnBatteryHanler(U32 ext_id)
 {
 	UNUSED(ext_id);
 
-<<<<<<< HEAD
-#ifdef PROFILE_GFP_ENABLE
-    if ( APP_PowerOff_IsPowerOn() )
-    {
-        if ( ++byLidOnCnt == 2 )
-        {
-            byLidOnCnt = 0;
-            App_GfpsAdv_Update(0);
-        }
-    }
-#endif	
-    
-=======
->>>>>>> db20e11 (second commit)
 	return TRUE;
 }
 
 void APP_Customer_KeyIndex0Handler(void)
 {
-<<<<<<< HEAD
-
-#ifdef PROFILE_GFP_ENABLE
-    if ( PM_GetNormalLinkNum() == 0 )
-        App_GfpsAdv_Update(1);
-#endif	
-
-#ifdef PROFILE_SWIFT_ENABLE
-    App_SwiftAdv_Update();
-#endif	
-=======
 #ifdef AIR_SWIFT_ENABLE
     App_SwiftAdv_Update();
 #endif
->>>>>>> db20e11 (second commit)
 
 }
 
@@ -226,10 +183,6 @@ BOOL APP_Customer_SmartKeyHandler(void)
 
 void APP_Customer_SmartUsr1IndHandler(void)
 {
-<<<<<<< HEAD
-    byLidOnCnt = 0; 
-=======
->>>>>>> db20e11 (second commit)
 }
 
 void APP_Customer_MCSyncConntingHandler(void)

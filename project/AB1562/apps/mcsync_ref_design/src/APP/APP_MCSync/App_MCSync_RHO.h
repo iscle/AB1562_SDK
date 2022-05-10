@@ -46,11 +46,7 @@ BOOL APP_MCSync_Rho_Start(void);
 void APP_MCSync_Rho_AirAppDisconnectNotify(void);
 void APP_MCSync_Rho_BleDisconnectNotify(U8 status);
 void APP_MCSync_Rho_CustAppDisconnectNotify(void);
-<<<<<<< HEAD
-#ifdef PROFILE_GFP_ENABLE
-=======
 #ifdef AIR_GFP_ENABLE
->>>>>>> db20e11 (second commit)
 void APP_MCSync_Rho_GfpSppDisconnectNotify(void);
 #endif
 void APP_MCSync_Rho_PacketHandler(MCSYNC_RHO_PACKET_T *pRxPacket, U16 length);
@@ -63,12 +59,9 @@ BOOL APP_MCSync_Rho_IsAbleToStartRho(void);
 void APP_MCSync_Rho_SetRhoState(U8 state);
 void APP_MCSync_Rho_StatusChangeIndHandler(U8 role);
 BOOL APP_MCSync_Rho_Stop(void);
-<<<<<<< HEAD
-=======
 #ifdef AIR_TILE_ADV_ENABLE	
 void app_MCSync_Rho_PartnerBleDisconnectNotify(U8 status); //add for tile
 #endif
->>>>>>> db20e11 (second commit)
 
 
 #endif //_APP_MCSYNC_RHO_H_

@@ -33,19 +33,13 @@
  */
 
 #include "hal_gpio_config.h"
-<<<<<<< HEAD
-=======
 #include "syslog.h"
->>>>>>> db20e11 (second commit)
 #include "nvkey.h"
 #include "nvkey_list.h"
 #include <string.h>
 
-<<<<<<< HEAD
-=======
 
 extern VOID* FPT_Parameter(U8 type);
->>>>>>> db20e11 (second commit)
 #define GPIO_PIN_MASK  (0x0003FFFF)
 const uint32_t GPIO_CONFIG_PIN_MASK[1] = {GPIO_PIN_MASK};
 
@@ -182,9 +176,6 @@ hal_gpio_status_t hal_gpio_set_output_with_gpio_var_name(gpio_var_name_t gpio_va
 	return hal_gpio_set_output(pin, gpio_data);
 }
 
-<<<<<<< HEAD
-
-=======
 void gpio_config_bonding_option(uint32_t pkg_type1, uint32_t pkg_type0, uint32_t emem_en, uint32_t wbanc_en, uint32_t hybanc_en, uint32_t audeq_en)
 {
     if (pkg_type0) {PU_CFG0_SET = BOND_PKG_TYPE_0_MASK; PD_CFG0_CLR = BOND_PKG_TYPE_0_MASK;} else {PU_CFG0_CLR = BOND_PKG_TYPE_0_MASK; PD_CFG0_SET = BOND_PKG_TYPE_0_MASK;}
@@ -263,7 +254,6 @@ void hal_gpio_config_bonding_option(void)
         printf("[GPIO]Read FPT VERSION Error\r\n");
     }
 }
->>>>>>> db20e11 (second commit)
 
 void gpio_config_all(void)
 {
@@ -294,10 +284,7 @@ void gpio_config_all(void)
             }
         }
     }
-<<<<<<< HEAD
-=======
     hal_gpio_config_bonding_option();
->>>>>>> db20e11 (second commit)
 }
 
 
@@ -347,9 +334,5 @@ void    rtc_gpio_config_all(void)
     }
 #endif
 }
-<<<<<<< HEAD
-   
-=======
 
->>>>>>> db20e11 (second commit)
 

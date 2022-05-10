@@ -39,11 +39,6 @@
 #define CONTROL_BLOCK_STATUS_WRITTING       0xFE
 #define CONTROL_BLOCK_STATUS_WRITE_FINISH   0xFC
 #define CONTROL_BLOCK_STATUS_ERASING        0xF8
-<<<<<<< HEAD
-
-#define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
-#define OFFLINE_MAX_CALLBACK_NUMBER         16
-=======
 #define CONTROL_BLOCK_STATUS_INVALID        0xA0
 
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
@@ -68,7 +63,6 @@ log_create_module(OFFLINE_DUMP, PRINT_LEVEL_INFO);
 #define OFFLINE_DUMP_MSGID_E(fmt, cnt, arg...)
 #endif /* __EXT_BOOTLOADER__ */
 
->>>>>>> db20e11 (second commit)
 
 const char *magic_name[OFFLINE_REGION_MAX] = {
     "OFFLINE_DUMP_V1_SYSLOG",
@@ -96,16 +90,6 @@ static offline_dump_info_t g_offline_dump_info_array[OFFLINE_REGION_MAX];
 static volatile uint32_t g_offline_dump_current_sequence[OFFLINE_REGION_MAX] = {0};
 static volatile bool g_offline_dump_region_is_written[OFFLINE_REGION_MAX] = {false};
 static offline_callback_t g_offline_log_head_callback[OFFLINE_REGION_MAX][OFFLINE_MAX_CALLBACK_NUMBER] = {{NULL}, {NULL}, {NULL}};
-<<<<<<< HEAD
-
-static bool port_offline_dump_access_is_allowed(void)
-{
-    if (g_is_fota_ongoing == true) {
-        return false;
-    } else {
-        return true;
-    }
-=======
 static offline_callback_t g_offline_log_tail_callback[OFFLINE_REGION_MAX][OFFLINE_MAX_CALLBACK_NUMBER] = {{NULL}, {NULL}, {NULL}};
 
 static bool port_offline_dump_access_is_allowed(offline_dump_region_type_t region_type)
@@ -125,7 +109,6 @@ static bool port_offline_dump_access_is_allowed(offline_dump_region_type_t regio
     }
 
     return true;
->>>>>>> db20e11 (second commit)
 }
 
 static uint16_t calculate_checksum(uint8_t *p_buf, uint32_t count)
@@ -154,10 +137,7 @@ static void check_offline_dump_region_integrity(offline_dump_region_type_t regio
 {
     uint8_t status;
     uint8_t *p_payload;
-<<<<<<< HEAD
-=======
     uint8_t version_build_buffer[OFFLINE_BUILD_INFO_SIZE];
->>>>>>> db20e11 (second commit)
     uint32_t j;
     int32_t ongoing_cell;
     uint16_t header_size, checksum, calc_checksum;
@@ -179,11 +159,8 @@ static void check_offline_dump_region_integrity(offline_dump_region_type_t regio
         p_header = (offline_dump_header_t *)(g_offline_dump_info_array[region_type].start_address + j * g_offline_dump_info_array[region_type].cell_size);
         PORT_FLASH_READ((uint32_t)&p_header->status, &status, 1);
         switch (status) {
-<<<<<<< HEAD
-=======
             case CONTROL_BLOCK_STATUS_INVALID:
                 continue;
->>>>>>> db20e11 (second commit)
             case CONTROL_BLOCK_STATUS_ERASED:
                 continue;
             case CONTROL_BLOCK_STATUS_WRITTING:
@@ -201,10 +178,6 @@ static void check_offline_dump_region_integrity(offline_dump_region_type_t regio
                 if (curr_seq_number > max_seq_number) {
                     max_seq_number = curr_seq_number;
                 }
-<<<<<<< HEAD
-                dump_is_empty = false;
-=======
->>>>>>> db20e11 (second commit)
                 break;
             default:
                 need_total_format = true;
@@ -220,14 +193,11 @@ static void check_offline_dump_region_integrity(offline_dump_region_type_t regio
         PORT_FLASH_READ((uint32_t)&p_header->header_checksum, (uint8_t *)&checksum, sizeof(p_header->header_checksum));
         PORT_FLASH_READ((uint32_t)&p_header->header_size, (uint8_t *)&header_size, sizeof(p_header->header_size));
 
-<<<<<<< HEAD
-=======
         if (header_size != sizeof(offline_dump_header_t)) {
             need_total_format = true;
             break;
         }
 
->>>>>>> db20e11 (second commit)
         p_payload = (uint8_t *)malloc(header_size - 6);
 
         PORT_FLASH_READ((uint32_t)&p_header->header_size, p_payload, header_size - 6);
@@ -239,8 +209,6 @@ static void check_offline_dump_region_integrity(offline_dump_region_type_t regio
             need_total_format = true;
             break;
         }
-<<<<<<< HEAD
-=======
 
         /* verify SDK version */
         memset(version_build_buffer, 0, sizeof(version_build_buffer));
@@ -260,7 +228,6 @@ static void check_offline_dump_region_integrity(offline_dump_region_type_t regio
             continue;
         }
         dump_is_empty = false;
->>>>>>> db20e11 (second commit)
     }
 
     if (need_total_format == true) {
@@ -315,11 +282,7 @@ bool offline_dump_region_init(void)
         }
 
         /* Check whether FOTA allows us to write to FOTA */
-<<<<<<< HEAD
-        if (port_offline_dump_access_is_allowed() == false) {
-=======
         if (port_offline_dump_access_is_allowed(i) == false) {
->>>>>>> db20e11 (second commit)
             continue;
         }
 
@@ -345,11 +308,7 @@ bool offline_dump_region_init(void)
         check_offline_dump_region_integrity((offline_dump_region_type_t)i);
 
 #ifndef __EXT_BOOTLOADER__
-<<<<<<< HEAD
-        LOG_I(common, "Offline dump type[%d] magic[%s] address[0x%08x] size[0x%x] cell_size[%d] cell_count[%d] cell_valid_size[%d] \r\n",
-=======
         OFFLINE_DUMP_I("Offline dump type[%d] magic[%s] address[0x%08x] size[0x%x] cell_size[%d] cell_count[%d] cell_valid_size[%d] \r\n",
->>>>>>> db20e11 (second commit)
                                                 g_offline_dump_info_array[i].type,
                                                 g_offline_dump_info_array[i].magic_name,
                                                 g_offline_dump_info_array[i].start_address,
@@ -379,11 +338,7 @@ bool offline_dump_region_alloc(offline_dump_region_type_t region_type, uint32_t 
     }
 
     /* Check whether FOTA allows us to write to FOTA */
-<<<<<<< HEAD
-    if (port_offline_dump_access_is_allowed() == false) {
-=======
     if (port_offline_dump_access_is_allowed(region_type) == false) {
->>>>>>> db20e11 (second commit)
         return false;
     }
 
@@ -437,11 +392,7 @@ bool offline_dump_region_write(offline_dump_region_type_t region_type, uint32_t 
     }
 
     /* Check whether FOTA allows us to write to FOTA */
-<<<<<<< HEAD
-    if (port_offline_dump_access_is_allowed() == false) {
-=======
     if (port_offline_dump_access_is_allowed(region_type) == false) {
->>>>>>> db20e11 (second commit)
         return false;
     }
 
@@ -477,11 +428,7 @@ bool offline_dump_region_write_end(offline_dump_region_type_t region_type, uint3
     }
 
     /* Check whether FOTA allows us to write to FOTA */
-<<<<<<< HEAD
-    if (port_offline_dump_access_is_allowed() == false) {
-=======
     if (port_offline_dump_access_is_allowed(region_type) == false) {
->>>>>>> db20e11 (second commit)
         return false;
     }
 
@@ -554,11 +501,7 @@ bool offline_dump_region_read(offline_dump_region_type_t region_type, uint32_t c
     }
 
     /* Check whether FOTA allows us to write to FOTA */
-<<<<<<< HEAD
-    if (port_offline_dump_access_is_allowed() == false) {
-=======
     if (port_offline_dump_access_is_allowed(region_type) == false) {
->>>>>>> db20e11 (second commit)
         return false;
     }
 
@@ -581,15 +524,11 @@ bool offline_dump_region_read(offline_dump_region_type_t region_type, uint32_t c
 
 bool offline_dump_region_query_seq_range(offline_dump_region_type_t region_type, uint32_t *p_min_seq, uint32_t *p_max_seq)
 {
-<<<<<<< HEAD
-    uint32_t min_seq, max_seq;
-=======
     bool mark_invalid;
     uint8_t status;
     uint32_t i;
     uint32_t min_seq, max_seq, index;
     offline_dump_header_t *p_header;
->>>>>>> db20e11 (second commit)
 
     offline_dump_region_init();
 
@@ -620,10 +559,6 @@ bool offline_dump_region_query_seq_range(offline_dump_region_type_t region_type,
         min_seq = 0;
     }
 
-<<<<<<< HEAD
-    *p_min_seq = min_seq;
-    *p_max_seq = max_seq;
-=======
     /* find out max invalid block */
     if (min_seq > max_seq) {
         return false;
@@ -653,7 +588,6 @@ bool offline_dump_region_query_seq_range(offline_dump_region_type_t region_type,
         *p_min_seq = min_seq;
         *p_max_seq = max_seq;
     }
->>>>>>> db20e11 (second commit)
 
     return true;
 }
@@ -741,10 +675,7 @@ bool offline_dump_register_head_callback(offline_dump_region_type_t region_type,
         return false;
     }
 
-<<<<<<< HEAD
-=======
     /* Find the insertion point */
->>>>>>> db20e11 (second commit)
     for (i = 0; i < OFFLINE_MAX_CALLBACK_NUMBER; i++) {
         if (g_offline_log_head_callback[region_type][i] == NULL) {
             g_offline_log_head_callback[region_type][i] = user_callback;
@@ -752,8 +683,6 @@ bool offline_dump_register_head_callback(offline_dump_region_type_t region_type,
         }
     }
 
-<<<<<<< HEAD
-=======
     /* Full, insertion error */
     if (i == OFFLINE_MAX_CALLBACK_NUMBER) {
         return false;
@@ -783,7 +712,6 @@ bool offline_dump_register_tail_callback(offline_dump_region_type_t region_type,
         return false;
     }
 
->>>>>>> db20e11 (second commit)
     return true;
 }
 
@@ -797,16 +725,11 @@ void offline_dump_callback_head_handle(offline_dump_region_type_t region_type)
 
     for (i = 0; i < OFFLINE_MAX_CALLBACK_NUMBER; i++) {
         if (g_offline_log_head_callback[region_type][i] != NULL) {
-<<<<<<< HEAD
-=======
             OFFLINE_DUMP_MSGID_I("head callback num[%d] add[0x%08x]", 2, i, g_offline_log_head_callback[region_type][i]);
->>>>>>> db20e11 (second commit)
             g_offline_log_head_callback[region_type][i]();
         }
     }
 }
-<<<<<<< HEAD
-=======
 
 void offline_dump_callback_tail_handle(offline_dump_region_type_t region_type)
 {
@@ -828,4 +751,3 @@ void offline_dump_callback_tail_handle(offline_dump_region_type_t region_type)
 
 
 
->>>>>>> db20e11 (second commit)

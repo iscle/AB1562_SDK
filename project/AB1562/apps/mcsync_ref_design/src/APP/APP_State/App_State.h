@@ -153,10 +153,7 @@ bool APP_State_CheckLinkConnected(BD_ADDR_T *pBdAddr);
 bool APP_State_CheckLinkInCallRelatedState(BD_ADDR_T *pBdAddr);//MMI_CheckLinkInCallRelatedState
 BD_ADDR_T * APP_State_CheckOtherLinksInCallRelatedState(BD_ADDR_T *pBdAddr);
 bool APP_State_AllLinksInCallRelatedState(void);//MMI_AllLinksInCallRelatedState
-<<<<<<< HEAD
-=======
 bool APP_State_IsAnyLinkInSpecifiedState(U8 state);
->>>>>>> db20e11 (second commit)
 bool APP_State_CheckLinkInCallActiveState(BD_ADDR_T *pBdAddr);//MMI_CheckLinkInCallActiveState
 bool APP_State_CheckOtherLinksInCallActiveState(BD_ADDR_T *pBdAddr);
 bool APP_State_AllLinksInCallActiveState(void);//MMI_AllLinksInCallActiveState

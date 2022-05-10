@@ -461,13 +461,8 @@ static int32_t flash_sw_protected_check(uint32_t address)
 
     index = (sizeof(region_cfg_tbl) / sizeof(region_cfg_tbl[0]));
     for(i = 0; i < index; i++) {
-<<<<<<< HEAD
-        if (address < region_cfg_tbl[i].length) {
-            result |= -1;
-=======
         if ((address >= region_cfg_tbl[i].address) && (address < ( region_cfg_tbl[i].address + region_cfg_tbl[i].length))) {
             result = 1;
->>>>>>> db20e11 (second commit)
         }
     }
     return result;

@@ -224,11 +224,7 @@ void os_gpt_interrupt_handle(hal_nvic_irq_t irq_number)
     if(isKernelInit && systemCounter > 1000)
     {
         systemTick ++;
-<<<<<<< HEAD
-        osStatusNotify();
-=======
         //osStatusNotify();
->>>>>>> db20e11 (second commit)
         systemCounter = 0;
     }
 }
@@ -302,11 +298,7 @@ void port_sleepMode_internal(int xExpectedIdleTime)
     U32 enter_wdt_before_time,enter_wdt_after_time;
     U32 exit_wdt_before_time,exit_wdt_after_time;
     U32 set_ost_before_time,set_ost_after_time;
-<<<<<<< HEAD
-
-=======
     hal_gpt_status_t gpt_ret;
->>>>>>> db20e11 (second commit)
     if(IsLowPwrMode)
     {
         if(osTaskStatus())
@@ -331,13 +323,10 @@ void port_sleepMode_internal(int xExpectedIdleTime)
         return;
     }
 
-<<<<<<< HEAD
-=======
     /* stop the os profiling timer */
     extern uint32_t os_profiling_gpt_handle;
     (void)hal_gpt_sw_stop_timer_ms(os_profiling_gpt_handle);
 
->>>>>>> db20e11 (second commit)
     os_gpt0_pause();
     hal_gpt_get_free_run_count(HAL_GPT_CLOCK_SOURCE_32K, &before_sleep_time);
 
@@ -369,11 +358,7 @@ void port_sleepMode_internal(int xExpectedIdleTime)
     /* restore wdt status to the configuration before sleep */
     extern void hal_wdt_exit_sleep(void);
     hal_wdt_exit_sleep();
-<<<<<<< HEAD
-    systemhang_set_safe_duration(SYSTEMHANG_USER_CONFIG_COUNT_TOTAL - 1, 60*20);
-=======
     systemhang_set_safe_duration(SYSTEMHANG_USER_CONFIG_COUNT_TOTAL - 1, 60*5);
->>>>>>> db20e11 (second commit)
     #endif /* MTK_SYSTEM_HANG_TRACER_ENABLE */
     hal_gpt_get_free_run_count(HAL_GPT_CLOCK_SOURCE_32K, &exit_wdt_after_time);
     
@@ -435,8 +420,6 @@ void port_sleepMode_internal(int xExpectedIdleTime)
             sleepRemainder -= 32768;
             xTaskIncrementTick();
         }
-<<<<<<< HEAD
-=======
 
     }
     /* restart the os profiling timer */
@@ -445,7 +428,6 @@ void port_sleepMode_internal(int xExpectedIdleTime)
     gpt_ret = hal_gpt_sw_start_timer_ms(os_profiling_gpt_handle, OS_PROFILING_GPT_PERIOD_MS, (hal_gpt_callback_t)osDumpTaskCounter, NULL);
     if(HAL_GPT_STATUS_OK != gpt_ret){
         LOG_COMMON_MSGID_INFO("os profiling timer is not re-started:%d", 1, gpt_ret);
->>>>>>> db20e11 (second commit)
     }
 }
 

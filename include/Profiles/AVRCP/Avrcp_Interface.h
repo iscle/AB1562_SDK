@@ -408,14 +408,6 @@ typedef struct {
 
 typedef struct {
     BD_ADDR_T bdAddr;
-<<<<<<< HEAD
-    U32 AttributeID;
-    U16 CharacterSetID;
-    U16 AttributeValueLength;
-    U8 AttributeValue[1];
-} PACKED AVRCP_GET_ELEMENT_IND_T;
-
-=======
     U16 len;// len of getEleAttPara;
     U8 attNum;
     union {
@@ -430,7 +422,6 @@ typedef struct {
         } PACKED multiAttrData;
     } PACKED getEleAttPara; 
 } PACKED AVRCP_GET_ELEMENT_IND_T;
->>>>>>> db20e11 (second commit)
 typedef struct {
     BD_ADDR_T bdAddr;
     U8 CapabilityCount;

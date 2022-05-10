@@ -146,11 +146,7 @@ void APP_AVRCP_ProcessKeyEvent(BD_ADDR_T *pBdAddr, U16 keyIndex)
 
 BOOL APP_AIR_CheckAVRCPKeyValid(U16 keyCode)
 {
-<<<<<<< HEAD
-	#ifdef A2DP_Profile
-=======
 	#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 	UNUSED(keyCode);
 	/*
 	if(A2DP_IsLinkFollower(gMMI_ctl.serviceInd))
@@ -179,11 +175,7 @@ void APP_AVRCP_KeyPlay(BD_ADDR_T *pBdAddr)
 		bt_a2dp_start_request(pBdAddr);
 	#endif
 
-<<<<<<< HEAD
-	#ifdef A2DP_Profile
-=======
 	#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 	if (!a2dp_is_connected(pBdAddr))
 	{
 		PM_ConnectProfile(pBdAddr, PROFILE_A2DP);
@@ -205,11 +197,7 @@ void APP_AVRCP_KeyPause(BD_ADDR_T *pBdAddr)
 	if (AVRCP_IsConnected(pBdAddr))
 		APP_AvrcpDecideOperation(pBdAddr, AVC_OPERATION_KEY_PAUSE);
 
-<<<<<<< HEAD
-	#ifdef A2DP_Profile
-=======
 	#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 	else if (a2dp_is_connected(pBdAddr))
 		bt_a2dp_suspend_request(pBdAddr);
 	else
@@ -279,11 +267,7 @@ void APP_AVRCP_KeySwitch(BD_ADDR_T *pBdAddr)
 
 void APP_AVRCP_KeyLeftChannel(BD_ADDR_T *pBdAddr)
 {
-<<<<<<< HEAD
-	#ifdef A2DP_Profile
-=======
 	#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 	MMI_A2DP_SendCmd(linkIndex, A2DP_HW_AUDIO_CHANNEL_MONO_L);
 	#else
 	UNUSED(pBdAddr);
@@ -294,11 +278,7 @@ void APP_AVRCP_KeyLeftChannel(BD_ADDR_T *pBdAddr)
 
 void APP_AVRCP_KeyRightChannel(BD_ADDR_T *pBdAddr)
 {
-<<<<<<< HEAD
-	#ifdef A2DP_Profile
-=======
 	#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 	MMI_A2DP_SendCmd(linkIndex, A2DP_HW_AUDIO_CHANNEL_MONO_R);
 	#else
 	UNUSED(pBdAddr);
@@ -309,11 +289,7 @@ void APP_AVRCP_KeyRightChannel(BD_ADDR_T *pBdAddr)
 
 void APP_AVRCP_KeyStereoChannel(BD_ADDR_T *pBdAddr)
 {
-<<<<<<< HEAD
-	#ifdef A2DP_Profile
-=======
 	#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 	MMI_A2DP_SendCmd(linkIndex, A2DP_HW_AUDIO_CHANNEL_STEREO);
 	#else
 	UNUSED(pBdAddr);

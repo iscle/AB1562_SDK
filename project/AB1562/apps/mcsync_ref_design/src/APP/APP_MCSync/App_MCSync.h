@@ -52,10 +52,6 @@ enum
 	APP_MCS_TIMER_ID_CHECK_AUTO_DISCOVERABLE_WHEN_PARTNER_CONNECTED,
 	APP_MCS_TIMER_AIR_PAIRING,
 	APP_MCS_TIMER_CHECK_RHO,
-<<<<<<< HEAD
-    APP_MCS_TIMER_SYNC_BATT,
-=======
->>>>>>> db20e11 (second commit)
 	APP_MCS_TIMER_A2DP_RETRIGGER,
 };
 
@@ -74,12 +70,9 @@ typedef struct
 {
 	APP_MCSYNC_INQUIRY_STRU 	inquiryPara;
 	U8 reasonForDisconnect;
-<<<<<<< HEAD
-=======
 	#ifdef AIR_TAKE_OVER_LINK_ENABLE 
 	U8 partnerTakeOverState;
 	#endif
->>>>>>> db20e11 (second commit)
 }APP_MCSYNC_STRU;
 
 typedef struct
@@ -132,13 +125,9 @@ void APP_MCSync_LinkListIndHandler(U8 * pData, U32 length);
 void APP_MCSync_ReconnectStateIndHandler(U8 type, BD_ADDR_T *pBdAddr);
 void APP_MCSync_ReconnectMaskIndHandler(U8 notReconnMask);
 void APP_MCSync_SyncKeyCodeInfoIndHandler(U16 keyCode);
-<<<<<<< HEAD
-void APP_MCSync_SyncGFPInfoIndHandler(void *pData, U32 length);
-=======
 #ifdef AIR_TILE_ADV_ENABLE
 void APP_MCSync_SyncTileInfoIndHandler(U8 opcode, U8 streamState);
 #endif
->>>>>>> db20e11 (second commit)
 
 /**************************************************************************************************
 * Public function (MCSync Init)

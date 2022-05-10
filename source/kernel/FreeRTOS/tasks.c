@@ -5133,15 +5133,6 @@ const TickType_t xConstTickCount = xTickCount;
 
 #if ( configGENERATE_RUN_TIME_STATS == 1 )
 
-<<<<<<< HEAD
-	void vTaskClearTaskRunTimeCounter( void )
-	{
-		TaskStatus_t *pxTaskStatusArray;
-		volatile UBaseType_t uxArraySize, x;
-		uint32_t ulTotalTime;
-		TCB_t *pxTCB;
-
-=======
 void vTaskClearTaskRunTimeCounter( TaskHandle_t taskHandle )
 {
 	TaskStatus_t *pxTaskStatusArray;
@@ -5158,7 +5149,6 @@ void vTaskClearTaskRunTimeCounter( TaskHandle_t taskHandle )
 	}
 	else
 	{
->>>>>>> db20e11 (second commit)
 		/* Take a snapshot of the number of tasks in case it changes while this
 		function is executing. */
 		uxArraySize = uxCurrentNumberOfTasks;
@@ -5182,20 +5172,6 @@ void vTaskClearTaskRunTimeCounter( TaskHandle_t taskHandle )
 			vPortFree(pxTaskStatusArray);
 		}
 	}
-<<<<<<< HEAD
-
-    void vTaskClearTaskRunTimeCounter_airoha( TaskHandle_t taskHandle )
-    {
-		TCB_t *pxTCB;
-
-        /* If null is passed in here then the name of the calling task is being queried. */
-        pxTCB = prvGetTCBFromHandle(taskHandle);
-        configASSERT( pxTCB );
-        pxTCB->ulRunTimeCounter = 0;
-    }
-
-
-=======
 }
 
 uint32_t xTaskGetTaskRunTimeCounter( TaskHandle_t taskHandle )
@@ -5207,7 +5183,6 @@ uint32_t xTaskGetTaskRunTimeCounter( TaskHandle_t taskHandle )
 
     return pxTCB->ulRunTimeCounter;
 }
->>>>>>> db20e11 (second commit)
 #endif /* configGENERATE_RUN_TIME_STATS */
 /*-----------------------------------------------------------*/
 

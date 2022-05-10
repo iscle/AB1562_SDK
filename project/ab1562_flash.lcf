@@ -39,11 +39,6 @@ _stack_start = ORIGIN(DRAM);
 _swla_size = 0;
 
 /* offline dump region size */
-<<<<<<< HEAD
-_exceptionlog_size  = 0x2000;   /*total  8K, cell size 8KB(log buffer size), total 1 cells*/
-_minidump_size      = 0x2000;   /*total  8K, cell size 8KB(mini dump size),  total 1 cells*/
-_offlinelog_size    = 0x2000;   /*total  8K, cell size 8KB(log buffer size), total 1 cells*/
-=======
 _exceptionlog_size  = 0x2000;   /*total  8K, total 1 cells*/
 _minidump_size      = 0x2000;   /*total  8K, total 1 cells*/
 _offlinelog_size    = 0x2000;   /*total  8K, total 1 cells*/
@@ -52,7 +47,6 @@ _offlinelog_size    = 0x2000;   /*total  8K, total 1 cells*/
 _exceptionlog_cell_size  = 0x2000;   /*cell size 8KB(log buffer size)*/
 _minidump_cell_size      = 0x2000;   /*cell size 8KB(mini dump size) */
 _offlinelog_cell_size    = 0x2000;   /*cell size 8KB(log buffer size)*/
->>>>>>> db20e11 (second commit)
 
 /* Linker symbol provided for C/Assembly Code */
 _iram_start     = ORIGIN(IRAM);
@@ -209,11 +203,7 @@ SECTIONS {
           LONG(0x00000000);  /* BinaryMaxLengthHigh */
           LONG(_exceptionlog_size);   /* BinaryMaxLengthLow */
           LONG(0x00000000);  /* ExecutionAddress */
-<<<<<<< HEAD
-          LONG(0x00002000);  /* OfflineCellSize  */
-=======
           LONG(_exceptionlog_cell_size);  /* OfflineCellSize  */
->>>>>>> db20e11 (second commit)
           LONG(0x00000000);  /* ReservedItem3 */
           LONG(0x00000000);  /* ReservedItem2 */
           LONG(0x00000000);  /* ReservedItem1 */
@@ -227,11 +217,7 @@ SECTIONS {
           LONG(0x00000000);  /* BinaryMaxLengthHigh */
           LONG(_minidump_size);   /* BinaryMaxLengthLow */
           LONG(0x00000000);  /* ExecutionAddress */
-<<<<<<< HEAD
-          LONG(0x00002000);  /* OfflineCellSize  */
-=======
           LONG(_minidump_cell_size);  /* OfflineCellSize  */
->>>>>>> db20e11 (second commit)
           LONG(0x00000000);  /* ReservedItem3 */
           LONG(0x00000000);  /* ReservedItem2 */
           LONG(0x00000000);  /* ReservedItem1 */
@@ -245,11 +231,7 @@ SECTIONS {
           LONG(0x00000000);  /* BinaryMaxLengthHigh */
           LONG(_offlinelog_size);   /* BinaryMaxLengthLow */
           LONG(0x00000000);  /* ExecutionAddress */
-<<<<<<< HEAD
-          LONG(0x00002000);  /* OfflineCellSize  */
-=======
           LONG(_offlinelog_cell_size);  /* OfflineCellSize  */
->>>>>>> db20e11 (second commit)
           LONG(0x00000000);  /* ReservedItem3 */
           LONG(0x00000000);  /* ReservedItem2 */
           LONG(0x00000000);  /* ReservedItem1 */

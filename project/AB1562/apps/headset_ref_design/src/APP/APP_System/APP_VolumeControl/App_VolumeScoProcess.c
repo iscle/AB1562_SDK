@@ -70,11 +70,7 @@ static void app_VolSco_SetLink(BD_ADDR_T *pBdAddr, U8 soundLevel, bool isLocalTr
 	if(APP_IsSetAppLink(pBdAddr))
 	{
 		APP_VolSco_SetCurrentSoundLevel(pBdAddr, soundLevel);
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE        
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE        
->>>>>>> db20e11 (second commit)
 		if(isLocalTriggered && (APP_Hfp_IsConnected(pBdAddr) || APP_Hfp_IsHspConnected(pBdAddr)))
 #else
         if(isLocalTriggered && APP_Hfp_IsConnected(pBdAddr)

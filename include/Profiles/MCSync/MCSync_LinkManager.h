@@ -55,11 +55,7 @@ enum
 {
 	SPECIAL_LINK,
 	NORMAL_LINK,
-<<<<<<< HEAD
-	#ifdef TAKE_OVER_LINK
-=======
 	#ifdef AIR_TAKE_OVER_LINK_ENABLE
->>>>>>> db20e11 (second commit)
 	NORMAL_LINK2,
 	#endif
 	MCSYNC_MAX_LINK_NUM,
@@ -69,10 +65,7 @@ enum
 {
 	RHO_IDLE,
 	RHO_STARTING,
-<<<<<<< HEAD
-=======
 	RHO_CONTROLLER_STARTING,
->>>>>>> db20e11 (second commit)
 	RHO_PARTNER_RECEIVE_PKT,
 };
 // 0:special, 1:normal 1, 2: normal 2
@@ -90,11 +83,7 @@ typedef struct
 	U8 linkRole;
 	U8 rhoState;
 	BD_ADDR_T shareAgentBdAddr;
-<<<<<<< HEAD
-	#ifdef TAKE_OVER_LINK
-=======
 	#ifdef AIR_TAKE_OVER_LINK_ENABLE
->>>>>>> db20e11 (second commit)
 	BOOL isLowPrioLink;
 	#endif
 }MCSYNC_LINK_STRU;
@@ -121,11 +110,7 @@ BOOL MCSYNC_IsWithPartner(BD_ADDR_T *pBdAddr);
 void MCSYNC_SetRhoState(MCSYNC_LINK_STRU *pLinkInfo, U8 state);
 U8 MCSYNC_GetRhoState(MCSYNC_LINK_STRU *pLinkInfo);
 
-<<<<<<< HEAD
-#ifdef TAKE_OVER_LINK
-=======
 #ifdef AIR_TAKE_OVER_LINK_ENABLE
->>>>>>> db20e11 (second commit)
 MCSYNC_LINK_STRU *MCSYNC_GetHighPrioLink(void);
 MCSYNC_LINK_STRU *MCSYNC_GetLowPrioLink(void);
 void MCSYNC_SetLowPrioLink(BD_ADDR_T *pBdAddr);
@@ -133,11 +118,7 @@ void MCSYNC_ClearLowPrioLink(BD_ADDR_T *pBdAddr);
 BOOL MCSYNC_CheckIsLowPrioLink(BD_ADDR_T *pBdAddr);
 #endif
 
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 void MCSYNC_SetShareAgentBdAddr(MCSYNC_LINK_STRU *pLinkInfo, BD_ADDR_T *pBdAddr);
 BD_ADDR_T* MCSYNC_GetShareAgentBdAddr(MCSYNC_LINK_STRU *pLinkInfo);
 #endif

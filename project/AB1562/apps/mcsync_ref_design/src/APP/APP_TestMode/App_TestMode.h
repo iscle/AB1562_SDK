@@ -31,22 +31,13 @@
  * OR REFUND ANY SOFTWARE LICENSE FEES OR SERVICE CHARGE PAID BY RECEIVER TO
  * AIROHA FOR SUCH AIROHA SOFTWARE AT ISSUE.
  */
-<<<<<<< HEAD
- 
- 
-=======
 
 
->>>>>>> db20e11 (second commit)
 #ifndef _APP_TEST_MODE_H_
 #define _APP_TEST_MODE_H_
 
 #if 0 /* Unused LOG_PRINT_156X */
-<<<<<<< HEAD
-#define DBG_LOG_APP_TEST_MODE(_message, arg_cnt, ...) 
-=======
 #define DBG_LOG_APP_TEST_MODE(_message, arg_cnt, ...)
->>>>>>> db20e11 (second commit)
 #else
 #define DBG_LOG_APP_TEST_MODE(_message, arg_cnt, ...)   LOG_MSGID_I(APP_TEST_MODE, _message, arg_cnt, ##__VA_ARGS__)
 #endif
@@ -129,12 +120,9 @@ typedef U8 LMP_VERSION;
 #define LMP_VERSION_OF_BT_CORE_SPEC_41      ((LMP_VERSION)(7))
 #define LMP_VERSION_OF_BT_CORE_SPEC_42      ((LMP_VERSION)(8))
 #define LMP_VERSION_OF_BT_CORE_SPEC_50      ((LMP_VERSION)(9))
-<<<<<<< HEAD
-=======
 #define LMP_VERSION_OF_BT_CORE_SPEC_51      ((LMP_VERSION)(10))
 #define LMP_VERSION_OF_BT_CORE_SPEC_52      ((LMP_VERSION)(11))
 
->>>>>>> db20e11 (second commit)
 
 typedef U8 HCI_VERSION;
 #define HCI_VERSION_OF_BT_CORE_SPEC_10B     ((HCI_VERSION)(0))
@@ -326,11 +314,7 @@ typedef struct stru_hci_vcmd_para_labtest_ble_brx_pkt
 		APP_3DH5,
 		TOTAL_TESTMODE_PACKET_TYPE_NO
 	};
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> db20e11 (second commit)
 	typedef struct
 	{
 		U8 state;
@@ -338,20 +322,12 @@ typedef struct stru_hci_vcmd_para_labtest_ble_brx_pkt
 		U8 powerIndex[TOTAL_TESTMODE_STATE_NO];
 		U8 packetTypeIndex[TOTAL_TESTMODE_STATE_NO];
 	}AppTestModeInfo;
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> db20e11 (second commit)
 	typedef struct
 	{
 		void (*TestModeHandler)(U8 channel, U16 power);
 	}AppTestModeHandlerSetType;
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> db20e11 (second commit)
 
     void APP_TestMode_ProcessKeyEvent(BD_ADDR_T *pBdAddr, U8 index);
     void APP_TestMode_KeyEnterTestMode(BD_ADDR_T *pBdAddr);
@@ -363,9 +339,5 @@ typedef struct stru_hci_vcmd_para_labtest_ble_brx_pkt
 
     U8 APP_TestMode_GetMsgNumInQueue(void);
 
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> db20e11 (second commit)
 #endif //_APP_TEST_MODE_H_

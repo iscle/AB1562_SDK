@@ -70,10 +70,7 @@
     @{
 */
 #define PROTOCOL_UUID_RFCOMM                0x0003  ///< RFCOMM.
-<<<<<<< HEAD
-=======
 #define PROTOCOL_UUID_ATT                   0x0007  /* ATT */
->>>>>>> db20e11 (second commit)
 #define PROTOCOL_UUID_OBEX                  0x0008  ///< OBEX.
 #define PROTOCOL_UUID_HID                   0x0011  ///< HIDP.
 #define PROTOCOL_UUID_AVCTP                 0x0017  ///< AVCTP.
@@ -113,10 +110,7 @@
 #define SERVICE_UUID_MESSAGE_NOTIFICATION   0x1133  ///< Message Notification Service.
 #define SERVICE_UUID_PNP_INFORMATION        0x1200  ///< PnP Information.
 #define SERVICE_UUID_GENERIC_AUDIO          0x1203  ///< Generic Audio.
-<<<<<<< HEAD
-=======
 #define SERVICE_UUID_GENERIC_ATTRIBUTE      0x1801  /* Generic Attribute */
->>>>>>> db20e11 (second commit)
 /*!
     @}
 */
@@ -467,10 +461,7 @@ typedef enum
     SDP_OPEN_SEARCH_PAGE_TIMEOUT,
 	SDP_OPEN_SEARCH_CONNECTION_ACCEPT_TIMEOUT,
     SDP_OPEN_SEARCH_CONNECTION_DISALLOW,
-<<<<<<< HEAD
-=======
 	SDP_OPEN_SEARCH_CONNECTION_LIMIT_RESOURCE,
->>>>>>> db20e11 (second commit)
     SDP_OPEN_SEARCH_STATUS_MAX,             /*!< Open search status max. */
 } BT_SDP_OPEN_STATUS_E;
 
@@ -691,11 +682,8 @@ void BtSdpServerDisconnectReq(U8 bdAddr[6],BT_SDP_SERVER_DISCON_OPTION option);
 
 U8 BtSdpGetDataElementSize(U8 dataElementHeader);
 
-<<<<<<< HEAD
-=======
 BOOL BtSdpGetRfcommChannel(U8 *ptr, U8 *pChannel);
 
->>>>>>> db20e11 (second commit)
 /* for aws RHO*/
 BOOL BtSdpIsRhoAllow(void);
 U16 BtSdpGetRhoDataLength(void);

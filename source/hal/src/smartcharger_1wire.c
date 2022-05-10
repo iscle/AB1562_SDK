@@ -159,10 +159,7 @@ static const uint8_t bootevet[]= {
 };
 
 U8 bootFlag;
-<<<<<<< HEAD
-=======
 extern bool one_wire_disable_rx_irq_flag;
->>>>>>> db20e11 (second commit)
 
 static void DRV_SmartCharger_1wire_Uart_Init( void )
 {
@@ -217,11 +214,7 @@ static void DRV_SmartCharger_1wire_Uart_Init( void )
     dma_config.send_vfifo_buffer_size = 32;
     dma_config.send_vfifo_threshold_size = 5;
     status = hal_uart_set_dma(HAL_UART_1, (const hal_uart_dma_config_t *)&dma_config);
-<<<<<<< HEAD
-
-=======
     //one_wire_disable_rx_irq_flag = true;
->>>>>>> db20e11 (second commit)
     if(status != HAL_UART_STATUS_OK)
     {
         LOG_COMMON_MSGID_INFO("[SmartCharger][1Wire]uart set dma fail status[%d]", 1,status);
@@ -377,11 +370,7 @@ static void DRV_SmartCharger_1wire_CallBack( TimerHandle_t pxExpiredTimer )
                         {
                             MSG_MessageSendEx(gMSG_SmartChargerHandler, patternTable[raceCmd[EVENT_INDEX]], NULL, batterLevel);
                         }
-<<<<<<< HEAD
-                        U16 tmp = DRV_BAT_GetThousandPercent()/10;
-=======
                         U16 tmp = pmu_bat_get_perc();
->>>>>>> db20e11 (second commit)
                         parameter = (uint32_t*)&tmp;
                         length    = 1;
                     }
@@ -498,51 +487,15 @@ static void DRV_SmartCharger_1wire_CallBack_Out( TimerHandle_t pxExpiredTimer )
         hal_gpio_disable_pull(HAL_GPIO_7);
 
         /* Dsiable VIO18 pullup */
-<<<<<<< HEAD
-        pmuData  = pmu_get_register_value_2byte(0x2, 0xFFFF, 0);
-        pmuData  = BIT_FIELD_INSERT32(pmuData, 3, 1, 1);
-        pmu_force_set_register_value_2byte(0x2, pmuData);
-=======
         pmuData  = pmu_get_register_value(0x2, 0xFFFF, 0);
         pmuData  = BIT_FIELD_INSERT32(pmuData, 3, 1, 1);
         pmu_force_set_register_value(0x2, pmuData);
->>>>>>> db20e11 (second commit)
 
         hal_pinmux_set_function(HAL_GPIO_7 , HAL_GPIO_7_GPIO7);
         hal_gpio_set_direction(HAL_GPIO_7 , HAL_GPIO_DIRECTION_INPUT);
         hal_gpio_disable_pull(HAL_GPIO_7);
 
         /* VBUS discharge on */
-<<<<<<< HEAD
-        pmuData  = pmu_get_register_value_2byte(0x32A, 0xFFFF, 0);
-        pmuData = BIT_FIELD_INSERT16(pmuData, 11, 1, 1);
-        pmu_force_set_register_value_2byte(0x32A, pmuData);
-
-        /* EOC */
-        pmuData  = pmu_get_register_value_2byte(0x1E, 0xFFFF, 0);
-        pmuData = BIT_FIELD_INSERT16(pmuData, 5, 3, 1);
-        pmu_force_set_register_value_2byte(0x1E, pmuData);
-
-#if 0
-        pmuData  = pmu_get_register_value_2byte(0x320, 0xFFFF, 0);
-        pmuData = BIT_FIELD_INSERT16(pmuData, 12, 1, 1);
-        pmuData &= 0x1FAA;
-        pmu_force_set_register_value_2byte(0x320, pmuData);
-#else
-        pmu_eoc_ctrl(1, 1);
-#endif
-
-        /* PSW_MAIN_CL = ON PSW_MAIN = OFF */
-        pmuData  = pmu_get_register_value_2byte(0x2, 0xFFFF, 0);
-        pmuData  = BIT_FIELD_INSERT32(pmuData, 2, 1, 1);
-        pmuData  = BIT_FIELD_INSERT32(pmuData, 0, 1, 1);
-        pmu_force_set_register_value_2byte(0x2, pmuData);
-
-        /* VBUS discharge off */
-        pmuData  = pmu_get_register_value_2byte(0x32A, 0xFFFF, 0);
-        pmuData = BIT_FIELD_INSERT16(pmuData, 11, 1, 0);
-        pmu_force_set_register_value_2byte(0x32A, pmuData);
-=======
         pmuData  = pmu_get_register_value(0x32A, 0xFFFF, 0);
         pmuData = BIT_FIELD_INSERT16(pmuData, 11, 1, 1);
         pmu_force_set_register_value(0x32A, pmuData);
@@ -579,7 +532,6 @@ static void DRV_SmartCharger_1wire_CallBack_Out( TimerHandle_t pxExpiredTimer )
         pmuData  = pmu_get_register_value(0x32A, 0xFFFF, 0);
         pmuData = BIT_FIELD_INSERT16(pmuData, 11, 1, 0);
         pmu_force_set_register_value(0x32A, pmuData);
->>>>>>> db20e11 (second commit)
 
         isCommMode  = FALSE;
         /* real charger out */
@@ -622,39 +574,15 @@ void battery_management_callback_for_smart_1wire( TimerHandle_t pxExpiredTimer )
     if(type & CHARGER_UNPLUG_INT)
     {
         /* Dsiable VIO18 pullup */
-<<<<<<< HEAD
-        pmuData  = pmu_get_register_value_2byte(0x2, 0xFFFF, 0);
-        pmuData  = BIT_FIELD_INSERT32(pmuData, 3, 1, 1);
-        pmu_force_set_register_value_2byte(0x2, pmuData);
-=======
         pmuData  = pmu_get_register_value(0x2, 0xFFFF, 0);
         pmuData  = BIT_FIELD_INSERT32(pmuData, 3, 1, 1);
         pmu_force_set_register_value(0x2, pmuData);
->>>>>>> db20e11 (second commit)
 
         hal_pinmux_set_function(HAL_GPIO_7 , HAL_GPIO_7_GPIO7);
         hal_gpio_set_direction(HAL_GPIO_7 , HAL_GPIO_DIRECTION_INPUT);
         hal_gpio_disable_pull(HAL_GPIO_7);
 
         /* VBUS discharge on */
-<<<<<<< HEAD
-        pmuData  = pmu_get_register_value_2byte(0x32A, 0xFFFF, 0);
-        pmuData = BIT_FIELD_INSERT16(pmuData, 11, 1, 1);
-        pmu_force_set_register_value_2byte(0x32A, pmuData);
-
-        /* EOC */
-        pmuData  = pmu_get_register_value_2byte(0x1E, 0xFFFF, 0);
-        pmuData = BIT_FIELD_INSERT16(pmuData, 5, 3, 1);
-        pmu_force_set_register_value_2byte(0x1E, pmuData);
-
-#if 0
-        pmuData  = pmu_get_register_value_2byte(0x320, 0xFFFF, 0);
-        pmuData = BIT_FIELD_INSERT16(pmuData, 12, 1, 1);
-        pmuData &= 0x1FAA;
-        pmu_force_set_register_value_2byte(0x320, pmuData);
-#else
-        pmu_eoc_ctrl(1, 0);
-=======
         pmuData  = pmu_get_register_value(0x32A, 0xFFFF, 0);
         pmuData = BIT_FIELD_INSERT16(pmuData, 11, 1, 1);
         pmu_force_set_register_value(0x32A, pmuData);
@@ -675,7 +603,6 @@ void battery_management_callback_for_smart_1wire( TimerHandle_t pxExpiredTimer )
             pmu_eoc_ctrl(1, 0);
         else
             PMU_MSGID_E("pmu_eoc_ctrl, bypass bat_volt[%d]", 1, bat_volt);
->>>>>>> db20e11 (second commit)
 #endif
 
 #if 0
@@ -689,17 +616,6 @@ void battery_management_callback_for_smart_1wire( TimerHandle_t pxExpiredTimer )
 #endif
         /* always comm mode */
         /* PSW_MAIN = OFF , ENABLE PULL UP */
-<<<<<<< HEAD
-        pmuData  = pmu_get_register_value_2byte(0x2, 0xFFFF, 0);
-        pmuData  = BIT_FIELD_INSERT32(pmuData, 0, 1, 1);
-        pmuData  = BIT_FIELD_INSERT32(pmuData, 3, 1, 0);
-        pmu_force_set_register_value_2byte(0x2, pmuData);
-
-        /* VBUS discharge off */
-        pmuData  = pmu_get_register_value_2byte(0x32A, 0xFFFF, 0);
-        pmuData = BIT_FIELD_INSERT16(pmuData, 11, 1, 0);
-        pmu_force_set_register_value_2byte(0x32A, pmuData);
-=======
         pmuData  = pmu_get_register_value(0x2, 0xFFFF, 0);
         if (bat_volt > PMU_1WIRE_BAT_THRD)
         {
@@ -717,7 +633,6 @@ void battery_management_callback_for_smart_1wire( TimerHandle_t pxExpiredTimer )
         pmuData  = pmu_get_register_value(0x32A, 0xFFFF, 0);
         pmuData = BIT_FIELD_INSERT16(pmuData, 11, 1, 0);
         pmu_force_set_register_value(0x32A, pmuData);
->>>>>>> db20e11 (second commit)
 
         DRV_SmartChargerCase_Comm_Mode();
         xTimerStart(pSmartChargerOutTimer, 0);
@@ -735,11 +650,7 @@ void battery_management_callback_for_smart_1wire( TimerHandle_t pxExpiredTimer )
         hal_gpio_set_direction(HAL_GPIO_7, HAL_GPIO_DIRECTION_OUTPUT);
         hal_gpio_set_output(HAL_GPIO_7, HAL_GPIO_DATA_HIGH);
 
-<<<<<<< HEAD
-        pmuData  = pmu_get_register_value_2byte(0x2, 0xFFFF, 0);
-=======
         pmuData  = pmu_get_register_value(0x2, 0xFFFF, 0);
->>>>>>> db20e11 (second commit)
         if (isCommMode == FALSE)
         {
             /* Enable VIO18 pullup */
@@ -753,26 +664,11 @@ void battery_management_callback_for_smart_1wire( TimerHandle_t pxExpiredTimer )
 
         /* PSW_MAIN ON */
         pmuData  = BIT_FIELD_INSERT32(pmuData, 0, 1, 0);
-<<<<<<< HEAD
-        pmu_force_set_register_value_2byte(0x2, pmuData);
-=======
         pmu_force_set_register_value(0x2, pmuData);
->>>>>>> db20e11 (second commit)
         hal_gpt_delay_us(100);
 
         /* PSW_MAIN_CL OFF */
         pmuData  = BIT_FIELD_INSERT32(pmuData, 2, 1, 0);
-<<<<<<< HEAD
-        pmu_force_set_register_value_2byte(0x2, pmuData);
-
-        /* EOC = CHG*/
-        pmuData  = pmu_get_register_value_2byte(0x1E, 0xFFFF, 0);
-        pmuData = BIT_FIELD_INSERT16(pmuData, 5, 3, 0);
-        pmu_force_set_register_value_2byte(0x1E, pmuData);
-
-#if 0
-        pmuData  = pmu_get_register_value_2byte(0x320, 0xFFFF, 0);
-=======
         pmu_force_set_register_value(0x2, pmuData);
 
         /* EOC = CHG*/
@@ -782,7 +678,6 @@ void battery_management_callback_for_smart_1wire( TimerHandle_t pxExpiredTimer )
 
 #if 0
         pmuData  = pmu_get_register_value(0x320, 0xFFFF, 0);
->>>>>>> db20e11 (second commit)
         pmuData = BIT_FIELD_INSERT16(pmuData, 12, 1, 0);
         pmuData &= 0x0FAA;
         LOG_COMMON_MSGID_INFO("[SmartCharger][1Wire]dummy start\r\n",0);
@@ -790,11 +685,7 @@ void battery_management_callback_for_smart_1wire( TimerHandle_t pxExpiredTimer )
         ignore1 = 1;
         ignore2 = 1;
 
-<<<<<<< HEAD
-        pmu_force_set_register_value_2byte(0x320, pmuData);
-=======
         pmu_force_set_register_value(0x320, pmuData);
->>>>>>> db20e11 (second commit)
 #else
         pmu_eoc_ctrl(0, 1);
 #endif
@@ -811,15 +702,9 @@ void battery_management_callback_for_smart_1wire( TimerHandle_t pxExpiredTimer )
             tmpdata = 0;
         }
 
-<<<<<<< HEAD
-        pmuData  = pmu_get_register_value_2byte(0x32A, 0xFFFF, 0);
-        pmuData = BIT_FIELD_INSERT16(pmuData, 11, 1, tmpdata);
-        pmu_force_set_register_value_2byte(0x32A, pmuData);
-=======
         pmuData  = pmu_get_register_value(0x32A, 0xFFFF, 0);
         pmuData = BIT_FIELD_INSERT16(pmuData, 11, 1, tmpdata);
         pmu_force_set_register_value(0x32A, pmuData);
->>>>>>> db20e11 (second commit)
 
         /*charger mode first when charger in */
         DRV_SmartChargerCase_Chg_Mode();
@@ -843,11 +728,8 @@ void DRV_SmartChargerCase_1wire_Init(void)
     uint32_t pmuData;
     uint16_t rc;
 
-<<<<<<< HEAD
-=======
     LOG_COMMON_MSGID_INFO("[SmartCharger][1Wire]DRV_SmartChargerCase_1wire_Init", 0);
 
->>>>>>> db20e11 (second commit)
     isCommMode = FALSE;
 
     pSmartCharger1Wire      = xTimerCreate( "Smart Charger", pdMS_TO_TICKS(1),   pdFALSE, NULL, battery_management_callback_for_smart_1wire );
@@ -937,26 +819,6 @@ void DRV_SmartChargerCase_1wire_Init(void)
     if(!chargerInitState)
     {
         /* PSW_MAIN_CL = ON , PSW_MAIN = OFF , DISABLE VIO PULL UP */
-<<<<<<< HEAD
-        pmuData  = pmu_get_register_value_2byte(0x2, 0xFFFF, 0);
-        pmuData  = BIT_FIELD_INSERT32(pmuData, 2, 1, 1);
-        pmuData  = BIT_FIELD_INSERT32(pmuData, 0, 1, 1);
-        pmuData  = BIT_FIELD_INSERT32(pmuData, 3, 1, 1);
-        pmu_force_set_register_value_2byte(0x2, pmuData);
-
-        /* CHG_STATUS = EOC */
-        pmuData  = pmu_get_register_value_2byte(0x1E, 0xFFFF, 0);
-        pmuData = BIT_FIELD_INSERT16(pmuData, 5, 3, 1);
-        pmu_force_set_register_value_2byte(0x1E, pmuData);
-
-#if 0
-        pmuData  = pmu_get_register_value_2byte(0x320, 0xFFFF, 0);
-        pmuData = BIT_FIELD_INSERT16(pmuData, 12, 1, 1);
-        pmuData &= 0x1FAA;
-        pmu_force_set_register_value_2byte(0x320, pmuData);
-#else
-        pmu_eoc_ctrl(1, 0);
-=======
         pmuData  = pmu_get_register_value(0x2, 0xFFFF, 0);
         pmuData  = BIT_FIELD_INSERT32(pmuData, 2, 1, 1);
         uint32_t bat_volt = pmu_bat_adc_to_volt(pmu_bat_avg_adc());
@@ -983,7 +845,6 @@ void DRV_SmartChargerCase_1wire_Init(void)
             pmu_eoc_ctrl(1, 0);
         else
             PMU_MSGID_E("pmu_eoc_ctrl, bypass bat_volt[%d]", 1, bat_volt);
->>>>>>> db20e11 (second commit)
 #endif
 
         /* init gpio 7*/
@@ -992,15 +853,9 @@ void DRV_SmartChargerCase_1wire_Init(void)
         hal_gpio_disable_pull(HAL_GPIO_7);
 
         /* VBUS discharge off */
-<<<<<<< HEAD
-        pmuData  = pmu_get_register_value_2byte(0x32A, 0xFFFF, 0);
-        pmuData = BIT_FIELD_INSERT16(pmuData, 11, 1, 0);
-        pmu_force_set_register_value_2byte(0x32A, pmuData);
-=======
         pmuData  = pmu_get_register_value(0x32A, 0xFFFF, 0);
         pmuData = BIT_FIELD_INSERT16(pmuData, 11, 1, 0);
         pmu_force_set_register_value(0x32A, pmuData);
->>>>>>> db20e11 (second commit)
     }
     else
     {

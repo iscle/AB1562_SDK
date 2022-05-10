@@ -363,11 +363,7 @@ static void app_ReConn_AddListByFastDongle(U8 type, U8 index)
 
 static void app_ReConn_AddListByBdAddr(U8 type, BD_ADDR_T *pBdAddr)
 {
-<<<<<<< HEAD
-	if((pBdAddr && APP_LinkKey_IsBdAddrInHistory(pBdAddr)) || type == RECONNECT_AWSMCE)
-=======
 	if((pBdAddr && APP_LinkKey_IsBdAddrInHistory(pBdAddr)) || type == RECONNECT_AWSMCE || (pBdAddr && type == RECONNECT_LINK_LOSS))
->>>>>>> db20e11 (second commit)
 	{
 		app_ReConn_AddReconnectList(type, pBdAddr);
 	}
@@ -439,10 +435,7 @@ static void app_ReConn_AddListByMode(U8 type, U8 reconnectMode)
 	}
 }
 
-<<<<<<< HEAD
-=======
 //find and shift next valid index
->>>>>>> db20e11 (second commit)
 static BOOL app_ReConn_SearchList(U8 dataCnt, U8 * pIndex)
 {
 	if(dataCnt)
@@ -514,10 +507,7 @@ static void app_ReConn_Start(U8 type)
 		goto STOP_RECONNECT;
 	}
 
-<<<<<<< HEAD
-=======
 	//the same with "(0 == app_ReConn_GetListCnt(LIST_NORMAL_DATA) && 0 == app_ReConn_GetListCnt(LIST_HIGH_PRI_DATA))"?
->>>>>>> db20e11 (second commit)
 	if((pTarget = APP_ReConn_GetTarget()) == (APP_RECONNECT_DATA_STRU *)NULL)
 	{
 		STOP_RECONNECT:
@@ -527,18 +517,8 @@ static void app_ReConn_Start(U8 type)
 		{
 			APP_Pairing_EnterDiscoverable();
 		}
-<<<<<<< HEAD
-		DBG_LOG_APP_Connection( "[APP_Reconn] STOP_RECONNECT, feature:%d, type:%d", 2, App_ReConnNvkey_IsFeatureOn(APP_DISCOVER_AFTER_POWERON_RECONNECT_FAIL_FEAT), type);
-		return;
-	}
-
-	if(!APP_Conn_IsProfilesReady())
-	{
-		DBG_LOG_APP_Connection( "[APP_Reconn] ----- Profile Not Ready!! return -----", 0);
-=======
 
 		DBG_LOG_APP_Connection( "[APP_Reconn] STOP_RECONNECT, feature:%d, type:%d", 2, App_ReConnNvkey_IsFeatureOn(APP_DISCOVER_AFTER_POWERON_RECONNECT_FAIL_FEAT), type);
->>>>>>> db20e11 (second commit)
 		return;
 	}
 
@@ -549,11 +529,7 @@ static void app_ReConn_Start(U8 type)
 	{
 		APP_INFO_STRU *pLinkInfo = APP_GetAppLinkByBdAddr(&pTarget->bdAddr);
 
-<<<<<<< HEAD
-		DBG_LOG_APP_Connection( "[APP_Reconn] app_ReConn_Start isActiveLink:%d, profileCnt:%d, targetBda:0x%x%x", 2, (pLinkInfo->linkPara.miscMask & APP_LINK_DETACHING), type);
-=======
 		DBG_LOG_APP_Connection( "[APP_Reconn] app_ReConn_Start isDetaching:%d, type:%d", 2, (pLinkInfo->linkPara.miscMask & APP_LINK_DETACHING), type);
->>>>>>> db20e11 (second commit)
 
 		if(pLinkInfo->linkPara.miscMask & APP_LINK_DETACHING)
 		{
@@ -569,12 +545,9 @@ static void app_ReConn_Start(U8 type)
 			APP_Conn_CreateActiveProfileConnection(&pTarget->bdAddr, app_Reconn_GetProfileMask(pTarget));
 		}
 
-<<<<<<< HEAD
-=======
         //start pm conflict state machine if earbuds try to reconn phone when phone already establish acl link.
         PM_ConnectionConflictStateMachine(&pTarget->bdAddr, PM_CONN_CONFLICT_ACTIVE_RECONNECT_EVT);
 
->>>>>>> db20e11 (second commit)
 		APP_ReConn_DeleteInvalidListByBdAddr(&pTarget->bdAddr);
 
 		if((pTarget = APP_ReConn_GetTarget()) == (APP_RECONNECT_DATA_STRU *)NULL)
@@ -588,11 +561,7 @@ static void app_ReConn_Start(U8 type)
 	{
 		if(!app_Reconn_GetProfileMask(pTarget))
 		{
-<<<<<<< HEAD
-			DBG_LOG_APP_Connection( "[APP_Reconn] Start Reconnecting, Priority:%d, targetIdx:%d, rtyCnt:%d", 3, (U8)gAppReconnectCtl.pReconnectList->currentHighPriorityIndex, (U8)app_Reconn_GetCurrentTargetIndex(), pTarget->retryCnt);
-=======
 			DBG_LOG_APP_Connection("[APP_Reconn] Start Reconnecting, Priority:%d, targetIdx:%d, rtyCnt:%d", 3, (U8)gAppReconnectCtl.pReconnectList->currentHighPriorityIndex, (U8)app_Reconn_GetCurrentTargetIndex(), pTarget->retryCnt);
->>>>>>> db20e11 (second commit)
 
 			if(FW_CmpBdAddr(&pTarget->bdAddr, BtAwsMce_ReadLocalBdAddr()) || BtAwsMce_IsDefaultRolePartner())
 			{
@@ -610,10 +579,7 @@ static void app_ReConn_Start(U8 type)
 			{
 				app_Reconn_SetProfileMask(pTarget, RECONNECT_PROFILE_HFP|RECONNECT_PROFILE_A2DP|RECONNECT_PROFILE_AVRCP|RECONNECT_PROFILE_MCSYNC);
 			}
-<<<<<<< HEAD
-=======
 
->>>>>>> db20e11 (second commit)
 			APP_Conn_CreateActiveProfileConnection(&pTarget->bdAddr, app_Reconn_GetProfileMask(pTarget));
 			app_Reconn_SetReconnectType(type);
 
@@ -622,20 +588,12 @@ static void app_ReConn_Start(U8 type)
 		}
 		else
 		{
-<<<<<<< HEAD
-			DBG_LOG_APP_Connection( "[APP_Reconn] Reconnect profile mask exist", 0);
-=======
 			//it is reconnecting
 			DBG_LOG_APP_Connection("[APP_Reconn] Reconnect profile mask exist", 0);
->>>>>>> db20e11 (second commit)
 		}
 	}
 	else
 	{
-<<<<<<< HEAD
-		DBG_LOG_APP_Connection( "[APP_ReConn] Reconn stop retry", 0);
-		APP_ReConn_DeleteListByBdAddr(&pTarget->bdAddr);
-=======
 		if(!app_Reconn_GetProfileMask(pTarget))
 		{
 			DBG_LOG_APP_Connection("[APP_ReConn] no retryCnt, delete list", 0);
@@ -646,7 +604,6 @@ static void app_ReConn_Start(U8 type)
 			//it is reconnecting
 			DBG_LOG_APP_Connection("[APP_Reconn] Reconnect profile mask exist 2", 0);
 		}
->>>>>>> db20e11 (second commit)
 	}
 
 	if(listCount)
@@ -674,11 +631,7 @@ static U8 app_ReConn_ProfileIDToMask(U8 profileID)
 		case PROFILE_HANDSFREE:
 			return RECONNECT_PROFILE_HFP;
 			break;
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE            
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE            
->>>>>>> db20e11 (second commit)
 		case PROFILE_HEADSET:
 			return RECONNECT_PROFILE_HSP;
 			break;
@@ -726,11 +679,8 @@ static U32 app_Reconn_Handler(Handler handler, U16 id, void *payload, U32 id_ext
 **************************************************************************************************/
 void APP_ReConn_DeleteProfileMask(BD_ADDR_T *pBdAddr, U8 profileID, U8 reason)
 {
-<<<<<<< HEAD
-=======
 	//reason: if profileID is MCSYNC (connect cfm), it is HCI status. otherwise, it is SDP status.
 	U32 delayReconnTime;
->>>>>>> db20e11 (second commit)
 	APP_RECONNECT_DATA_STRU *pDataCtl;
 	U8 listCount = app_ReConn_GetListCnt(LIST_HIGH_PRI_DATA) + app_ReConn_GetListCnt(LIST_NORMAL_DATA);
 
@@ -741,11 +691,7 @@ void APP_ReConn_DeleteProfileMask(BD_ADDR_T *pBdAddr, U8 profileID, U8 reason)
 	{
 		if((pDataCtl = APP_ReConn_GetTarget()) != NULL && FW_CmpBdAddr(pBdAddr, &pDataCtl->bdAddr))
 		{
-<<<<<<< HEAD
-			if(profileID == PROFILE_MCSYNC && reason == HCI_STATUS_LMP_RESPONSE_TIMEOUT)
-=======
 			if(profileID == PROFILE_MCSYNC && reason == HCI_STATUS_LMP_RESPONSE_TIMEOUT) //command status?
->>>>>>> db20e11 (second commit)
 			{
 				pDataCtl->reconnProfileMask = 0;
 			}
@@ -754,26 +700,18 @@ void APP_ReConn_DeleteProfileMask(BD_ADDR_T *pBdAddr, U8 profileID, U8 reason)
 				pDataCtl->reconnProfileMask &= ~app_ReConn_ProfileIDToMask(profileID);
 			}
 			
-<<<<<<< HEAD
-            DBG_LOG_APP_Connection( "[APP_ReConn] DeleteProfileMask mask:0x%x, isActiveLink:%d", 2, pDataCtl->reconnProfileMask, APP_IsActiveLink(pBdAddr));
-=======
             DBG_LOG_APP_Connection( "[APP_ReConn] DeleteProfileMask mask:0x%x, isActiveLink:%d, isSuspend:%d", 3, pDataCtl->reconnProfileMask, APP_IsActiveLink(pBdAddr), gAppReconnectCtl.isSuspend);
 
 			if(pDataCtl->reconnProfileMask == RECONNECT_PROFILE_MCSYNC && reason == SDP_OPEN_SEARCH_CONNECTION_LIMIT_RESOURCE) //command status from controller, this may be no connect complete after.
 			{
 				pDataCtl->reconnProfileMask = 0;
 			}
->>>>>>> db20e11 (second commit)
 
 			if(!pDataCtl->reconnProfileMask && !APP_IsActiveLink(pBdAddr))
 			{
 				APP_Mcsync_ReconnectFailedNotify(reason);
 				if(!gAppReconnectCtl.isSuspend)
                 {
-<<<<<<< HEAD
-                    APP_Media_PushMediaEvent(MEDIA_EVT_RECONNECT_FAILED);
-					APP_Reconn_SetDelayTimer(RECONNECT_CHECK, ((reason == SDP_OPEN_SEARCH_ACL_LINK_ALREADY_EXIST) ? ONE_SEC : App_ReConnNvKey_GetReconnectDelayTime() * ONE_SEC));
-=======
 					if(reason == SDP_OPEN_SEARCH_ACL_LINK_ALREADY_EXIST || reason == HCI_STATUS_LMP_RESPONSE_TIMEOUT /*|| reason == SDP_OPEN_SEARCH_CONNECTION_LIMIT_RESOURCE*/)
 					{
 						delayReconnTime = ONE_SEC;
@@ -787,7 +725,6 @@ void APP_ReConn_DeleteProfileMask(BD_ADDR_T *pBdAddr, U8 profileID, U8 reason)
 
 					APP_Media_PushMediaEvent(MEDIA_EVT_RECONNECT_FAILED);
 					APP_Reconn_SetDelayTimer(RECONNECT_CHECK, delayReconnTime);
->>>>>>> db20e11 (second commit)
                 }
 			}
 			break;
@@ -878,20 +815,13 @@ void APP_Reconn_SetDelayTimer(U8 type, U32 delayTime)
 
 void APP_Reconn_SetLinkLossBdAddr(BD_ADDR_T *pBdAddr)
 {
-<<<<<<< HEAD
-	if(pBdAddr && APP_LinkKey_IsBdAddrInHistory(pBdAddr))
-=======
 	if(pBdAddr)
->>>>>>> db20e11 (second commit)
 	{
 		if(RECONNECT_UNNECESSARY == App_ReConnNvkey_GetActionAfterLinkLoss())
 		{
 			return;
 		}
-<<<<<<< HEAD
-=======
 
->>>>>>> db20e11 (second commit)
 		app_ReConn_AddListByBdAddr(RECONNECT_LINK_LOSS, pBdAddr);
 	}
 }
@@ -911,8 +841,6 @@ U8 APP_ReConn_QueueNum(void)
 	return num;
 }
 
-<<<<<<< HEAD
-=======
 U8 APP_ReConn_QueueTypeNum(U8 type)
 {
 	U8 i, num = 0;
@@ -928,7 +856,6 @@ U8 APP_ReConn_QueueTypeNum(U8 type)
 	return num;
 }
 
->>>>>>> db20e11 (second commit)
 void APP_ReConn_PutQueue(U8 type)
 {
 	U8 i;
@@ -947,32 +874,20 @@ void APP_ReConn_PutQueue(U8 type)
 	}
 }
 
-<<<<<<< HEAD
-void APP_ReConn_PourQueue(void)
-{
-	U8 i, type;
-
-	DBG_LOG_APP_Connection( "[APP_ReConn] Pour queue. Num:%d", 1, gReconnQueueIdx);
-=======
 void APP_ReConn_PourQueue(U32 dalay)
 {
 	U8 i, type;
 
 	DBG_LOG_APP_Connection( "[APP_ReConn] Pour queue. Num:%d, dalay:%d", 2, gReconnQueueIdx, dalay);
->>>>>>> db20e11 (second commit)
 	for(i = 0; i < gReconnQueueIdx; i++)
 	{
 		if((type = gReconnQueue[i]) != RECONNECT_TYPE_NULL)
 		{
 			DBG_LOG_APP_Connection( "[APP_ReConn] Pour queue. type:%d", 1, type);
-<<<<<<< HEAD
-			APP_ReConn_Reconnect(type);
-=======
             if(dalay)
                 APP_Reconn_SetDelayTimer(type, dalay);
             else
                 APP_ReConn_Reconnect(type);
->>>>>>> db20e11 (second commit)
 			gReconnQueue[i] = RECONNECT_TYPE_NULL;
 		}
 	}
@@ -986,34 +901,6 @@ void APP_ReConn_Reconnect(U8 type)
 	U8 settings;
 
 	DBG_LOG_APP_Connection( "[APP_ReConn] Reconnect. type:%d, role:0x%x, isPowerOn:%d", 3, type, BtAwsMce_GetDefaultRole(), APP_PowerOff_IsPowerOn());
-<<<<<<< HEAD
-	DBG_LOG_APP_Connection( "[APP_ReConn] Reconnect. ready:%d, disc:%d, airPairing:%d, app_state:%x", 4, APP_Conn_IsProfilesReady(), APP_IsLinkActiveDisconnecting(BtMCSync_GetNormalLinkBdAddr()), BtAwsMce_IsInAirPairing(), APP_State_GetTopState(BtMCSync_GetNormalLinkBdAddr()));
-
-#ifdef MCSYNC_SHARE_MODE
-	if(MCSYNC_SHARE_MODE_FOLLOWER_ENABLE == BtMCSync_GetShareMode())
-	{
-		return;
-	}
-#endif
-	if(!BtAwsMce_IsDefaultRoleAgent() && (type == RECONNECT_PWR_ON || type == RECONNECT_USER_INIT)
-		&& !(BtAwsMce_IsDefaultRoleNone()&& APP_LinkKey_CheckFCDKeyState())
-		)
-    {
-        DBG_LOG_APP_Connection( "[APP_ReConn] Partner NOT reconnect after power on", 0);
-        return;
-    }
-
-	if(BtAwsMce_IsDefaultRoleAgent() && type == RECONNECT_AWSMCE && MCSYNC_LINK_SAWS_READY <= BtAwsMce_GetMcsyncState() && APP_State_GetTopState(BtMCSync_GetNormalLinkBdAddr()) != APP_DETACHING_LINK)
-	{
-		if(BtAwsMce_GetMcsyncState() != MCSYNC_LINK_CONNECTING)
-		{
-			DBG_LOG_APP_Connection( "[APP_ReConn] Special link already exist", 0);
-			return;
-		}
-		else
-		{
-			DBG_LOG_APP_Connection( "[APP_ReConn] Special link not connecting", 0);
-=======
 	DBG_LOG_APP_Connection( "[APP_ReConn] Reconnect. ready:%d, activeDisc:%d, airPairing:%d, appState:%x", 4, APP_Conn_IsProfilesReady(), APP_IsLinkActiveDisconnecting(BtMCSync_GetNormalLinkBdAddr()), BtAwsMce_IsInAirPairing(), APP_State_GetTopState(BtMCSync_GetNormalLinkBdAddr()));
 
 	#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
@@ -1051,18 +938,10 @@ void APP_ReConn_Reconnect(U8 type)
 		{
 			DBG_LOG_APP_Connection("[APP_ReConn] Special link is connecting", 0);
 			return;
->>>>>>> db20e11 (second commit)
 		}
 	}
 
 	if(!APP_PowerOff_IsPowerOn() || BtAwsMce_IsInAirPairing()
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-        || BtMCSync_IsInMCSyncSharePairing()
-#endif
-	)
-	{
-=======
 		#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
         || BtMCSync_IsInMCSyncSharePairing()
 		#endif
@@ -1072,40 +951,25 @@ void APP_ReConn_Reconnect(U8 type)
 		DBG_LOG_APP_Connection("[APP_ReConn] isSharePairing:%d", 1, BtMCSync_IsInMCSyncSharePairing());
 		#endif
 
->>>>>>> db20e11 (second commit)
 		APP_ReConn_ClearCtl();
 		return;
 	}
 
 	if(!APP_Conn_IsProfilesReady())
 	{
-<<<<<<< HEAD
-		DBG_LOG_APP_Connection( "[APP_ReConn] Profile not ready", 0);
-		APP_ReConn_PutQueue(type);
-		return;
-		//goto PROFILE_NOT_READY;
-=======
 		DBG_LOG_APP_Connection("[APP_ReConn] Profile not ready", 0);
 		APP_ReConn_PutQueue(type);
 		return;
->>>>>>> db20e11 (second commit)
 	}
 	
 	if(APP_AirApp_FOTA_Reconnect() && BtAwsMce_IsDefaultRoleAgent() && type == RECONNECT_PWR_ON)
 	{
-<<<<<<< HEAD
-		DBG_LOG_APP_Connection( "[APP_ReConn] ----- FOTA reconnect && RECONNECT_PWR_ON return----- ", 0);
-=======
 		DBG_LOG_APP_Connection("[APP_ReConn] FOTA reconnect && RECONNECT_PWR_ON return", 0);
->>>>>>> db20e11 (second commit)
 		return;
 	}	
 	
 	if((type == RECONNECT_PWR_ON || type == RECONNECT_USER_INIT) && (APP_IsLinkActiveDisconnecting(BtMCSync_GetNormalLinkBdAddr()) || APP_State_GetTopState(BtMCSync_GetNormalLinkBdAddr()) == APP_DETACHING_LINK))
 	{
-<<<<<<< HEAD
-		DBG_LOG_APP_Connection( "[APP_Reconn] ----- Profile Not Ready!! return -----", 0);
-=======
 		DBG_LOG_APP_Connection("[APP_Reconn] Disconnecting SP, reconnect later", 0);
 		APP_ReConn_PutQueue(type);
 		return;
@@ -1114,35 +978,23 @@ void APP_ReConn_Reconnect(U8 type)
 	if((type == RECONNECT_PWR_ON || type == RECONNECT_USER_INIT) && BtAwsMce_GetMcsyncState() < MCSYNC_LINK_SAWS_READY)
 	{
 		DBG_LOG_APP_Connection("[APP_Reconn] Special Link Not Ready McsyncState:%d", 1, BtAwsMce_GetMcsyncState());
->>>>>>> db20e11 (second commit)
 		APP_ReConn_PutQueue(type);
 		return;
 	}
 
 	if(CURRENT_ACTIVE_LINK_CNT >= APP_Conn_GetSupportDeviceNo())
 	{
-<<<<<<< HEAD
-        DBG_LOG_APP_Connection( "[APP_ReConn] CURRENT_ACTIVE_LINK_CNT fail", 0);
-=======
         DBG_LOG_APP_Connection("[APP_ReConn] Link full. active:%d, maxSupport:%d", 2, CURRENT_ACTIVE_LINK_CNT, APP_Conn_GetSupportDeviceNo());
->>>>>>> db20e11 (second commit)
 
         if(BtAwsMce_IsDefaultRoleAgent())
         {
             BT_ACL_LINK_STATUS_T LinkStatus;
-<<<<<<< HEAD
-=======
 
->>>>>>> db20e11 (second commit)
             FW_Memset(&LinkStatus, 0, sizeof(BT_ACL_LINK_STATUS_T));
             BtGetEdrAclLinkStatus(&LinkStatus);
 
             if(LinkStatus.isDataValid && !LinkStatus.isLinkEncrypted
-<<<<<<< HEAD
-#ifdef DISCONNECT_AGENT_RECOVERY
-=======
 #ifdef AIR_AGENT_RECOVERY_MODE_AFTER_DISCONNECTION_FROM_PHONE_ENABLE
->>>>>>> db20e11 (second commit)
                 && app_Reconn_CheckBdAddrList((BD_ADDR_T *)&LinkStatus.bdaddr)
 #endif
                 )
@@ -1155,20 +1007,6 @@ void APP_ReConn_Reconnect(U8 type)
                 APP_Mcsync_SetReconnectLater(type, 3 * ONE_SEC);
             }
         }
-<<<<<<< HEAD
-        return;
-	}
-
-	if(!(APP_LinkKey_CheckFCDKeyState()&& BtAwsMce_IsDefaultRoleNone())&&!APP_Mcsync_EnterSuperReconnectMode(type))
-	{
-		DBG_LOG_APP_Connection( "[APP_ReConn] APP_Mcsync_EnterSuperReconnectMode", 0);
-		return;
-	}
-	//PROFILE_NOT_READY:
-
-	if(!APP_LinkKey_GetNormalPDLNumber() && !APP_LinkKey_CheckFCDKeyState() && type != RECONNECT_AWSMCE && type != RECONNECT_CHECK && type != RECONNECT_PWR_ON && type != RECONNECT_USER_INIT)
-	{
-=======
 
         return;
 	}
@@ -1182,7 +1020,6 @@ void APP_ReConn_Reconnect(U8 type)
 	if(!APP_LinkKey_GetNormalPDLNumber() && !APP_LinkKey_CheckFCDKeyState() && type != RECONNECT_AWSMCE && type != RECONNECT_CHECK && type != RECONNECT_PWR_ON && type != RECONNECT_USER_INIT)
 	{
 		DBG_LOG_APP_Connection("[APP_ReConn] PdlNum:%d", 1, APP_LinkKey_GetNormalPDLNumber());
->>>>>>> db20e11 (second commit)
 		APP_ReConn_ClearCtl();
 		return;
 	}
@@ -1192,10 +1029,7 @@ void APP_ReConn_Reconnect(U8 type)
 	{
 		if(!APP_AirApp_FOTA_Reconnect() && type == RECONNECT_AWSMCE && (DrvCharger_GetSmartCaseState() == STATE_LID_CLOSE || DrvCharger_GetSmartCaseState() == STATE_CASE_OFF))
 		{
-<<<<<<< HEAD
-=======
 			DBG_LOG_APP_Connection("[APP_ReConn] Lid close, not reconnect AWS", 0);
->>>>>>> db20e11 (second commit)
 			return;
 		}
 	}
@@ -1221,13 +1055,8 @@ void APP_ReConn_Reconnect(U8 type)
 			if(APP_LinkKey_CheckFCDKeyState() && FW_IsBdAddrZero(BtMCSync_ReadPartnerBdAddr()))
 				settings = RECONNECT_FAST_DONGLE;
 
-<<<<<<< HEAD
-			DBG_LOG_APP_Connection( "[APP_ReConn] RECONNECT_USER_INIT", 0);
-			app_ReConn_AddListByMode(type, settings);	//TO DO
-=======
 			DBG_LOG_APP_Connection( "[APP_ReConn] RECONNECT_USER_INIT settings:%d", 1, settings);
 			app_ReConn_AddListByMode(type, settings);
->>>>>>> db20e11 (second commit)
 			break;
 
 		case RECONNECT_LAST_ONCE_AUDIOTRANSFER:
@@ -1268,19 +1097,12 @@ void APP_ReConn_Reconnect(U8 type)
 	{
 		if(INVALID_RECONNECT_INDEX != app_Reconn_GetCurrentTargetIndex())
 		{
-<<<<<<< HEAD
-			DBG_LOG_APP_Connection( "[APP_ReConn] Current Target Index NOT Invalid", 0);
-=======
 			DBG_LOG_APP_Connection("[APP_ReConn] Current Target Index NOT Invalid", 0);
->>>>>>> db20e11 (second commit)
 			APP_ReConn_PutQueue(type);
 			return;
 		}
 	}
-<<<<<<< HEAD
-=======
 
->>>>>>> db20e11 (second commit)
 	app_ReConn_Start(type);
 }
 

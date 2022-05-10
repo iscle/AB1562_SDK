@@ -78,8 +78,6 @@
 #define RTC_GPIO_1    (RTC_GPIO_BASE_NUM + 1)
 #define RTC_GPIO_2    (RTC_GPIO_BASE_NUM + 2)
 
-<<<<<<< HEAD
-=======
 #define BOND_DIS_EMEM_MASK   (1 << 27)
 #define BOND_DIS_WBANC_MASK  (1 << 28)
 #define BOND_DIS_HYBANC_MASK (1 << 29)
@@ -87,7 +85,6 @@
 #define BOND_PKG_TYPE_0_MASK (1 << 31)
 #define BOND_PKG_TYPE_1_MASK (1 << 0)
 
->>>>>>> db20e11 (second commit)
 typedef enum {
     GPIO_PULL_UP = 0,
     GPIO_PULL_DOWN = 1,

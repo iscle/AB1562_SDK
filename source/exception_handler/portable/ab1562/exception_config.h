@@ -54,26 +54,18 @@
 
 #define EXCEPTION_SLAVES_TOTAL                          0
 
-<<<<<<< HEAD
-#define MINIDUMP_TOTAL_SIZE                             (4 * 1024)
-=======
 #ifdef MTK_MINIDUMP_ENHANCE_ENABLE
 #define MINIDUMP_TOTAL_SIZE                   (548 * 1024)
 #else
 #define MINIDUMP_TOTAL_SIZE     (4 * 1024)
 #endif
 
->>>>>>> db20e11 (second commit)
 #define MINIDUMP_ADDRESS_OFFSET_DSP0                    (0)
 #define MINIDUMP_HEADER_LENGTH                          (512)
 #define MINIDUMP_CONTEXT_LENGTH                         (512)
 #define MINIDUMP_CURRENTSTACK_LENGTH                    (3 * 1024)
 #define MINIDUMP_SYSTEMSTACK_LENGTH                     (2 * 1024)
-<<<<<<< HEAD
-#define MINIDUMP_DATA_SIZE_DSP0                         (4096)
-=======
 #define MINIDUMP_DATA_SIZE_DSP0                         MINIDUMP_TOTAL_SIZE
->>>>>>> db20e11 (second commit)
 
 #define EXCEPTION_MINIDUMP_LATEST_INDEX_OFFSET          0x4
 

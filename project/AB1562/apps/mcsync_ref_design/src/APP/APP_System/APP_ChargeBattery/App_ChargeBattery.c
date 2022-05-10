@@ -114,10 +114,7 @@ extern APP_CHGBAT_INFO_STRU *pChgBatCtl;
 
 static void app_ChgBat_DrvEvtHandler(U16 id, U32 ext_id)
 {
-<<<<<<< HEAD
-=======
         bool KeepFakeOff;
->>>>>>> db20e11 (second commit)
 	UNUSED(ext_id);
 
 	switch(id)
@@ -147,11 +144,7 @@ static void app_ChgBat_DrvEvtHandler(U16 id, U32 ext_id)
 		case APP_CHGBAT_BATTERY_MONITOR_PERIOD:
 			APP_ChgBat_SetBatterMonitorTimer();
 			APP_ChgBat_CheckCurrentBatLevel();
-<<<<<<< HEAD
-			#ifdef XIAOAI_DEVELOPMENT
-=======
 			#if defined(XIAOAI_DEVELOPMENT) || defined(AIR_GFP_ENABLE)
->>>>>>> db20e11 (second commit)
 			if(BtAwsMce_IsDefaultRolePartner())
 				BtMCSync_SendSyncBatteryLevel(Battery_GetLevelInPercent());
 			#endif
@@ -249,20 +242,13 @@ static void app_ChgBat_DrvEvtHandler(U16 id, U32 ext_id)
 			if(APP_ChgBat_GetBatStatus() == APP_BAT_CHARGING_FULL)
 			{
 				APP_ChgBat_PushBatChgMediaEvt();
-<<<<<<< HEAD
-		   		if(APP_ChgCase_GetCaseType() == CASE_TYPE_NONE)
-=======
 				KeepFakeOff = APP_PowerOff_IsKeepFakeOff();
 		   		if(APP_ChgCase_GetCaseType() == CASE_TYPE_NONE && !KeepFakeOff)
->>>>>>> db20e11 (second commit)
 		   		{
 		   			U8 PwrLv = 3;
 					gAppBatInfo.statePowerOff = CHG_CASE_DEEP_SLEEP;
 					DBG_LOG_APP_CHGBAT( "[APP_CHGBAT] Enter Deep Sleep",0);
 					APP_SendRaceCmd(RACE_SET_ADAPTIVE_POWER_LEVEL, &PwrLv, sizeof(U8));
-<<<<<<< HEAD
-		   		}				
-=======
 		   		}
 				else
 				{
@@ -273,7 +259,6 @@ static void app_ChgBat_DrvEvtHandler(U16 id, U32 ext_id)
 						APP_State_AddTopState(APP_EOF, APP_FAKEOFF);
 					}
 		   		}
->>>>>>> db20e11 (second commit)
 			}
 			break;
 		case DRV_CHARGER_MSG_CHARGERCPL:

@@ -251,8 +251,6 @@ void APP_AudioDriver_ClearSubSinkCmd(U16 id)
 	app_AudioDriver_ClearSubSinkCmd(AUDIO_VP, id);
 }
 
-<<<<<<< HEAD
-=======
 void APP_AudioDriver_ClearAllSubSinkCmd(void)
 {
 	U8 cmdIndex;
@@ -281,7 +279,6 @@ void APP_AudioDriver_ClearAllSubSinkCmd(void)
 		APP_AudioDriver_SendSubSinkCmd(AUDIO_FAKE_EVT, 0, id);
 }
 
->>>>>>> db20e11 (second commit)
 void APP_AudioDriver_SpecificEventVPStopCmd(U16 id)
 {
 	app_AudioDriver_ClearSubSinkCmd(AUDIO_VP, id);

@@ -107,12 +107,6 @@
 #include "Battery.h"
 #include "App_MCSync_Data.h"
 
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-#include "App_MCSync_Share.h"
-#include "App_VolumeA2dpProcess.h"
-#endif
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
 #include "App_MCSync_Share.h"
 #include "App_VolumeA2dpProcess.h"
@@ -122,7 +116,6 @@
 #endif
 
 #include "BtMCSync.h"
->>>>>>> db20e11 (second commit)
 /**************************************************************************************************
 * Structure
 **************************************************************************************************/
@@ -141,26 +134,19 @@ static void app_mcsync_bt_reconnect_state_sync_callback(U16 length, U8 *p_data);
 static void app_mcsync_bt_reconnect_mask_sync_callback(U16 length, U8 *p_data);
 static void app_mcsync_bt_retransmit_follower_disc_sync_callback(U16 length, U8 *p_data);
 static void app_mcsync_bt_l2cap_data_callback(U16 length, U8 *p_data);
-<<<<<<< HEAD
-
-=======
 static void app_mcsync_bt_take_over_callback(U16 length, U8 *p_data);
 static void app_mcsync_bt_notice_master_partner_to_share_mode_sync_callback(U16 length, U8 *p_data);
->>>>>>> db20e11 (second commit)
 /**************************************************************************************************
 * Prototype 	Static gva group(MCSync data init & callback)
 **************************************************************************************************/
 static void app_mcsync_gva_gfp_sync_callback(U16 length, U8 *p_data);
 
-<<<<<<< HEAD
-=======
 /**************************************************************************************************
 *Static Tile group(MCSync data init & callback)
 **************************************************************************************************/
 #ifdef AIR_TILE_ADV_ENABLE
 static void app_mcsync_tile_data_sync_callback(U16 length, U8 *p_data);
 #endif
->>>>>>> db20e11 (second commit)
 
 /**************************************************************************************************
 * Prototype 	Static ama group(MCSync data init & callback)
@@ -233,11 +219,8 @@ const MODULE_TABLE_T gAppMCSyncIFDataBtCbTable[MCSYNC_MODULE_BT_GROUP_NUM] =
     {MCSYNC_MODULE_BT_RECONNECT_MASK, 			app_mcsync_bt_reconnect_mask_sync_callback},
     {MCSYNC_MODULE_BT_RETRANSMIT_FOLLOWER_DISC, app_mcsync_bt_retransmit_follower_disc_sync_callback},
     {MCSYNC_MODULE_BT_L2CAP_DATA,               app_mcsync_bt_l2cap_data_callback},
-<<<<<<< HEAD
-=======
 	{MCSYNC_MODULE_BT_TAKE_OVER_STATE, 			app_mcsync_bt_take_over_callback},
     {MCSYNC_MODULE_BT_NOTICE_MASTER_PARTNER_TO_SHARE_MODE, app_mcsync_bt_notice_master_partner_to_share_mode_sync_callback},
->>>>>>> db20e11 (second commit)
 };
 
 const MODULE_TABLE_T gAppMCSyncIFDataGvaCbTable[MCSYNC_MODULE_GVA_GROUP_NUM] =
@@ -252,8 +235,6 @@ const MODULE_TABLE_T gAppMCSyncIFDataAmaCbTable[MCSYNC_MODULE_AMA_GROUP_NUM] =
 };
 #endif
 
-<<<<<<< HEAD
-=======
 #ifdef AIR_TILE_ADV_ENABLE
 const MODULE_TABLE_T gAppMCSyncIFDataTileCbTable[MCSYNC_MODULE_TILE_GROUP_NUM] =
 {
@@ -261,7 +242,6 @@ const MODULE_TABLE_T gAppMCSyncIFDataTileCbTable[MCSYNC_MODULE_TILE_GROUP_NUM] =
 };
 #endif
 
->>>>>>> db20e11 (second commit)
 const MODULE_TABLE_T gAppMCSyncIFDataAudioCbTable[MCSYNC_MODULE_AUDIO_GROUP_NUM] =
 {
     {MCSYNC_MODULE_AUDIO_VP_IS_ENABLE,          app_mcsync_audio_vprt_is_enable_callback},
@@ -327,9 +307,6 @@ static void app_mcsync_bt_ag_num_sync_callback(U16 length, U8 *p_data)
 {
     APP_MCSYNC_DATA_NUM_AG_T *ind = (APP_MCSYNC_DATA_NUM_AG_T *)p_data;
     U8 oldNumOfAg = APP_GetAGNum();
-<<<<<<< HEAD
-    DBG_LOG_APP_MCSYNC( "[APP_MCSync][Partner] : Sync Num Of AG, numOfAG(%d), a2dpState:%d", 2, ind->numOfAG, ind->a2dpState);
-=======
 
 	#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
 	U8 shareMode = BtMCSync_GetShareMode();
@@ -341,14 +318,11 @@ static void app_mcsync_bt_ag_num_sync_callback(U16 length, U8 *p_data)
 	#else
 	DBG_LOG_APP_MCSYNC( "[APP_MCSync][Partner] : Sync Num Of AG, numOfAG(%d), a2dpState:%d", 2, ind->numOfAG, ind->a2dpState);
 	#endif
->>>>>>> db20e11 (second commit)
 
 	APP_SetAGNum(ind->numOfAG);
 	APP_Conn_NotifyPartnerMediaEvt(oldNumOfAg, ind->numOfAG, (ind->a2dpState == APP_MCSYNC_A2DP_STATE_PLAYING) ? 1 : 0);
 	APP_RhoDomn_MonitorTimerHandler();
     UNUSED(length);
-<<<<<<< HEAD
-=======
 
 	#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
 	if(shareMode != MCSYNC_SHARE_MODE_DISABLE)
@@ -377,7 +351,6 @@ static void app_mcsync_bt_ag_num_sync_callback(U16 length, U8 *p_data)
             }
         }
     }
->>>>>>> db20e11 (second commit)
 }
 
 static void app_mcsync_bt_caller_id_sync_callback(U16 length, U8 *p_data)
@@ -430,11 +403,7 @@ static void app_mcsync_bt_reconnect_mask_sync_callback(U16 length, U8 *p_data)
 static void app_mcsync_bt_retransmit_follower_disc_sync_callback(U16 length, U8 *p_data)
 {
 	
-<<<<<<< HEAD
-	#ifdef MCSYNC_SHARE_MODE
-=======
 	#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 	UNUSED(length);
     APP_MCSYNC_DATA_FOLLOWER_DISC_T msg;
     FW_Memcpy(&msg, p_data, sizeof(APP_MCSYNC_DATA_FOLLOWER_DISC_T));
@@ -458,8 +427,6 @@ static void app_mcsync_bt_l2cap_data_callback(U16 length, U8 *p_data)
     }
 }
 
-<<<<<<< HEAD
-=======
 static void app_mcsync_bt_take_over_callback(U16 length, U8 *p_data)
 {
 	#ifdef AIR_TAKE_OVER_LINK_ENABLE
@@ -513,26 +480,14 @@ static void app_mcsync_bt_notice_master_partner_to_share_mode_sync_callback(U16 
 	#endif
 }
 
->>>>>>> db20e11 (second commit)
 /**************************************************************************************************
 * Static gva group(MCSync data init & callback)
 **************************************************************************************************/
 static void app_mcsync_gva_gfp_sync_callback(U16 length, U8 *p_data)
 {
-<<<<<<< HEAD
-    UNUSED(length);
-    APP_MCSYNC_GFP_INFO_STRU *msg = NULL;
-    msg = (APP_MCSYNC_GFP_INFO_STRU*)FW_GetMemory(length);
-    if(msg){
-        FW_Memcpy(msg, p_data, length);
-        APP_MCSync_SyncGFPInfoIndHandler(&msg->data[0], msg->length);
-        FW_FreeMemory(msg);
-    }
-=======
 #ifdef AIR_GFP_ENABLE
     APP_Gfp_McsyncDataHandle(length, p_data);
 #endif
->>>>>>> db20e11 (second commit)
 }
 
 
@@ -547,8 +502,6 @@ static void app_mcsync_ama_data_sync_callback(U16 length, U8 *p_data)
 #endif
 
 /**************************************************************************************************
-<<<<<<< HEAD
-=======
 *Static Tile group(MCSync data init & callback)
 **************************************************************************************************/
 #ifdef AIR_TILE_ADV_ENABLE
@@ -567,7 +520,6 @@ static void app_mcsync_tile_data_sync_callback(U16 length, U8 *p_data)
 #endif
 
 /**************************************************************************************************
->>>>>>> db20e11 (second commit)
 * Static audio group (MCSync data init & callback)
 **************************************************************************************************/
 static void app_mcsync_audio_vprt_is_enable_callback(U16 length, U8 *p_data)
@@ -810,14 +762,11 @@ void APP_MCSync_Data_Callback_Init(void)
 	bt_mcsync_register_module((MODULE_TABLE_T*)&gAppMCSyncIFDataReserved1GroupCbTable[0],
 		MCSYNC_MODULE_RESERVED1_GROUP_NUM, MCSYNC_MODULE_GROUP_RESERVED1);
 
-<<<<<<< HEAD
-=======
 #ifdef AIR_TILE_ADV_ENABLE
 	bt_mcsync_register_module((MODULE_TABLE_T*)&gAppMCSyncIFDataTileCbTable[0],
 		MCSYNC_MODULE_TILE_GROUP_NUM, MCSYNC_MODULE_GROUP_RESERVED3);
 #endif
 
->>>>>>> db20e11 (second commit)
 	bt_mcsync_data_init();
 }
 

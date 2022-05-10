@@ -34,10 +34,7 @@
 
 #include "hal_captouch.h"
 #include "hal_captouch_internal.h"
-<<<<<<< HEAD
-=======
 #include "hal_rtc.h"
->>>>>>> db20e11 (second commit)
 #include "hal_rtc_internal.h"
 #ifdef HAL_CAPTOUCH_MODULE_ENABLED
 #include "interrupt.h"
@@ -48,18 +45,12 @@
 #include "hal_pmu.h"
 #include "drv_charger.h"
 
-<<<<<<< HEAD
-bool Is_feature_enable;
-
-extern uint8_t captouch_gpio_mapping[8];
-=======
 log_create_module(Captouch, PRINT_LEVEL_INFO);
 
 bool Is_feature_enable;
 
 extern uint8_t captouch_gpio_mapping[8];
 extern uint32_t tune_delay_us;
->>>>>>> db20e11 (second commit)
 extern NORMAL_SETTING_STRU *normal_setting;
 extern LPM_SETTING_STRU *lpm_setting;
 extern SDWU_SETTING_STRU *sdwu_setting;
@@ -80,16 +71,9 @@ extern captouch_ear_detect_t captouch_ear_detect;
 
 extern TimerHandle_t captouch_earcheck_timer;
 extern TimerHandle_t captouch_earcheck_stop_baseK_timer;
-<<<<<<< HEAD
-extern TimerHandle_t captouch_debounce_timer_ch0;
-extern TimerHandle_t captouch_debounce_timer_ch1;
-extern TimerHandle_t captouch_debounce_timer_ch2;
-extern TimerHandle_t captouch_ctrl_manual_timer;
-=======
 #if 0
 extern TimerHandle_t captouch_ctrl_manual_timer;
 #endif
->>>>>>> db20e11 (second commit)
 
 hal_captouch_status_t hal_captouch_set_avg(hal_captouch_channel_t channel,uint8_t mavg_val, uint8_t avg_val)
 {
@@ -97,21 +81,14 @@ hal_captouch_status_t hal_captouch_set_avg(hal_captouch_channel_t channel,uint8_
 
     if (avg_val > CAPTOUCH_AVG_MAX) return HAL_CAPTOUCH_STATUS_INVALID_PARAMETER;
 
-<<<<<<< HEAD
-    captouch_set_mavg(channel,mavg_val);
-    captouch_set_avg(channel,avg_val);
-=======
     captouch_channel_sense_control(1<<channel, captouch_disable);
     captouch_set_mavg(channel,mavg_val);
     captouch_set_avg(channel,avg_val);
     captouch_channel_sense_control(1<<channel, captouch_enable);
->>>>>>> db20e11 (second commit)
 
     return HAL_CAPTOUCH_STATUS_OK;
 }
 
-<<<<<<< HEAD
-=======
 static void hal_captouch_init_tune(uint8_t channel_bit_map, bool coarse_tune_en, bool capcon_state, bool isChargerIn)
 {
     uint8_t tune_ch_bit_map;
@@ -208,19 +185,13 @@ static void hal_captouch_lpwusd_setting(bool autosuspend_timeout_en)
 #endif
 }
 
->>>>>>> db20e11 (second commit)
 hal_captouch_status_t hal_captouch_init(void)
 {
     uint8_t bitmap;
     uint32_t i;
     hal_captouch_status_t ret;
-<<<<<<< HEAD
-    bool capcon_state, lpwu_flag, isChargerIn;
-    S8 finecap;
-=======
     bool capcon_state, lpwu_flag = false, isChargerIn;
     //S8 finecap;
->>>>>>> db20e11 (second commit)
 #ifdef HAL_CAPTOUCH_SW_AUTO_SUSPEND_ENABLED
     bool autosuspend_timeout_en;
 #endif
@@ -242,15 +213,6 @@ hal_captouch_status_t hal_captouch_init(void)
     captouch_context.ear_detect = 0xff;
 
     capcon_state = rtc_internal_captouch_get_capcon_state();
-<<<<<<< HEAD
-    lpwu_flag = captouch_get_lpwu_int_flag();
-    isChargerIn = DRV_CHARGER_IsPlugInState();
-#ifdef  HAL_CAPTOUCH_SW_AUTO_SUSPEND_ENABLED
-    autosuspend_timeout_en = captouch_autosuspend_timeout_enable();
-    captouch_init_parameter_print(capcon_state, lpwu_flag, isChargerIn, normal_setting->eardetect, autosuspend_timeout_en);
-#else
-    captouch_init_parameter_print(capcon_state, lpwu_flag, isChargerIn, normal_setting->eardetect, 0);
-=======
     isChargerIn = DRV_CHARGER_IsPlugInState();
     lpwu_flag = captouch_get_lpwu_int_flag();
     //if(capcon_state && (hal_rtc_get_power_on_reason() == RTC_POWERED_BY_CAPTOUCH) && (sdwu_setting->sdwu_en & (1<<HAL_CAPTOUCH_LONGPRESS_WAKEUP)))
@@ -263,7 +225,6 @@ hal_captouch_status_t hal_captouch_init(void)
 #else
     HAL_CAPTOUCH_LOG_PRINT("captouch init capcon_state:%d, lpwu_flag:%d, isChargerIn:%d, ear_detect_ch:%d, autosuspend_timeout_en:%d", 5,
                                                                                                             capcon_state, lpwu_flag, isChargerIn, normal_setting->eardetect, 0);
->>>>>>> db20e11 (second commit)
 #endif
     //open captouch annalog clock
     ret = hal_captouch_power_on_init(captouch_enable);
@@ -291,23 +252,6 @@ hal_captouch_status_t hal_captouch_init(void)
         }
     }
 
-<<<<<<< HEAD
-    if(!(DRV_CHARGER_IsPlugInState() || !capcon_state)&& !normal_setting->eardetect)
-    {
-        for(int i = 0; i < 3; i++)
-        {
-            if(normal_setting->captouchChannelBitMap & (1<<i))
-            {
-                finecap = captouch_fine_cap_from_nvkey(i);
-                ret = hal_captouch_set_fine_cap(i, finecap);
-                if(ret != HAL_CAPTOUCH_STATUS_OK) return ret;
-
-                captouch_set_control_manual(i, true);
-            }
-        }
-        captouch_ctrl_manual_timer = xTimerCreate("captouch_ctrl_man", pdMS_TO_TICKS(100), pdFALSE, NULL, captouch_findbase_timer_handle);
-    }
-=======
 #if 0
     if(capcon_state && lpwu_flag && normal_setting->eardetect == 0x01)
     {
@@ -320,7 +264,6 @@ hal_captouch_status_t hal_captouch_init(void)
         HAL_CAPTOUCH_LOG_PRINT("captouch init enable fine cap manual mode", 0);
     }
 #endif
->>>>>>> db20e11 (second commit)
     captouch_channel_sense_control(normal_setting->captouchChannelBitMap, captouch_enable);
     for(i = 0; i < 3; i++)
     {
@@ -338,129 +281,6 @@ hal_captouch_status_t hal_captouch_init(void)
     captouch_set_dynamic_threshold(false, true, 0x28, 0);
 
 #ifdef HAL_CAPTOUCH_SW_AUTO_SUSPEND_ENABLED
-<<<<<<< HEAD
-     // auto_suspend time out function enable
-    autosuspend_timeout_en = captouch_autosuspend_timeout_enable();
-    if(autosuspend_timeout_en)
-    {
-        autosuspend_timeout_context.ch_bitmap = autosuspend_setting->ch_bitmap & (~autosuspend_setting->lpsd_ch_bitmap) & (~autosuspend_setting->lpwu_ch_bitmap);
-        for(int i =0; i<3;i++)
-        {
-            if(autosuspend_setting->time[i] != 0)
-                autosuspend_timeout_context.time[i]= autosuspend_setting->time[i];
-        }
-    }
-        //lpsd and lpwu setting
-    if(captouch_sdwusetting_from_NVKEY())
-    {
-        if(sdwu_setting->sdwu_en & (1<<HAL_CAPTOUCH_LONGPRESS_SHUTDOWN))
-        {
-            if(autosuspend_timeout_en)
-            {
-                if(autosuspend_setting->lpsd_ch_bitmap)
-                    captouch_longpress_channel_select_control(HAL_CAPTOUCH_LONGPRESS_SHUTDOWN, autosuspend_setting->lpsd_ch_bitmap, sdwu_setting->sdtime*32000 );
-            }
-            else
-            {
-                captouch_longpress_channel_control(HAL_CAPTOUCH_LONGPRESS_SHUTDOWN, sdwu_setting->sdtime*32000);
-            }
-            pmu_lpsd_rst_init(CAP_LPSD, PMU_ON);
-            if(sdwu_setting->sdwu_en & (1<<HAL_CAPTOUCH_LONGPRESS_SHUTDOWN_VBUS))
-                hal_captouch_set_lpsd_chk_vbus(true);
-        }
-        if(sdwu_setting->sdwu_en & (1<<HAL_CAPTOUCH_LONGPRESS_WAKEUP))
-        {
-            captouch_longpress_int_control(true);
-            captouch_longpress_channel_control(HAL_CAPTOUCH_LONGPRESS_WAKEUP, sdwu_setting->wutime*32000);
-        }
-    }
-#else
-    if(captouch_sdwusetting_from_NVKEY())
-    {
-        if(sdwu_setting->sdwu_en & (1<<HAL_CAPTOUCH_LONGPRESS_SHUTDOWN))
-        {
-            captouch_longpress_channel_control(HAL_CAPTOUCH_LONGPRESS_SHUTDOWN, sdwu_setting->sdtime*32000);
-            pmu_lpsd_rst_init(CAP_LPSD, PMU_ON);
-            if(sdwu_setting->sdwu_en & (1<<HAL_CAPTOUCH_LONGPRESS_SHUTDOWN_VBUS))
-                hal_captouch_set_lpsd_chk_vbus(true);
-        }
-        if(sdwu_setting->sdwu_en & (1<<HAL_CAPTOUCH_LONGPRESS_WAKEUP))
-        {
-            captouch_longpress_int_control(true);
-            captouch_longpress_channel_control(HAL_CAPTOUCH_LONGPRESS_WAKEUP, sdwu_setting->wutime*32000);
-        }
-    }
-#endif
-    captouch_clk_control(true);
-    hal_gpt_delay_ms(10);
-
-    if(DRV_CHARGER_IsPlugInState() || !capcon_state)
-    {
-        captouch_set_autok_suspend(normal_setting->captouchChannelBitMap, false);
-        for(i = 0; i < 3; i++)
-        {
-            if (normal_setting->captouchChannelBitMap & (1<<i))
-            {
-                captouch_channel_sense_control(normal_setting->captouchChannelBitMap, captouch_disable);
-                hal_captouch_set_avg(i, 5, normal_setting->touchAvg[i]);
-                captouch_channel_sense_control(normal_setting->captouchChannelBitMap, captouch_enable);
-                captouch_find_baseline(i);
-                if(normal_setting->swtune_en)
-                    hal_captouch_tune_control(i, HAL_CAPTOUCH_TUNE_HW_AUTO);
-            }
-        }
-    }
-
-    //Create SW debounce timer for touch key channel
-    for(i = 0; i < 3; i++)
-    {
-        if(normal_setting->captouchChannelBitMap & (1<<i))
-        {
-            if(captouch_context.ear_detect != i)
-            {
-                switch(i)
-                {
-                    case HAL_CAPTOUCH_CHANNEL_0:
-                        captouch_debounce_timer_ch0 = xTimerCreate("captouchdeb_ch0", pdMS_TO_TICKS(normal_setting->swDebounceTime), pdFALSE, NULL, captouch_key_press_event_handler);
-                        break;
-                    case HAL_CAPTOUCH_CHANNEL_1:
-                        captouch_debounce_timer_ch1 = xTimerCreate("captouchdeb_ch1", pdMS_TO_TICKS(normal_setting->swDebounceTime), pdFALSE, NULL, captouch_key_press_event_handler);
-                        break;
-                    case HAL_CAPTOUCH_CHANNEL_2:
-                        captouch_debounce_timer_ch2 = xTimerCreate("captouchdeb_ch2", pdMS_TO_TICKS(normal_setting->swDebounceTime), pdFALSE, NULL, captouch_key_press_event_handler);
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-    }
-    //register nvic irq handler and enable irq
-
-    for(i = 0; i < 3; i++)
-    {
-        hal_captouch_set_avg(i, normal_setting->touchMavg[i], normal_setting->touchAvg[i]);
-    }
-
-    if((!DRV_CHARGER_IsPlugInState() && capcon_state ) && (!lpwu_flag))
-    {
-        for (int i =0;i<3 ; i++)
-        {
-            if (normal_setting->captouchChannelBitMap & (1<<i))
-            {
-                captouch_set_control_manual(i, false);
-                hal_gpt_delay_ms(10);
-                captouch_channel_sense_control(1<<i, captouch_disable);
-                hal_captouch_set_avg(i, 5, normal_setting->touchAvg[0]);
-                captouch_channel_sense_control(1<<i, captouch_enable);
-                captouch_find_baseline(i);
-                captouch_channel_sense_control(1<<i, captouch_disable);
-                hal_captouch_set_avg(i, normal_setting->touchMavg[i], normal_setting->touchAvg[i]);
-                captouch_channel_sense_control(1<<i, captouch_enable);
-            }
-        }
-    }
-=======
     hal_captouch_lpwusd_setting(autosuspend_timeout_en);
 #else
     hal_captouch_lpwusd_setting(false);
@@ -482,7 +302,6 @@ hal_captouch_status_t hal_captouch_init(void)
         HAL_CAPTOUCH_LOG_PRINT("captouch init disable fine cap manual mode", 0);
     }
 #endif
->>>>>>> db20e11 (second commit)
 
     //auto suspend
     captouch_set_autok_suspend(normal_setting->captouchChannelBitMap, true);
@@ -493,20 +312,12 @@ hal_captouch_status_t hal_captouch_init(void)
 #ifdef  HAL_CAPTOUCH_FORCE_TOUCH_ENABLED
     captouch_force_init();
 #endif
-<<<<<<< HEAD
-=======
     //register nvic irq handler and enable irq
->>>>>>> db20e11 (second commit)
     captouch_context.has_initilized = true;
     captouch_register_nvic_callback();
     captouch_int_control(true);
 
-<<<<<<< HEAD
-
-    if(lpwu_flag)
-=======
     if(lpwu_flag && captouch_get_channel_trigger(0))
->>>>>>> db20e11 (second commit)
     {
         captouch_send_press_msg();
     }
@@ -542,35 +353,22 @@ void hal_captouch_coarse_cap_tune(hal_captouch_coarse_cal_t* coarse_cal_result)
 {
     uint8_t i;
 
-<<<<<<< HEAD
-    captouch_int_control(false);
-=======
     captouch_get_tune_delay_time(32, 8);
     captouch_int_control(false);
     if(sdwu_setting->sdwu_en & (1<<HAL_CAPTOUCH_LONGPRESS_WAKEUP))
         captouch_longpress_int_control(false);
 
->>>>>>> db20e11 (second commit)
     for(i = 0; i < 3; i++)
     {
         if(normal_setting->captouchChannelBitMap & (1<<i))
         {
             captouch_set_autok_suspend((1<<i), false);
-<<<<<<< HEAD
-            hal_captouch_set_avg(i, 5, normal_setting->touchAvg[i]);
-            captouch_find_baseline(i);
-            coarse_cal_result->coarse_cal[i].result = hal_captouch_tune_control(i, HAL_CAPTOUCH_TUNE_HW_AUTO);
-            hal_captouch_set_avg(i, normal_setting->touchMavg[i], normal_setting->touchAvg[i]);
-            captouch_set_autok_suspend((1<<i), true);
-            coarse_cal_result->coarse_cal[i].coarse_value= captouch_get_coarse_cap(i);
-=======
             hal_captouch_set_avg(i, 8, normal_setting->touchAvg[i]);
             hal_gpt_delay_us(tune_delay_us); //wait fine tune
             captouch_find_baseline(i);
             coarse_cal_result->coarse_cal[i].result = hal_captouch_tune_control(i, HAL_CAPTOUCH_TUNE_HW_AUTO);
             coarse_cal_result->coarse_cal[i].coarse_value= captouch_get_coarse_cap(i);
             hal_captouch_set_avg(i, normal_setting->touchMavg[i], normal_setting->touchAvg[i]);
->>>>>>> db20e11 (second commit)
         }
         else
         {
@@ -578,15 +376,11 @@ void hal_captouch_coarse_cap_tune(hal_captouch_coarse_cal_t* coarse_cal_result)
             coarse_cal_result->coarse_cal[i].coarse_value = 0xFF;
         }
     }
-<<<<<<< HEAD
-    captouch_int_control(true);
-=======
     captouch_set_autok_suspend(normal_setting->captouchChannelBitMap, true);
     hal_gpt_delay_us(200);
     captouch_int_control(true);
     if(sdwu_setting->sdwu_en & (1<<HAL_CAPTOUCH_LONGPRESS_WAKEUP))
         captouch_longpress_int_control(true);
->>>>>>> db20e11 (second commit)
 }
 
 hal_captouch_status_t hal_captouch_channel_enable(hal_captouch_channel_t channel)
@@ -722,23 +516,11 @@ hal_captouch_status_t hal_captouch_lowpower_control(hal_captouch_lowpower_type_t
         captouch_rtc_lpm_control(HAL_CAPTOUCH_MODE_LOWPOWER);
         captouch->TOUCH_ANACFG0.ANACFG0 = (1<<16) | 0x3f;
         captouch_set_clk(HAL_CAPTOUCH_MODE_NORMAL, HAL_CAPTOUCH_CLK_4K);
-<<<<<<< HEAD
-        captouch_channel_sense_control(1<<HAL_CAPTOUCH_CHANNEL_0, captouch_disable);
-        hal_captouch_set_avg(HAL_CAPTOUCH_CHANNEL_0, 5, 5);
-        captouch_channel_sense_control(1<<HAL_CAPTOUCH_CHANNEL_0, captouch_enable);
-        captouch_clk_control(true);
-        captouch_int_control(true);
-        hal_gpt_delay_ms(200);
-        captouch_channel_sense_control(1<<HAL_CAPTOUCH_CHANNEL_0, captouch_disable);
-        hal_captouch_set_avg(HAL_CAPTOUCH_CHANNEL_0, normal_setting->touchMavg[0] - 3, normal_setting->touchAvg[0]);
-        captouch_channel_sense_control(1<<HAL_CAPTOUCH_CHANNEL_0, captouch_enable);
-=======
         hal_captouch_set_avg(HAL_CAPTOUCH_CHANNEL_0, 5, 5);
         captouch_clk_control(true);
         captouch_int_control(true);
         hal_gpt_delay_ms(200);
         hal_captouch_set_avg(HAL_CAPTOUCH_CHANNEL_0, normal_setting->touchMavg[0] - 3, normal_setting->touchAvg[0]);
->>>>>>> db20e11 (second commit)
         captouch_set_autok_suspend(0x1, true);
     }
 

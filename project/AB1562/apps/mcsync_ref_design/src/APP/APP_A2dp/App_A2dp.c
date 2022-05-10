@@ -171,11 +171,7 @@ static void app_A2dpMediaConnectCfmHandler(A2DP_MEDIA_CONNECT_CFM_T *cfm)
 {
 	DBG_LOG_APP_A2DP( "[APP_A2DP] Media Connect Cfm : BdAddr : 0x%x%x, Status:0x%x", 3, FW_bdaddr_to_2U32(&cfm->bdAddr, TRUE), FW_bdaddr_to_2U32(&cfm->bdAddr, FALSE), cfm->status);
 
-<<<<<<< HEAD
-	#ifdef CODEC_SWITCH_WORKAROUND_SONY_XPERIA
-=======
 	#ifdef AIR_CODEC_SWITCH_WORKAROUND_SONY_XPERIA_ENABLE
->>>>>>> db20e11 (second commit)
 	if( bt_sdps_pnp_is_sony_xperia((BD_ADDR_T*)&cfm->bdAddr.addr[0]) )
 	{
 		if(!cfm->status && bt_a2dp_get_reconfigure_status((BD_ADDR_T*)&cfm->bdAddr.addr[0]))
@@ -201,11 +197,7 @@ static void app_A2dpStartIndHandler(A2DP_START_IND_T *ind)
     BOOL audioDevReg;
     BD_ADDR_T *pBdAddr = &ind->bdAddr;
 
-<<<<<<< HEAD
-#ifdef AVRCP_Profile
-=======
 #ifdef AIR_AVRCP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
     APP_AvrcpSetMusicPlay(pBdAddr, TRUE);
     APP_AvrcpResetKeyPlayToggle(pBdAddr);
 #endif
@@ -257,11 +249,7 @@ static void app_A2dpStartCfmHandler(A2DP_START_CFM_T *cfm)
     BOOL audioDevReg;
     BD_ADDR_T *pBdAddr = &cfm->bdAddr;
 
-<<<<<<< HEAD
-#ifdef AVRCP_Profile
-=======
 #ifdef AIR_AVRCP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
     APP_AvrcpSetMusicPlay(pBdAddr, TRUE);
     APP_AvrcpResetKeyPlayToggle(pBdAddr);
 #endif
@@ -283,11 +271,7 @@ static void app_A2dpStartCfmHandler(A2DP_START_CFM_T *cfm)
     }
     APP_MCSYNC_SendSyncA2dpInfo(pBdAddr, MCSYNC_SHARE_SPECIFIC_ROLE_NOT_USED);
 
-<<<<<<< HEAD
-#ifdef CODEC_SWITCH_WORKAROUND_SONY_XPERIA
-=======
 #ifdef AIR_CODEC_SWITCH_WORKAROUND_SONY_XPERIA_ENABLE
->>>>>>> db20e11 (second commit)
 	if(bt_sdps_pnp_is_sony_xperia(pBdAddr))
 	{
 		DBG_LOG_APP_A2DP( "[APP_A2dp] [Codec Work-Around] Force Play", 0);
@@ -391,11 +375,7 @@ static void app_A2dp_MusicStopped(BD_ADDR_T *pBdAddr, BOOL isStop)
     }
     App_SniffEnable(pBdAddr, APP_SNIFF_A2DP_MUSIC);
     app_A2dp_MusicStopClearPara(pBdAddr);
-<<<<<<< HEAD
-#ifdef AVRCP_Profile
-=======
 #ifdef AIR_AVRCP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
     APP_Avrcp_ReleaseTimer(pBdAddr, APP_AVRCP_TIMER_SEND_GET_PLAY_STATUS_TO_PAUSE_MUSIC);
     APP_Avrcp_ReleaseTimer(pBdAddr, APP_AVRCP_TIMER_SEND_PAUSE_MUSIC);
     APP_Avrcp_ReleaseTimer(pBdAddr, APP_AVRCP_TIMER_MONITOR_PLAY_STATUS);
@@ -409,11 +389,7 @@ static void app_A2dp_MusicStopped(BD_ADDR_T *pBdAddr, BOOL isStop)
 
 static void app_A2dp_MusicStopClearPara(BD_ADDR_T *pBdAddr)
 {
-<<<<<<< HEAD
-#ifdef AVRCP_Profile
-=======
 #ifdef AIR_AVRCP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
     if (!APP_Avrcp_isDisablePlayStatusMonitor(pBdAddr)) {
         APP_Avrcp_SetPlayStatus(pBdAddr, 0);
     }
@@ -481,11 +457,7 @@ void APP_A2dp_SendPauseMusic(BD_ADDR_T *pBdAddr, U8 isCall)
 
         if (isCall && APP_A2dp_NVKeyIsFeatureOn(APP_A2DP_MEMPUT_WHEN_CALLACTIVE_FEAT)) {
         }
-<<<<<<< HEAD
-#ifdef AVRCP_Profile
-=======
 #ifdef AIR_AVRCP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
         else if (App_IsProfileInReconnectList(pBdAddr, PROFILE_AVRCP) || PM_IsProfileIdLoaded(pBdAddr, PROFILE_AVRCP)) {
             if (APP_IsDSPActive(pBdAddr)) {
                 if (APP_Avrcp_isDisablePlayStatusMonitor(pBdAddr)) {
@@ -511,11 +483,7 @@ static BOOL app_A2dp_GetAudioDevRegister(BD_ADDR_T *pBdAddr)
 {
     BOOL audioDevReg = APP_AudioDeviceRegister(pBdAddr, AUDIO_DEVICE_MUSIC);
 
-<<<<<<< HEAD
-#ifdef AVRCP_Profile
-=======
 #ifdef AIR_AVRCP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
     if (AVRCP_PLAYBACK_STATUS_PLAYING == APP_Avrcp_GetPlayStatus(pBdAddr)) {
         audioDevReg |= APP_AudioDeviceRegister(pBdAddr, AUDIO_DEVICE_AVRCP_PLAY);
     }
@@ -541,11 +509,7 @@ void APP_A2dp_ClearResumeState(BD_ADDR_T *pBdAddr)
     APP_AudioDeviceDeRegister(pBdAddr, AUDIO_DEVICE_AVRCP_PLAY);
 }
 
-<<<<<<< HEAD
-#ifdef AVRCP_Profile
-=======
 #ifdef AIR_AVRCP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 void APP_A2dp_MonitorPlayStatus(BD_ADDR_T *pBdAddr, U8 isSuccessful)
 {
     if (isSuccessful) {
@@ -555,11 +519,7 @@ void APP_A2dp_MonitorPlayStatus(BD_ADDR_T *pBdAddr, U8 isSuccessful)
 
 static void app_A2dp_GetPlayStatusToPauseMusicCallBack(BD_ADDR_T *pBdAddr, U8 isSuccessful)
 {
-<<<<<<< HEAD
-#ifdef AVRCP_Profile
-=======
 #ifdef AIR_AVRCP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
     if (isSuccessful) {
         APP_Avrcp_SetTimer(pBdAddr, APP_AVRCP_TIMER_SEND_PAUSE_MUSIC, ONE_SEC, (U32)app_A2dp_GetPauseMusicCallBack);
     } else
@@ -592,11 +552,7 @@ void APP_A2dp_CheckPlayStatusConsistency(BD_ADDR_T *pBdAddr, U8 playStatus, U8 n
 
 void APP_A2dp_PlayStatusChanged(BD_ADDR_T *pBdAddr, U8 playStatus)
 {
-<<<<<<< HEAD
-#ifdef AVRCP_Profile
-=======
 #ifdef AIR_AVRCP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
     switch (playStatus) {
         case AVRCP_PLAYBACK_STATUS_PLAYING:
             if (APP_Avrcp_CheckTimer(pBdAddr, APP_AVRCP_TIMER_SEND_GET_PLAY_STATUS_TO_PAUSE_MUSIC) || APP_Avrcp_CheckTimer(pBdAddr, APP_AVRCP_TIMER_SEND_PAUSE_MUSIC)) {
@@ -652,11 +608,7 @@ void APP_A2dp_PlayStatusChanged(BD_ADDR_T *pBdAddr, U8 playStatus)
 
 void APP_A2dp_PlayStatusTheSame(BD_ADDR_T *pBdAddr, U8 playStatus)
 {
-<<<<<<< HEAD
-#ifdef AVRCP_Profile
-=======
 #ifdef AIR_AVRCP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
     switch (playStatus) {
         case AVRCP_PLAYBACK_STATUS_PLAYING:
             if (APP_Avrcp_CheckTimer(pBdAddr, APP_AVRCP_TIMER_SEND_GET_PLAY_STATUS_TO_PAUSE_MUSIC) || APP_Avrcp_CheckTimer(pBdAddr, APP_AVRCP_TIMER_SEND_PAUSE_MUSIC)) {
@@ -709,11 +661,7 @@ void APP_A2dp_PlayStatusTheSame(BD_ADDR_T *pBdAddr, U8 playStatus)
 
 void APP_A2dp_SendResume(BD_ADDR_T *pBdAddr)
 {
-<<<<<<< HEAD
-#ifdef AVRCP_Profile
-=======
 #ifdef AIR_AVRCP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
     if (AVRCP_IsConnected(pBdAddr)) {
         APP_AvrcpDecideOperation(pBdAddr, AVC_OPERATION_PLAY);
         APP_A2dp_ClearResumeState(pBdAddr);
@@ -728,11 +676,7 @@ static void app_A2dp_SendPause(BD_ADDR_T *pBdAddr, U8 playStatus)
 {
     bt_a2dp_set_meida_play(pBdAddr, FALSE);
 
-<<<<<<< HEAD
-#ifdef AVRCP_Profile
-=======
 #ifdef AIR_AVRCP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
     if (AVRCP_IsConnected(pBdAddr)) {
         switch (playStatus) {
             case AVRCP_PLAYBACK_STATUS_PLAYING:
@@ -820,11 +764,7 @@ static void app_A2dp_DspOn(BD_ADDR_T *pBdAddr)
     {
         APP_MCSYNC_SendSyncA2dpInfo(pBdAddr, MCSYNC_SHARE_SPECIFIC_ROLE_NOT_USED);
 
-<<<<<<< HEAD
-        #ifdef A2DP_Profile
-=======
         #ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 
         DBG_LOG_APP_A2DP("[APP_A2DP] Audioable BdAddr : 0x%x%x", 2, FW_bdaddr_to_2U32(pBdAddr, TRUE), FW_bdaddr_to_2U32(pBdAddr, FALSE));
 

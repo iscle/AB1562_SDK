@@ -45,19 +45,12 @@
 #include "drv_a2dp.h"
 #include "App_MCSync.h"
 #include "App_MCSync_Data.h"
-<<<<<<< HEAD
-=======
 #include "App_MCSync_Share.h"
->>>>>>> db20e11 (second commit)
 
 /*************************************************************************************************
 * Prototype
 **************************************************************************************************/
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 static void app_mcsync_SendSyncKeyInfo(U16 keyEventCode, U32 supportedState);
 #endif
 static void app_mcsync_SendSyncStopVpRtInfo(U16 eventIndex, U32 currentPicoClock);
@@ -75,11 +68,7 @@ static void app_mcsync_SendSyncSpeakerMute(BOOL isMute);
 static void app_mcsync_SendReconnectMask(U8 notReconnMask);
 static void app_mcsync_SendReconnectState(U8 type, BD_ADDR_T *pBdAddr);
 static void app_mcsync_SendLinkList(U8 * pData, U32 length);
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 static void app_mcsync_SendSyncShareModeInfo(U8 state, U8 shareMode);
 static void app_mcsync_SendSyncFollowerSoundLevel(U8 soundLevel, U8 isFollowerIFPkt);
 static void app_mcsync_SendOtherAgentBDA(BD_ADDR_T *pBdAddr);
@@ -88,11 +77,7 @@ static void app_mcsync_SendOtherAgentBDA(BD_ADDR_T *pBdAddr);
 /*************************************************************************************************
 * Static function
 **************************************************************************************************/
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 static void app_mcsync_SendSyncKeyInfo(U16 keyEventCode, U32 supportedState)
 {
 	BtMCSync_SendSyncKeyInfo(keyEventCode, supportedState);
@@ -182,15 +167,6 @@ static void app_mcsync_SendSyncPowerOff(U8 reason, BOOL isFollowerIFPKT, BOOL is
 {
  	BtMCSync_SendSyncPowerOff(reason, isFollowerIFPKT, isOnlyForFollower);
 }
-<<<<<<< HEAD
-static void app_mcsync_SendSyncGFPInfo(U8 *pData, U32 length)
-{
-    APP_MCSYNC_GFP_INFO_STRU msg;
-    msg.length = length;
-    FW_Memcpy((U8*)&msg.data, (U8*)pData, length);
-    bt_mcsync_send_data_by_module_id(MCSYNC_MODULE_GVA_GFP, sizeof(APP_MCSYNC_GFP_INFO_STRU) + length - 1, (U8*)&msg);
-}
-=======
 
 #ifdef AIR_TILE_ADV_ENABLE
 static void app_mcsync_SendSyncTileInfo(BOOL isAgent)
@@ -209,7 +185,6 @@ static void app_mcsync_SendSyncTileInfo(BOOL isAgent)
 		result, msg.opcode, msg.streamState, sizeof(APP_MCSYNC_TILE_INFO_STRU));
 }
 #endif
->>>>>>> db20e11 (second commit)
 
 static void app_mcsync_SendSyncFCDReset(U8 type)
 {
@@ -237,11 +212,7 @@ static void app_mcsync_SendLinkList(U8 * pData, U32 length)
     bt_mcsync_send_data_by_module_id(MCSYNC_MODULE_BT_LINK_LIST, length, (U8*)pData);
 }
 
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 static void app_mcsync_SendSyncShareModeInfo(U8 state, U8 shareMode)
 {
 	BtMCSync_SendSyncShareModeInfo(state, shareMode);
@@ -274,13 +245,10 @@ void APP_MCSYNC_SendSyncA2dpInfo(BD_ADDR_T *pBdAddr, U8 specificRole)
         if(drv_a2dp_get_low_latency_mode(pBdAddr))
             gameMode |= 0x02;
         #endif
-<<<<<<< HEAD
-=======
         if(drv_a2dp_get_ap_mode())
         {
             gameMode |= 0x04;
         }
->>>>>>> db20e11 (second commit)
 
 		if(PM_IsProfileConnected(pBdAddr, PROFILE_A2DP))
 		{
@@ -319,26 +287,17 @@ void APP_MCSYNC_SendSyncSmartChargeCaseStateInfo(U8 state)
 {
 	if(BtAwsMce_IsDefaultRolePartner())
 	{
-<<<<<<< HEAD
-		#ifdef MCSYNC_SHARE_MODE
-		if(BtMCSync_GetShareMode() == MCSYNC_SHARE_MODE_NORMAL_ENABLE)
-=======
 		#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
 		if(BtMCSync_GetShareMode() == MCSYNC_SHARE_MODE_NORMAL_ENABLE &&
           (APP_MCSync_Share_GetState() == APP_SHARE_STATE_ENTERED_MODE ||
           APP_MCSync_Share_GetState() == APP_SHARE_STATE_PREPARING))
->>>>>>> db20e11 (second commit)
 		{
 			BtMCSync_SendSyncSmartChargeCaseStateInfo(state);
 		}
 		else
 		#endif
 		{
-<<<<<<< HEAD
-			DBG_LOG_APP_MCSYNC("[APP_MCSync] Partner send case state to Agent (%d)", state);
-=======
 			DBG_LOG_APP_MCSYNC("[APP_MCSync] Partner send case state to Agent (%d)", 1, state);
->>>>>>> db20e11 (second commit)
 			APP_MCSYNC_DATA_SMART_CASE_STATE_T msg;
 			msg.state = state;
 			bt_mcsync_send_data_by_module_id(MCSYNC_MODULE_PPH_SMART_CHARGER_CASE_STATE,
@@ -380,13 +339,10 @@ void APP_MCSYNC_SendSyncANCPassThruInfo(U8 userRegister, U8 enable, U8 flash_no,
 		msg.type		 = type;
 		msg.runtime_gain = runtime_gain;
 		msg.clockToStart = clockToStart;
-<<<<<<< HEAD
-=======
 
 		DBG_LOG_APP_MCSYNC("[APP_MCSync] SendSyncANCPassThruInfo userReg:%d, enable:%d, type:%d", 3,
 			userRegister, enable, type);
 
->>>>>>> db20e11 (second commit)
 		bt_mcsync_send_data_by_module_id(MCSYNC_MODULE_AUDIO_ANC_PASSTHRU,
 			sizeof(APP_MCSYNC_DATA_ANC_T), (U8*)&msg);
 	}
@@ -399,17 +355,10 @@ void APP_MCSYNC_SendSyncNumOfAGInfo(U8 numOfAG)
         APP_MCSYNC_DATA_NUM_AG_T msg;
         U8 a2dpState = APP_MCSYNC_A2DP_STATE_NONE;
         BD_ADDR_T *pBdAddr = BtMCSync_GetNormalLinkBdAddr();
-<<<<<<< HEAD
-                
-        if(pBdAddr && !PM_IsProfileConnected(pBdAddr, PROFILE_MCSYNC) && numOfAG > 0)
-            return;
-        
-=======
 
         if(pBdAddr && !PM_IsProfileConnected(pBdAddr, PROFILE_MCSYNC) && numOfAG > 0)
             return;
 
->>>>>>> db20e11 (second commit)
         if(pBdAddr)
         {
             if(a2dp_is_in_streaming(pBdAddr))
@@ -455,14 +404,6 @@ void APP_MCSYNC_SendSyncPowerOff(U8 reason, BOOL isFollowerIFPKT, BOOL isOnlyFor
 	app_mcsync_SendSyncPowerOff(reason, isFollowerIFPKT, isOnlyForFollower);
 }
 
-<<<<<<< HEAD
-void APP_MCSYNC_SendSyncGFPInfo(U8 *pData, U32 length)
-{
-	if(BtAwsMce_IsDefaultRoleAgent()) {
-		app_mcsync_SendSyncGFPInfo(pData, length);
-  }
-}
-=======
 #ifdef AIR_TILE_ADV_ENABLE
 void APP_MCSYNC_SendSyncTileInfo(BOOL isAgent)
 {
@@ -479,26 +420,18 @@ void APP_MCSYNC_SendSyncTileInfo(BOOL isAgent)
 	}
 }
 #endif
->>>>>>> db20e11 (second commit)
 
 /* client to agent */
 void APP_MCSYNC_SendSyncKeyInfo(U16 keyEventCode, U32 supportedState)
 {
 	if(BtAwsMce_IsDefaultRolePartner())
 	{
-<<<<<<< HEAD
-		#ifdef MCSYNC_SHARE_MODE
-		DBG_LOG_APP_MCSYNC( "[APP_MCSync] sync key info: share mode:%d", 1, BtMCSync_GetShareMode());
-
-		if(BtMCSync_GetShareMode() == MCSYNC_SHARE_MODE_NORMAL_ENABLE)
-=======
 		#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
 		DBG_LOG_APP_MCSYNC( "[APP_MCSync] sync key info: share mode:%d, state:%d", 2,
 			BtMCSync_GetShareMode(), APP_MCSync_Share_GetState());
 
 		if(BtMCSync_GetShareMode() == MCSYNC_SHARE_MODE_NORMAL_ENABLE &&
           (APP_MCSync_Share_GetState() == APP_SHARE_STATE_ENTERED_MODE || APP_MCSync_Share_GetState() == APP_SHARE_STATE_PREPARING))
->>>>>>> db20e11 (second commit)
 		{
 			app_mcsync_SendSyncKeyInfo(keyEventCode, supportedState);
 		}
@@ -632,10 +565,7 @@ void APP_MCSYNC_SendLinkList(U8 * pData, U32 length)
 
 void APP_MCSYNC_SendSyncFollowerDisc(U8 isFollowerIFPkt, U8 isOnlyForFollower)
 {
-<<<<<<< HEAD
-=======
     #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
     APP_MCSYNC_DATA_FOLLOWER_DISC_T msg;
 
 	msg.isFollowerIFPkt = isFollowerIFPkt;
@@ -644,11 +574,6 @@ void APP_MCSYNC_SendSyncFollowerDisc(U8 isFollowerIFPkt, U8 isOnlyForFollower)
 
 	bt_mcsync_send_data_by_module_id(MCSYNC_MODULE_BT_RETRANSMIT_FOLLOWER_DISC,
 		sizeof(APP_MCSYNC_DATA_FOLLOWER_DISC_T), (U8*)&msg);
-<<<<<<< HEAD
-}
-
-#ifdef MCSYNC_SHARE_MODE
-=======
 	#else
 	UNUSED(isFollowerIFPkt); UNUSED(isOnlyForFollower);
 	#endif
@@ -670,7 +595,6 @@ void APP_MCSYNC_SendNoticeMasterPartnerToShareMode(U8 enterShareMode)
 	#endif
 }
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 void APP_MCSYNC_SendSyncShareModeInfo(U8 state, U8 shareMode)
 {
 	if(BtAwsMce_IsDefaultRoleAgent())
@@ -704,8 +628,6 @@ void APP_MCSYNC_SendExitRequest(void)
     }
 }
 #endif
-<<<<<<< HEAD
-=======
 
 #ifdef AIR_TAKE_OVER_LINK_ENABLE
 void APP_MCSYNC_SendSyncTakeOverStateInfo(void)
@@ -720,4 +642,3 @@ void APP_MCSYNC_SendSyncTakeOverStateInfo(void)
 }
 #endif
 
->>>>>>> db20e11 (second commit)

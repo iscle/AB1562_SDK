@@ -77,11 +77,7 @@
 #include "drv_a2dp.h"
 #include "App_InEarDetection.h"
 
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 #include "App_MCSync_Share.h"
 #endif
 #include "App_Mcsync_Reconnection.h"
@@ -126,10 +122,7 @@ static U32 app_ConnectionTimer_Handler(Handler handler, U16 id, void *msg, U32 h
 static const HandlerData gAppConnectionHandle = { app_Connection_Handler };
 static const HandlerData gAppConnectionTimerHandle = { app_ConnectionTimer_Handler };
 static APP_CONNECTION_CTL_STRU gAppConnCtl;
-<<<<<<< HEAD
-=======
 extern APP_VPRT_INFO_STRU gVpRtInfo;
->>>>>>> db20e11 (second commit)
 
 /**************************************************************************************************
 * Static Functions
@@ -179,11 +172,6 @@ static void app_Conn_SetConnected(BD_ADDR_T *pBdAddr)
 		}
 		else if(role == ROLE_AGENT || (role == ROLE_NONE && APP_SUPPORT_ALL_ROLE_ENTER_DISCOVER_FEAT))
 		{
-<<<<<<< HEAD
-			APP_Media_PushMediaEvent((U16)(MEDIA_EVT_SLC_CONNECTED + APP_State_CountConnectedDev()-1));
-			APP_SetAGNum(APP_State_CountConnectedDev());
-
-=======
 			/*
 			if(APP_Conn_CheckTimer(TIMER_ID_DISCONNECTED_VP) )
 				APP_Conn_ReleaseTimer(TIMER_ID_DISCONNECTED_VP);
@@ -204,7 +192,6 @@ static void app_Conn_SetConnected(BD_ADDR_T *pBdAddr)
 				//APP_MCSYNC_SendSyncNumOfAGInfo(APP_GetAGNum());
 			}
 			#endif
->>>>>>> db20e11 (second commit)
 			APP_Customer_ConnectionNoiseControl();
 			APP_Customer_SetConnected_Control();
 			APP_Customer_BatteryLevelVP();
@@ -220,16 +207,11 @@ static void app_Conn_SetConnected(BD_ADDR_T *pBdAddr)
 
 static void app_Conn_ConnectCfmHandler(PM_CONNECT_CFM_T * cfm)
 {
-<<<<<<< HEAD
-	DBG_LOG_APP_Connection( "[APP_CONN] PM_CONNECT_CFM PID:0x%x ConnProfileCnt:%d bda:0x%x%x", 4, cfm->profileID, cfm->profileCntConnectedEvt, FW_bdaddr_to_2U32(&cfm->bdAddr, TRUE), FW_bdaddr_to_2U32(&cfm->bdAddr, FALSE));
-#ifdef MCSYNC_SHARE_MODE
-=======
 	DBG_LOG_APP_Connection( "[APP_CONN] PM_CONNECT_CFM PID:0x%x ConnProfileCnt:%d bda:0x%x%x, mcsync state:%d", 5, 
 		cfm->profileID, cfm->profileCntConnectedEvt, FW_bdaddr_to_2U32(&cfm->bdAddr, TRUE), 
 		FW_bdaddr_to_2U32(&cfm->bdAddr, FALSE), BtAwsMce_GetMcsyncState());
 
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 	if(APP_MCSync_Share_FollowerEventHandler(APP_SHARE_FOLLOWER_EVENT_AG_CONNECT_CFM, &cfm->bdAddr, NULL))
 	{
 		APP_ReConn_DeleteInvalidListByBdAddr(&cfm->bdAddr);
@@ -244,11 +226,7 @@ static void app_Conn_ConnectCfmHandler(PM_CONNECT_CFM_T * cfm)
 	}
 
 	APP_ReConn_DeleteInvalidListByBdAddr(&cfm->bdAddr);
-<<<<<<< HEAD
-	APP_ReConn_PourQueue();
-=======
 	APP_ReConn_PourQueue(0);
->>>>>>> db20e11 (second commit)
 
 	if(cfm->profileCntConnectedEvt && cfm->profileID == PROFILE_A2DP)
 	{
@@ -277,13 +255,6 @@ static void app_Conn_ConnectCfmHandler(PM_CONNECT_CFM_T * cfm)
 	}
 //	MMI_TIMER_ReleaseDetachTimer(linkIndex);
 
-<<<<<<< HEAD
-	if(!APP_System_IsMpTestMode() && !APP_FCD_IsFcdReset() && !FW_IsBdAddrZero(BtMCSync_ReadAgentBdAddr()))
-	{
-		if(!APP_LinkKey_IsBdAddrInHistory(&cfm->bdAddr))
-		{
-			APP_LinkKey_UpdateHistory(&cfm->bdAddr, TRUE);
-=======
 	#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
 	if(cfm->profileCntConnectedEvt >=2 && BtAwsMce_GetMcsyncState() == MCSYNC_LINK_CONNECTED 
 		&& BtAwsMce_IsDefaultRoleAgent() && !BtAwsMce_IsSpecialLink(&cfm->bdAddr))
@@ -299,7 +270,6 @@ static void app_Conn_ConnectCfmHandler(PM_CONNECT_CFM_T * cfm)
             //need update & sync local key to remote again when AG profile is not the first connected profile because PROFILE_MCSYNC delete the link history below.
 		    APP_LinkKey_UpdateHistory(&cfm->bdAddr, TRUE);
             APP_Mcsync_GetLocalLinkKey();
->>>>>>> db20e11 (second commit)
 		}
 
 		if(cfm->profileID == PROFILE_MCSYNC)
@@ -308,18 +278,11 @@ static void app_Conn_ConnectCfmHandler(PM_CONNECT_CFM_T * cfm)
 			BtModuleLog_SendLogHandler(MODULE_LOG_MODULE_APP_MCSYNC,
 				MODULE_LOG_MODULE_APP_MCSYNC_SUB_MODULE_CONNECTION, 1);
 			#endif
-<<<<<<< HEAD
-			BD_ADDR_T *pBdAddr = (BtAwsMce_IsDefaultRoleAgent()) ? BtAwsMce_ReadLocalBdAddr() : BtMCSync_ReadAgentBdAddr();
-			if(FW_CmpBdAddr(&cfm->bdAddr, pBdAddr))
-			{
-				APP_LinkKey_DeleteLinkHistory(&cfm->bdAddr); // remove agent from phone list
-=======
 			
 			BD_ADDR_T *pBdAddr = (BtAwsMce_IsDefaultRoleAgent()) ? BtAwsMce_ReadLocalBdAddr() : BtMCSync_ReadAgentBdAddr();
 			if(FW_CmpBdAddr(&cfm->bdAddr, pBdAddr) || ((cfm->profileCntConnectedEvt == 1) && !BtAwsMce_IsSpecialLink(&cfm->bdAddr)))
 			{
 				APP_LinkKey_DeleteLinkHistory(&cfm->bdAddr); // remove agent from phone list, or remove link info when only mcsync profile connected on normal aws link for avoiding reconnect sp.
->>>>>>> db20e11 (second commit)
 			}
 
 			APP_Mcsync_SyncLinkKey();
@@ -333,20 +296,15 @@ static void app_Conn_ConnectCfmHandler(PM_CONNECT_CFM_T * cfm)
 void APP_Conn_RemoveConnectedState(BD_ADDR_T *pBdAddr, U8 profileCnt)
 {
 	U8 state;
-<<<<<<< HEAD
-=======
 
 	#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
 	U8 shareMode = BtMCSync_GetShareMode();
 	#endif
 	
->>>>>>> db20e11 (second commit)
 	if(!profileCnt)
 	{
 		state = APP_State_GetTopState(pBdAddr);
 
-<<<<<<< HEAD
-=======
 		DBG_LOG_APP_Connection( "[APP_CONN] RemoveConnectedState, BDA:0x%x%x, agNum:%d, role:0x%x, special link:%d, state:%d", 6,
 			FW_bdaddr_to_2U32(pBdAddr, TRUE), FW_bdaddr_to_2U32(pBdAddr, FALSE), APP_GetAGNum(),
 			BtAwsMce_GetDefaultRole(), BtAwsMce_IsSpecialLink(pBdAddr), state);
@@ -390,7 +348,6 @@ void APP_Conn_RemoveConnectedState(BD_ADDR_T *pBdAddr, U8 profileCnt)
             }
         }
 
->>>>>>> db20e11 (second commit)
 		if(state >= APP_HFP_INCOMMING && state <= APP_HFP_CAMULTY)
 		{
 			APP_State_RmvState(pBdAddr, state);
@@ -414,23 +371,15 @@ static void app_Conn_DisconnectCfmHandler(PM_DISCONNECT_CFM_T *cfm)
 	}
 #endif
 
-<<<<<<< HEAD
-#ifdef PROFILE_AMA_ENABLE
-    if (!PM_IsProfileConnected(pBdAddr, PROFILE_A2DP) && !PM_IsProfileConnected(pBdAddr, PROFILE_HANDSFREE) && !PM_IsProfileConnected(pBdAddr, PROFILE_AVRCP))
-    {
-=======
 #if defined(PROFILE_AMA_ENABLE) || defined(AIR_GFP_ENABLE)
     if (!PM_IsProfileConnected(pBdAddr, PROFILE_A2DP) && !PM_IsProfileConnected(pBdAddr, PROFILE_HANDSFREE) && !PM_IsProfileConnected(pBdAddr, PROFILE_AVRCP))
     {
 #ifdef PROFILE_AMA_ENABLE
->>>>>>> db20e11 (second commit)
         if (PM_IsProfileConnected(pBdAddr, PROFILE_AMA))
         {
             APP_Ama_Disconnect(pBdAddr);
             PM_DisconnectSpecificProfile(pBdAddr, PROFILE_AMA);
         }
-<<<<<<< HEAD
-=======
 #endif
 
 #ifdef AIR_GFP_ENABLE
@@ -439,7 +388,6 @@ static void app_Conn_DisconnectCfmHandler(PM_DISCONNECT_CFM_T *cfm)
             PM_DisconnectSpecificProfile(pBdAddr, PROFILE_GFP);
         }
 #endif
->>>>>>> db20e11 (second commit)
     }
 #endif
 
@@ -477,11 +425,7 @@ static void app_Conn_DisconnectCfmHandler(PM_DISCONNECT_CFM_T *cfm)
         }
 
 		if(cfm->profileCntConnectedEvt)
-<<<<<<< HEAD
-		{			
-=======
 		{
->>>>>>> db20e11 (second commit)
 			return;
 		}
 
@@ -521,17 +465,10 @@ static U32 app_Connection_Handler(Handler handler, U16 id, void *msg, U32 handle
 			DBG_LOG_APP_Connection( "[APP_CONN] All Profile Registered Cfm: isPowerOn:%d, isFOTA:%d", 2, APP_PowerOff_IsPowerOn(), APP_AirApp_FOTA_Reconnect() );
 
 			gAppConnCtl.isProfileRegistered = TRUE;
-<<<<<<< HEAD
-			APP_ReConn_PourQueue();
-            
-            APP_Ble_StartGattService();
-            
-=======
 			APP_ReConn_PourQueue(0);
 
             APP_Ble_StartGattService();
 
->>>>>>> db20e11 (second commit)
 			if(
 				(APP_State_CheckNestStateByLink(APP_EOF, APP_CONDISCABLE) || APP_State_CheckNestStateByLink(APP_EOF, APP_CONNECTABLE)) ||
 				( APP_AirApp_FOTA_Reconnect() || (SYS_BOOT_REASON_STATUS() == BOOT_CODE_FROM_DEEP_SLEEP) || !APP_PowerOff_IsPowerOn())
@@ -555,11 +492,7 @@ static U32 app_Connection_Handler(Handler handler, U16 id, void *msg, U32 handle
 	return 0;
 }
 
-<<<<<<< HEAD
-#ifdef DISCONNECT_AGENT_RECOVERY
-=======
 #ifdef AIR_AGENT_RECOVERY_MODE_AFTER_DISCONNECTION_FROM_PHONE_ENABLE
->>>>>>> db20e11 (second commit)
 static void app_connection_time_power_off_aws_check_handler(void)
 {
     U8 timer_1 = app_mcsync_reconnect_check_super_reconnect_timer(RECONNECT_LINK_LOSS);
@@ -575,19 +508,6 @@ static void app_connection_time_power_off_aws_check_handler(void)
 static U32 app_ConnectionTimer_Handler(Handler handler, U16 id, void *msg, U32 handler_id)
 {
     APP_INFO_STRU *pLinkInfo;
-<<<<<<< HEAD
-	UNUSED(handler);
-	UNUSED(msg);
-
-	switch(id)
-	{
-		case TIMER_ID_PARTNER_PLAY_SLC_CONNECTED_VP: 		
-			
-			//APP_Media_PushMediaEvent(MEDIA_EVT_SLC_CONNECTED);
-		case TIMER_ID_DISCONNECTED_VP:
-			DBG_LOG_APP_Connection( "[APP_CONN] timer handler, push slc disc media event", 0);
-			APP_Media_PushMediaEvent(MEDIA_EVT_SLC_DISCONNECTED);
-=======
 	U32 value = 0;
 	U32 *pMsg;
 	U8 state;
@@ -679,7 +599,6 @@ static U32 app_ConnectionTimer_Handler(Handler handler, U16 id, void *msg, U32 h
 	            if(APP_PowerOff_IsPowerOn())
 	                APP_Media_PushMediaEvent(MEDIA_EVT_SLC_CONNECTED);
 			}
->>>>>>> db20e11 (second commit)
 			break;
 
 		case TIMER_ID_CLEAR_LINK_KEY:
@@ -729,9 +648,6 @@ static U32 app_ConnectionTimer_Handler(Handler handler, U16 id, void *msg, U32 h
             }
 			break;
 
-<<<<<<< HEAD
-#ifdef DISCONNECT_AGENT_RECOVERY
-=======
         case TIMER_ID_DISCONNECT_SPECIAL_LINK:
             DBG_LOG_APP_Connection( "[APP_CONN] TIMER_ID_DISCONNECT_SPECIAL_LINK: power on=%d, mcsync= %d", 2, APP_PowerOff_IsPowerOn(), BtAwsMce_GetMcsyncState());
             if (!APP_PowerOff_IsPowerOn() && BtAwsMce_GetMcsyncState() >= MCSYNC_LINK_SAWS_READY)
@@ -741,7 +657,6 @@ static U32 app_ConnectionTimer_Handler(Handler handler, U16 id, void *msg, U32 h
             break;
 
 #ifdef AIR_AGENT_RECOVERY_MODE_AFTER_DISCONNECTION_FROM_PHONE_ENABLE
->>>>>>> db20e11 (second commit)
         case TIMER_ID_POWER_OFF_AWS_CHECK:
             app_connection_time_power_off_aws_check_handler();
             break;
@@ -772,15 +687,9 @@ void APP_RemoveServiceBdAddr(BD_ADDR_T *pBdAddr)
 		switch(APP_GetCurrentAudioDevice())
 		{
 			case AUDIO_DEVICE_SCO:
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE                
-			case AUDIO_DEVICE_SCO_HSP:
-#endif                
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE
 			case AUDIO_DEVICE_SCO_HSP:
 #endif
->>>>>>> db20e11 (second commit)
 			case AUDIO_DEVICE_SCO_IDLE:
 			case AUDIO_DEVICE_MUSIC:
 			case AUDIO_DEVICE_MUSIC_CALL_NOTIFY:
@@ -842,10 +751,7 @@ void APP_AddServiceBdAddr(BD_ADDR_T *pBdAddr)
 
 void APP_Conn_CreateActiveProfileConnection(BD_ADDR_T *pBdAddr,U8 profilemask)
 {
-<<<<<<< HEAD
-=======
 	DBG_LOG_APP_Connection( "[APP_CONN] CreateActiveProfileConnection mask:0x%x, bdAddr:0x%x%x", 3, profilemask, FW_bdaddr_to_2U32(pBdAddr, TRUE), FW_bdaddr_to_2U32(pBdAddr, FALSE));
->>>>>>> db20e11 (second commit)
 	//PM_ConnectProfile(pBdAddr, PROFILE_AVRCP);		//Sony IOT Issue. Reconnect AVRCP After A2DP Connect
 	PM_ConnectProfile(pBdAddr, PROFILE_MCSYNC);
 
@@ -904,11 +810,7 @@ void APP_Conn_ReleaseProfileLinkAndDetach(BD_ADDR_T *pBdAddr)
 		return;
 	}
 
-<<<<<<< HEAD
- 
-=======
 
->>>>>>> db20e11 (second commit)
 	if (pLinkInfo->linkPara.miscMask & APP_LINK_DETACHING)
 		return;
 
@@ -932,21 +834,13 @@ void APP_Conn_ReleaseProfileLinkAndDetach(BD_ADDR_T *pBdAddr)
 		if(!APP_State_GetConnectedCount() && !APP_PowerOff_IsPowerOn())
 		{
 			APP_State_AddTopState(APP_EOF, APP_DETACHING_LINK);
-<<<<<<< HEAD
-
-=======
 #if 0
->>>>>>> db20e11 (second commit)
 			if(BtAwsMce_IsDefaultRoleAgent())
 			{
 				APP_SetACLState(pLinkInfo, ACL_STATE_OFF);
 				APP_ClearAppLinkBdAddr(pBdAddr);
 			}
-<<<<<<< HEAD
-
-=======
 #endif
->>>>>>> db20e11 (second commit)
 		}
 	}
 }
@@ -1080,9 +974,6 @@ BOOL APP_Conn_PowerOffHandler(void)
 
 	if(APP_Conn_IsOnlySpecialAWS())
 	{
-<<<<<<< HEAD
-		BtAwsMce_DisconnectAwsLink();
-=======
 	    if (APP_Conn_CheckTimer(TIMER_ID_DISCONNECT_SPECIAL_LINK))
         {
             APP_Conn_ReleaseTimer(TIMER_ID_DISCONNECT_SPECIAL_LINK);
@@ -1095,7 +986,6 @@ BOOL APP_Conn_PowerOffHandler(void)
             AWSMCE_AgentDisconnAwsLink(BtAwsMce_ReadLocalBdAddr());
         }
         APP_Conn_SetTimer(TIMER_ID_DISCONNECT_SPECIAL_LINK, 3000);
->>>>>>> db20e11 (second commit)
 	}
 
 	if(CURRENT_ACTIVE_LINK_CNT == 2)
@@ -1133,11 +1023,7 @@ void APP_Conn_NotifyPartnerMediaEvt(U8 oldNumOfAg, U8 numOfAG, U8 isA2dpPlaying)
 			drv_a2dp_set_partner_later_join(TRUE);
 		}
 
-<<<<<<< HEAD
-		APP_Media_PushMediaEvent((U16)(MEDIA_EVT_SLC_CONNECTED) + numIndex);
-=======
 		//APP_Media_PushMediaEvent((U16)(MEDIA_EVT_SLC_CONNECTED) + numIndex);
->>>>>>> db20e11 (second commit)
 	}
 }
 
@@ -1230,10 +1116,6 @@ void APP_Conn_ReleaseTimer(U16 timerId)
 
 void APP_Conn_SetTimer(U16 timerId, U32 timeout)
 {
-<<<<<<< HEAD
-	DBG_LOG_APP_Connection("[APP_CONN] Set Timer, timer id:%d, timeout:%d", 2, timerId, timeout);
-	FW_SetTimer((Handler)&gAppConnectionTimerHandle, timerId, NULL, 0, timeout);
-=======
 	U32 *pMsg = NULL;
     if(timerId == TIMER_ID_DISCONNECTED_VP)
     {
@@ -1249,7 +1131,6 @@ void APP_Conn_SetTimer(U16 timerId, U32 timeout)
 
 	DBG_LOG_APP_Connection("[APP_CONN] Set Timer, timer id:%d, timeout:%d", 2, timerId, timeout);
 	FW_SetTimer((Handler)&gAppConnectionTimerHandle, timerId, pMsg, 0, timeout);
->>>>>>> db20e11 (second commit)
 }
 
 void APP_Conn_ReleaseQosTimer(APP_INFO_STRU * pLinkInfo)

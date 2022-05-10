@@ -647,11 +647,7 @@ int32_t SF_DAL_Init_EON(NOR_MTD_Driver *driver, SF_MTD_Data *D)
 }
 #endif // defined(SF_DAL_EON)
 
-<<<<<<< HEAD
-#if defined(SF_DAL_GIGADEVICE) || defined(SF_DAL_WINBOND)
-=======
 #if defined(SF_DAL_GIGADEVICE) || defined(SF_DAL_WINBOND) || defined(SF_DAL_XMC)
->>>>>>> db20e11 (second commit)
 //-----------------------------------------------------------------------------
 /*!
   @brief
@@ -777,8 +773,6 @@ int32_t SF_DAL_Init_GIGADEVICE(NOR_MTD_Driver *driver, SF_MTD_Data *D)
 }
 #endif
 
-<<<<<<< HEAD
-=======
 #if defined(SF_DAL_XMC)
 int32_t SF_DAL_Init_XMC(NOR_MTD_Driver *driver, SF_MTD_Data *D)
 {
@@ -796,7 +790,6 @@ int32_t SF_DAL_Init_XMC(NOR_MTD_Driver *driver, SF_MTD_Data *D)
 }
 #endif
 
->>>>>>> db20e11 (second commit)
 
 //-----------------------------------------------------------------------------
 /*!
@@ -1017,8 +1010,6 @@ int32_t SF_DAL_Init_Vendor(NOR_MTD_Driver *driver, SF_MTD_Data *D)
             result = SF_DAL_Init_NUMONYX(driver, D);
             break;
 #endif
-<<<<<<< HEAD
-=======
 
 #if defined(SF_DAL_XMC)
         case SF_DAL_TYPE_XMC:
@@ -1026,7 +1017,6 @@ int32_t SF_DAL_Init_Vendor(NOR_MTD_Driver *driver, SF_MTD_Data *D)
             result |= SF_DAL_Init_WINBOND_OTP(D);
             break;
 #endif
->>>>>>> db20e11 (second commit)
         default:
             result = FS_FLASH_MOUNT_ERROR;
             ASSERT_RET(0, 0);

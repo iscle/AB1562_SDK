@@ -47,11 +47,7 @@
 #include "BtMCSync.h"
 #include "App_MCSync_RHO.h"
 #include "App_SmartChgCase.h"
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 #include "App_MCSync_Share.h"
 #endif
 
@@ -114,11 +110,7 @@ static void app_pairing_write_scan_enable_cfm_handler(BT_WRITE_SCAN_ENABLE_CFM_T
                 state = APP_State_GetTopState(APP_EOF);
 
                 DBG_LOG_APP_SYSTEM( "[APP_Pairing] Scan enable, Inquiry disable, state:%d", 1, state);
-<<<<<<< HEAD
-                if(APP_FAKEOFF == state || APP_OFF == state)
-=======
                 if(APP_FAKEOFF == state || APP_OFF == state || APP_DETACHING_LINK == state)
->>>>>>> db20e11 (second commit)
                 {
                     APP_Pairing_ConnectableHandler(NON_CONNECTABLE_MODE);
                 }
@@ -132,11 +124,7 @@ static void app_pairing_write_scan_enable_cfm_handler(BT_WRITE_SCAN_ENABLE_CFM_T
                 DBG_LOG_APP_SYSTEM( "[APP_Pairing] Scan disable, Inquiry disable", 0);
                 APP_State_RmvState(APP_EOF, APP_CONDISCABLE);
                 APP_MCSync_Rho_NonConnectableNotify();
-<<<<<<< HEAD
-                #ifdef MCSYNC_SHARE_MODE
-=======
                 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
                 APP_MCSync_Share_FollowerEventHandler(APP_SHARE_FOLLOWER_EVENT_NON_CONNECTABLE, NULL, NULL);
                 #endif
                 break;
@@ -166,11 +154,7 @@ static U32 app_pairing_gap_handler(Handler handler, U16 id, void *msg, U32 id_ex
 
 static void app_pairing_connectable_timeout_handler(void)
 {
-<<<<<<< HEAD
-	#ifndef TAKE_OVER_LINK
-=======
 	#ifndef AIR_TAKE_OVER_LINK_ENABLE
->>>>>>> db20e11 (second commit)
     if (CURRENT_ACTIVE_LINK_CNT > 0)
     {
         APP_State_ConnectabilityHandle(CMD_SET_NON_CONNECTABLE);
@@ -211,10 +195,7 @@ static void app_pairing_set_connectable(U8 connectMode)
 	if(connectMode == NON_CONNECTABLE_MODE)
 	{
 		gAppPairingCtl.cmd_state = APP_SCAN_CMD_NO_CONNECT_NO_DISCOVER;
-<<<<<<< HEAD
-=======
         gAppPairingCtl.discoverable_mode = NON_DISCOVERABLE_MODE;
->>>>>>> db20e11 (second commit)
 		BtWriteScanEnable((Handler)&gAppPairingGapHandler, (SCAN_ENABLE_T)SCAN_ENABLE_OFF);
 	}
 	else if(connectMode == CONNECTABLE_MODE)
@@ -222,16 +203,12 @@ static void app_pairing_set_connectable(U8 connectMode)
 		if(!APP_SmtChgCse_IsPhoneNeeded())
 			return;
 
-<<<<<<< HEAD
-        if(gAppPairingCtl.discoverable_mode != NON_DISCOVERABLE_MODE)
-=======
         if(gAppPairingCtl.discoverable_mode != NON_DISCOVERABLE_MODE            
         	#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
            	&& !(BtMCSync_GetShareMode() == MCSYNC_SHARE_MODE_FOLLOWER_ENABLE && APP_MCSync_IsShareConn())
             #endif
            )
 
->>>>>>> db20e11 (second commit)
         {
             gAppPairingCtl.cmd_state = APP_SCAN_CMD_CONNECT_DISCOVER;
             BtWriteScanEnable((Handler)&gAppPairingGapHandler, (SCAN_ENABLE_T)SCAN_ENABLE_INQ_AND_PAGE);

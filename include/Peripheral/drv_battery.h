@@ -66,14 +66,6 @@ typedef struct
 ////////////////////////////////////////////////////////////////////////////////
 // FUNCTION PROTOTYPES /////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-<<<<<<< HEAD
-EXTERN VOID DRV_BAT_Init(VOID);
-EXTERN U8 DRV_BAT_GetLevelInPercent(void);
-EXTERN U8 DRV_BAT_IsBelowInitBat(void);
-EXTERN U8 DRV_BAT_IsBelowLowBat(void);
-EXTERN U8 DRV_BAT_IsBelowShutDownBat(void);
-EXTERN U8 DRV_BAT_3v3_proc(void);
-=======
 EXTERN VOID pmu_bat_init(VOID);
 EXTERN U32 pmu_bat_avg_adc(void);
 EXTERN U8 pmu_bat_get_perc(void);
@@ -82,16 +74,11 @@ EXTERN U8 DRV_BAT_IsBelowLowBat(void);
 EXTERN U8 DRV_BAT_IsBelowShutDownBat(void);
 EXTERN U16 pmu_bat_get_pure_adc(VOID);
 EXTERN void pmu_bat_3v3_proc(void);
->>>>>>> db20e11 (second commit)
 
 EXTERN U32 pmu_bat_volt_to_adc(U32 volt);
 EXTERN U32 pmu_bat_adc_to_volt(U32 adc);
 EXTERN U32 pmu_bat_volt_to_perc(U32 volt);
-<<<<<<< HEAD
-EXTERN U16 DRV_BAT_GetThousandPercent(void);
-=======
 EXTERN U16 pmu_bat_get_k_perc(void);
->>>>>>> db20e11 (second commit)
 
 #endif /* _DRV_BATTERY_H_ */
 

@@ -124,14 +124,11 @@
 <Value>0x000206</Value>
 </NVKey>
 
-<<<<<<< HEAD
-=======
 <!-- Voice Assisant Parameters Variation -->
 <NVKey KeyID="0xF2E4">
 <Value>01000000000000000000000000000000000000000000000000000000000000000000000000000000000000</Value>
 </NVKey>
 
->>>>>>> db20e11 (second commit)
 <NVKey KeyID="0xF2E7">
 <Value>0x00</Value>
 </NVKey>
@@ -157,14 +154,11 @@
 </NVKey>
 <!-- PEQ Group for APP -->
 
-<<<<<<< HEAD
-=======
 <!-- Google Fast Pair - Personalized Name -->
 <NVKey KeyID="0xF2F7">
     <Value>0x00</Value>
 </NVKey>
 
->>>>>>> db20e11 (second commit)
 <!-- Customer Product Info Parameters 00-->
 <NVKey KeyID="0xF500">
 <Value>0x0000000000000000000000000000000000000000000000000000000000000000</Value>

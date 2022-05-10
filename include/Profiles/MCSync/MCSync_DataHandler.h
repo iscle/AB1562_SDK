@@ -522,15 +522,12 @@ typedef struct
 	U16 raceID;
 }MCSYNC_GET_BATTERY_STRU;
 
-<<<<<<< HEAD
-=======
 typedef struct
 {
 	U8 takeOverState;
 }MCSYNC_TAKE_OVER_STATE_STRU;
 
 
->>>>>>> db20e11 (second commit)
 /*************************************************************************************************
 * Public function (IF data)
 **************************************************************************************************/
@@ -585,10 +582,7 @@ U8		MCSYNC_SendBatteryLevel(U8 batteryLevel);
 U8 MCSYNC_SendLeakageDetectInfo(BOOL isStart, BOOL result);
 
 void MCSYNC_SendBatteryMsgInfo(U16 raceID, U8 channelID);
-<<<<<<< HEAD
-=======
 void MCSYNC_SendTakeOverState(void);
->>>>>>> db20e11 (second commit)
 
 
 /*************************************************************************************************

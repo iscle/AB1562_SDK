@@ -130,13 +130,6 @@
 #include "hal_des.h"
 #endif
 
-<<<<<<< HEAD
-#ifdef HAL_AUDIO_MODULE_ENABLED
-#include "hal_audio.h"
-#endif
-
-=======
->>>>>>> db20e11 (second commit)
 #ifdef HAL_CACHE_MODULE_ENABLED
 #include "hal_cache.h"
 #endif

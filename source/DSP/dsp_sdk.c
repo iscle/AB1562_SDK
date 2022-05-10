@@ -51,13 +51,9 @@ typedef struct stream_function_sample_instance_u
 // Constant Definitions ////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 #define FUNCTION_SAMPLE_MEMORY_SIZE     sizeof(stream_function_sample_instance_t)
-<<<<<<< HEAD
-#define CUSTOMIZED_TX_NR_MEMORY_SIZE    10000 /* Modify 3rd party customized TX NR scratch size here*/
-=======
 #if defined(AIR_TXNR_3RD_PARTY_ENABLE) || defined(AIR_TXNR_INTELLIGO_1MIC_ENABLE)
 #define CUSTOMIZED_TX_NR_MEMORY_SIZE    80*1024 /* Modify 3rd party customized TX NR scratch size here*/
 #endif
->>>>>>> db20e11 (second commit)
 #define TX_NR_FRAME_SIZE                480   /* In unit of bytes */
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -102,13 +98,10 @@ stream_feature_list_t stream_feature_list_a2dp[10] =
     FUNC_CH_SEL,
     FUNC_PEQ_USER,
     FUNC_AU_DRC,
-<<<<<<< HEAD
-=======
 #ifdef AIR_PEQ_SPEAKER_ENBALE
     FUNC_PEQ_SPEAKER,
     FUNC_AU_DRC2,
 #endif
->>>>>>> db20e11 (second commit)
     FUNC_END,
 };
 
@@ -149,11 +142,7 @@ const stream_feature_list_t stream_feature_list_a2dp_share_without_peq[6] =
 };
 
 /* eSCO Feature List (EC/NR on) */
-<<<<<<< HEAD
-const stream_feature_list_t stream_feature_list_hfp_nb_uplink_ecnr_on[] =
-=======
 stream_feature_list_t stream_feature_list_hfp_nb_uplink_ecnr_on[] =
->>>>>>> db20e11 (second commit)
 {
     CODEC_NULL,
     FUNC_CLK_SKEW_UL,
@@ -174,11 +163,7 @@ const stream_feature_list_t stream_feature_list_hfp_nb_downlink_ecnr_on[] =
     FUNC_END,
 };
 
-<<<<<<< HEAD
-const stream_feature_list_t stream_feature_list_hfp_wb_uplink_ecnr_on[] =
-=======
 stream_feature_list_t stream_feature_list_hfp_wb_uplink_ecnr_on[] =
->>>>>>> db20e11 (second commit)
 {
     CODEC_NULL,
     FUNC_CLK_SKEW_UL,
@@ -200,11 +185,7 @@ const stream_feature_list_t stream_feature_list_hfp_wb_downlink_ecnr_on[] =
 };
 
 /* eSCO Feature List (EC/NR off) */
-<<<<<<< HEAD
-const stream_feature_list_t stream_feature_list_hfp_nb_uplink_ecnr_off[] =
-=======
 stream_feature_list_t stream_feature_list_hfp_nb_uplink_ecnr_off[] =
->>>>>>> db20e11 (second commit)
 {
     CODEC_NULL,
     FUNC_CLK_SKEW_UL,
@@ -221,11 +202,7 @@ const stream_feature_list_t stream_feature_list_hfp_nb_downlink_ecnr_off[] =
     FUNC_END,
 };
 
-<<<<<<< HEAD
-const stream_feature_list_t stream_feature_list_hfp_wb_uplink_ecnr_off[] =
-=======
 stream_feature_list_t stream_feature_list_hfp_wb_uplink_ecnr_off[] =
->>>>>>> db20e11 (second commit)
 {
     CODEC_NULL,
     FUNC_CLK_SKEW_UL,
@@ -332,11 +309,7 @@ uint32_t function_sample_api(stream_function_sample_instance_ptr_t instance_ptr,
 /* One time initialization at system boot */
 void dsp_sdk_initialize (void)
 {
-<<<<<<< HEAD
-    #if defined(MTK_3RD_PARTY_NR)
-=======
     #if defined(AIR_TXNR_3RD_PARTY_ENABLE) || defined(AIR_TXNR_INTELLIGO_1MIC_ENABLE)
->>>>>>> db20e11 (second commit)
     DSP_SetTxNrMemSize(CUSTOMIZED_TX_NR_MEMORY_SIZE);
     #endif
 }
@@ -393,28 +366,6 @@ bool dsp_customized_func_c_proc(void *para)
  * Do not remove symbol name & modify prototype, otherwise compile may result in error
  *
  */
-<<<<<<< HEAD
-void Voice_TX_NR_Init(void* tx_nr_ptr, 
-                    int32_t* nr_para)
-{
-    UNUSED(tx_nr_ptr);
-    UNUSED(nr_para);
-
-    //printf("[dsp_sdk] nr_para[0]:0x%x", (uint32_t)nr_para[0]);
-    //printf("[dsp_sdk] nr_para[9]:0x%x", (uint32_t)nr_para[9]);
-}
-
-void Voice_TX_NR_Prcs(int16_t* ec_out1,
-                      int16_t* ec_out2,
-                      int16_t* nr_out,
-                      int16_t nr_gain,
-                      void* tx_nr_ptr)
-{
-    UNUSED(tx_nr_ptr);
-    UNUSED(nr_gain);
-    UNUSED(ec_out2);
-    FW_Memcpy(nr_out, ec_out1, TX_NR_FRAME_SIZE);
-=======
 #ifdef AIR_TXNR_INTELLIGO_1MIC_ENABLE
 extern void IGO_NR_Init(void*, uint8_t*);
 extern void IGO_NR_Prcs(int16_t* in, int16_t* out, void* buf_ptr);
@@ -450,6 +401,5 @@ void Voice_TX_NR_Prcs(int16_t *ec_out1,
     UNUSED(nr_out);
     UNUSED(tx_nr_ptr);
 #endif
->>>>>>> db20e11 (second commit)
 }
 

@@ -190,11 +190,8 @@ static void app_linkkey_clear_normal_link(U8 index)
     LINK_HISTORY_STRU* linkListPtr = (LINK_HISTORY_STRU *)gLinkKeyCtl.pHistoryInfo;
     U8 maxCount = gLinkKeyCtl.normalLinkNum;
 
-<<<<<<< HEAD
-=======
     DBG_LOG_APP_Connection( "[APP_LINKKEY] Clear Link History:%d, addr:0x%x", 2, 
         index, index < maxCount ? FW_bdaddr_to_2U32(&linkListPtr[index].linkData, TRUE) : 0xffffff);
->>>>>>> db20e11 (second commit)
     //Remove Index LinkHistory and Sequence LinkHistory
     for( ; index < maxCount - 1; index++)
     {
@@ -387,11 +384,7 @@ U8 APP_LinkKey_SearchLinkKeyIndex(BD_ADDR_T *pBdAddr, U8 needKeyOk)
 void APP_LinkKey_SetLinkSoundLevelByHistory(BD_ADDR_T *pBdAddr)
 {
 	U8 scoSoundLevel, scoMicSoundlevel;
-<<<<<<< HEAD
-	#ifdef A2DP_Profile
-=======
 	#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 	U8 a2dpSoundLevel;
 	#endif
 	LINK_HISTORY_STRU *linkListPtr = APP_LinkKey_SearchHistoryByBdAddr(pBdAddr, FALSE, FALSE);
@@ -400,11 +393,7 @@ void APP_LinkKey_SetLinkSoundLevelByHistory(BD_ADDR_T *pBdAddr)
 	{
 		scoSoundLevel = APP_DEFAULT_SCO_SOUND_LEVEL;
 		scoMicSoundlevel = APP_DEFAULT_SCO_MIC_SOUND_LEVEL;
-<<<<<<< HEAD
-		#ifdef A2DP_Profile
-=======
 		#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 		a2dpSoundLevel = APP_DEFAULT_A2DP_SOUND_LEVEL;
 		#endif
 	}
@@ -412,11 +401,7 @@ void APP_LinkKey_SetLinkSoundLevelByHistory(BD_ADDR_T *pBdAddr)
 	{
 		scoSoundLevel = linkListPtr->scoSoundlevel;
 		scoMicSoundlevel = linkListPtr->scoMicSoundlevel;
-<<<<<<< HEAD
-		#ifdef A2DP_Profile
-=======
 		#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 		a2dpSoundLevel = linkListPtr->a2dpSoundLevel;
 		#endif
 	}
@@ -430,11 +415,7 @@ void APP_LinkKey_SetLinkSoundLevelByHistory(BD_ADDR_T *pBdAddr)
 	APP_VolManage_SetCurrentScoMicSoundLevel(pBdAddr, scoMicSoundlevel);
 	APP_VolManage_SetCurrentScoVgm(pBdAddr, APP_VolManage_GetVgmByScoMicSoundLevel(scoMicSoundlevel));
 
-<<<<<<< HEAD
-	#ifdef A2DP_Profile
-=======
 	#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 	APP_VolManage_SetCurrentA2dpSoundLevel(pBdAddr, a2dpSoundLevel);
 	#endif
 	APP_VolManage_SetCurrentAbsoluteVolume(pBdAddr, APP_VolManage_GetAbsoluteVolumeBySoundLevel(a2dpSoundLevel));
@@ -524,11 +505,7 @@ U8 APP_LinkKey_ShiftLinkKeyToTop (U8 targetIndex)
 U8 APP_LinkKey_AddNormalByHistoryInfo(LINK_HISTORY_STRU *plinkListIn)
 {
 	LINK_HISTORY_STRU *plinkListDest;
-<<<<<<< HEAD
-
-=======
 	U8 i;
->>>>>>> db20e11 (second commit)
 	if(!plinkListIn)
 		return INDEX_EOF;
 
@@ -536,10 +513,6 @@ U8 APP_LinkKey_AddNormalByHistoryInfo(LINK_HISTORY_STRU *plinkListIn)
 
 	if(!plinkListDest)
 	{
-<<<<<<< HEAD
-		app_linkkey_clear_normal_link(gLinkKeyCtl.normalLinkNum - 1); ; // choose the oldest link
-		plinkListDest = &gLinkKeyCtl.pHistoryInfo[gLinkKeyCtl.normalLinkNum - 1];
-=======
 		if(APP_LinkKey_GetNormalPDLNumber() == gLinkKeyCtl.normalLinkNum)
 			i = gLinkKeyCtl.normalLinkNum -1 ;
 		else
@@ -547,7 +520,6 @@ U8 APP_LinkKey_AddNormalByHistoryInfo(LINK_HISTORY_STRU *plinkListIn)
 			
 		app_linkkey_clear_normal_link(i); ; // choose the oldest link
 		plinkListDest = &gLinkKeyCtl.pHistoryInfo[i];
->>>>>>> db20e11 (second commit)
 	}
 
 	FW_Memcpy(plinkListDest, plinkListIn, sizeof(LINK_HISTORY_STRU));

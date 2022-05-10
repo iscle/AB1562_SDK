@@ -74,12 +74,9 @@
 #include "syslog.h"
 #include "chargercase_common.h"
 #include "ChargerSmartCase.h"
-<<<<<<< HEAD
-=======
 #ifdef AIR_TILE_ADV_ENABLE
 #include "App_Tile.h"
 #endif
->>>>>>> db20e11 (second commit)
 
 log_create_module(APP_RSRC_MNG, PRINT_LEVEL_INFO);
 
@@ -108,10 +105,7 @@ enum
 	APP_RHO_AMA,
 	APP_RHO_INEAR_DETECTION,
     APP_RHO_XIAOAI,
-<<<<<<< HEAD
-=======
     APP_RHO_TILE,
->>>>>>> db20e11 (second commit)
 	APP_RHO_MODULE_NUM
 };
 
@@ -170,15 +164,12 @@ static const APP_RHO_HANDLE_STRU gAppRhoHandler[APP_RHO_MODULE_NUM] =
 #else
     {NULL,							NULL,							NULL,                           NULL},
 #endif
-<<<<<<< HEAD
-=======
 #ifdef AIR_TILE_ADV_ENABLE
     {APP_Tile_FillRhoData,          APP_Tile_AssignRhoData,         NULL,                           NULL},
 #else
     {NULL,							NULL,							NULL,                           NULL},
 #endif
 
->>>>>>> db20e11 (second commit)
 };
 
 AT_ESD APP_ESD_STRU gAppEsd;
@@ -418,15 +409,9 @@ BOOL APP_SetAppLinkBdAddr(BD_ADDR_T *pBdAddr)
 
 	if (APP_IsSetAppLink(pBdAddr))
 	{
-<<<<<<< HEAD
-		DBG_LOG_APP_RSRC_MNG( "[APP_RM] Set Link Addr Already", 0);
-		if(!APP_System_IsMpTestMode() && !APP_FCD_IsFcdReset() && !FW_IsBdAddrZero(BtMCSync_ReadAgentBdAddr())
-		#ifdef MCSYNC_SHARE_MODE
-=======
 		DBG_LOG_APP_RSRC_MNG( "[APP_RM] Set Link Addr Already Bda:0x%x%x", 2, FW_bdaddr_to_2U32(pBdAddr, TRUE), FW_bdaddr_to_2U32(pBdAddr, FALSE));
 		if(!APP_System_IsMpTestMode() && !APP_FCD_IsFcdReset() && !FW_IsBdAddrZero(BtMCSync_ReadAgentBdAddr())
 		#ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 			&& !BtMCSync_IsShareModeBdAddr(pBdAddr)		
 		#endif
 			/*#if SINGLE_HEADSET_MODE_ENABLE
@@ -442,20 +427,12 @@ BOOL APP_SetAppLinkBdAddr(BD_ADDR_T *pBdAddr)
 	if ((pLinkInfo = APP_GetEmptyAppLink()))
 	{
 		FW_Memcpy(&pLinkInfo->bdAddr, pBdAddr, sizeof(BD_ADDR_T));
-<<<<<<< HEAD
-		DBG_LOG_APP_RSRC_MNG( "[APP_RM] Set Link Addr OK", 0);
-=======
 		DBG_LOG_APP_RSRC_MNG( "[APP_RM] Set Link Addr OK Bda:0x%x%x", 2, FW_bdaddr_to_2U32(pBdAddr, TRUE), FW_bdaddr_to_2U32(pBdAddr, FALSE));
->>>>>>> db20e11 (second commit)
 		return TRUE;
 	}
 	else
 	{
-<<<<<<< HEAD
-		DBG_LOG_APP_RSRC_MNG( "[APP_RM] Set Link Addr Fail (Full)", 0);
-=======
 		DBG_LOG_APP_RSRC_MNG( "[APP_RM] Set Link Addr Fail (Full) Bda:0x%x%x", 2, FW_bdaddr_to_2U32(pBdAddr, TRUE), FW_bdaddr_to_2U32(pBdAddr, FALSE));
->>>>>>> db20e11 (second commit)
 		return FALSE;
 	}
 }
@@ -464,11 +441,8 @@ void APP_ClearAppLinkBdAddr(BD_ADDR_T *pBdAddr)
 {
 	APP_INFO_STRU *pLinkInfo = APP_GetAppLinkByBdAddr(pBdAddr);
 
-<<<<<<< HEAD
-=======
 	DBG_LOG_APP_RSRC_MNG( "[APP_RM] ClearAppLinkBdAddr Bda:0x%x%x", 2, FW_bdaddr_to_2U32(pBdAddr, TRUE), FW_bdaddr_to_2U32(pBdAddr, FALSE));
 
->>>>>>> db20e11 (second commit)
 	if(pLinkInfo && pLinkInfo->aclState == ACL_STATE_OFF && !APP_State_CheckLinkConnected(pBdAddr))
 	{
 		APP_STATE_STRU *pTmpNestState;
@@ -478,11 +452,7 @@ void APP_ClearAppLinkBdAddr(BD_ADDR_T *pBdAddr)
 		pTmpNestState = pLinkInfo->pNestState;
 		FW_Memset(pLinkInfo, 0, sizeof(APP_INFO_STRU));
 		pLinkInfo->pNestState = pTmpNestState;
-<<<<<<< HEAD
-		DBG_LOG_APP_RSRC_MNG( "[APP_RM] Clear Link Addr", 0);
-=======
 		DBG_LOG_APP_RSRC_MNG( "[APP_RM] Clear Link Addr Bda:0x%x%x", 2, FW_bdaddr_to_2U32(pBdAddr, TRUE), FW_bdaddr_to_2U32(pBdAddr, FALSE));
->>>>>>> db20e11 (second commit)
 	}
 }
 
@@ -494,18 +464,12 @@ APP_INFO_STRU *APP_GetEmptyAppLink()
 	{
 		if (FW_IsBdAddrZero(&gAppCtl.appInfo[linkIndex].bdAddr))
 		{
-<<<<<<< HEAD
-=======
 			DBG_LOG_APP_RSRC_MNG( "[APP_RM] GetEmptyAppLink Bda:0x%x%x", 2, FW_bdaddr_to_2U32(&gAppCtl.appInfo[linkIndex].bdAddr, TRUE), FW_bdaddr_to_2U32(&gAppCtl.appInfo[linkIndex].bdAddr, FALSE));
->>>>>>> db20e11 (second commit)
 			return &gAppCtl.appInfo[linkIndex];
 		}
 	}
 
-<<<<<<< HEAD
-=======
 	DBG_LOG_APP_RSRC_MNG( "[APP_RM] GetEmptyAppLink NULL", 0);
->>>>>>> db20e11 (second commit)
 	return NULL;
 }
 
@@ -566,18 +530,13 @@ BOOL APP_IsLinkActiveDisconnecting(BD_ADDR_T *pBdAddr)
 		APP_INFO_STRU *pLinkInfo = APP_GetAppLinkByBdAddr(pBdAddr);
 		if(pLinkInfo)
 		{
-<<<<<<< HEAD
-=======
 			DBG_LOG_APP_RSRC_MNG( "[APP_RM] APP_IsLinkActiveDisconnecting, misc mask:0x%x", 1, pLinkInfo->linkPara.miscMask);
->>>>>>> db20e11 (second commit)
 			return (pLinkInfo->linkPara.miscMask & APP_ACTIVE_DISCONNECT)? TRUE : FALSE;
 		}
 	}
 	return FALSE;
 }
 
-<<<<<<< HEAD
-=======
 U8 APP_GetLinkActiveDisconnectingCnt(void)
 {
 	U8 linkIndex;
@@ -596,7 +555,6 @@ U8 APP_GetLinkActiveDisconnectingCnt(void)
 	return cnt;
 }
 
->>>>>>> db20e11 (second commit)
 void APP_SetACLState(APP_INFO_STRU * pLinkInfo, U8 aclState)
 {
 	if(pLinkInfo)
@@ -1100,8 +1058,6 @@ APP_QOS_CTL * APP_SearchQosCtl(BD_ADDR_T *pBdAddr)
 /**************************************************************************************************
 * Public Functions (AWS MCE)
 **************************************************************************************************/
-<<<<<<< HEAD
-=======
 U8 APP_GetNormalLinkNum()
 {
 	BD_ADDR_T *pBdAddr;
@@ -1134,7 +1090,6 @@ BD_ADDR_T* APP_GetNormalLinkAddr()
 	return NULL;
 }
 
->>>>>>> db20e11 (second commit)
 void APP_SetAgentState(U8 state)
 {
 	if(BtAwsMce_GetDefaultRole() == ROLE_PARTNER)

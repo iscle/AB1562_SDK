@@ -66,8 +66,5 @@ void drv_a2dp_set_share_mode_on(BOOL isOn, BOOL is_follower);
 
 SOURCE drv_a2dp_get_source(void);
 
-<<<<<<< HEAD
-=======
 BOOL drv_a2dp_get_ap_mode(void);
 void drv_a2dp_set_ap_mode(BOOL mode);
->>>>>>> db20e11 (second commit)

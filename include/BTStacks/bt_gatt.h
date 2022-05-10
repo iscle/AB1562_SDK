@@ -341,10 +341,7 @@ BOOL BtGattUpdateAttributeLength(BT_ATT_HANDLE attHandle, U16 length);
 void BtAttAccessResponse(U8 bdAddr[6], U8 result, U16 handle, U16 valueLen, U8 *valuePtr);
 void BtAttNotificationRequest(U8 bdAddr[6], U16 handle, U16 valueLen, U8 *valuePtr);
 void BtAttIndicationRequest(U8 bdAddr[6], U16 handle, U16 valueLen, U8 *valuePtr);
-<<<<<<< HEAD
-=======
 extern void ATT_Enable_EDRBrearer(void);
->>>>>>> db20e11 (second commit)
 
 /*GATT*/
 void BtGattStartServer(Handler app);

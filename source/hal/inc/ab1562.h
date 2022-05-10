@@ -212,10 +212,7 @@ typedef IRQn_Type hal_nvic_irq_t;
 /* AO APB Peripheral */
 #define CONFIG_BASE          0xA2010000 /*Configuration Registers(Clock, Power Down, Version and Reset)*/
 #define TOP_MISC_CFG_BASE    0xA2010000 /*Configuration Registers(Clock, Power Down, Version and Reset)*/
-<<<<<<< HEAD
-=======
 #define GPIO_CLKO_BASE       0xA2020310 /*GPIO clockt out configuration*/
->>>>>>> db20e11 (second commit)
 #define EMI_AO_BASE          0xA2010400
 //#define CKSYS_BASE           0xA2020000 /*BBPLL control*/
 //#define CKSYS_XO_CLK_BASE    0xA2030000 /*XPLL control*/
@@ -297,17 +294,9 @@ typedef struct {
 /* structure type of top_misc_cfg
  */
 typedef struct {
-<<<<<<< HEAD
-    __IO uint32_t GPIO_CLKO_CTRL_A;   /* CLK0~3 out mode */
-    __IO uint32_t GPIO_CLKO_CTRL_B;   /* CLK4   out mode */
-
-} TOP_MISC_CFG_T;
-#define TOP_MISC_CFG    ((TOP_MISC_CFG_T *)TOP_MISC_CFG_BASE)
-=======
     __IO uint32_t GPIO_CLKO_CTRL_A;   /* CLK0~2 out mode */
 } GPIO_CLKO_CFG_T;
 #define GPIO_CLKO_CFG    ((GPIO_CLKO_CFG_T *)GPIO_CLKO_BASE)
->>>>>>> db20e11 (second commit)
 
 
 /* structure type of CMSYS_CFG
@@ -3889,8 +3878,6 @@ typedef struct {
     GPIO_CFG_REGISTER_T         GPIO_TDSEL_CFG_S;
 } GPIO_CFG0_REGISTER_T;
 
-<<<<<<< HEAD
-=======
 #define PD_CFG0     *((volatile uint32_t*)(IO_CFG_0_BASE + 0x60))
 #define PD_CFG1     *((volatile uint32_t*)(IO_CFG_0_BASE + 0x70))
 #define PD_CFG0_SET *((volatile uint32_t*)(IO_CFG_0_BASE + 0x64))
@@ -3904,7 +3891,6 @@ typedef struct {
 #define PU_CFG1_SET *((volatile uint32_t*)(IO_CFG_0_BASE + 0x94))
 #define PU_CFG0_CLR *((volatile uint32_t*)(IO_CFG_0_BASE + 0x88))
 #define PU_CFG1_CLR *((volatile uint32_t*)(IO_CFG_0_BASE + 0x98))
->>>>>>> db20e11 (second commit)
 
 #define GPIO_BASE_REGISTER  ((GPIO_BASE_REGISTER_T*)GPIO_BASE)
 /*************************** GPIO register definition end line  *******************************

@@ -843,13 +843,10 @@ hal_rtc_status_t hal_rtc_configure_gpio(hal_rtc_gpio_t pin, hal_rtc_gpio_control
 hal_rtc_status_t hal_rtc_eint_init(hal_rtc_eint_config_t *eint_config);
 #endif
 
-<<<<<<< HEAD
-=======
 
 hal_rtc_status_t hal_rtc_switch_32k_source(hal_rtc_osc32k_mode_t mode);
 
 
->>>>>>> db20e11 (second commit)
 #ifdef HAL_RTC_FEATURE_CAPTOUCH
 /**
  * @brief This function configures the RTC Captouch setting. Captouch driver will

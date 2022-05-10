@@ -45,10 +45,7 @@ typedef struct
 	U8 statePowerOff;
 	BOOL isDoingRHO;
 	U16 statusDuringDelay;
-<<<<<<< HEAD
-=======
 	U8 smartCaseBatLevel;
->>>>>>> db20e11 (second commit)
 }APP_BAT_INFO_STRU;
 /**************************************************************************************************
 * Public Functions
@@ -81,11 +78,7 @@ U8 APP_ChgBat_GetPowerOffState(void);
 void APP_ChgBat_SetPowerOffState(U8 statePowerOff);
 void APP_Battery_ReadInformationConfig(void);
 void APP_Battery_Init(void);
-<<<<<<< HEAD
-
-=======
 U8 APP_Battery_GetSmartCaseBatLevel(void);
 void APP_Battery_SetSmartCaseBatLevel(U8 batLevel);
->>>>>>> db20e11 (second commit)
 
 #endif //_APP_BATTERY_H_

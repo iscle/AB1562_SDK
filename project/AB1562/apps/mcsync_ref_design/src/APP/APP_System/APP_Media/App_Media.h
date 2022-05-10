@@ -261,9 +261,6 @@ void APP_Media_Init(void);
 
 void APP_Media_PowerOffHandle(BOOL isReset);
 BOOL APP_Media_IsMediaEventAllowSync(U16 eventCode);
-<<<<<<< HEAD
-=======
 BOOL APP_Media_CheckIsConnEvent(U16 evtOpCode);
->>>>>>> db20e11 (second commit)
 
 #endif

@@ -48,11 +48,7 @@
 /***********************************************************************************************
  * Pre Processor Definitions
 ***********************************************************************************************/
-<<<<<<< HEAD
-#define     RTC_EOSC_CALI_FREQUENCY     30660
-=======
 #define     RTC_EOSC_CALI_FREQUENCY     32768
->>>>>>> db20e11 (second commit)
 
 /*version rg*/
 #define   RTC_CHIP_VERSION      *((uint32_t *)0xA2000008)
@@ -158,11 +154,7 @@ static  void   rtc_local_restore_irq(uint32_t  status)
 
 static void rtc_local_wait_done(void)
 {
-<<<<<<< HEAD
-#define     RTC_TIMEOUT_WAIT_BUSY_US    500
-=======
 #define     RTC_TIMEOUT_WAIT_BUSY_US    5000
->>>>>>> db20e11 (second commit)
 
     uint32_t  count = 0;
     uint32_t  pre_tick = 0, cur_tick = 0, tick_gap = 0;
@@ -177,15 +169,9 @@ static void rtc_local_wait_done(void)
         hal_gpt_get_duration_count(pre_tick, cur_tick, &tick_gap);
         /* if timeout, then print log and update pre-tick */
         if(tick_gap > RTC_TIMEOUT_WAIT_BUSY_US){
-<<<<<<< HEAD
-            if(count++ == 3){
-                log_rtc_info("[hal][rtc] local_wait_done: failed will assert\r\n", 0);
-                assert(0);
-=======
             if(count++ == 5){
                 log_rtc_error("[hal][rtc] local_wait_done: failed ,sw will return\r\n", 0);
                 break;
->>>>>>> db20e11 (second commit)
             } else {
                 pre_tick = cur_tick;
                 log_rtc_info("[hal][rtc] local_wait_done(%d): timeout=%dus, RTC_WRTGR = %x!\r\n", 3, count, tick_gap, rtc_register->RTC_WRTGR);
@@ -318,8 +304,6 @@ uint32_t    rtc_internal_irq_status()
 }
 
 
-<<<<<<< HEAD
-=======
 uint32_t    rtc_internal_power_reason(uint32_t irq_status)
 {
     int ret = 0;
@@ -343,7 +327,6 @@ uint32_t    rtc_internal_power_reason(uint32_t irq_status)
 }
 
 
->>>>>>> db20e11 (second commit)
 void    rtc_internal_print_power_reason(uint32_t irq_status)
 {
 #ifdef RTC_CAPTOUCH_SUPPORTED
@@ -372,15 +355,12 @@ void    rtc_internal_print_power_reason(uint32_t irq_status)
 
 void    rtc_internal_enable_setting()
 {
-<<<<<<< HEAD
-=======
     rtc_register->RTC_OSC32CON2_UNION.VALUE = RTC_OSC32CON2_MAGIC_KEY_1;
     hal_gpt_delay_us(2);
     rtc_register->RTC_OSC32CON2_UNION.VALUE = RTC_OSC32CON2_MAGIC_KEY_2;
     hal_gpt_delay_us(2);
     rtc_register->RTC_OSC32CON2_UNION.BITS.SETTING_CG = 1;
     rtc_local_wait_done();
->>>>>>> db20e11 (second commit)
 }
 
 
@@ -389,86 +369,7 @@ void    rtc_internal_enable_setting()
 
 void    rtc_internal_set_setting_cg_by_user(bool force_ctrl, bool enable)
 {
-<<<<<<< HEAD
-#define     RTC_STATE_IDLE      0
-#define     RTC_STATE_KEY1      1
-#define     RTC_STATE_KEY2      2
-#define     RTC_STATE_RW        3
-#ifdef    RTC_DEBUG_TIME_CHECK_ENABLED
-    uint32_t        tick0,tick1,tick2,tick3;
-#endif
-    uint32_t                    status;
-
-    rtc_local_save_irq(&status);
-    if(enable != 0){
-        g_ref_cnt++;
-        if(g_cg_enabled == true && force_ctrl != true) {
-            rtc_local_restore_irq(status);
-            return;
-        }
-    } else {
-        if(g_ref_cnt != 0) {
-            g_ref_cnt--;
-        }
-        if( (g_ref_cnt != 0 || g_cg_enabled == false) && force_ctrl != true){
-            rtc_local_restore_irq(status);
-            return;
-        }
-    }
-    rtc_local_restore_irq(status);
-
-retry:
-    /*avoid thread configure again*/
-    rtc_local_wait_done(); //wait hw free
-    if(enable == g_cg_enabled){
-        return;
-    }
-
-    RTC_DEBUG_GET_1M_TICK(tick0);
-    /*block start: state => write key 1 */
-    rtc_local_save_irq(&status);
-    if(g_wr_state == RTC_STATE_IDLE){
-        rtc_register->RTC_OSC32CON2_UNION.VALUE = RTC_OSC32CON2_MAGIC_KEY_1;
-        g_wr_state = RTC_STATE_KEY1;
-     }
-    rtc_local_restore_irq(status);
-    rtc_local_wait_done();/*wait hw idle*/
-    RTC_DEBUG_GET_1M_TICK(tick1);
-
-    /*block start: state => write key 2 */
-    rtc_local_save_irq(&status);
-    if(g_wr_state == RTC_STATE_KEY1){
-
-        rtc_register->RTC_OSC32CON2_UNION.VALUE = RTC_OSC32CON2_MAGIC_KEY_2;
-        g_wr_state = RTC_STATE_KEY2;
-    }
-    rtc_local_restore_irq(status);
-    rtc_local_wait_done();/*wait hw idle*/
-    RTC_DEBUG_GET_1M_TICK(tick2);
-
-    /*block start: state => write data */
-    rtc_local_save_irq(&status);
-    if(g_wr_state == RTC_STATE_KEY2){
-        g_cg_enabled = (enable == 0)?0:1;
-        rtc_register->RTC_OSC32CON2_UNION.BITS.SETTING_CG = g_cg_enabled;
-        g_wr_state = RTC_STATE_IDLE;
-        g_ref_cnt  = (enable == 0)?0:g_ref_cnt;
-        rtc_local_restore_irq(status);
-        /*wait hw idle*/
-        rtc_local_wait_done();
-    }else {
-        g_wr_state = RTC_STATE_IDLE;
-        rtc_local_restore_irq(status);
-        goto retry;
-    }
-    /*block end: state => write data */
-    RTC_DEBUG_GET_1M_TICK(tick3);
-#ifdef    RTC_DEBUG_TIME_CHECK_ENABLED
-    log_rtc_info("[hal][rtc] set OSC32CON0 time key1(%dus),key2(%dus),val(%dus)\r\n", 3, tick1-tick0,tick2-tick1,tick3-tick2);
-#endif
-=======
     return;
->>>>>>> db20e11 (second commit)
 }
 
 void    rtc_internal_set_timer_cg(bool  enable)
@@ -691,10 +592,6 @@ uint32_t    rtc_local_abs(int  value)
 }
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> db20e11 (second commit)
 uint32_t rtc_internal_get_eosc32_calibration()
 {
     uint32_t    value          = 0;
@@ -818,8 +715,6 @@ uint32_t    rtc_internal_get_time_calibration()
 }
 
 
-<<<<<<< HEAD
-=======
 bool    rtc_internal_check_clock_source(hal_rtc_osc32k_mode_t mode)
 {
     uint32_t                temp = 0;
@@ -867,7 +762,6 @@ void    rtc_internal_debug_code()
 
 
 
->>>>>>> db20e11 (second commit)
 void    rtc_internal_set_osc32_mode(rtc_osc32k_mode_t mode)
 {
     uint32_t    temp = 0;
@@ -882,15 +776,9 @@ void    rtc_internal_set_osc32_mode(rtc_osc32k_mode_t mode)
             /*swtich clock*/
             temp  = rtc_local_get_osc32con(0);
             temp &= ~RTC_OSC32CON0_32K_SEL_MASK;
-<<<<<<< HEAD
-            temp |= 0x2;
-            rtc_local_set_osc32con(0,temp);
-            hal_gpt_delay_us(70);
-=======
             //temp |= 0x0;
             rtc_local_set_osc32con(0,temp);
             hal_gpt_delay_us(160);
->>>>>>> db20e11 (second commit)
             /*power down XOSC*/
             temp =  rtc_local_get_osc32con(2);
             temp &= ~(RTC_OSC32CON2_EOSC_PWDB_MASK | RTC_OSC32CON2_XOSC_PWDB_MASK);
@@ -909,11 +797,7 @@ void    rtc_internal_set_osc32_mode(rtc_osc32k_mode_t mode)
             temp &= ~RTC_OSC32CON0_32K_SEL_MASK;
             temp |= 0x1;
             rtc_local_set_osc32con(0,temp);
-<<<<<<< HEAD
-            hal_gpt_delay_us(70);
-=======
             hal_gpt_delay_us(160);
->>>>>>> db20e11 (second commit)
             /*power down XOSC*/
             temp =  rtc_local_get_osc32con(2);
             temp &= ~(RTC_OSC32CON2_EOSC_PWDB_MASK | RTC_OSC32CON2_XOSC_PWDB_MASK);
@@ -931,11 +815,7 @@ void    rtc_internal_set_osc32_mode(rtc_osc32k_mode_t mode)
             temp &= ~RTC_OSC32CON0_32K_SEL_MASK;
             temp |= 0x3;
             rtc_local_set_osc32con(0, temp);
-<<<<<<< HEAD
-            hal_gpt_delay_us(70);
-=======
             hal_gpt_delay_us(160);
->>>>>>> db20e11 (second commit)
             /*power down eosc*/
             temp =  rtc_local_get_osc32con(2);
             temp &= ~(RTC_OSC32CON2_EOSC_PWDB_MASK | RTC_OSC32CON2_XOSC_PWDB_MASK);
@@ -1093,10 +973,7 @@ hal_rtc_status_t    rtc_internal_gpio_control(hal_rtc_gpio_t  rtc_gpio, bool is_
     if(rtc_gpio >= HAL_RTC_GPIO_MAX){
         return HAL_RTC_STATUS_OK;
     }
-<<<<<<< HEAD
-=======
     rtc_internal_reload();
->>>>>>> db20e11 (second commit)
     if(is_output == true) {
         if(*level == 0){
             temp = ~(1<<rtc_out_offset[rtc_gpio]);
@@ -1105,13 +982,8 @@ hal_rtc_status_t    rtc_internal_gpio_control(hal_rtc_gpio_t  rtc_gpio, bool is_
             temp = (1<<rtc_out_offset[rtc_gpio]);
             rtc_register->RTC_GPIO_CON |= temp;
         }
-<<<<<<< HEAD
-    } else {
-        rtc_internal_reload();
-=======
         rtc_local_trigger_wait();
     } else {
->>>>>>> db20e11 (second commit)
         temp = (1<<rtc_in_offset[rtc_gpio]);
         if(rtc_register->RTC_GPIO_CON & temp){
             *level = true;
@@ -1533,11 +1405,7 @@ hal_rtc_status_t rtc_internal_captouch_init(void)
     hal_gpt_delay_us(5);
 
     rtc_internal_unlock_captouch();
-<<<<<<< HEAD
-    rtc_register->RTC_CAP_CON = (RTC_CAP_CON_ISO_EN_MASK);
-=======
     rtc_register->RTC_CAP_CON = (RTC_CAP_CON_RST_MASK);
->>>>>>> db20e11 (second commit)
     rtc_local_trigger_wait();
     rtc_internal_unlock_captouch();
     rtc_register->RTC_CAP_CON = (RTC_CAP_CON_RST_MASK | RTC_CAP_CON_ISO_EN_MASK);
@@ -1561,11 +1429,7 @@ bool rtc_internal_captouch_get_capcon_state(void)
     uint8_t ret;
 
     rtc_internal_set_setting_cg_by_user(false, true);
-<<<<<<< HEAD
-    rtc_internal_unlock_captouch(); 
-=======
     rtc_internal_unlock_captouch();
->>>>>>> db20e11 (second commit)
     rtc_internal_reload();
     ret = rtc_register->RTC_CAP_CON & 0x01;
     rtc_internal_set_setting_cg_by_user(false, false);
@@ -1738,8 +1602,6 @@ void    rtc_internal_dump(char *comment)
  * Private using api
 ***********************************************************************************************/
 
-<<<<<<< HEAD
-=======
 
 /*
 ****************************************************************************
@@ -1848,7 +1710,6 @@ void audio_class_d_enable_handle()
 
 
 
->>>>>>> db20e11 (second commit)
 /*private macro, donnot modify*/
 #define     HAL_RTC_CHK_MONTH_OFFSET    (22)
 #define     HAL_RTC_CHK_DAY_OFFSET      (17)

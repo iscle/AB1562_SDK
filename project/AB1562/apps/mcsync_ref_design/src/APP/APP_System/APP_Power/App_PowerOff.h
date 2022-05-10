@@ -84,10 +84,7 @@ typedef struct
 {
 	BOOL isNeedToPowerOff;
 	U8 reason;
-<<<<<<< HEAD
-=======
     BOOL KeepFakeOff;
->>>>>>> db20e11 (second commit)
 }APP_POWER_OFF_REASON_STRU;
 
 typedef struct
@@ -115,11 +112,8 @@ void APP_PowerOff_SystemOff(void);//MMI_SystemOff
 void APP_PowerOff_SetAutoSwitchOffBit(U16 bitMask, bool isBitAdded, BD_ADDR_T *pBdAddr);
 void APP_Reset(void);//MMI_Reset
 void APP_Reset_Loader(void);
-<<<<<<< HEAD
-=======
 void APP_PowerOff_KeepFakeOff(bool enable);
 bool APP_PowerOff_IsKeepFakeOff(void);
->>>>>>> db20e11 (second commit)
 
 BOOL APP_PowerOff_FillRhoData(void *pData);
 BOOL APP_PowerOff_AssignRhoData(void *pData);

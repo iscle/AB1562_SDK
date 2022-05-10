@@ -1,7 +1,5 @@
 var NAVTREEINDEX2 =
 {
-<<<<<<< HEAD
-=======
 "group__hal__nvic__macro.html":[1,3,12,2],
 "group__hal__nvic__macro.html#ga1ab52a38d8a882078612c6a0e4727fa5":[1,3,12,2,1],
 "group__hal__nvic__macro.html#ga75a57e3ad952d8143a4e92f750adfc2a":[1,3,12,2,0],
@@ -12,7 +10,6 @@ var NAVTREEINDEX2 =
 "group__hal__rtc__enum.html":[1,3,2,0],
 "group__hal__rtc__enum.html#ga55c7c479743b9eadd5874f68cc99bfda":[1,3,2,0,0],
 "group__hal__rtc__enum.html#ga937edb89f1f6e28a7ad7c732e2d74a04":[1,3,2,0,2],
->>>>>>> db20e11 (second commit)
 "group__hal__rtc__enum.html#gafd0d3ebedd556c274a30a8479de1631e":[1,3,2,0,1],
 "group__hal__rtc__enum.html#gga55c7c479743b9eadd5874f68cc99bfdaa730814acac910e9932bb526f416b754e":[1,3,2,0,0,2],
 "group__hal__rtc__enum.html#gga55c7c479743b9eadd5874f68cc99bfdaa7f1c7e1c1fd399cef058aaad7e300b7f":[1,3,2,0,0,1],
@@ -252,19 +249,5 @@ var NAVTREEINDEX2 =
 "hal__sw__dma_8h_source.html":[3,0,0,24],
 "hal__trng_8h_source.html":[3,0,0,25],
 "hal__uart_8h_source.html":[3,0,0,26],
-<<<<<<< HEAD
-"hal__wdt_8h_source.html":[3,0,0,27],
-"index.html":[],
-"index.html":[0],
-"index.html#SDK_Architecture":[0,1],
-"index.html#SDK_Overview":[0,0],
-"index.html#license":[0,2],
-"modules.html":[1],
-"pages.html":[],
-"structhal__aesotf__buffer__t.html":[1,2,0],
-"structhal__aesotf__buffer__t.html#a56ed84df35de10bdb65e72b184309497":[1,2,0,0],
-"structhal__aesotf__buffer__t.html#aebb70c2aab3407a9f05334c47131a43b":[1,2,0,1]
-=======
 "hal__wdt_8h_source.html":[3,0,0,27]
->>>>>>> db20e11 (second commit)
 };

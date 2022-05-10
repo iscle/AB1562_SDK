@@ -57,11 +57,7 @@ enum //group_id
 	MCSYNC_MODULE_GROUP_NEWTON,
 	MCSYNC_MODULE_GROUP_RESERVED1,
 	MCSYNC_MODULE_GROUP_RESERVED2,
-<<<<<<< HEAD
-	MCSYNC_MODULE_GROUP_RESERVED3,
-=======
 	MCSYNC_MODULE_GROUP_RESERVED3, // used for Tile
->>>>>>> db20e11 (second commit)
 	MCSYNC_MODULE_GROUP_RESERVED4,
 	MCSYNC_MODULE_GROUP_RESERVED5,
 	MCSYNC_MODULE_GROUP_RESERVED6,
@@ -86,13 +82,9 @@ typedef enum //module_id
     MCSYNC_MODULE_BT_RECONNECT_MASK,
     MCSYNC_MODULE_BT_RETRANSMIT_FOLLOWER_DISC,
     MCSYNC_MODULE_BT_L2CAP_DATA,
-<<<<<<< HEAD
-    MCSYNC_MODULE_BT_GROUP_END              = MCSYNC_MODULE_BT_L2CAP_DATA,
-=======
     MCSYNC_MODULE_BT_TAKE_OVER_STATE,
 	MCSYNC_MODULE_BT_NOTICE_MASTER_PARTNER_TO_SHARE_MODE,
     MCSYNC_MODULE_BT_GROUP_END              = MCSYNC_MODULE_BT_NOTICE_MASTER_PARTNER_TO_SHARE_MODE,
->>>>>>> db20e11 (second commit)
 
     /*GVA GROUP*/
     MCSYNC_MODULE_GVA_GROUP_START           = GENERATE_GROUP_ID(MCSYNC_MODULE_GROUP_GVA),
@@ -156,11 +148,6 @@ typedef enum //module_id
     MCSYNC_MODULE_RESERVED1_GROUP_END               = MCSYNC_MODULE_RESERVED1_GROUP_AE_GENEREAL_DATA,
 
     /*PROFILE LAYER GROUP*/
-<<<<<<< HEAD
-    MCSYNC_MODULE_PROFILE_LAYER_GROUP_START         = GENERATE_GROUP_ID(MCSYNC_MODULE_GROUP_RESERVED2),
-    MCSYNC_MODULE_PROFILE_LAYER_GROUP_GET_BATTERY   = MCSYNC_MODULE_PROFILE_LAYER_GROUP_START,
-    MCSYNC_MODULE_PROFILE_LAYER_GROUP_END           = MCSYNC_MODULE_PROFILE_LAYER_GROUP_GET_BATTERY,
-=======
 	MCSYNC_MODULE_PROFILE_LAYER_GROUP_START			= GENERATE_GROUP_ID(MCSYNC_MODULE_GROUP_RESERVED2),
 	MCSYNC_MODULE_PROFILE_LAYER_GROUP_GET_BATTERY	= MCSYNC_MODULE_PROFILE_LAYER_GROUP_START,
 	MCSYNC_MODULE_PROFILE_LAYER_TAKE_OVER_STATE,
@@ -170,7 +157,6 @@ typedef enum //module_id
     MCSYNC_MODULE_TILE_GROUP_START         = GENERATE_GROUP_ID(MCSYNC_MODULE_GROUP_RESERVED3),
     MCSYNC_MODULE_TILE_DATA                = MCSYNC_MODULE_TILE_GROUP_START,
     MCSYNC_MODULE_TILE_GROUP_END           = MCSYNC_MODULE_TILE_DATA,
->>>>>>> db20e11 (second commit)
 }MCSYNC_MODULE_ID_E;
 
 
@@ -259,10 +245,7 @@ enum
 #define MCSYNC_MODULE_NEWTON_GROUP_NUM      		(MCSYNC_MODULE_NEWTON_GROUP_END 		- MCSYNC_MODULE_NEWTON_GROUP_START			+1)
 #define MCSYNC_MODULE_RESERVED1_GROUP_NUM   		(MCSYNC_MODULE_RESERVED1_GROUP_END 		- MCSYNC_MODULE_RESERVED1_GROUP_START		+1)
 #define MCSYNC_MODULE_PROFILE_LAYER_GROUP_NUM      	(MCSYNC_MODULE_PROFILE_LAYER_GROUP_END 	- MCSYNC_MODULE_PROFILE_LAYER_GROUP_START	+1)
-<<<<<<< HEAD
-=======
 #define MCSYNC_MODULE_TILE_GROUP_NUM     			(MCSYNC_MODULE_TILE_GROUP_END 			- MCSYNC_MODULE_TILE_GROUP_START			+1)
->>>>>>> db20e11 (second commit)
 
 /*************************************************************************************************
 * Structure
@@ -514,10 +497,7 @@ void BtAwsMce_DisconnectSpecialLink(void);
 void BtAwsMce_SetAirPairing(BOOL isAirPairing);
 BOOL BtAwsMce_IsInAirPairing(void);
 void BtAwsMce_SetMpTestMode(BOOL isMpTestMode);
-<<<<<<< HEAD
-=======
 void BtAwsMce_SetDiscoverableEnable(BOOL isEnable);
->>>>>>> db20e11 (second commit)
 void BtAwsMce_SetSingleHSMode(BOOL isSingle);
 U8 BtAwsMce_GetMcsyncState(void);
 void BtAwsMce_PartnerCancelCreateConn(void);
@@ -527,11 +507,7 @@ BOOL BtMCSync_IsPhoneLinkUnderAgentRole(BD_ADDR_T *pBdAddr);
 BOOL BtMCSync_IsRegistered(void);
 void BtMCSync_ReadAFH(BD_ADDR_T *pBdAddr);
 BOOL BtMCSync_PartnerMode(void);
-<<<<<<< HEAD
-void BtMCSync_AgentMode(void);
-=======
 BOOL BtMCSync_AgentMode(void);
->>>>>>> db20e11 (second commit)
 void BtMCSync_AllowAllRoleConnSP(BOOL isAllowAllRoleConnSP);
 U8 BtMCSync_GetCurrentRole(void);
 void BtMCSync_SetDefaultDeviceBdAddr(void);
@@ -581,11 +557,7 @@ U8	BtAwsMceGetRhoState(void);
 BOOL BtMCSyncIsRhoing(void);
 void BtAwsMceDisableAdvHandle(void);
 
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 void BtMCSync_SendSyncShareModeInfo(U8 state, U8 shareMode);
 void BtMCSync_SendSyncFollowerSoundLevel(U8 soundLevel, U8 isFollowerIFPkt);
 void BtMCSync_SendSyncOtherAgentBDA(BD_ADDR_T *pBdAddr);
@@ -622,11 +594,7 @@ void BtMCSync_AgentStartShareMode(Handler handler);
 /**************************************************************************************************
 * Take over connection (API)
 **************************************************************************************************/
-<<<<<<< HEAD
-#ifdef TAKE_OVER_LINK
-=======
 #ifdef AIR_TAKE_OVER_LINK_ENABLE
->>>>>>> db20e11 (second commit)
 void 	BtMCSync_SetMcsyncTakeOverConnState(U8 state);
 U8 		BtMCSync_GetMcsyncTakeOverConnState(void);
 BOOL 	BtMCSync_CheckIsLowPrioLink(BD_ADDR_T *pBdAddr);

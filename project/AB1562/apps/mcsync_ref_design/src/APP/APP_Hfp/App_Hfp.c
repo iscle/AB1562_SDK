@@ -698,11 +698,7 @@ void APP_Hfp_regVendorAT()
 }
 void APP_Hfp_RegisterProfile()
 {
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 	APP_Hfp_StartService(PROFILE_BIT_HFP | PROFILE_BIT_HSP);
 #else
     APP_Hfp_StartService(PROFILE_BIT_HFP);
@@ -717,11 +713,7 @@ BOOL APP_Hfp_IsConnected(BD_ADDR_T *pBdAddr)
 //**************************************************************************************************
 //* Public Functions (battery send)
 //**************************************************************************************************
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 BOOL APP_Hfp_IsHspConnected(BD_ADDR_T * pBdAddr)
 {
 	return PM_IsProfileConnected(pBdAddr, PROFILE_HEADSET);
@@ -780,11 +772,7 @@ void APP_HFP_SendATCmdByLink(BD_ADDR_T *pBdAddr, U8 opcode)
 		return;
 
 	HFP_SniffHandler(pBdAddr, opcode);
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE    
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE    
->>>>>>> db20e11 (second commit)
 	if(APP_Hfp_IsHspConnected(pBdAddr))
 	{
 		switch(opcode)
@@ -856,11 +844,7 @@ void APP_HFP_SendATCmdByLink(BD_ADDR_T *pBdAddr, U8 opcode)
 			case HFP_ATCMD_SET_NREC: //gHfpAtNrec
 				HFP_Send_ECNR(pBdAddr,FALSE);
 				break;
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE                
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE                
->>>>>>> db20e11 (second commit)
 			case HFP_ATCMD_CKPD_200: //gHfpAtCkpd200
 				HFP_Send_CKPD200(pBdAddr);
 				break;
@@ -1048,11 +1032,7 @@ void APP_HFP_GetCallSetupRemoteAlert(BD_ADDR_T *pBdAddr, BOOL isUnderCallActive)
 
 void APP_HFP_ScoConnOKHandler(BD_ADDR_T *pBdAddr)
 {
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 	if(APP_Hfp_IsHspConnected(pBdAddr))
 	{
 		APP_State_RmvState(pBdAddr, APP_HFP_INCOMMING);
@@ -1088,11 +1068,7 @@ void APP_HFP_ScoDiscHandler(BD_ADDR_T *pBdAddr)
 {
 	if(APP_State_CheckNestStateByLink(pBdAddr, APP_HFP_CALLACTIVE))
 	{
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE	
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE	
->>>>>>> db20e11 (second commit)
 		if(APP_Hfp_IsHspConnected(pBdAddr))
 		{
 			APP_State_RmvState(pBdAddr, APP_HFP_CALLACTIVE);
@@ -1175,11 +1151,7 @@ void APP_HFP_ReleaseAllTimer(BD_ADDR_T *pBdAddr)
 	APP_HFP_CTL_STRU * pLinkInfo;
 	if(pBdAddr && (pLinkInfo = APP_GetHfpLinkInfo(pBdAddr)))
 	{
-<<<<<<< HEAD
-		MSG_MessageCancelEx2((Handler)&gHfpStateCheckTimer, (U32)pLinkInfo);
-=======
 		MSG_MessageCancelAllEx2((Handler)&gHfpStateCheckTimer, (U32)pLinkInfo);
->>>>>>> db20e11 (second commit)
 	}
 }
 
@@ -1198,11 +1170,7 @@ U8 APP_Hfp_GetSupportCodec(BD_ADDR_T * pBdAddr)
 {
 	if(pBdAddr)
 	{
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE	
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE	
->>>>>>> db20e11 (second commit)
 		return (APP_Hfp_IsConnected(pBdAddr) || APP_Hfp_IsHspConnected(pBdAddr)) ? HFP_GetSupportCodec(pBdAddr): SCO_CODEC_CVSD;
 #else
 		return APP_Hfp_IsConnected(pBdAddr) ? HFP_GetSupportCodec(pBdAddr): SCO_CODEC_CVSD;

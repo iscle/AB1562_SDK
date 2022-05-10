@@ -36,13 +36,9 @@
 #define __HAL_CAPTOUCH_H__
 
 #include "hal_platform.h"
-<<<<<<< HEAD
-
-=======
 #include "log.h"
 
 #define HAL_CAPTOUCH_LOG_PRINT(fmt, cnt, arg...)             LOG_MSGID_I(Captouch, fmt, cnt, ##arg)
->>>>>>> db20e11 (second commit)
 
 #ifdef HAL_CAPTOUCH_MODULE_ENABLED
 //#include "hal_keypad_table.h"

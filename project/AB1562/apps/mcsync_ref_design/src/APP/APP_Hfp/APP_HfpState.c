@@ -199,11 +199,7 @@ static void app_HFP_ConnectedHandler(BD_ADDR_T *pBdAddr, APP_MSG_TYPE_STRU *pMsg
 			break;
 
 		case HFP_CONNECT_CFM:
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE            
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE            
->>>>>>> db20e11 (second commit)
 			if(!APP_Hfp_IsHspConnected(pBdAddr))
 #else
             if(1)
@@ -289,11 +285,7 @@ static void app_HFP_ConnectedHandler(BD_ADDR_T *pBdAddr, APP_MSG_TYPE_STRU *pMsg
 				{
 					isSentVGS = TRUE;
 				}
-<<<<<<< HEAD
-				#ifdef AVRCP_Profile
-=======
 				#ifdef AIR_AVRCP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 				else if(APP_IsActiveAudioDevInMusic())
 				{
 					isSendAVRCP = TRUE;
@@ -304,21 +296,13 @@ static void app_HFP_ConnectedHandler(BD_ADDR_T *pBdAddr, APP_MSG_TYPE_STRU *pMsg
 					isSentVGS = TRUE;
 					isSendAVRCP = TRUE;
 				}
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 				if(isSentVGS && (APP_Hfp_IsConnected(pBdAddr) || APP_Hfp_IsHspConnected(pBdAddr)))
 #else
                 if(isSentVGS && APP_Hfp_IsConnected(pBdAddr))
 #endif                    
 					APP_HFP_SendATCmdByLink(pBdAddr, HFP_ATCMD_ADJUST_VOLUME);
-<<<<<<< HEAD
-				#ifdef AVRCP_Profile
-=======
 				#ifdef AIR_AVRCP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 				if(isSendAVRCP)
 					APP_Avrcp_SendVolumeChangeNotification(pBdAddr, APP_VolManage_GetCurrentA2dpSoundLevel(pBdAddr));
 				#endif
@@ -371,11 +355,7 @@ static void app_HFP_ImgEntryFromCaImg(BD_ADDR_T *pBdAddr)
 
 	if(!APP_SCO_EXISTS(pBdAddr))
 	{
-<<<<<<< HEAD
-		#ifdef A2DP_Profile
-=======
 		#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 		if(APP_a2dp_is_in_streaming(pBdAddr))
 		{
 			if(APP_AudioDeviceRegister(pBdAddr, AUDIO_DEVICE_MUSIC_CALL_NOTIFY))
@@ -394,11 +374,7 @@ static void app_HFP_ImgEntryFromCaImg(BD_ADDR_T *pBdAddr)
 	}
 	else
 	{
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE	
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE	
->>>>>>> db20e11 (second commit)
 		if(APP_AudioDeviceRegister(pBdAddr, APP_Hfp_IsHspConnected(pBdAddr)? AUDIO_DEVICE_SCO_HSP : AUDIO_DEVICE_SCO))
 #else
         if(APP_AudioDeviceRegister(pBdAddr, AUDIO_DEVICE_SCO))
@@ -409,11 +385,7 @@ static void app_HFP_ImgEntryFromCaImg(BD_ADDR_T *pBdAddr)
 	}
 	APP_AudioDeviceRegister(pBdAddr, AUDIO_DEVICE_CALL_STATE);
 
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 	if(APP_State_CheckOtherLinksInCallRelatedState(pBdAddr) || APP_Hfp_IsFeatureOn(APP_PLAY_DEFAULT_RING_INCOMING_FEAT) || APP_Hfp_IsHspConnected(pBdAddr))
 #else
     if(APP_State_CheckOtherLinksInCallRelatedState(pBdAddr) || APP_Hfp_IsFeatureOn(APP_PLAY_DEFAULT_RING_INCOMING_FEAT))
@@ -451,11 +423,7 @@ static void app_HFP_ImgEntry(BD_ADDR_T *pBdAddr)//(U8 linkIndex)
 	{
 		if(!APP_SCO_EXISTS(pBdAddr))
 		{
-<<<<<<< HEAD
-			#ifdef A2DP_Profile
-=======
 			#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 			if(APP_a2dp_is_in_streaming(pBdAddr))
 			{
 				if(APP_AudioDeviceRegister(pBdAddr, AUDIO_DEVICE_MUSIC_CALL_NOTIFY))
@@ -474,11 +442,7 @@ static void app_HFP_ImgEntry(BD_ADDR_T *pBdAddr)//(U8 linkIndex)
 		}
 		else
 		{
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE		
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE		
->>>>>>> db20e11 (second commit)
 			if(APP_AudioDeviceRegister(pBdAddr, APP_Hfp_IsHspConnected(pBdAddr) ? AUDIO_DEVICE_SCO_HSP : AUDIO_DEVICE_SCO))
 #else
             if(APP_AudioDeviceRegister(pBdAddr, AUDIO_DEVICE_SCO))
@@ -491,11 +455,7 @@ static void app_HFP_ImgEntry(BD_ADDR_T *pBdAddr)//(U8 linkIndex)
 	}
 	APP_AudioDeviceRegister(pBdAddr, AUDIO_DEVICE_CALL_STATE);
 
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 	if(APP_State_CheckOtherLinksInCallRelatedState(pBdAddr) || APP_Hfp_IsFeatureOn(APP_PLAY_DEFAULT_RING_INCOMING_FEAT) || APP_Hfp_IsHspConnected(pBdAddr))
 #else
     if(APP_State_CheckOtherLinksInCallRelatedState(pBdAddr) || APP_Hfp_IsFeatureOn(APP_PLAY_DEFAULT_RING_INCOMING_FEAT))
@@ -524,11 +484,7 @@ static void app_HFP_ImgHandler(BD_ADDR_T *pBdAddr, APP_MSG_TYPE_STRU *pMsg)//(U8
 
 	switch(pMsg->eventCode)
 	{
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 		case HFP_ATCMD_CKPD_200:
 			APP_State_RmvState(pBdAddr, APP_HFP_INCOMMING);
 			//Enter CallActive state after CKPD=200 has been sent.
@@ -626,11 +582,7 @@ static void app_HFP_ImgExit(BD_ADDR_T *pBdAddr)//(U8 linkIndex)
 
 	APP_VolManage_SetSpkMuteByLink(pBdAddr, SET_MUTE_OFF);
 
-<<<<<<< HEAD
-	#ifdef A2DP_Profile
-=======
 	#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 	if(APP_a2dp_is_in_streaming(pBdAddr))
 	{
 		APP_AudioDeviceDeRegister(pBdAddr, AUDIO_DEVICE_MUSIC_CALL_NOTIFY);

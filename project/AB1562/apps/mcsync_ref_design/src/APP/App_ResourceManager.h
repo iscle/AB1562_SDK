@@ -44,11 +44,7 @@
 
 
 #if 0 /* Unused LOG_PRINT_156X */
-<<<<<<< HEAD
-#define DBG_LOG_APP_RSRC_MNG(_message, arg_cnt, ...) 
-=======
 #define DBG_LOG_APP_RSRC_MNG(_message, arg_cnt, ...)
->>>>>>> db20e11 (second commit)
 #else
 #define DBG_LOG_APP_RSRC_MNG(_message, arg_cnt, ...)   LOG_MSGID_I(APP_RSRC_MNG, _message, arg_cnt, ##__VA_ARGS__)
 #endif
@@ -84,12 +80,9 @@
 #define APP_SetEnterDiscoverableAfterDisc(a)		(gAppCtl.enterDiscoverableAfterDisc = (a))
 #define APP_IsEnterDiscoverableAfterDisc()			(gAppCtl.enterDiscoverableAfterDisc)
 
-<<<<<<< HEAD
-=======
 #define APP_SetKeepDiscoverableAfterDisc(a)		    (gAppCtl.keepDiscoverableAfterDisc = (a))
 #define APP_IsKeepDiscoverableAfterDisc()			(gAppCtl.keepDiscoverableAfterDisc)
 
->>>>>>> db20e11 (second commit)
 #define APP_SetKeyInvalidPwOnLowBat(a)				(gAppCtl.driverCtl.keyInvalidInPwrOnLowBat = (a))
 #define APP_IsKeyInvalidPwOnLowBat()				(gAppCtl.driverCtl.keyInvalidInPwrOnLowBat)
 
@@ -381,12 +374,8 @@ typedef struct
 
 	U32 speakerMuteMask;
 	U8 isRmvDetachState:1;
-<<<<<<< HEAD
-	U8 reserve:7;
-=======
         U8 keepDiscoverableAfterDisc:1;
 	U8 reserve:6;
->>>>>>> db20e11 (second commit)
 	/*
 #ifdef TRSPX_App
 	U32 passkey[MAX_MULTI_POINT_NO];
@@ -453,10 +442,7 @@ U8 APP_GetLinkIndexByBdAddr(BD_ADDR_T *pBdAddr);
 BD_ADDR_T *APP_GetBdAddrByLinkIndex(U8 linkIndex);
 
 BOOL APP_IsLinkActiveDisconnecting(BD_ADDR_T *pBdAddr); //MMI_IsLinkActiveDisconnecting
-<<<<<<< HEAD
-=======
 U8 APP_GetLinkActiveDisconnectingCnt(void);
->>>>>>> db20e11 (second commit)
 
 void APP_SetACLState(APP_INFO_STRU * pLinkInfo, U8 aclState);
 BOOL APP_IsActiveLink(BD_ADDR_T *pBdAddr);//MMI_IsActiveLink
@@ -532,11 +518,8 @@ APP_QOS_CTL * APP_SearchQosCtl(BD_ADDR_T *pBdAddr);
 /**************************************************************************************************
 * Public Functions (AWS MCE)
 **************************************************************************************************/
-<<<<<<< HEAD
-=======
 U8 APP_GetNormalLinkNum();
 BD_ADDR_T* APP_GetNormalLinkAddr();
->>>>>>> db20e11 (second commit)
 void APP_SetAgentState(U8 state);
 U8 APP_GetAgentState(void);
 void APP_SetPartnerSmartChargeCaseState(U8 state);

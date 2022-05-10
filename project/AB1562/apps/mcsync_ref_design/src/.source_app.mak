@@ -294,10 +294,7 @@ App_GattServer.c \
 C_SRC		+=	\
 $(addprefix src/APP/APP_Gfp/, \
 App_Gfp.c \
-<<<<<<< HEAD
-=======
 App_Gfp_RhoHandler.c \
->>>>>>> db20e11 (second commit)
 )
 
 C_SRC		+=	\

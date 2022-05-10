@@ -189,11 +189,7 @@ static U8 app_ImgMedia_CallerIDHandler(BD_ADDR_T *pBdAddr)
 
 	if(!APP_State_CheckLinkInIncomingState(pBdAddr) || !pHfpLinkInfo)
 		return IMG_AUDIO_VOICE_LOAD_STATE_ERROR;
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 	if(APP_Hfp_IsHspConnected(pBdAddr))
 		return IMG_AUDIO_VOICE_LOAD_INVALID;
 #endif
@@ -247,11 +243,7 @@ static U8 app_ImgMedia_RingHandler(BD_ADDR_T *pBdAddr)
 	BOOL isInCall = FALSE;
 	if(!APP_State_CheckLinkInIncomingState(pBdAddr))
 		return IMG_AUDIO_VOICE_LOAD_STATE_ERROR;
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 	if(APP_Hfp_IsFeatureOn(APP_PLAY_DEFAULT_RING_INCOMING_FEAT) || APP_Hfp_IsHspConnected(pBdAddr))
 #else
     if(APP_Hfp_IsFeatureOn(APP_PLAY_DEFAULT_RING_INCOMING_FEAT))

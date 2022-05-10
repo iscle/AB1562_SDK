@@ -39,25 +39,13 @@
 #define __HAL_PMU_H__
 #ifdef HAL_PMU_MODULE_ENABLED
 
-<<<<<<< HEAD
-#define PMIC_SLAVE_ADDR            0x6B
-#define INVALID_INTERRUPT_VALUE    0xFF
-#define PMU_PRESS_PK_TIME 300000  //300ms
-//#define HAL_PMU_DEBUG_ENABLE
-#define PMU_VCORE_CP     0xA20A0204
-
-=======
->>>>>>> db20e11 (second commit)
 #define PMU_MSGID_I(fmt,cnt,arg...)        LOG_MSGID_I(PMU,fmt,cnt,##arg)
 #define PMU_MSGID_W(fmt,cnt,arg...)        LOG_MSGID_W(PMU,fmt,cnt,##arg)
 #define PMU_MSGID_E(fmt,cnt,arg...)        LOG_MSGID_E(PMU,fmt,cnt,##arg)
 
-<<<<<<< HEAD
-=======
 #define PMIC_SLAVE_ADDR            0x6B
 #define PMU_1WIRE_BAT_THRD         3200
 
->>>>>>> db20e11 (second commit)
 typedef enum {
     PMU_NO_FTK = 0xFF,
     PMU_ECO1 = 1,
@@ -72,16 +60,6 @@ typedef enum{
 }pmu_lock_parameter_t;
 
 typedef enum {
-<<<<<<< HEAD
-    PMU_NONE          = 0,                 /**< NONE Trigger */
-    PMU_EDGE_RISING   = 1,                 /**< edge and rising trigger */
-    PMU_EDGE_FALLING  = 2,                 /**< edge and falling trigger */
-    PMU_EDGE_FALLING_AND_RISING = 3        /**< edge and falling or rising trigger */
-} pmu_int_trigger_mode_t;
-
-typedef enum {
-=======
->>>>>>> db20e11 (second commit)
     PMU_STATUS_INVALID_PARAMETER  = -1,     /**< pmu error invalid parameter */
     PMU_STATUS_ERROR              = 0,     /**< pmu undefined error */
     PMU_STATUS_SUCCESS            = 1       /**< pmu function ok */
@@ -99,14 +77,6 @@ typedef enum {
 } pmu_power_operate_t;
 
 typedef enum {
-<<<<<<< HEAD
-    PMU_SW_MODE,
-    PMU_HW_MODE,
-} pmu_control_mode_t;
-
-typedef enum {
-=======
->>>>>>> db20e11 (second commit)
     PMU_PWRKEY_IRQ_RISE_FLAG,
     PMU_PWRKEY_IRQ_RISE_EN,
     PMU_PWRKEY_IRQ_FALL_FLAG,
@@ -125,16 +95,6 @@ typedef enum {
 } pmu_pwrkey_int_mask_t;
 
 typedef enum {
-<<<<<<< HEAD
-    PMU_DURATION_5S,
-    PMU_DURATION_8S,
-    PMU_DURATION_11S,
-    PMU_DURATION_25S,
-} pmu_pwrkey_time_t;
-
-typedef enum {
-=======
->>>>>>> db20e11 (second commit)
     PMU_PWR_KEY_DEB_10MS,
     PMU_PWR_KEY_DEB_20MS,
     PMU_PWR_KEY_DEB_30MS,
@@ -162,11 +122,7 @@ typedef enum {
 
 typedef union union_pmu_power_on_reason
 {
-<<<<<<< HEAD
-    uint16_t value;
-=======
     uint8_t value;
->>>>>>> db20e11 (second commit)
     struct stru_pmu_power_on_reason
     {
         bool off_norm_chg_pon        : 1;
@@ -177,27 +133,12 @@ typedef union union_pmu_power_on_reason
         bool reserved5               : 1;
         bool reserved6               : 1;
         bool reserved7               : 1;
-<<<<<<< HEAD
-        bool reserved8               : 1;
-        bool reserved9               : 1;
-        bool reserved10              : 1;
-        bool reserved11              : 1;
-        bool reserved12              : 1;
-        bool reserved13              : 1;
-        bool reserved14              : 1;
-        bool reserved15              : 1;
-=======
->>>>>>> db20e11 (second commit)
     } field;
 } PMU_POWER_ON_REASON_UNION;
 
 typedef union union_pmu_power_off_reason
 {
-<<<<<<< HEAD
-    uint16_t value;
-=======
     uint8_t value;
->>>>>>> db20e11 (second commit)
     struct stru_pmu_power_off_reason
     {
         bool norm_rtc_rtc_mode       : 1;
@@ -208,17 +149,6 @@ typedef union union_pmu_power_off_reason
         bool reserved5               : 1;
         bool reserved6               : 1;
         bool reserved7               : 1;
-<<<<<<< HEAD
-        bool reserved8               : 1;
-        bool reserved9               : 1;
-        bool reserved10              : 1;
-        bool reserved11              : 1;
-        bool reserved12              : 1;
-        bool reserved13              : 1;
-        bool reserved14              : 1;
-        bool reserved15              : 1;
-=======
->>>>>>> db20e11 (second commit)
     } field;
 
 } PMU_POWER_OFF_REASON_UNION;
@@ -256,12 +186,6 @@ typedef enum {
 
 typedef enum {
     PMIC_VCORE_0P8_V,
-<<<<<<< HEAD
-    PMIC_VCORE_0P9_V,
-    PMIC_VCORE_0P8_V_CUSTOM,
-    PMIC_VCORE_0P9_V_CUSTOM,
-=======
->>>>>>> db20e11 (second commit)
 } pmu_power_vcore_voltage_t;
 
 typedef enum {
@@ -355,94 +279,6 @@ typedef struct
     uint32_t timer_s;
 }PACKED rtc_alarm_config_t;
 
-<<<<<<< HEAD
-/*
- * [4]   STS_RBOOT  :Power on for cold reset
- * [3]   STS_SPAR   :reserved
- * [2]   STS_CHRIN  :Power on for charger insertion
- * [1]   STS_RTCA   :Power on for RTC alarm
- * [0]   STS_PWRKEY :Power on for PWREKY press
- *
- */
-extern pmu_function_t pmu_function_table[PMU_INT_MAX];
-extern rtc_alarm_config_t rtc_config;
-extern uint8_t Adie_Version;
-extern PMU_POWER_ON_REASON_UNION pmu_power_on_reason;
-extern PMU_POWER_OFF_REASON_UNION pmu_power_off_reason;
-void pmu_get_adie_version(void);
-pmu_power_vcore_voltage_t pmu_vcore_lock_control(pmu_power_stage_t mode,pmu_power_vcore_voltage_t vol,pmu_lock_parameter_t lock);
-void pmu_control_power(pmu_power_domain_t pmu_pdm, pmu_power_operate_t operate);
-pmu_status_t pmu_control_enable_interrupt(pmu_interrupt_index_t int_channel, int isEnable);
-pmu_status_t pmu_control_mask_interrupt(pmu_interrupt_index_t int_channel, int isEnable);
-pmu_status_t pmu_control_clear_interrupt(pmu_interrupt_index_t int_channel);
-pmu_status_t  pmu_control_clear_interrupt(pmu_interrupt_index_t int_channel);
-int pmu_get_raw_status_interrupt(pmu_interrupt_index_t int_channel);
-int pmu_get_status_interrupt(pmu_interrupt_index_t int_channel);
-void pmu_charger_interrupt_handler(void);
-pmu_status_t pmu_deregister_callback(pmu_interrupt_index_t pmu_int_ch);
-pmu_status_t pmu_register_callback(pmu_interrupt_index_t pmu_int_ch, pmu_callback_t callback, void *user_data);
-//bool pmu_is_charger_exist_init(void);
-pmu_status_t pmu_control_mask(pmu_interrupt_index_t pmu_int_ch, bool isMaskInterrupt);
-void pmu_control_clear_all_charger_interrupt(void);
-pmu_operate_status_t pmu_set_register_value_2byte_init(void);
-pmu_operate_status_t pmu_set_register_value_2byte(unsigned short int address, unsigned short int mask, unsigned short int shift, unsigned short int value);
-pmu_operate_status_t pmu_force_set_register_value_2byte(unsigned short int address, unsigned short int value);
-uint32_t pmu_get_register_value_2byte(unsigned short int address, unsigned short int mask, unsigned short int shift);
-void pmu_read_rg(unsigned short int address);
-pmu_operate_status_t pmu_vcore_voltage_sel(pmu_power_stage_t mode ,pmu_power_vcore_voltage_t vol);
-pmu_power_vcore_voltage_t pmu_get_vcore_voltage(void);
-pmu_operate_status_t pmu_vaud18_voltage_sel(uint8_t vol);
-uint16_t pmu_get_power_on_reason(void);
-uint16_t pmu_get_power_off_reason(void);
-void pmic_i2c_deinit(void);
-void pmic_i2c_init(void);
-void pmu_on_mode_switch(pmu_power_domain_t domain, pmu_control_mode_t mode);
-void pmu_lp_mode(pmu_power_domain_t domain, pmu_control_mode_t mode);
-
-pmu_operate_status_t pmu_chg_deb_time(pmu_chg_deb_time_t out_deb_time, pmu_chg_deb_time_t in_deb_time);
-
-void pmu_init(void);
-void pmu_eint_init();
-void pmu_eint_clean_proc(void);
-void pmu_eoc_ctrl (pmu_power_operate_t oper, uint8_t en);
-
-void pmu_vcroe_voltage_turing(int symbol,int num );
-void pmu_vio18_voltage_turing(int symbol,int num );
-void pmu_vaud18_voltage_turing(int symbol,int num );
-
-uint8_t pmu_get_lock_status(void);
-int pmu_get_lock_index(void);
-void pmu_set_usb_input_status(void);
-uint8_t pmu_get_usb_input_status(void);
-void pmu_rtc_eoc_ctrl (void);
-void pmu_power_off_sequence(pmu_power_stage_t stage);
-void pmu_srclken_control_mode(pmu_power_operate_t mode);
-void pmu_power_enable(pmu_power_domain_t pmu_pdm, pmu_power_operate_t operate);
-void pmu_voltage_selet(pmu_power_stage_t mode,pmu_power_domain_t domain,uint32_t vol);
-/*PWRKEY long pressed reset enable & disable*/
-pmu_operate_status_t pmu_pwrkey_enable(pmu_power_operate_t oper);
-pmu_power_state_t pmu_get_power_status(pmu_power_domain_t pmu_pdm);
-pmu_operate_status_t pmu_chg_force_sel(pmu_chg_force_t oper);
-
-pmu_operate_status_t pmu_pwrkey_deb_sel(pmu_pwrkey_deb_time_t tmr);
-pmu_operate_status_t pmu_pwrkey_irq_sel(pmu_pwrkey_irq_sel_t type, pmu_power_operate_t oper);
-
-/*Long pressed time to issue reset
- * 2'b00: 5 sec
- * 2'b01: 8 sec
- * 2'b10: 11 sec
- * 2'b11: 25 sec
- * */
-pmu_operate_status_t pmu_pwrkey_duration_time(pmu_pwrkey_time_t tmr);
-
-/*Re power-on scenario slection
- * 2'b00: debounce pwrkey
- * 2'b01: after release pwrkey
- * 2'b10: after release pwrkey and press pwrkey again
-*/
-pmu_operate_status_t pmu_lpsd_rst_init(pmu_lpsd_rst_sel_t sel, pmu_power_operate_t oper);
-
-=======
 typedef enum {
     PMU_CC_JEITA_NORM,
     PMU_CC_JEITA_WARM,
@@ -511,7 +347,6 @@ pmu_operate_status_t pmu_lpsd_rst_init(pmu_lpsd_rst_sel_t sel, pmu_power_operate
 pmu_power_state_t pmu_get_power_status(pmu_power_domain_t pmu_pdm);
 void pmu_voltage_selet(pmu_power_stage_t mode,pmu_power_domain_t domain,uint32_t vol);
 pmu_operate_status_t pmu_vcore_voltage_sel(pmu_power_stage_t mode ,pmu_power_vcore_voltage_t vol);
->>>>>>> db20e11 (second commit)
 
 #endif /* HAL_PMU_MODULE_ENABLED */
 #endif //__HAL_PMU_H__

@@ -116,10 +116,7 @@ typedef enum
     A2DP_SOURCE_INITIAL_WAIT =      0x0453,
     A2DP_SOURCE_SET_GAMING_MODE =   0x0454,
     A2DP_SOURCE_GET_GAMING_MODE =   0x0455,
-<<<<<<< HEAD
-=======
     A2DP_SOURCE_SET_DEVICE_TYPE =   0x0456,//for ap mode
->>>>>>> db20e11 (second commit)
 } stream_config_type;
 
 

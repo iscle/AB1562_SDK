@@ -72,13 +72,10 @@
 #ifdef PROFILE_AMA_ENABLE
 #include "BtAma.h"
 #endif
-<<<<<<< HEAD
-=======
 
 #ifdef AIR_GFP_ENABLE
 #include "App_Gfp.h"
 #endif
->>>>>>> db20e11 (second commit)
 /**************************************************************************************************
 * Prototype
 **************************************************************************************************/
@@ -287,21 +284,12 @@ static APP_KEY_EVT_STRU const gSystemKeyEvtHandler[SYSTEM_KEY_EVENT_NO] =  //MMI
 	{app_SystemKey_GameModeOn},					//SYSTEM_KEY_EVENT_KEY_GAME_MODE_ON
 	{app_SystemKey_GameModeOff},				//SYSTEM_KEY_EVENT_KEY_GAME_MODE_OFF
 	{app_SystemKey_GameModeToggle},				//SYSTEM_KEY_EVENT_KEY_GAME_MODE_TOGGLE
-<<<<<<< HEAD
-	{NULL},										//SYSTEM_KEY_EVENT_KEY_AGENT_STARTS_SHARE_MODE
-	{NULL},										//SYSTEM_KEY_EVENT_KEY_AGENT_STOPS_SHARE_MODE
-	{NULL},										//SYSTEM_KEY_EVENT_KEY_FOLLOWER_STARTS_SHARE_MODE
-	{NULL},										//SYSTEM_KEY_EVENT_KEY_FOLLOWER_STOPS_SHARE_MODE
-	{NULL},										//SYSTEM_KEY_EVENT_KEY_AGENT_TOGGLE_SHARE_MODE
-	{NULL},										//SYSTEM_KEY_EVENT_KEY_FOLLOWER_TOGGLE_SHARE_MODE
-=======
 	{NULL},										//SYSTEM_KEY_EVENT_KEY_MASTER_SHARE_MODE_START
 	{NULL},										//SYSTEM_KEY_EVENT_KEY_MASTER_SHARE_MODE_STOP
 	{NULL},										//SYSTEM_KEY_EVENT_KEY_FOLLOWER_SHARE_MODE_START
 	{NULL},										//SYSTEM_KEY_EVENT_KEY_FOLLOWER_SHARE_MODE_STOP
 	{NULL},										//SYSTEM_KEY_EVENT_KEY_MASTER_SHARE_MODE_TOGGLE
 	{NULL},										//SYSTEM_KEY_EVENT_KEY_FOLLOWER_SHARE_MODE_TOGGLE
->>>>>>> db20e11 (second commit)
 	{app_SystemKey_MicToSpk3MicMainEnable},		//SYSTEM_KEY_EVENT_KEY_MIC_TO_SPK_3MIC_MAIN_MIC_ENABLE
 	{app_SystemKey_MicToSpk3MicRef1Enable},		//SYSTEM_KEY_EVENT_KEY_MIC_TO_SPK_3MIC_REF1_MIC_ENABLE
 	{app_SystemKey_MicToSpk3MicRef2Enable},		//SYSTEM_KEY_EVENT_KEY_MIC_TO_SPK_3MIC_REF2_MIC_ENABLE
@@ -427,14 +415,11 @@ static void app_SystemKey_ReconnectUserInit(BD_ADDR_T *pBdAddr)
 static void app_SystemKey_Discoverable(BD_ADDR_T *pBdAddr)
 {
 	UNUSED(pBdAddr);
-<<<<<<< HEAD
-=======
     if (CURRENT_ACTIVE_LINK_CNT)
     {
         /* Pressed when there is at least one SP connected. */
         APP_SetKeepDiscoverableAfterDisc(TRUE);
     }
->>>>>>> db20e11 (second commit)
 	APP_System_Discoverable();
 }
 
@@ -652,12 +637,9 @@ static void app_SystemKey_ResetToFactory(BD_ADDR_T *pBdAddr)
 	#ifdef PROFILE_AMA_ENABLE
 	AMA_Target_FactoryReset();
 	#endif
-<<<<<<< HEAD
-=======
     #ifdef AIR_GFP_ENABLE
     APP_Gfp_ResetToFactory();
     #endif
->>>>>>> db20e11 (second commit)
 }
 
 
@@ -827,11 +809,7 @@ static void app_SystemKey_SCOSwitch(BD_ADDR_T *pBdAddr)
 		//APP_SetSwitchingSCO(TRUE);
 		//APP_HfpSco_SendDSPCmd(pOtherBdAddr);
 		APP_ResumeOtherAudioDevice(pBdAddr, AUDIO_DEVICE_SCO_IDLE);
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE        
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE        
->>>>>>> db20e11 (second commit)
 		APP_ResumeOtherAudioDevice(pBdAddr, AUDIO_DEVICE_SCO_HSP);
 #endif
 		APP_ResumeOtherAudioDevice(pBdAddr, AUDIO_DEVICE_SCO);

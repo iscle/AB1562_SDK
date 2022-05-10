@@ -772,15 +772,9 @@ static BOOL app_AudioDsp_PlayCheck(U8 audioType, BOOL is_resume)
     {
         case AUDIO_PATH_MAIN_OUT_IN:
             app_Audio_ClosePathAssistant(g_audio_path_ctl.assistant_ctl.audio_type, &g_audio_path_ctl.assistant_ctl.bdAddr, TRUE);
-<<<<<<< HEAD
-            #ifdef MTK_INEAR_ENHANCEMENT_ENABLE
-            app_Audio_ClosePathBgEffect(g_audio_path_ctl.bg_effect_ctl.audio_type, TRUE);
-            #elif defined MTK_DUALMIC_INEAR
-=======
             #ifdef AIR_TXNR_1_MIC_INEAR_ENABLE
             app_Audio_ClosePathBgEffect(g_audio_path_ctl.bg_effect_ctl.audio_type, TRUE);
             #elif defined AIR_TXNR_2_MIC_INEAR_ENABLE
->>>>>>> db20e11 (second commit)
             if(g_audio_path_ctl.bg_effect_ctl.audio_type == AUDIO_ANC)
             {
                 if(USER_PASSTHRU_OPEN == AudioDsp_GetANCPassThruRegister())
@@ -812,21 +806,13 @@ static BOOL app_AudioDsp_PlayCheck(U8 audioType, BOOL is_resume)
             break;
 
         case AUDIO_PATH_BG_EFFECT:
-<<<<<<< HEAD
-            #ifdef MTK_INEAR_ENHANCEMENT_ENABLE
-=======
             #ifdef AIR_TXNR_1_MIC_INEAR_ENABLE
->>>>>>> db20e11 (second commit)
             if(AUDIO_PATH_MAIN_OUT_IN == app_Audio_GetPathType(g_audio_path_ctl.main_ctl.audio_type))
             {
                 isSuccessful = FALSE;
                 break;
             }
-<<<<<<< HEAD
-            #elif defined MTK_DUALMIC_INEAR
-=======
             #elif defined AIR_TXNR_2_MIC_INEAR_ENABLE
->>>>>>> db20e11 (second commit)
             if(AUDIO_PATH_MAIN_OUT_IN == app_Audio_GetPathType(g_audio_path_ctl.main_ctl.audio_type))
             {
                 if(USER_PASSTHRU_OPEN == AudioDsp_GetANCPassThruRegister())
@@ -870,15 +856,9 @@ static void app_AudioDsp_PlayFailRecover(U8 audioType)
             drv_vad_notify_dsp_busy(FALSE);
             #endif
             app_Audio_ResumePathAssistant();
-<<<<<<< HEAD
-            #ifdef MTK_INEAR_ENHANCEMENT_ENABLE
-            app_Audio_ResumePathBgEffect();
-            #elif defined MTK_DUALMIC_INEAR
-=======
             #ifdef AIR_TXNR_1_MIC_INEAR_ENABLE
             app_Audio_ResumePathBgEffect();
             #elif defined AIR_TXNR_2_MIC_INEAR_ENABLE
->>>>>>> db20e11 (second commit)
             if(g_audio_path_ctl.bg_effect_ctl.audio_type == AUDIO_ANC)
             {
                 if(USER_PASSTHRU_OPEN == AudioDsp_GetANCPassThruRegister())
@@ -1085,15 +1065,9 @@ BOOL APP_AudioDspStop(AUDIO_DSP_STOP_PARA_STUR *pParameter)
                 drv_vad_notify_dsp_busy(FALSE);
                 #endif
                 app_Audio_ResumePathAssistant();
-<<<<<<< HEAD
-                #ifdef MTK_INEAR_ENHANCEMENT_ENABLE
-                app_Audio_ResumePathBgEffect();
-                #elif defined MTK_DUALMIC_INEAR
-=======
                 #ifdef AIR_TXNR_1_MIC_INEAR_ENABLE
                 app_Audio_ResumePathBgEffect();
                 #elif defined AIR_TXNR_2_MIC_INEAR_ENABLE
->>>>>>> db20e11 (second commit)
                 if(g_audio_path_ctl.bg_effect_ctl.audio_type == AUDIO_ANC)
                 {
                     if(USER_PASSTHRU_OPEN == AudioDsp_GetANCPassThruRegister())
@@ -1209,20 +1183,12 @@ BOOL APP_AudioIsPermittedToPlay(U8 audio_type)
 {
     if(audio_type == AUDIO_ANC)
     {
-<<<<<<< HEAD
-        #ifdef MTK_INEAR_ENHANCEMENT_ENABLE
-=======
         #ifdef AIR_TXNR_1_MIC_INEAR_ENABLE
->>>>>>> db20e11 (second commit)
         if(AUDIO_PATH_MAIN_OUT_IN == app_Audio_GetPathType(g_audio_path_ctl.main_ctl.audio_type))
         {
             return FALSE;
         }
-<<<<<<< HEAD
-        #elif defined MTK_DUALMIC_INEAR
-=======
         #elif defined AIR_TXNR_2_MIC_INEAR_ENABLE
->>>>>>> db20e11 (second commit)
         if(AUDIO_PATH_MAIN_OUT_IN == app_Audio_GetPathType(g_audio_path_ctl.main_ctl.audio_type))
         {
             if(USER_PASSTHRU_OPEN == AudioDsp_GetANCPassThruRegister())

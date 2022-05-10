@@ -33,11 +33,7 @@
  */
 
 #include "bt.h"
-<<<<<<< HEAD
-#ifdef PROFILE_SWIFT_ENABLE
-=======
 #ifdef AIR_SWIFT_ENABLE
->>>>>>> db20e11 (second commit)
 #include "bt_gatt.h"
 #include "bt_gap.h"
 #include "App_ResourceManager.h"
@@ -48,10 +44,6 @@
 #include "App_Pairing.h"
 #include "PM_Interface.h"
 #include "nvkey_list.h"
-<<<<<<< HEAD
-#include "gfps_api.h"
-=======
->>>>>>> db20e11 (second commit)
 #include "PM_Interface.h"
 #include "AudioDSP_StreamManager.h"
 #include "BtMCSync.h"

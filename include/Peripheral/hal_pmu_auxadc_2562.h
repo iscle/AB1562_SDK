@@ -40,11 +40,6 @@
 
 extern void pmu_auxadc_init(void);
 
-<<<<<<< HEAD
-//#ifdef HAL_PMU_AUXADC_MODULE_ENABLED
-
-=======
->>>>>>> db20e11 (second commit)
 typedef enum {
     PMU_AUX_VICHG = 5,
     PMU_AUX_VBAT,
@@ -57,10 +52,6 @@ typedef enum {
 
 uint16_t pmu_auxadc_get_channel_value(pmu_adc_channel_t Channel);
 
-<<<<<<< HEAD
-//#endif /* HAL_PMU_AUXADC_MODULE_ENABLED */
-=======
->>>>>>> db20e11 (second commit)
 #endif /* __HAL_PMU_AUXADC_2562_H__ */
 
 

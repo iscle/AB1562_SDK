@@ -584,11 +584,7 @@ static U8 app_ReConn_ProfileIDToMask(U8 profileID)
 		case PROFILE_HANDSFREE:
 			return RECONNECT_PROFILE_HFP;
 			break;
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE            
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE            
->>>>>>> db20e11 (second commit)
 		case PROFILE_HEADSET:
 			return RECONNECT_PROFILE_HSP;
 			break;

@@ -22,11 +22,8 @@ var searchData=
   ['hal_5feint_5ftrigger_5fmode_5ft',['hal_eint_trigger_mode_t',['../group__hal__eint__enum.html#ga18442c984decbf98c2ea1d6f270b9bdb',1,'hal_eint.h']]],
   ['hal_5fflash_5fblock_5ft',['hal_flash_block_t',['../group__hal__flash__enum.html#gaf2a5627aefec9ab9c2505ad9c987f2e8',1,'hal_flash.h']]],
   ['hal_5fflash_5fstatus_5ft',['hal_flash_status_t',['../group__hal__flash__enum.html#ga0ed7423bb156b37296817ff0cb40b389',1,'hal_flash.h']]],
-<<<<<<< HEAD
-=======
   ['hal_5fgpio_5fclock_5fmode_5ft',['hal_gpio_clock_mode_t',['../group__hal__gpio__enum.html#ga84a5e8429bfb7e9a697e156094d1e638',1,'hal_platform.h']]],
   ['hal_5fgpio_5fclock_5ft',['hal_gpio_clock_t',['../group__hal__gpio__enum.html#ga2f13bf3247dc651f4cfb7524cd0d97c6',1,'hal_platform.h']]],
->>>>>>> db20e11 (second commit)
   ['hal_5fgpio_5fdata_5ft',['hal_gpio_data_t',['../group__hal__gpio__enum.html#gab38c5c477ed49fa478c0acf134f85efc',1,'hal_gpio.h']]],
   ['hal_5fgpio_5fdirection_5ft',['hal_gpio_direction_t',['../group__hal__gpio__enum.html#ga542728e7f1595592548392d692286b2c',1,'hal_gpio.h']]],
   ['hal_5fgpio_5fdriving_5fcurrent_5ft',['hal_gpio_driving_current_t',['../group__hal__gpio__enum.html#ga84c2c8e08483edaab619f3479d437b41',1,'hal_gpio.h']]],

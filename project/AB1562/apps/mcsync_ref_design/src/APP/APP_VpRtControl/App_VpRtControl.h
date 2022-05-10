@@ -86,12 +86,8 @@ typedef struct
 	U32 currentPicoClock;
 	U8 isVpRtSyncEvent:1;
 	U8 isWaitUnsniff:1;
-<<<<<<< HEAD
-	U8 reserved:6;
-=======
 	U8 isVpRtSecondDevice:1;
 	U8 reserved:5;
->>>>>>> db20e11 (second commit)
 }APP_VPRT_INFO_STRU;
 
 /**************************************************************************************************
@@ -116,9 +112,6 @@ void APP_VpRt_StopHFPVpUnderHFPState(U16 eventIndex);
 
 void APP_VpRt_ReleaseTimer(void);
 void APP_VpRt_Init(void);
-<<<<<<< HEAD
-=======
 void APP_VpRt_T0Timer(U16 id, U32 clockToStart, U32 delayMs);
->>>>>>> db20e11 (second commit)
 
 #endif

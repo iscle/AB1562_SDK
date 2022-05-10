@@ -35,13 +35,10 @@
 #ifndef __APP_GFP_H__
 #define __APP_GFP_H__
 
-<<<<<<< HEAD
-=======
 
 #define APP_GFP_LOG_MSGID_I(_message, arg_cnt, ...) LOG_MSGID_I(APP_GFP, "[APP_GFP]"_message, arg_cnt, ##__VA_ARGS__)
 
 
->>>>>>> db20e11 (second commit)
 typedef enum
 {
     GFP_GROUP_BLUETOOTH_EVENT           = 0x01,
@@ -51,23 +48,13 @@ typedef enum
     GFP_GROUP_ACKNOWLEDGEMENT           = 0xFF,
 }GFP_MESSAGE_GROUP;
 
-<<<<<<< HEAD
-=======
 
->>>>>>> db20e11 (second commit)
 typedef enum
 {
     GFP_CODE_ENABLE_SILENCE_MODE        = 0x01,
     GFP_CODE_DISABLE_SILENCE_MODE       = 0x02,
 }GFP_BLUETOOTH_EVENT_CODE;
 
-<<<<<<< HEAD
-typedef enum
-{
-    GFP_CODE_LOG_BUFFER_FULL            = 0x01,
-}GFP_COMPANION_APP_EVENT_CODE;
-=======
->>>>>>> db20e11 (second commit)
 
 typedef enum
 {
@@ -81,29 +68,20 @@ typedef enum
     GFP_CODE_PLATFORM_TYPE              = 0x08,
 }GFP_DEVICE_INFORMATION_CODE;
 
-<<<<<<< HEAD
-=======
 
->>>>>>> db20e11 (second commit)
 typedef enum
 {
     GFP_CODE_RING                       = 0x01,
 }GFP_DEVICE_ACTION_CODE;
 
-<<<<<<< HEAD
-=======
 
->>>>>>> db20e11 (second commit)
 typedef enum
 {
     GFP_CODE_ACK                        = 0x01,
     GFP_CODE_NAK                        = 0x02,
 }GFP_ACKNOWLEDGEMENT_CODE;
 
-<<<<<<< HEAD
-=======
 
->>>>>>> db20e11 (second commit)
 typedef struct
 {
     U8 group;
@@ -111,10 +89,7 @@ typedef struct
     U16 length;
 }GFP_MESSAGE_STREAM_HEADER_T;
 
-<<<<<<< HEAD
-=======
 
->>>>>>> db20e11 (second commit)
 typedef union
 {
     U8 modelID[3];
@@ -126,19 +101,13 @@ typedef union
     U8 platformType[2];
 }GFP_DEVICE_INFORMATION_T;
 
-<<<<<<< HEAD
-=======
 
->>>>>>> db20e11 (second commit)
 typedef struct
 {
     U8 ringing[2];
 }GFP_DEVICE_ACTION_T;
 
-<<<<<<< HEAD
-=======
 
->>>>>>> db20e11 (second commit)
 typedef struct
 {
     GFP_MESSAGE_STREAM_HEADER_T header;
@@ -150,21 +119,14 @@ typedef struct
     }data;
 }GFP_MESSAGE_STREAM_STRU;
 
-<<<<<<< HEAD
-=======
 
->>>>>>> db20e11 (second commit)
 typedef enum
 {
     GFP_ACKNOLEGEMENT_NAK_REASON_NOT_SUPPORTED = 0x00,  /**< FAST_PAIR message acknowledgement nak reason of not supported. */
     GFP_ACKNOLEGEMENT_NAK_REASON_DEVICE_BUSY   = 0x01,  /**< FAST_PAIR message acknowledgement nak reason of device busy. */
     GFP_ACKNOLEGEMENT_NAK_REASON_CURRENT_STATE = 0x02,  /**< FAST_PAIR message acknowledgement nak reason of not allowed due to current state. */
-<<<<<<< HEAD
-} GFP_ACK_REASON_T;
-=======
 }GFP_ACK_REASON_T;
 
->>>>>>> db20e11 (second commit)
 
 typedef struct {
     U8 action;     /**< The acknowledge action ID. */
@@ -173,13 +135,6 @@ typedef struct {
     U8 reason;     /**< The nak reason. It's only valid when action ID setted to #GFP_MESSAGE_CODE_ACKNOWLEDGEMENT_NAK. */
 } GFP_ACK_T;
 
-<<<<<<< HEAD
-void APP_Gfp_Init(void);
-void APP_Gfp_RegisterProfile(void);
-void APP_Gfp_SendMessageStream(U8 group, U8 code);
-
-#endif //__APP_GFP_H__
-=======
 
 typedef void (*gfp_spp_cb_t)(void *param);
 
@@ -195,4 +150,3 @@ BOOL APP_Gfp_SppIsAllowRho(void);
 
 #endif //__APP_GFP_H__
 
->>>>>>> db20e11 (second commit)

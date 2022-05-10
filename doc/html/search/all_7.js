@@ -214,8 +214,6 @@ var searchData=
   ['hal_5fgpio_5fclear_5fhigh_5fimpedance',['hal_gpio_clear_high_impedance',['../group___g_p_i_o.html#ga7e97d3aaafde013d4cbc54c397f69d8e',1,'hal_gpio.h']]],
   ['hal_5fgpio_5fclear_5fschmitt',['hal_gpio_clear_schmitt',['../group___g_p_i_o.html#ga76829c574ef1efa8f524de68d6dc5625',1,'hal_gpio.h']]],
   ['hal_5fgpio_5fclear_5fslew_5frate',['hal_gpio_clear_slew_rate',['../group___g_p_i_o.html#gafdb0384aa111e071e08cff7954e6ecbc',1,'hal_gpio.h']]],
-<<<<<<< HEAD
-=======
   ['hal_5fgpio_5fclock_5f0',['HAL_GPIO_CLOCK_0',['../group__hal__gpio__enum.html#gga2f13bf3247dc651f4cfb7524cd0d97c6a4072a43878c07f517382faca91e23719',1,'hal_platform.h']]],
   ['hal_5fgpio_5fclock_5f1',['HAL_GPIO_CLOCK_1',['../group__hal__gpio__enum.html#gga2f13bf3247dc651f4cfb7524cd0d97c6aa69b28652cc45d3f19a511a945c87881',1,'hal_platform.h']]],
   ['hal_5fgpio_5fclock_5f2',['HAL_GPIO_CLOCK_2',['../group__hal__gpio__enum.html#gga2f13bf3247dc651f4cfb7524cd0d97c6a87a39002c45db6849f9ebaed1d7788a9',1,'hal_platform.h']]],
@@ -225,7 +223,6 @@ var searchData=
   ['hal_5fgpio_5fclock_5fmode_5fmax',['HAL_GPIO_CLOCK_MODE_MAX',['../group__hal__gpio__enum.html#gga84a5e8429bfb7e9a697e156094d1e638a266d04e134d65b308504917d9623ea6e',1,'hal_platform.h']]],
   ['hal_5fgpio_5fclock_5fmode_5ft',['hal_gpio_clock_mode_t',['../group__hal__gpio__enum.html#ga84a5e8429bfb7e9a697e156094d1e638',1,'hal_platform.h']]],
   ['hal_5fgpio_5fclock_5ft',['hal_gpio_clock_t',['../group__hal__gpio__enum.html#ga2f13bf3247dc651f4cfb7524cd0d97c6',1,'hal_platform.h']]],
->>>>>>> db20e11 (second commit)
   ['hal_5fgpio_5fdata_5fhigh',['HAL_GPIO_DATA_HIGH',['../group__hal__gpio__enum.html#ggab38c5c477ed49fa478c0acf134f85efca3197688dd46aa28e778ae6cf33d5f51f',1,'hal_gpio.h']]],
   ['hal_5fgpio_5fdata_5flow',['HAL_GPIO_DATA_LOW',['../group__hal__gpio__enum.html#ggab38c5c477ed49fa478c0acf134f85efca1d893fac58a2d9a77ae950a82c1b4dce',1,'hal_gpio.h']]],
   ['hal_5fgpio_5fdata_5ft',['hal_gpio_data_t',['../group__hal__gpio__enum.html#gab38c5c477ed49fa478c0acf134f85efc',1,'hal_gpio.h']]],
@@ -250,10 +247,7 @@ var searchData=
   ['hal_5fgpio_5fpin_5ft',['hal_gpio_pin_t',['../group__hal__gpio__enum.html#ga8793dd0b4f544f610264c026357bf6da',1,'hal_platform.h']]],
   ['hal_5fgpio_5fpull_5fdown',['hal_gpio_pull_down',['../group___g_p_i_o.html#gafc092ca55bf3e9f1b7b15e5344773eea',1,'hal_gpio.h']]],
   ['hal_5fgpio_5fpull_5fup',['hal_gpio_pull_up',['../group___g_p_i_o.html#gafad3b85f8569d715f4772fd045192490',1,'hal_gpio.h']]],
-<<<<<<< HEAD
-=======
   ['hal_5fgpio_5fset_5fclockout',['hal_gpio_set_clockout',['../group___g_p_i_o.html#gad7b47b13e9584f643d2fb1d2852c95bf',1,'hal_gpio.h']]],
->>>>>>> db20e11 (second commit)
   ['hal_5fgpio_5fset_5fdirection',['hal_gpio_set_direction',['../group___g_p_i_o.html#ga290f8e259302f1e6eb6caa5c3aeb8a9e',1,'hal_gpio.h']]],
   ['hal_5fgpio_5fset_5fdriving_5fcurrent',['hal_gpio_set_driving_current',['../group___g_p_i_o.html#ga4f2b9732372813716c994140f8758580',1,'hal_gpio.h']]],
   ['hal_5fgpio_5fset_5fhigh_5fimpedance',['hal_gpio_set_high_impedance',['../group___g_p_i_o.html#ga29169c4f1126b5aa55a6139dd9cdb79e',1,'hal_gpio.h']]],
@@ -675,11 +669,7 @@ var searchData=
   ['hal_5fwdt_5fregister_5fcallback',['hal_wdt_register_callback',['../group___w_d_t.html#ga5af617d234a009d8b5ae34405b385639',1,'hal_wdt.h']]],
   ['hal_5fwdt_5fregister_5fcallback_5fext',['hal_wdt_register_callback_ext',['../group___w_d_t.html#ga521e59b120e0cfd4e409db93cfdecb51',1,'hal_wdt.h']]],
   ['hal_5fwdt_5freset_5fstatus_5ft',['hal_wdt_reset_status_t',['../group__hal__wdt__enum.html#ga3be12756e35fc7316eb1f738f9847112',1,'hal_wdt.h']]],
-<<<<<<< HEAD
-  ['hal_5fwdt_5fsoftware_5freset',['HAL_WDT_SOFTWARE_RESET',['../group__hal__wdt__enum.html#gga3be12756e35fc7316eb1f738f9847112ac54dce6ad4238e4f10b9ccb1515a4c80',1,'HAL_WDT_SOFTWARE_RESET():&#160;hal_wdt.h'],['../group___w_d_t.html#ga89a0aadab692ed1325167ae0061e0238',1,'hal_wdt_software_reset(void):&#160;hal_wdt.h']]],
-=======
   ['hal_5fwdt_5fsoftware_5freset',['hal_wdt_software_reset',['../group___w_d_t.html#ga89a0aadab692ed1325167ae0061e0238',1,'hal_wdt_software_reset(void):&#160;hal_wdt.h'],['../group__hal__wdt__enum.html#gga3be12756e35fc7316eb1f738f9847112ac54dce6ad4238e4f10b9ccb1515a4c80',1,'HAL_WDT_SOFTWARE_RESET():&#160;hal_wdt.h']]],
->>>>>>> db20e11 (second commit)
   ['hal_5fwdt_5fsoftware_5freset_5fext',['hal_wdt_software_reset_ext',['../group___w_d_t.html#ga9b3df255e67858d9a690c286c3721f1d',1,'hal_wdt.h']]],
   ['hal_5fwdt_5fstatus_5finvalid_5fmagic',['HAL_WDT_STATUS_INVALID_MAGIC',['../group__hal__wdt__enum.html#ggadde0ed13ab9e9d9bdc51133b20d87cb6a0037c090d407eed30e009f59f6d853db',1,'hal_wdt.h']]],
   ['hal_5fwdt_5fstatus_5finvalid_5fparameter',['HAL_WDT_STATUS_INVALID_PARAMETER',['../group__hal__wdt__enum.html#ggadde0ed13ab9e9d9bdc51133b20d87cb6a76e3bcb73cfc5feba7aed59b174db0f9',1,'hal_wdt.h']]],

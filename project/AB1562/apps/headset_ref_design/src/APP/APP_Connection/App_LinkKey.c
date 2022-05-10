@@ -371,11 +371,7 @@ U8 APP_LinkKey_SearchLinkKeyIndex(BD_ADDR_T *pBdAddr, U8 needKeyOk)
 void APP_LinkKey_SetLinkSoundLevelByHistory(BD_ADDR_T *pBdAddr)
 {
 	U8 scoSoundLevel, scoMicSoundlevel;
-<<<<<<< HEAD
-	#ifdef A2DP_Profile
-=======
 	#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 	U8 a2dpSoundLevel;
 	#endif
 	LINK_HISTORY_STRU *linkListPtr = APP_LinkKey_SearchHistoryByBdAddr(pBdAddr, FALSE, FALSE);
@@ -384,11 +380,7 @@ void APP_LinkKey_SetLinkSoundLevelByHistory(BD_ADDR_T *pBdAddr)
 	{
 		scoSoundLevel = APP_DEFAULT_SCO_SOUND_LEVEL;
 		scoMicSoundlevel = APP_DEFAULT_SCO_MIC_SOUND_LEVEL;
-<<<<<<< HEAD
-		#ifdef A2DP_Profile
-=======
 		#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 		a2dpSoundLevel = APP_DEFAULT_A2DP_SOUND_LEVEL;
 		#endif
 	}
@@ -396,11 +388,7 @@ void APP_LinkKey_SetLinkSoundLevelByHistory(BD_ADDR_T *pBdAddr)
 	{
 		scoSoundLevel = linkListPtr->scoSoundlevel;
 		scoMicSoundlevel = linkListPtr->scoMicSoundlevel;
-<<<<<<< HEAD
-		#ifdef A2DP_Profile
-=======
 		#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 		a2dpSoundLevel = linkListPtr->a2dpSoundLevel;
 		#endif
 	}
@@ -414,11 +402,7 @@ void APP_LinkKey_SetLinkSoundLevelByHistory(BD_ADDR_T *pBdAddr)
 	APP_VolManage_SetCurrentScoMicSoundLevel(pBdAddr, scoMicSoundlevel);
 	APP_VolManage_SetCurrentScoVgm(pBdAddr, APP_VolManage_GetVgmByScoMicSoundLevel(scoMicSoundlevel));
 
-<<<<<<< HEAD
-	#ifdef A2DP_Profile
-=======
 	#ifdef AIR_A2DP_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 	APP_VolManage_SetCurrentA2dpSoundLevel(pBdAddr, a2dpSoundLevel);
 	#endif
 	APP_VolManage_SetCurrentAbsoluteVolume(pBdAddr, APP_VolManage_GetAbsoluteVolumeBySoundLevel(a2dpSoundLevel));

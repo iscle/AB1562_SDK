@@ -1635,8 +1635,6 @@ bool APP_State_AllLinksInCallRelatedState(void)
 	return FALSE;
 }
 
-<<<<<<< HEAD
-=======
 bool APP_State_IsAnyLinkInSpecifiedState(U8 state)
 {
 	U8 linkIndex;
@@ -1654,7 +1652,6 @@ bool APP_State_IsAnyLinkInSpecifiedState(U8 state)
 	return FALSE;
 }
 
->>>>>>> db20e11 (second commit)
 bool APP_State_CheckLinkInCallActiveState(BD_ADDR_T *pBdAddr)
 {
 	APP_INFO_STRU *pLinkInfo = APP_GetAppLinkByBdAddr(pBdAddr);
@@ -2030,11 +2027,7 @@ void APP_State_ConnectedEntry(BD_ADDR_T *pBdAddr)
 	if(pLinkInfo->stateEntryExit & (APP_EXIT_IMGCALL_STATE|APP_EXIT_OUTGOING_STATE|APP_EXIT_CALLACTIVE_STATE))
 	{
 		pLinkInfo->stateEntryExit &= ~(APP_EXIT_IMGCALL_STATE|APP_EXIT_OUTGOING_STATE|APP_EXIT_CALLACTIVE_STATE);
-<<<<<<< HEAD
-#ifdef PROFILE_HEADSET_ENABLE
-=======
 #ifdef AIR_HEADSET_PROFILE_ENABLE
->>>>>>> db20e11 (second commit)
 		if(APP_Hfp_IsHspConnected(pBdAddr))
 		{
 			APP_AudioDeviceDeRegister(pBdAddr, AUDIO_DEVICE_SCO_HSP);

@@ -36,11 +36,7 @@
 #ifndef _APP_MCSYNC_PLUS_H_
 #define _APP_MCSYNC_PLUS_H_
 
-<<<<<<< HEAD
-#ifdef MCSYNC_SHARE_MODE
-=======
 #ifdef AIR_MCSYNC_SHARE_MODE_ENABLE
->>>>>>> db20e11 (second commit)
 
 #define SHARE_MODE_SHARE_AGENT 		0x01
 #define SHARE_MODE_FOLLOWER_AGENT 	0x02
@@ -55,8 +51,6 @@ enum
 
 enum
 {
-<<<<<<< HEAD
-=======
     APP_SHARE_STATE_NONE,
     APP_SHARE_STATE_PREPARING,
     APP_SHARE_STATE_ENTERED_MODE,
@@ -74,7 +68,6 @@ enum
 
 enum
 {
->>>>>>> db20e11 (second commit)
 	APP_SHARE_PARTNER_EVENT_SYNC_INFO,
 	APP_SHARE_PARTNER_EVENT_MCSYNC_DISCONNECT_IND,
 	APP_SHARE_PARTNER_EVENT_ACL_CLOSE,
@@ -93,15 +86,12 @@ enum
     APP_SHARE_FOLLOWER_EVENT_LEAVE_MODE_IND, //from agent
 };
 
-<<<<<<< HEAD
-=======
 enum
 {
     APP_SHARE_MODE_OFF,
     APP_SHARE_MODE_FOLLOWER,
     APP_SHARE_MODE_AGENT_PARTNER,
 };
->>>>>>> db20e11 (second commit)
 
 
 /*************************************************************************************************
@@ -146,11 +136,8 @@ U8 APP_MCSync_Share_FollowerFilter(BD_ADDR_T *pBdAddr, U8 role);
 void APP_MCSync_Share_SetLinkLoss(U8 isValue);
 
 U8 APP_MCSync_Share_GetLinkLoss(void);
-<<<<<<< HEAD
-=======
 U8 APP_MCSync_Share_GetState(void);
 bool APP_MCSync_IsShareConn(void);
->>>>>>> db20e11 (second commit)
 
 
 #endif

@@ -36,10 +36,7 @@
 #include "App_PowerOff.h"
 #include "App_Connection.h"
 #include "App_MCSync_RHO.h"
-<<<<<<< HEAD
-=======
 #include "APP_AirApp.h"
->>>>>>> db20e11 (second commit)
 
 log_create_module(APP_BLE, PRINT_LEVEL_INFO);
 /**************************************************************************************************
@@ -180,44 +177,26 @@ static U8 app_BleSetAdvHandleAction(U8 advHandleMask, U8 action)
             if (app_BleAction(pAdvHandleNode->appBleAdvDesc, action))
             {
                 validMask |= pAdvHandleNode->appBleAdvDesc->advHandleMask;
-<<<<<<< HEAD
-            }            
-        }
-        pAdvHandleNode = pAdvHandleNode->nextNode;
-    }
-    
-=======
             }
         }
         pAdvHandleNode = pAdvHandleNode->nextNode;
     }
 
->>>>>>> db20e11 (second commit)
     return validMask;
 }
 
 static void app_BleHandleStartGattServerCfm(BT_GATT_START_SERVER_CFM_T *cfm)
 {
     U8 validMask;
-<<<<<<< HEAD
-    
-    DBG_LOG_APP_BLE( "[APP_BLE] APP_Ble_HandleStartServerCfm status:%d", 1, cfm->status);
-    
-=======
 
     DBG_LOG_APP_BLE( "[APP_BLE] APP_Ble_HandleStartServerCfm status:%d", 1, cfm->status);
 
->>>>>>> db20e11 (second commit)
     if (cfm->status == BT_STATUS_SUCCESS)
     {
         gAppBleCtl.gattServerState = APP_BLE_GATT_SERVER_STATE_STARTED;
 
         validMask = app_BleSetAdvHandleAction(BLE_ADV_ALL, APP_BLE_ACTION_GATT_SERVER_READY);
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> db20e11 (second commit)
         DBG_LOG_APP_BLE( "[APP_BLE] APP_Ble_HandleStartServerCfm validMask:%d", 1, validMask);
 
 #ifdef PROFILE_GVA_ENABLE
@@ -236,11 +215,7 @@ static U32 app_BleHandler(Handler handler, U16 id, void *msg, U32 handler_id)
         case BT_ACL_OPENED_IND:
         {
             BT_ACL_OPENED_IND_T *ind = (BT_ACL_OPENED_IND_T *)msg;
-<<<<<<< HEAD
-            
-=======
 
->>>>>>> db20e11 (second commit)
             DBG_LOG_APP_BLE("[APP_BLE] BT_ACL_OPENED_IND BdAddr:0x%x%x", 3, ind->status, FW_bdaddr_to_2U32((BD_ADDR_T *)ind->bdaddr, TRUE), FW_bdaddr_to_2U32((BD_ADDR_T *)ind->bdaddr, FALSE));
             if (!ind->status)
             {
@@ -261,21 +236,11 @@ static U32 app_BleHandler(Handler handler, U16 id, void *msg, U32 handler_id)
         case BT_ACL_CLOSED_IND:
         {
             BT_ACL_CLOSED_IND_T *ind = (BT_ACL_CLOSED_IND_T *)msg;
-<<<<<<< HEAD
-            
-=======
 
->>>>>>> db20e11 (second commit)
             DBG_LOG_APP_BLE("[APP_BLE] BT_ACL_CLOSED_IND status:%d poweron:%d BdAddr:0x%x%x", 4, ind->status, APP_PowerOff_IsPowerOn(), FW_bdaddr_to_2U32((BD_ADDR_T *)ind->bdaddr, TRUE), FW_bdaddr_to_2U32((BD_ADDR_T *)ind->bdaddr, FALSE));
             if (!ind->status)
             {
                 U8 i;
-<<<<<<< HEAD
-                if (APP_PowerOff_IsPowerOn())
-                {
-                    APP_Ble_EnableAdv(gAppBleCtl.advHandleMask);
-                }
-=======
                 if (APP_PowerOff_IsPowerOn() && !APP_AirApp_FOTA_Reconnect())
                 {
                     APP_Ble_EnableAdv(gAppBleCtl.advHandleMask);
@@ -288,7 +253,6 @@ static U32 app_BleHandler(Handler handler, U16 id, void *msg, U32 handler_id)
                 {
                     APP_Ble_EnableAdv(BLE_ADV_PRIMARY_MASK);
                 }
->>>>>>> db20e11 (second commit)
 
                 for (i = 0; i < NUM_OF_LE_ACL_LINKS; i++)
                 {
@@ -306,11 +270,7 @@ static U32 app_BleHandler(Handler handler, U16 id, void *msg, U32 handler_id)
         case BT_GATT_START_SERVER_CFM:
             app_BleHandleStartGattServerCfm((BT_GATT_START_SERVER_CFM_T *)msg);
             break;
-<<<<<<< HEAD
-            
-=======
 
->>>>>>> db20e11 (second commit)
         case BT_GATT_EXCHANGE_MTU_IND:
         {
             BT_GATT_EXCHANGE_MTU_IND_T *ind = (BT_GATT_EXCHANGE_MTU_IND_T *)msg;
@@ -363,11 +323,7 @@ BOOL APP_Ble_Disconnect(BD_ADDR_T *pBdAddr)
 {
     U8 i;
     BOOL notDisconn = TRUE;
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> db20e11 (second commit)
     if (NULL == pBdAddr)
     {
         for (i = 0; i < NUM_OF_LE_ACL_LINKS; i++)
@@ -406,11 +362,7 @@ void APP_Ble_RegisterAdvHandle(APP_BLE_ADV_HANDLE_NODE *pAdvHandleNode)
         DBG_LOG_APP_BLE("[APP_BLE] RegisterAdvHandle already!! advHandleMask:0x%x", 1, pAdvHandleNode->appBleAdvDesc->advHandleMask);
         return;
     }
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> db20e11 (second commit)
     pAdvHandleNode->nextNode = gAppBleAdvHandleNodeList;
     gAppBleAdvHandleNodeList = pAdvHandleNode;
 }
@@ -418,11 +370,7 @@ void APP_Ble_RegisterAdvHandle(APP_BLE_ADV_HANDLE_NODE *pAdvHandleNode)
 BOOL APP_Ble_EnableAdv(U8 advHandleMask)
 {
     U8 validMask = 0;
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> db20e11 (second commit)
     if (APP_BLE_GATT_SERVER_STATE_STARTED != gAppBleCtl.gattServerState)
     {
         DBG_LOG_APP_BLE("[APP_BLE] gattServer isn't ready! state:%d advHandleMask:0x%x", 2, gAppBleCtl.gattServerState, advHandleMask);
@@ -445,11 +393,7 @@ BOOL APP_Ble_EnableAdv(U8 advHandleMask)
 BOOL APP_Ble_DisableAdv(U8 advHandleMask)
 {
     U8 validMask = 0;
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> db20e11 (second commit)
     if (APP_BLE_GATT_SERVER_STATE_STARTED != gAppBleCtl.gattServerState)
     {
         DBG_LOG_APP_BLE("[APP_BLE] gattServer isn't ready! state:%d advHandleMask:0x%x", 2, gAppBleCtl.gattServerState, advHandleMask);
